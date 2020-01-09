@@ -1,0 +1,95 @@
+/**
+*
+* [custom] Structure principale
+*
+** Html & Body
+** Header
+** Main
+** Aside
+** Footer
+*
+**/
+
+/*===================================
+=            Html & body            =
+===================================*/
+
+html {
+	overflow-x:hidden;
+}
+body {}
+
+.body-inner {
+	/* pour la navigation cachée */
+	position: relative;
+	transition: transform .3s ease;
+
+	.h-nav-is-open & {
+		transform:translateX(rem(-$h-nav-width));
+		transition: transform .3s ease;
+	}
+}
+
+
+/*=====  FIN Html & body  =====*/
+
+/*==============================
+=            Header            =
+==============================*/
+
+.header {
+	padding:rem(40);
+	background-color:#eee;
+}
+.header-inner {
+	display:flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+
+/*=====  FIN Header  =====*/
+
+/*============================
+=            Main            =
+============================*/
+
+.main {
+	padding:rem(10);
+
+	/* $mq-max */
+	@media ( min-width : em($mq-max) ) {
+		padding:rem(80);		
+	}
+}
+.main-inner {}
+
+
+/*=====  FIN Main  =====*/
+
+/*=============================
+=            Aside            =
+=============================*/
+
+.aside {}
+.aside-inner {}
+
+
+/*=====  FIN Aside  =====*/
+
+/*==============================
+=            Footer            =
+==============================*/
+
+.footer {
+	padding:rem(40);
+	background-color:#eee;
+}
+.footer-inner {
+	display:flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+
+/*=====  FIN Footer  =====*/

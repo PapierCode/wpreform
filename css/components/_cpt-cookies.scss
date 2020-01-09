@@ -1,0 +1,44 @@
+/**
+*
+* Composants : Alerte cookies
+*
+*
+**/
+
+.cookies-msg {
+	transition:none;
+	overflow: hidden;
+	text-align: center;
+	background-color: purple;
+	color:#fff;
+	animation: cookie-anim .5s ease-in forwards;
+	padding: em(10);
+	margin: 0;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	transform: translate(0,100%);
+	z-index: 9999;
+
+	&.is-hidden{
+		animation: none;
+		transition: all 0.5s ease-out; // durée à reporter en js
+		transform: translate(0,100%);
+	}
+}
+
+@keyframes cookie-anim {
+	0% { transform: translate(0,100%); }
+	100% { transform: translate(0,0); }
+}
+
+.cookies-msg-link, .cookies-msg-link:visited {
+	display: inline-block;
+	color: #fff;
+	text-decoration: underline;
+	&:hover, &:focus{
+		text-decoration: none;
+	}
+}
+.cookies-msg-btn {}

@@ -1,0 +1,182 @@
+/**
+*
+* Formulaires : défaut
+*
+** Container
+** Champs
+** CGU
+** Captcha
+** Validation
+*
+**/
+
+/*=================================
+=            Container            =
+=================================*/
+
+.form {
+	padding-top: rem(10);
+	margin-top: rem(10);
+	border-top:2px solid #ccc;
+}
+.form-item {
+	& + & {
+		margin: rem(10,0,0,0);
+	}
+
+	/* $mq-contact-form */
+	@media ( min-width : em($mq-contact-form) ) {
+		display: flex;
+		align-items: flex-start;
+		& + & {
+			margin-top: rem(20);
+		}
+	}
+}
+
+
+/*=====  FIN Container  ======*/
+
+/*==============================
+=            Champs            =
+==============================*/
+
+/*----------  Label  ----------*/
+
+.form-label {
+	font-size: rem(18);
+	display: block;
+	margin-top: rem(10);
+	padding-right: rem(10);
+
+	/* $mq-contact-form */
+	@media ( min-width : em($mq-contact-form) ) {
+		min-width : rem(300);
+		margin-top: 0;
+	}
+}
+
+
+/*----------  Défaut  ----------*/
+
+.form-field {
+	width: 100%;
+	margin-top: rem(10);
+	padding: rem(5,10,5,10);
+	border:1px solid #ddd;
+	&.error { border-color: $msg-error-color; }
+	&:focus {
+		border-color:#333;
+		outline: none;
+	}
+
+	/* $mq-contact-form */
+	@media ( min-width : em($mq-contact-form) ) {
+		margin-top: 0;
+	}
+}
+
+/*----------  Input text  ----------*/
+
+.form-input {}
+
+
+/*----------  Textarea  ----------*/
+
+.form-textarea {}
+
+
+/*=====  FIN Champs  ======*/
+
+/*===========================
+=            CGU            =
+===========================*/
+
+.form-item--cgu {
+	padding-top: rem(20);
+	margin-top: rem(30);
+	border-top:1px solid #ccc;
+
+	> * {
+		margin: 0;
+	}
+	> :nth-child(2) {
+		font-style: italic;
+		margin-top: rem(5);
+	}
+
+	/* $mq-contact-form */
+	@media ( min-width : em($mq-contact-form) ) {
+		display: block;
+	}
+}
+
+
+/*=====  FIN CGU  ======*/
+
+/*===============================
+=            Captcha            =
+===============================*/
+
+.form-item--captcha {
+	margin-top: rem(10);
+	.g-recaptcha {
+		margin-top: rem(10);
+
+		/* $mq-contact-form */
+		@media ( min-width : em($mq-contact-form) ) {
+			margin-left:auto;
+			margin-top: 0;
+		}
+	}
+	/* $mq-contact-form */
+	@media ( min-width : em($mq-contact-form) ) {
+		padding-top: rem(20);
+		border-top:1px solid #ccc;
+	}
+}
+
+.g-recaptcha {
+	transform-origin:left top;
+	transform:scale(0.9);
+
+	/* $mq-space-m */
+	@media (min-width:em($mq-space-m)) {
+		transform:scale(1);
+	}
+}
+
+
+/*=====  FIN Captcha  ======*/
+
+/*==================================
+=            Validation            =
+==================================*/
+
+.form-item--submit {
+	text-align: center;
+	padding-top: rem(20);
+	margin-top: rem(30);
+	border-top:2px solid #ccc;
+
+	/* $mq-contact-form */
+	@media ( min-width : em($mq-contact-form) ) {
+		display: block;
+	}
+}
+
+.form-submit {
+	background-color: #000;
+	color:#fff;
+	font-size: rem(20);
+	padding: rem(10,20,10,20);
+	transition:background-color ease 0.3s;
+	&:hover, &:focus {
+		background-color: purple;
+		color:#fff;
+		transition:background-color ease 0.3s;
+	}
+}
+
+
+/*=====  FIN Validation  ======*/

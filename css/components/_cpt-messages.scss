@@ -1,0 +1,132 @@
+/**
+*
+* Composants : messages
+*
+** Variables
+** Défaut
+** Erreur
+** Succès
+** Inline to Block
+*
+**/
+
+
+/*=================================
+=            Variables            =
+=================================*/
+
+$msg-default-color		: #377cb0;
+$msg-error-color			: #d81501;
+$msg-success-color		: #1f8900;
+
+
+/*=====  FIN Variables  ======*/
+
+/*==============================
+=            Défaut            =
+==============================*/
+
+.msg {
+	position: relative;
+	padding-left: rem(40);
+	line-height: 1.3;
+	color:$msg-default-color;
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 50%;
+		width: rem(30);
+		height: rem(30);
+		margin-top: rem(-15);
+		border-radius: 50%;
+		color:#fff;
+		background: $msg-default-color url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='19' viewBox='0 0 4 19'%3E%3Crect width='4' height='12' rx='1' ry='1' fill='%23fff'/%3E%3Crect y='15' width='4' height='4' rx='1' ry='1' fill='%23fff'/%3E%3C/svg%3E") center center no-repeat;
+		text-align: center;
+	}
+
+	&.msg--block {
+		background-color:$msg-default-color;
+
+		&:before {
+			background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='19' viewBox='0 0 4 19'%3E%3Crect width='4' height='12' rx='1' ry='1' fill='#{str-slice(#{$msg-default-color},1,7)}'/%3E%3Crect y='15' width='4' height='4' rx='1' ry='1' fill='#{str-slice(#{$msg-default-color},1,7)}'/%3E%3C/svg%3E");
+		}
+	}
+
+	/* @mq-space-m */
+	@media ( min-width : em($mq-space-m) ) {
+		margin: rem($space-l,0,$space-l,0);
+	}
+}
+
+
+/*=====  FIN Défaut  ======*/
+
+/*==============================
+=            Erreur            =
+==============================*/
+
+.msg--error {
+	color:$msg-error-color;
+
+	&:before {
+		background-color: $msg-error-color;
+	}
+
+	&.msg--block {
+		background-color:$msg-error-color;
+
+		&:before {
+			background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='19' viewBox='0 0 4 19'%3E%3Crect width='4' height='12' rx='1' ry='1' fill='#{str-slice(#{$msg-error-color},1,7)}'/%3E%3Crect y='15' width='4' height='4' rx='1' ry='1' fill='#{str-slice(#{$msg-error-color},1,7)}'/%3E%3C/svg%3E");
+		}
+	}
+}
+
+
+/*=====  FIN Erreur  ======*/
+
+/*==================================
+=            Succès            =
+==================================*/
+
+.msg--success {
+	color:$msg-success-color;
+
+	&:before {
+		background-color: $msg-success-color;
+	}
+
+	&.msg--block {
+		background-color:$msg-success-color;
+
+		&:before {
+			background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='19' viewBox='0 0 4 19'%3E%3Crect width='4' height='12' rx='1' ry='1' fill='#{str-slice(#{$msg-success-color},1,7)}'/%3E%3Crect y='15' width='4' height='4' rx='1' ry='1' fill='#{str-slice(#{$msg-success-color},1,7)}'/%3E%3C/svg%3E");
+		}
+	}
+}
+
+
+/*=====  FIN Succès  ======*/
+
+/*=======================================
+=            Inline to block            =
+=======================================*/
+
+.msg--block {
+	display:block;
+	color:#fff;
+	padding: rem(15,15,15,50);
+
+	&:before {
+		background-color: #fff;
+		left: rem(10);
+	}
+
+	a, a:visited {
+		color:#fff;
+	}
+
+}
+
+
+/*=====  FIN Inline to block  ======*/

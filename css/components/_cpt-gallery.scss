@@ -1,0 +1,278 @@
+/**
+*
+* Composant : gallerie
+*
+** Variables
+** Conteneur
+** Diapositives
+** Contrôles
+** Compteur
+** Légende
+** Loader
+*
+**/
+
+
+/*=================================
+=            Variables            =
+=================================*/
+
+$gl-opening-duration 	: 400ms;
+$gl-closing-duration 	: 400ms; // reporter dans l'option "closingDuration" du plugin jQuery
+
+$gl-bg-color				: rgba(0,0,0,0.8);
+
+$gl-btn-bg-color			: #000;
+$gl-btn-bg-color-hover	: purple;
+
+
+/*=====  FIN Variables  ======*/
+
+/*=================================
+=            Conteneur            =
+=================================*/
+
+.gl {
+	position: fixed;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+
+	overflow: hidden;
+
+	background-color: $gl-bg-color;
+
+	// utiliser une animation pour l'ouverture
+	// une transition ne fonctionne pas si l'élément est ajouté par le plugin
+	animation: gl-visible $gl-opening-duration ease;
+	// utiliser un transition pour la fermeture
+	// le plugin ajoute la class "is-hidden" avant de supprimer la gallerie
+	&.is-hidden {
+		transform:translateY(-100%);
+		transition:transform $gl-closing-duration ease;
+	}
+}
+
+@keyframes gl-visible {
+	0% {
+		transform:translateY(-100%);
+	}
+	100% {
+		transform:translateY(0);
+	}
+}
+
+.gl-container {
+	position: relative;
+	height: 100%
+}
+
+
+/*=====  FIN Conteneur  ======*/
+
+/*====================================
+=            Diapositives            =
+====================================*/
+
+.gl-slide {
+	position: relative;
+	float: left;
+	height: 100%;
+
+	&.is-leaving {}
+	&.is-leaving-to-right {}
+	&.is-leaving-to-left {}
+	&.is-coming {}
+	&.is-coming-from-left {}
+	&.is-coming-from-right {}
+}
+
+@keyframes coming {}
+@keyframes comingfromleft {}
+@keyframes comingfromright {}
+@keyframes leaving {}
+@keyframes leavingtoright {}
+@keyframes leavingtoleft {}
+
+.gl-slide-container {
+	text-align: center;
+	height: 100%;
+	padding: rem(70,$space-s,100,$space-s);
+	&:before {
+		content: "";
+		display: inline-block;
+		height: 50%;
+	}
+	> img {
+		max-height: 100%;
+	}
+
+	/* @mq-gallery-nav */
+	@media ( min-width : em($mq-gallery-nav) ) {
+		padding: rem(70,70,100,70);
+	}
+	/* @mq-max */
+	@media ( min-width : em($mq-max) ) {
+		padding: rem(90,90,100,90);
+	}
+}
+
+
+/*=====  FIN Diapositives  ======*/
+
+/*==================================
+=            Contrôles            =
+==================================*/
+
+/*----------  Communs  ----------*/
+
+.gl-btn {
+	background-color: $gl-btn-bg-color;
+	transition:background-color 0.3s ease;
+	transform-origin:center center 0;
+	padding: rem(15);
+	border-radius: 50%;
+
+	// si l'on clique sur l'enfant SVG
+	// ben ça clique à travers et ferme la galerie...
+	&:after {
+		content: "";
+		position: absolute;
+		top:0;
+		right:0;
+		bottom:0;
+		left: 0;
+	}
+
+	img {
+		vertical-align: bottom;
+	}
+
+	&:hover, &:focus {
+		background-color: $gl-btn-bg-color-hover;
+		transition:background-color 0.3s ease;
+	}
+}
+
+
+/*----------  Précédent / suivant  ----------*/
+
+.gl-btn-nav {
+	position: absolute;
+	top: rem(10);
+
+	/* @mq-gallery-nav */
+	@media ( min-width : em($mq-gallery-nav) ) {
+		top: 50%;
+	}
+}
+.gl-btn-nav--prev {
+	right: rem(130);
+
+	/* @mq-gallery-nav */
+	@media ( min-width : em($mq-gallery-nav) ) {
+		right:auto;
+		left: rem(10);
+		margin-top: rem(-20);
+	}
+
+	/* @mq-max */
+	@media ( min-width : em($mq-max) ) {
+		left: rem(20);
+	}
+}
+.gl-btn-nav--next {
+	right: rem(70);
+	transform:rotate(180deg);
+
+	/* @mq-gallery-nav */
+	@media ( min-width : em($mq-gallery-nav) ) {
+		right: rem(10);
+		margin-top: rem(-20);
+	}
+
+	/* @mq-max */
+	@media ( min-width : em($mq-max) ) {
+		right: rem(20);
+	}
+}
+
+
+/*----------  Fermeture  ----------*/
+
+.gl-btn-close {
+	position: absolute;
+	top: rem(10);
+	right: rem(10);
+
+	/* @mq-max */
+	@media ( min-width : em($mq-max) ) {
+		top: rem(20);
+		right: rem(20);
+	}
+}
+
+
+/*=====  FIN Contrôles  ======*/
+
+/*================================
+=            Compteur            =
+================================*/
+
+.gl-counter {
+	position: absolute;
+	top: rem(10);
+	left: rem(10);
+	color: #fff;
+
+	/* @mq-max */
+	@media ( min-width:rem($mq-max)) {
+		top: rem(20);
+		left: rem(20);
+	}
+}
+.gl-counter-current {}
+.gl-counter-all {}
+
+
+/*=====  FIN Compteur  ======*/
+
+/*===============================
+=            Légende            =
+===============================*/
+
+.gl-caption {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	padding: rem(10);
+	color:#fff;
+	text-align: center;
+	background-color: rgba(0,0,0,0.5);
+}
+
+
+/*=====  FIN Légende  ======*/
+
+/*==============================
+=            Loader            =
+==============================*/
+
+.gl-loader {
+	position: absolute;
+	top: rem(10);
+	left: 50%;
+	margin-left: rem(-$loader-width/2);
+	transform:translateY(0);
+	transition:transform 0.5s ease;
+	&.is-hidden {
+		transform:translateY(rem(-35));
+		transition:transform 0.5s ease;
+	}
+}
+
+
+/*=====  FIN Loader  ======*/

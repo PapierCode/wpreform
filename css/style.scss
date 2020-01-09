@@ -1,0 +1,132 @@
+/**
+*
+* [PC] CSS V2
+* Imports & Configuration
+*
+** Typographie
+** Couleurs
+** Agencement
+** Imports
+*
+**/
+
+
+/*===================================
+=            Typographie            =
+===================================*/
+
+
+/*----------  Défaut  ----------*/
+
+$base-font-family		: Arial, Roboto, "Nimbus Sans L", sans-serif;
+
+$mq-font-size		   	: 16; // pour le calcul des medias queries
+$base-font-size			: 18;
+$base-line-height		: 1.5;
+
+
+/*=====  FIN Typographie  ======*/
+
+/*================================
+=            Couleurs            =
+================================*/
+
+/*----------  Project  ----------*/
+
+//...
+
+
+/*----------  Défaut  ----------*/
+
+$body-bg-color			: #fff;
+$font-color-default		: #333;
+
+$color-placeholder		: #777;
+
+
+/*=====  FIN Couleurs  ======*/
+
+/*==================================
+=            Agencement            =
+==================================*/
+
+/*----------  Gouttières  ----------*/
+
+$space-s				 : 10;
+$space-m				 : 20;
+$space-l				 : 30;
+
+
+/*----------  Largeur maximum  ----------*/
+
+$max-width				: 1230;
+$max-width-txt          : 700;
+$h-nav-width            : 240; // navigation cachée
+
+
+/*----------  Medias Queries  ----------*/
+
+$mq-max					: $max-width;
+$mq-nav 				: $max-width;
+
+$mq-space-m				: 480;
+$mq-space-l				: 760;
+
+$mq-title-size			: 760;
+$mq-gallery-nav		    : 760;
+$mq-contact-form        : 760;
+
+
+/*=====  FIN Agencement  ======*/
+
+/*===============================
+=            Imports            =
+===============================*/
+
+@import "vars";
+
+/*----------  Framework  ----------*/
+
+@import "framework/frk-functions";
+@import "framework/frk-normalize";
+@import "framework/frk-reset";
+@import "framework/frk-helpers";
+
+
+/*----------  Composants  ----------*/
+
+@import "components/cpt-skip-nav";
+// @import "components/cpt-cookies";
+@import "components/cpt-messages";
+@import "components/cpt-loader";
+@import "components/cpt-gallery";
+@import "components/cpt-sharing";
+@import "components/cpt-wysiwyg";
+
+
+/*----------  Layout  ----------*/
+
+@import "layout/layout";
+@import "layout/layout-logo";
+
+
+/*----------  Navigation  ----------*/
+
+@import "navigation/nav-header";
+@import "navigation/nav-footer";
+
+
+/*----------  Publications  ----------*/
+
+@import "publications/pub-commons";
+@import "publications/pub-home";
+@import "publications/pub-page";
+@import "publications/pub-news";
+
+
+/*----------  Formulaires  ----------*/
+
+@import "forms/form-default";
+
+
+/*=====  FIN imports  ======*/

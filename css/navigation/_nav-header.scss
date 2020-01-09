@@ -1,0 +1,124 @@
+/**
+*
+* [custom] Navigation dans l'entête
+*
+*
+**/
+
+/*============================================
+=            Bouton ouvrir/fermer            =
+============================================*/
+
+.btn-h-nav-box {
+    position: absolute;
+    top:0;
+    right:rem(10);
+    z-index: 1;
+    padding:rem(10);
+    transition:transform .3s ease;
+
+    .h-nav-is-open & {
+        transform:translateX(rem($h-nav-width));
+        transition:transform .3s ease;
+        bottom:0;
+    }
+}
+.btn-h-nav {
+    display:block;
+    
+    .h-nav-is-open & {
+        position: sticky;
+        top:rem(10);
+    }
+}
+
+
+
+/*=====  FIN Bouton ouvrir/fermer  =====*/
+
+/*=================================
+=            Container            =
+=================================*/
+
+.h-nav {
+	position: absolute;
+	top: 0;
+	left: 100%;
+	bottom: 0;
+
+	width: rem($h-nav-width);
+	padding: rem(50,10,10,10);
+
+	background-color: orange;
+
+	/* $mq-nav */
+	@media ( min-width : em($mq-nav) ) {
+		// reset
+		position: static;
+		width: auto;
+		padding: 0;
+		background-color: transparent;
+	}
+}
+
+
+/*=====  FIN Container  =====*/
+
+/*=============================
+=            Liste            =
+=============================*/
+
+.h-nav-list {
+
+    .h-nav-is-open & {
+        position: sticky;
+        z-index: 2;
+        top:rem(50);
+    }
+
+    /* $mq-nav */
+    @media ( min-width : em($mq-nav) ) {
+        position: static;
+        display:flex;
+        flex-wrap: wrap;        
+    }
+}
+
+.h-nav-item {
+
+    /* $mq-nav */
+    @media ( min-width : em($mq-nav) ) {
+        margin-right:rem(10);        
+    }
+}
+
+
+/*=====  FIN Liste  =====*/
+
+/*============================
+=            Lien            =
+============================*/
+
+html {
+    --theme-color : #ccc;
+}
+
+.h-nav-link, .h-nav-link:visited {
+    display:block;
+    padding:rem(5,10);
+
+    font-family: var(--nav-h-font);
+    text-decoration: none;
+
+    background-color:var(--theme-color);
+    color:hsl( var(--h-nav-link-txt-hue), var(--h-nav-link-txt-saturation), var(--h-nav-link-txt-light) );
+
+    &:hover, &:focus {
+        
+    }
+}
+
+.h-nav-link-inner {}
+
+
+/*=====  FIN Lien  =====*/

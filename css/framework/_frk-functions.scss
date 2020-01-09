@@ -1,0 +1,70 @@
+/**
+*
+* Framework : fonctions SASS
+*
+** Px to em
+** Px to rem
+*
+**/
+
+/*=================================
+=             Px to em            =
+=================================*/
+
+@function em($a, $b:null, $c:null, $d:null, $base: $mq-font-size) {
+
+	// $a
+	@if $a != null and $b == null and $c == null and $d == null {
+
+		@return #{$a/$base}em;
+
+	// $a et $b
+	} @else if $a != null and $b != null and $c == null and $d == null {
+
+		@return #{$a/$base}em #{$b/$base}em;
+
+	// $a, $b, $c et $d
+	} @else if $a != null and $b != null and $c != null and $d != null {
+
+		@return #{$a/$base}em #{$b/$base}em #{$c/$base}em #{$d/$base}em;
+
+	} @else {
+
+		@return "!";
+
+	}
+
+}
+
+/*=====  FIN Px to em  ======*/
+
+/*=================================
+=            Px to rem            =
+=================================*/
+
+@function rem($a, $b:null, $c:null, $d:null, $base: 16) {
+
+	// $a
+	@if $a != null and $b == null and $c == null and $d == null {
+
+		@return #{$a/$base}rem;
+
+	// $a et $b
+	} @else if $a != null and $b != null and $c == null and $d == null {
+
+		@return #{$a/$base}rem #{$b/$base}rem;
+
+	// $a, $b, $c et $d
+	} @else if $a != null and $b != null and $c != null and $d != null {
+
+		@return #{$a/$base}rem #{$b/$base}rem #{$c/$base}rem #{$d/$base}rem;
+
+	} @else {
+
+		@return "!";
+
+	}
+
+}
+
+/*=====  FIN Px to em  ======*/

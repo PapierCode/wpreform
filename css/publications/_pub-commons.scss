@@ -1,0 +1,73 @@
+/**
+*
+* Publications : commmuns
+*
+**/
+
+/*==========================
+=            H1            =
+==========================*/
+
+h1, .h1-like {
+	color:$font-color-default;
+	font-family: var(--font);
+	font-weight: 900;
+	margin: 0;
+
+	font-size: rem(28);
+	line-height: $base-line-height;
+
+	/* $mq-title-size */
+	@media ( min-width : em($mq-title-size) ) {
+		font-size: rem(40);
+		line-height: $base-line-height;
+	}
+}
+
+
+/*=====  FIN H1  =====*/
+
+/*======================================
+=            Article résumé            =
+======================================*/
+
+.st-list {
+	max-width: rem($max-width);
+
+	/* $mq-space-l */
+	@media ( min-width : em($mq-space-l) ) {
+		
+	}
+}
+.st {
+	padding:rem(100,20,20,20);
+	margin-top:rem(75);
+	background-color:#eee;
+	position: relative;
+}
+
+.st-title {
+	font-family: var(--font);
+	font-weight: 900;
+	font-size: rem(30);
+	line-height: 1.2;
+	text-decoration: underline;
+
+	margin:0;
+
+	a {
+		text-decoration: none;
+		color:#000;
+	}
+}
+
+.st-figure {
+	position: absolute;
+	left:50%;
+	top:0;
+	transform: translate(-50%,-50%);
+}
+
+
+
+/*=====  FIN Article résumé  =====*/

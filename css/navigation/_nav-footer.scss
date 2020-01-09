@@ -1,0 +1,30 @@
+/**
+*
+* [custom] Navigation dans le pied de page
+*
+**/
+
+
+/*=============================
+=            Liste            =
+=============================*/
+
+.f-nav-list {}
+
+.f-nav-item {}
+
+
+/*=====  FIN Liste  ======*/
+
+/*============================
+=            Lien            =
+============================*/
+
+.f-nav-link {
+	&:hover, &:focus {}
+}
+
+.f-nav-link-inner {}
+
+
+/*=====  FIN Lien  ======*/
