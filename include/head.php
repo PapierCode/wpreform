@@ -87,16 +87,21 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 
 	function pc_metas_seo_and_social() {
 
-		global $imgSizes; // tailles d'images déclarées, cf. templates/_templates_images.php
-		global $projectSettings; // config projet, cf. functions.php
+		global $images_project_sizes; // tailles d'images déclarées, cf. templates/_templates_images.php
+		global $settings_project; // config projet, cf. functions.php
+
+		// réutilisable
+		global $meta_title;
+		global $meta_description;
+		global $img_to_share;
 
 		// url de la page en cours
-		$url		= 'https://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+		$url = 'https://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 		
 		// défaut
-		$image			= get_bloginfo( 'template_directory' ).'/images/logo.jpg';
-		$title 			= $projectSettings['coord-name'];
-		$description 	= $projectSettings['micro-desc'];
+		$img_to_share		= get_bloginfo( 'template_directory' ).'/images/logo.jpg';
+		$meta_title 		= $settings_project['coord-name'];
+		$meta_description 	= $settings_project['micro-desc'];
 
 
 		/*----------  home.php  ----------*/
@@ -104,17 +109,17 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 		if ( is_home() ) {
 
 			// contenu home
-			$homeSettings = get_option('home-settings-option');
+			$settings_home = get_option('home-settings-option');
 
 			// titre
-			$title = ( isset( $homeSettings['seo-title'] ) && trim($homeSettings['seo-title']) != '' ) ? $homeSettings['seo-title'] : trim($homeSettings['content-title']).' - '.trim($projectSettings['coord-name']);
+			$meta_title = ( isset( $settings_home['seo-title'] ) && trim($settings_home['seo-title']) != '' ) ? $settings_home['seo-title'] : trim($settings_home['content-title']).' - '.trim($settings_project['coord-name']);
 			// description
-			$description = ( isset( $homeSettings['seo-desc'] ) && trim($homeSettings['seo-desc']) != '' ) ? $homeSettings['seo-desc'] : wp_trim_words($homeSettings['content-intro'],30,'...');
+			$meta_description = ( isset( $settings_home['seo-desc'] ) && trim($settings_home['seo-desc']) != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-intro'],30,'...');
 			
 			// visuel
-			if ( isset( $homeSettings['seo-img'] ) && $homeSettings['seo-img'] != '' ) {
-				$imageDatas = pc_get_img($homeSettings['seo-img'],'share','datas');
-				$image = $imageDatas[0];
+			if ( isset( $settings_home['seo-img'] ) && $settings_home['seo-img'] != '' ) {
+				$img_to_share_datas = pc_get_img($settings_home['seo-img'],'share','datas');
+				$img_to_share = $img_to_share_datas[0];
 			}
 
 
@@ -124,17 +129,17 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 
 			// custom fields
 			$postId = get_the_id();
-			$postMetas = get_post_meta( $postId );
+			$page_metas = get_post_meta( $postId );
 
 			// titre
-			$title = ( isset( $postMetas['seo-title'] ) ) ? $postMetas['seo-title'][0] : get_the_title($postId).' - '.trim($projectSettings['coord-name']);
+			$meta_title = ( isset( $page_metas['seo-title'] ) ) ? $page_metas['seo-title'][0] : get_the_title($postId).' - '.trim($settings_project['coord-name']);
 			// description
-			$description = ( isset( $postMetas['seo-desc'] ) ) ? $postMetas['seo-desc'][0] : get_the_excerpt($postId);
+			$meta_description = ( isset( $page_metas['seo-desc'] ) ) ? $page_metas['seo-desc'][0] : get_the_excerpt($postId);
 			
 			// visuel
-			if ( isset( $postMetas['thumbnail-img'] ) ) {
-				$imageDatas = pc_get_img($postMetas['thumbnail-img'][0],'share','datas');
-				$image = $imageDatas[0];
+			if ( isset( $page_metas['thumbnail-img'] ) ) {
+				$img_to_share_datas = pc_get_img($page_metas['thumbnail-img'][0],'share','datas');
+				$img_to_share = $img_to_share_datas[0];
 			}
 
 
@@ -143,30 +148,36 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 		} elseif ( is_404() ) {
 
 			// metas title & description
-			$title = 'Page non trouvée - '.trim($projectSettings['coord-name']);
-			$description = 'Désolé, cette page n\'existe pas ou a été supprimée.';
+			$meta_title = 'Page non trouvée - '.trim($settings_project['coord-name']);
+			$meta_description = 'Désolé, cette page n\'existe pas ou a été supprimée.';
 			
 		}
+
+		
+		/*----------  Filtres  ----------*/
+		
+		$meta_title = apply_filters( 'pc_filter_meta_title', $meta_title );
+		$meta_description = apply_filters( 'pc_filter_meta_description', $meta_description );
 
 
 		/*----------  Affichage  ----------*/
 
-		echo '<title>'.$title.'</title>'.PHP_EOL;
+		echo '<title>'.$meta_title.'</title>'.PHP_EOL;
 		
 		$metasDatas = array(
-			array( 'name',	'description', $description ),
+			array( 'name',	'description', $meta_description ),
 			array( 'property', 'og:url', $url ),
 			array( 'property', 'og:type', 'article' ),
-			array( 'property', 'og:title', $title ),
-			array( 'property', 'og:description', $description ),
-			array( 'property', 'og:image', $image ),
-			array( 'property', 'og:image:width', $imgSizes['share']['width'] ),
-			array( 'property', 'og:image:height', $imgSizes['share']['height'] ),
+			array( 'property', 'og:title', $meta_title ),
+			array( 'property', 'og:description', $meta_description ),
+			array( 'property', 'og:image', $img_to_share ),
+			array( 'property', 'og:image:width', $images_project_sizes['share']['width'] ),
+			array( 'property', 'og:image:height', $images_project_sizes['share']['height'] ),
 			array( 'name', 'twitter:card', 'summary' ),
 			array( 'name', 'twitter:url', $url ),
-			array( 'name', 'twitter:title', $title ),
-			array( 'name', 'twitter:description', $description ),
-			array( 'name', 'twitter:image', $image )
+			array( 'name', 'twitter:title', $meta_title ),
+			array( 'name', 'twitter:description', $meta_description ),
+			array( 'name', 'twitter:image', $img_to_share )
 		);
 		
 		foreach ($metasDatas as $meta) {

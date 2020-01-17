@@ -8,18 +8,10 @@
 
 if ( class_exists('PC_Add_metabox') ) {
 
+$metabox_seo_for = array( 'page', NEWS_POST_SLUG );
 
-/*----------  Cibles  ----------*/
-
-$seoFor = array( 'page', NEWS_POST_SLUG );
-
-
-/*===========================
-=            SEO            =
-===========================*/
-
-$seoMetaboxSeoContent = array(
-    'desc'          => $pcSettings['help-seo-social'],
+$metabox_seo_fields = array(
+    'desc'          => $settings_pc['help-seo-social'],
     'prefix'        => 'seo',
     'fields'        => array(
         array(
@@ -41,9 +33,7 @@ $seoMetaboxSeoContent = array(
     )
 );
 
-$seoMetaboxSeo = new PC_Add_Metabox( $seoFor, 'Optimisations référencement (SEO) & Réseaux sociaux', 'page-metabox-seo', $seoMetaboxSeoContent, 'normal', 'low' );
+$metabox_seo_declaration = new PC_Add_Metabox( $metabox_seo_for, 'Optimisations référencement (SEO) & Réseaux sociaux', 'page-metabox-seo', $metabox_seo_fields, 'normal', 'low' );
 
-
-/*=====  FIN SEO  ======*/
 
 } // FIN if class_exist()

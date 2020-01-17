@@ -14,25 +14,20 @@ if ( class_exists('PC_Add_Admin_Page') ) {
 /*----------  Communs  ----------*/
 
 // select page
-$allPages = get_posts( array(
+$all_pages = get_posts( array(
     'post_type' => 'page',
     'nopaging' => true,
 ) );
-$pageList = array();
-foreach ($allPages as $page) {
-    $pageList[$page->post_title] = $page->ID;
+$pages_list = array();
+foreach ($all_pages as $page) {
+    $pages_list[$page->post_title] = $page->ID;
 }
-
-
-/*----------  Horaires  ----------*/
-
-$hoursFields = '<div style="display:flex;"><input type="text" name="project-settings-option[coord-hours]"/></div>';
 
 
 /*----------  Contenu  ----------*/
 
 // sections et champs associés
-$projectAdminContent = array(
+$settings_project_field = array(
     array(
         'title'     => 'Coordonnées',
         'id'        => 'contact-informations',
@@ -80,12 +75,6 @@ $projectAdminContent = array(
                 'required'  => true,
                 'attr'      => 'step="any"',
                 'desc'      => 'Saisissez la valeur avec une virgule.'
-            ),
-            array(
-                'type'      => 'custom',
-                'label_for' => 'hours',
-                'label'     => 'Horaires',
-                'display'   => $hoursFields
             ),
             array(
                 'type'      => 'text',
@@ -154,7 +143,7 @@ $projectAdminContent = array(
                 'type'      => 'select',
                 'label_for' => 'page',
                 'label'     => 'Page des CGU',
-                'options'   => $pageList,
+                'options'   => $pages_list,
                 'required'  => true
             )
         )
@@ -185,26 +174,34 @@ $projectAdminContent = array(
     )
 );
 
-$projectAdminContent = apply_filters( 'pc_filter_project_settings_fields', $projectAdminContent );
+$settings_project_fields = apply_filters( 'pc_filter_settings_project_fields', $settings_project_field );
 
 
 /*----------  Création  ----------*/
 
-$projectAdmin = new PC_Add_Admin_Page(
+$settings_project_declaration = new PC_Add_Admin_Page(
     'Paramètres du site',
 	'',
     'Paramètres',
     'project-settings',
-    $projectAdminContent,
+    $settings_project_fields,
     'editor',
     61,
     'dashicons-clipboard',
-    'pc_sanitize_project_settings'
+    'pc_sanitize_settings_project'
 );
 
-function pc_sanitize_project_settings( $datas ) {
-    return $datas;
-}
 
+/*----------  Sanitize  ----------*/
+
+function pc_sanitize_settings_project( $datas ) {
+
+    $datas = apply_filters( 'pc_filter_settings_project_sanitize_fields', $datas );
+
+    global $settings_project_field;
+
+    return pc_sanitize_fields( $settings_project_field, $datas );
+
+}
 
 } // FIN if class_exists

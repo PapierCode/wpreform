@@ -8,17 +8,9 @@
 
 if ( class_exists('PC_Add_metabox') ) {
 
+$metabox_thumbnail_for = array( 'page', NEWS_POST_SLUG );
 
-/*----------  Cibles  ----------*/
-
-$thumbnailFor = array( 'page', NEWS_POST_SLUG );
-
-
-/*===========================
-=            SEO            =
-===========================*/
-
-$thumbnailMetaboxSeoContent = array(
+$metabox_thumbnail_fields = array(
     'desc'          => '<p>Le visuel utilisé pour afficher cette page sous sa forme résumée et le partage sur les réseaux sociaux.</p>',
     'prefix'        => 'thumbnail',
     'fields'        => array(
@@ -33,9 +25,7 @@ $thumbnailMetaboxSeoContent = array(
     )
 );
 
-$thumbnailMetaboxSeo = new PC_Add_Metabox( $thumbnailFor, 'Visuel', 'page-metabox-thumbnail', $thumbnailMetaboxSeoContent, 'normal', 'low' );
+$metabox_thumbnail_declaration = new PC_Add_Metabox( $metabox_thumbnail_for, 'Visuel', 'page-metabox-thumbnail', $metabox_thumbnail_fields, 'normal', 'low' );
 
-
-/*=====  FIN SEO  ======*/
 
 } // FIN if class_exist()

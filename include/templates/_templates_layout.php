@@ -11,7 +11,7 @@
 
 /*----------  Ouverture  ----------*/
 
-function pc_get_main_start( $classes = '' ) {
+function pc_display_main_start( $classes = '' ) {
 
     echo '<main id="main" class="main '.$classes.'"><div class="main-inner">';
 
@@ -20,14 +20,14 @@ function pc_get_main_start( $classes = '' ) {
 
 /*----------  Titre (H1)  ----------*/
 
-function pc_get_main_title( $text ) {
+function pc_display_main_title( $text ) {
 
     echo '<h1>'.$text.'</h1>';
 
     // actualités filtrées, affichage de la catégorie en sous titre
     if ( get_query_var( NEWS_TAX_QUERY_VAR ) ) {
-        $currentNewsTax = get_term_by( 'slug', get_query_var( NEWS_TAX_QUERY_VAR ), NEWS_TAX_SLUG );
-        echo '<p>Pour la catégorie <em>'.$currentNewsTax->name.'</em></p>';
+        $current_news_cat = get_term_by( 'slug', get_query_var( NEWS_TAX_QUERY_VAR ), NEWS_TAX_SLUG );
+        echo '<p>Pour la catégorie <em>'.$current_news_cat->name.'</em></p>';
     }
 
 }
@@ -35,7 +35,7 @@ function pc_get_main_title( $text ) {
 
 /*----------  Fermeture  ----------*/
 
-function pc_get_main_end() {
+function pc_display_main_end() {
 
     echo '</div></main>';
 

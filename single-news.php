@@ -5,23 +5,23 @@ get_header();
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 
 	// métas
-	$postMetas = get_post_meta( $post->ID );
+	$news_metas = get_post_meta( $post->ID );
 
 	// Main (1/2)
-	pc_get_main_start();
+	pc_display_main_start();
 		
 
 		/*----------  Visuel  ----------*/
 
-		if ( isset( $postMetas['resum-img'] ) ) {
-			$img = pc_get_img( $postMetas['resum-img'][0], 'st', 'datas' );
-			echo '<figure class=""><img src="'.$img[0].'" alt="'.$img[1].'" width="'.$img[2].'" height="'.$img[3].'" /></figure>';
+		if ( isset( $news_metas['thumbnail-img'] ) ) {
+			$news_img = pc_get_img( $news_metas['thumbnail-img'][0], 'st', 'datas' );
+			echo '<figure class=""><img src="'.$news_img[0].'" alt="'.$news_img[1].'" width="'.$news_img[2].'" height="'.$news_img[3].'" /></figure>';
 		} else {
-			$img = pc_get_default_st( '', 'datas' );
+			$news_img = pc_get_default_st( '', 'datas' );
 		}
 
 		// Titre de la page (H1)
-		pc_get_main_title( get_the_title() );
+		pc_display_main_title( get_the_title() );
 		
 
 		/*----------  Dates  ----------*/ ?>
@@ -34,14 +34,14 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 		<?php if ( taxonomy_exists (NEWS_TAX_SLUG ) ) {
 
 			// toutes les termes attachés au post
-			$postTax = wp_get_post_terms( $post->ID, NEWS_TAX_SLUG, array("fields" => "all" ) );
+			$news_tax = wp_get_post_terms( $post->ID, NEWS_TAX_SLUG, array("fields" => "all" ) );
 
 			// si il y a au moins une tax
-			if ( count($postTax) > 0 ) {
+			if ( count($news_tax) > 0 ) {
 
 				echo '<ul class="tax-list">';
-				foreach ($postTax as $postTaxKey => $postTaxValue) {
-					echo '<li class="reset-list tax-list-item"><a class="tax-list-link" href="'.pc_get_page_by_custom_content(NEWS_POST_SLUG).'?'.NEWS_TAX_QUERY_VAR.'='.$postTaxValue->slug.'" title="Tous les actualités publiées dans '.$postTaxValue->name.'" rel="nofollow">'.$postTaxValue->name.'</a></li>';
+				foreach ($news_tax as $news_tax_key => $news_tax_value) {
+					echo '<li class="reset-list tax-list-item"><a class="tax-list-link" href="'.pc_get_page_by_custom_content(NEWS_POST_SLUG).'?'.NEWS_TAX_QUERY_VAR.'='.$news_tax_value->slug.'" title="Tous les actualités publiées dans '.$news_tax_value->name.'" rel="nofollow">'.$news_tax_value->name.'</a></li>';
 				}
 				echo '</ul>';
 				
@@ -63,7 +63,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 			// navigation suivant/précédent
 			pc_post_navigation();
 			// Partage
-			include 'include/templates/template_share.php';
+			pc_display_share_links();
 			?>
 
 		</footer>	
@@ -80,12 +80,12 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 				"url": "<?php the_permalink(); ?>",
 				"author": {
 					"@type": "Organization",
-					"name": "<?= $projectSettings['coord-name']; ?>",
+					"name": "<?= $settings_project['coord-name']; ?>",
 					"logo": {
 						"@type":"ImageObject",
 						"url" : "<?php bloginfo('template_directory'); ?>/images/logo.jpg",
-						"width" : "<?= $imgSizes['share']['width']; ?>",
-						"height" : "<?= $imgSizes['share']['height']; ?>"
+						"width" : "<?= $images_project_sizes['share']['width']; ?>",
+						"height" : "<?= $images_project_sizes['share']['height']; ?>"
 					}
 				},
 				"publisher": {
@@ -94,16 +94,16 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 					"logo": {
 						"@type":"ImageObject",
 						"url" : "<?php bloginfo('template_directory'); ?>/images/logo.jpg",
-						"width" : "<?= $imgSizes['share']['width']; ?>",
-						"height" : "<?= $imgSizes['share']['height']; ?>"
+						"width" : "<?= $images_project_sizes['share']['width']; ?>",
+						"height" : "<?= $images_project_sizes['share']['height']; ?>"
 					}
 				},
 				"headline": "<?php the_title(); ?>",
 				"image": {
 					"@type":"ImageObject",
-					"url" : "<?= $img[0]; ?>",
-					"width" : "<?= $img[1]; ?>",
-					"height" : "<?= $img[2]; ?>"
+					"url" : "<?= $news_img[0]; ?>",
+					"width" : "<?= $news_img[1]; ?>",
+					"height" : "<?= $news_img[2]; ?>"
 				},
 				"datePublished": "<?= get_the_date('c'); ?>",
 				"dateModified": "<?php the_modified_date('c'); ?>",
@@ -115,7 +115,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 		<?php /*=====  FIN Données structurée  ======*/
 
 		// Main (2/2)
-	pc_get_main_end();
+	pc_display_main_end();
 
 // Boucle WP (2/2)
 endwhile; endif;

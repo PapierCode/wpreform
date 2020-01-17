@@ -23,45 +23,90 @@ $form_contact_settings = apply_filters( 'pc_filter_form_contact_settings', $form
  
 /*=====  FIN Formulaire  =====*/
 
-/*==============================
-=            Champs            =
-==============================*/
+/*=============================================
+=            Définition des champs            =
+=============================================*/
 
-$form_contact_fields = array(
-	'contact-last-name' => array(
-		'type'		    	=> 'text',
-		'label-txt' 		=> 'Nom',
-		'email-from-txt'	=> true
-	),
-	'contact-name' => array(
-		'type'		    	=> 'text',
-		'label-txt' 		=> 'Prénom'
-	),
-	'contact-phone' => array(
-		'type'		    	=> 'text',
-		'label-txt' 		=> 'Téléphone'
-	),
-	'contact-mail' => array(
-		'type'		    	=> 'email',
-		'label-txt' 		=> 'E-mail',
-		'required' 	    	=> true
-    ),
-	'contact-message' => array(
-		'type'		    	=> 'textarea',
-		'label-txt' 		=> 'Message',
-		'required' 	    	=> true,
-		'attr'				=> 'rows="5"'
-	),
-	'contact-cgu' => array(
-		'type'		    	=> 'checkbox',
-		'label-txt' 		=> 'J\'ai lu et j\'accepte la <a href="'.get_the_permalink($projectSettings['cgu-page']).'" title="Politique de confidentialité">Politique de confidentialité</a>',
-		'required' 	    	=> true,
-		'desc'				=> 'Les données de ce formulaire ne sont pas stockées et uniquement utilisées pour répondre à votre demande.',
-		'email-not-in'		=> true
-	)
-);
+if ( class_exists('PC_Add_metabox') ) {
+	
+	$post_contact_fields = array(
+		'prefix'        => 'contact',
+		'fields'        => array(
+			array(
+				'type'      		=> 'text',
+				'id'        		=> 'last-name',
+				'label'     		=> 'Nom',
+				'attr'				=> 'readonly',
+            	'css'       		=> 'width:100%',
+				'email-from-txt'	=> true // pour la notification mail
+			),
+			array(
+				'type'      		=> 'text',
+				'id'        		=> 'name',
+				'label'     		=> 'Prénom',
+				'attr'				=> 'readonly',
+				'css'       		=> 'width:100%',
+			),
+			array(
+				'type'      		=> 'text',
+				'id'        		=> 'phone',
+				'label'     		=> 'Téléphone',
+				'attr'				=> 'readonly',
+				'css'       		=> 'width:100%',
+			),
+			array(
+				'type'      		=> 'email',
+				'id'        		=> 'mail',
+				'label'     		=> 'E-mail',
+				'attr'				=> 'readonly',
+            	'css'       		=> 'width:100%',
+				'required' 	    	=> true
+			),
+			array(
+				'type'      		=> 'textarea',
+				'id'        		=> 'message',
+				'label'     		=> 'Message',
+				'attr'				=> 'readonly',
+            	'css'       		=> 'width:100%',
+				'form-attr'			=> 'rows="5"', // pour le formulaire public
+				'required' 	    	=> true
+			),
+			array(
+				'type'      		=> 'checkbox',
+				'id'        		=> 'cgu',
+				'label'     		=> 'CGU acceptées',
+				'attr'				=> 'disabled',
+				'required' 	    	=> true,
+				'form-label'		=> 'J\'ai lu et j\'accepte la <a href="'.get_the_permalink($settings_project['cgu-page']).'" title="Politique de confidentialité">Politique de confidentialité</a>', // pour le formulaire public
+				'form-desc'			=> 'Les données saisies dans ce formulaire nous sont réservées et ne seront pas cédées ou revendues à des tiers.', // pour le formulaire public,
+				'email-not-in'		=> true // pour la notification mail
 
-$form_contact_fields = apply_filters( 'pc_filter_form_contact_fields', $form_contact_fields );
+			)
+		)
+	);
+
+	$post_contact_fields = apply_filters( 'pc_filter_post_contact_fields', $post_contact_fields );
+	
+	$post_contact_fields_declaration = new PC_Add_Metabox( CONTACT_POST_SLUG, 'Champs', 'form-contact-fields', $post_contact_fields, 'normal', 'low' );
+	
+	
+} // FIN if class_exist()
+
+	
+/*=====  FIN Définition des champs  =====*/
+
+/*=================================================================
+=            Préparation des champs pour le formulaire            =
+=================================================================*/
+
+$form_contact_fields = array();
+
+foreach ($post_contact_fields['fields'] as $key => $datas) {
+
+	$form_contact_fields[$post_contact_fields['prefix'].'-'.$datas['id']] = $datas;
+
+}
 
 
-/*=====  FIN Champs  =====*/
+
+/*=====  FIN Préparation des champs pour le formulaire  =====*/

@@ -4,23 +4,22 @@
 *
 * Actualités
 *
-* * Post
-* * Admin
-* * Taxonomy
-* * Menu item actif
+** Création du post
+** Création de la taxonomie
+** Affichage dans l'admin
 *
 **/
 
 
-if ( isset($pcSettings['news-active']) && class_exists( 'PC_Add_Custom_Post' ) && class_exists( 'PC_Add_Admin_Page' ) ) {
+if ( isset($settings_pc['news-active']) && class_exists( 'PC_Add_Custom_Post' ) && class_exists( 'PC_Add_Admin_Page' ) ) {
 
-	/*===================================
-	=            Custom Post            =
-	===================================*/
+	/*========================================
+	=            Création du post            =
+	========================================*/
 
 	/*----------  Labels  ----------*/
 
-	$newsLabels = array (
+	$post_news_labels = array (
 	    'name'                  => 'Actualités',
 	    'singular_name'         => 'Actualité',
 	    'menu_name'             => 'Actualités',
@@ -35,10 +34,10 @@ if ( isset($pcSettings['news-active']) && class_exists( 'PC_Add_Custom_Post' ) &
 
 	/*----------  Configuration  ----------*/
 
-	$newsArgs = array(
+	$news_post_args = array(
 	    'menu_position'     => 26,
 		'menu_icon'         => 'dashicons-megaphone',
-		'show_in_nav_menus' => ($currentUserRole === 'administrator') ? true : false,
+		'show_in_nav_menus' => ($current_user_role === 'administrator') ? true : false,
 	    'supports'          => array( 'title', 'editor' ),
 	    'rewrite'			=> array( 'slug' => 'news-actualites'),
 		'taxonomies'		=> array( NEWS_TAX_SLUG ),
@@ -48,20 +47,20 @@ if ( isset($pcSettings['news-active']) && class_exists( 'PC_Add_Custom_Post' ) &
 
 	/*----------  Déclaration  ----------*/
 
-	$news = new PC_Add_Custom_Post( NEWS_POST_SLUG, $newsLabels, $newsArgs );
+	$news_post_declaration = new PC_Add_Custom_Post( NEWS_POST_SLUG, $post_news_labels, $news_post_args );
 
 
-	/*=====  FIN Custom Post  ======*/
+	/*=====  FIN Création du post  ======*/
 
 	/*=======================================
-	=            Custom Taxonomy            =
+	=            Création de la taxonomie            =
 	=======================================*/
 
-	if ( isset($pcSettings['news-tax']) ) {
+	if ( isset($settings_pc['news-tax']) ) {
 
 		/*----------  Labels  ----------*/
 
-		$newsCatLabels = array(
+		$news_tax_labels = array(
 		    'name'                          => 'Catégories',
 		    'singular_name'                 => 'Catégorie',
 		    'menu_name'                     => 'Catégories',
@@ -82,14 +81,14 @@ if ( isset($pcSettings['news-active']) && class_exists( 'PC_Add_Custom_Post' ) &
 
 		/*----------  Paramètres  ----------*/
 
-		$newsCatArgs = array(
-			'show_in_nav_menus' => ($currentUserRole === 'administrator') ? true : false,
+		$news_tax_args = array(
+			'show_in_nav_menus' => ($current_user_role === 'administrator') ? true : false,
 		);
 
 
 		/*----------  Déclaration  ----------*/
 
-		$news->add_custom_tax( NEWS_TAX_SLUG, $newsCatLabels, $newsCatArgs );
+		$news_post_declaration->add_custom_tax( NEWS_TAX_SLUG, $news_tax_labels, $news_tax_args );
 
 
 		/*----------  Filtre  ----------*/
@@ -107,11 +106,11 @@ if ( isset($pcSettings['news-active']) && class_exists( 'PC_Add_Custom_Post' ) &
 	} // FIN si taxonomy active
 
 
-	/*=====  FIN Custom Taxonomy  ======*/
+	/*=====  FIN Création de la taxonomie  ======*/
 
-	/*============================================================
-	=            Gestion des colonnes dans les listes            =
-	============================================================*/
+	/*==============================================
+	=            Affichage dans l'admin            =
+	==============================================*/
 	
 	add_filter( 'manage_edit-'.NEWS_TAX_SLUG.'_columns', 'pc_news_tax_columns' );
 
@@ -123,6 +122,6 @@ if ( isset($pcSettings['news-active']) && class_exists( 'PC_Add_Custom_Post' ) &
 		}
 	
 	
-	/*=====  FIN Gestion des colonnes dans les listes  =====*/
+	/*=====  FIN Affichage dans l'admin  =====*/
 
 } // FIN if news-active && class_exists(PC_Add_Custom_Post)

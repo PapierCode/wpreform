@@ -5,13 +5,13 @@ get_header();
 if ( have_posts() ) : while ( have_posts() ) : the_post();
 
 	// métas
-	$postMetas = get_post_meta($post->ID);
+	$page_metas = get_post_meta($post->ID);
 
 	// Main (1/2)
-	pc_get_main_start();
+	pc_display_main_start();
 
 		// Titre de la page (H1)
-		pc_get_main_title( get_the_title() );
+		pc_display_main_title( get_the_title() );
 
 
 		/*===============================
@@ -29,10 +29,10 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 		
 		/*----------  Contenu spécifique  ----------*/
 				
-		if ( isset($postMetas['content-from']) ) {
+		if ( isset($page_metas['content-from']) ) {
 			
-			foreach ($pageContentFrom as $slug => $datas) {
-				if ($slug == $postMetas['content-from'][0]) {
+			foreach ($page_content_from as $slug => $datas) {
+				if ($slug == $page_metas['content-from'][0]) {
 					include $datas[1];
 				}
 			}
@@ -40,13 +40,13 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 
 		/*----------  Sous-pages  ----------*/		
 
-		} else if ( isset($postMetas['content-subpages']) ) {
+		} else if ( isset($page_metas['content-subpages']) ) {
 
-			$subpagesId = explode(',',$postMetas['content-subpages'][0]);
+			$sub_pages_id = explode(',',$page_metas['content-subpages'][0]);
 
 			echo '<div class="st-list">';
-			foreach ($subpagesId as $postId) {
-				pc_get_post_resum( $postId, '', 2 );
+			foreach ($sub_pages_id as $postId) {
+				pc_display_post_resum( $postId, '', 2 );
 			}
 			echo '</div>';
 
@@ -69,7 +69,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 
 			/*----------  Partage  ----------*/			
 			
-			include 'include/templates/template_share.php'; ?>
+			pc_display_share_links(); ?>
 
 		</footer>
 		
@@ -78,7 +78,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 
 
 	// Main (2/2)
-	pc_get_main_end();
+	pc_display_main_end();
 
 // Boucle WP (2/2)
 endwhile; endif;

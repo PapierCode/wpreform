@@ -21,22 +21,22 @@
 				<div class="h-logo">
 					<a href="<?php bloginfo('url'); ?>" class="h-logo-link" title="Accueil <?php bloginfo('name'); ?>">
 						<?php
-						$logoDatas = array(
+						$logo_datas = array(
 							'url' => get_bloginfo('template_directory').'/images/logo.svg',
 							'width' => 140,
 							'height' => 120,
 							'alt' => 'Logo'
 						);
-						$logoDatas = apply_filters( 'pc_filter_header_logo', $logoDatas );
+						$logo_datas = apply_filters( 'pc_filter_header_logo', $logo_datas );
 						?>
-						<img class="h-logo" src="<?= $logoDatas['url']; ?>" alt="<?= $logoDatas['alt']; ?>" width="<?= $logoDatas['width']; ?>" height="<?= $logoDatas['height']; ?>" />
+						<img class="h-logo" src="<?= $logo_datas['url']; ?>" alt="<?= $logo_datas['alt']; ?>" width="<?= $logo_datas['width']; ?>" height="<?= $logo_datas['height']; ?>" />
 					</a>
 					<div class="btn-h-nav-box"><button type="button" title="Ouvrir/fermer le menu" class="btn-h-nav reset-btn ico-menu js-menu" aria-hidden="true" tabindex="-1"><span class="btn-menu-inner ico-menu"><span class="">Menu</span></span></button></div>
 				</div>
 				<nav id="header-nav" class="h-nav">
 					<?php
-						$hNavConfig = array(
-							'theme_location'  	=> 'header_primary',
+						$nav_header_config = array(
+							'theme_location'  	=> 'nav-header',
 							'nav_prefix'		=> array('h-nav', 'h-p-nav'), // custom
 							'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1 reset-list',
 							'items_wrap'      	=> '<ul class="%2$s">%3$s</ul>',
@@ -46,7 +46,7 @@
 							'fallback_cb'     	=> false,
 							'walker'          	=> new Pc_Walker_Nav_Menu()
 						);
-						wp_nav_menu( $hNavConfig );
+						wp_nav_menu( $nav_header_config );
 						// + include/navigation.php
 					?>
 				</nav>

@@ -2,8 +2,8 @@
 /**
 *
 ** Création des menus
-** Customisation menu principal
-** Customisation menu pied de page
+** Customisation menu 
+** Item parent actif si page enfatn affichée
 *
 **/
 
@@ -12,14 +12,14 @@
 =            Création des menus            =
 ==========================================*/
 
-add_action( 'init', 'add_menu' );
+add_action( 'init', 'pc_register_nav_menus' );
 
-	function add_menu() {
+	function pc_register_nav_menus() {
 
 		register_nav_menus(
 			array(
-				'header_primary'	=> 'Entête',
-				'footer_primary'	=> 'Pied de page'
+				'nav-header'	=> 'Entête',
+				'nav-footer'	=> 'Pied de page'
 			)
 		);
 
@@ -110,24 +110,24 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 /*=====  End of Customisation menu  ======*/
 
-/*=======================================
-=            Menu activation            =
-=======================================*/
+/*=================================================================
+=            Item parent actif si page enfatn affichée            =
+=================================================================*/
 
 add_filter( 'wp_nav_menu_objects', 'pc_nav_menu_item_active', NULL, 2 );
 
-	function pc_nav_menu_item_active( $menuItems, $args ) {
+	function pc_nav_menu_item_active( $menu_items, $args ) {
 
 		// si menu d'entête
-		if ( $args->theme_location == 'header_primary' ) {
+		if ( $args->theme_location == 'nav-header' ) {
 
 			// si single-news.php
 			if ( is_singular( NEWS_POST_SLUG ) ) {
 
 				// page qui publie les actus
-				$newsPage = pc_get_page_by_custom_content( NEWS_POST_SLUG, 'object' );
+				$news_page = pc_get_page_by_custom_content( NEWS_POST_SLUG, 'object' );
 				// si la page qui publie les actus a un parent ou pas
-				$idToSearch = ( $newsPage->post_parent > 0 ) ? $newsPage->post_parent : $newsPage->ID;
+				$id_to_search = ( $news_page->post_parent > 0 ) ? $news_page->post_parent : $news_page->ID;
 
 			}
 
@@ -136,14 +136,15 @@ add_filter( 'wp_nav_menu_objects', 'pc_nav_menu_item_active', NULL, 2 );
 				
 				global $post;
 				// si la page a un parent
-				if ( $post->post_parent > 0 ) { $idToSearch = $post->post_parent; }
+				if ( $post->post_parent > 0 ) { $id_to_search = $post->post_parent; }
 
 			}
 			
-			if ( isset($idToSearch) ) {
+			// recherche de l'item
+			if ( isset($id_to_search) ) {
 
-				foreach ( $menuItems as $object ) {
-					if ( $object->object_id == $idToSearch ) {
+				foreach ( $menu_items as $object ) {
+					if ( $object->object_id == $id_to_search ) {
 						// ajout classe WP (remplacée dans le Walker du menu)
 						$object->classes[] = 'current-menu-item';
 					}
@@ -153,9 +154,9 @@ add_filter( 'wp_nav_menu_objects', 'pc_nav_menu_item_active', NULL, 2 );
 
 		}
 
-		return $menuItems;
+		return $menu_items;
 
 	};
 
 
-/*=====  FIN Menu activation  ======*/
+/*=====  FIN Item parent actif si page enfatn affichée  ======*/

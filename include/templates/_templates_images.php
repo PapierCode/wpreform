@@ -26,17 +26,17 @@ function pc_define_default_img_sizes() {
 
 }
     
-$imgSizes = array(
+$images_project_sizes = array(
     'st'    => array( 'width'=>150, 'height'=>150, 'crop'=>true ), // affecte pc_get_default_st()
     'share' => array( 'width'=>300, 'height'=>300, 'crop'=>true ),
     'gl-m'  => array( 'width'=>800, 'height'=>800, 'crop'=>false ),
     'gl-l'  => array( 'width'=>1200, 'height'=>1200, 'crop'=>false )
 );
 
-$imgSizes = apply_filters( 'pc_filter_add_img_sizes', $imgSizes );
+$images_project_sizes = apply_filters( 'pc_filter_add_img_sizes', $images_project_sizes );
 
-foreach ( $imgSizes as $imgSize => $datas ) {
-    add_image_size( $imgSize, $datas['width'], $datas['height'], $datas['crop'] );
+foreach ( $images_project_sizes as $size => $datas ) {
+    add_image_size( $size, $datas['width'], $datas['height'], $datas['crop'] );
 }
 
 
@@ -51,30 +51,30 @@ add_filter( 'post_gallery', 'pc_gallery_custom', 10, 3 );
 function pc_gallery_custom( $output = '', $atts, $instance ) {
 
     // liste des images
-    $imgIdList = explode( ',' , $atts['ids'] );
+    $img_id_list = explode( ',' , $atts['ids'] );
 
     // html contruction
     $return = '<ul class="wp-gallery reset-list">';
 
-        foreach ( $imgIdList as $imgId ) {
+        foreach ( $img_id_list as $img_id ) {
 
-            $imgThumbDatas = wp_get_attachment_image_src($imgId,'st');
+            $thumbnail_datas = wp_get_attachment_image_src($img_id,'st');
 
             // si la vignette existe
-            if ( isset($imgThumbDatas) && $imgThumbDatas[3] == 1 ) {
+            if ( isset($thumbnail_datas) && $thumbnail_datas[3] == 1 ) {
 
-               $imgMediumDatas = wp_get_attachment_image_url($imgId,'gl-m');
-               if ( !isset($imgMediumDatas) ) { $imgMediumDatas = wp_get_attachment_image_src($value,'full'); }
-               $imgLargeDatas = wp_get_attachment_image_url($imgId,'gl-l');
-               if ( !isset($imgLargeDatas) ) { $imgLargeDatas = wp_get_attachment_image_src($value,'full'); }
+               $medium_datas = wp_get_attachment_image_url($img_id,'gl-m');
+               if ( !isset($medium_datas) ) { $medium_datas = wp_get_attachment_image_src($value,'full'); }
+               $large_datas = wp_get_attachment_image_url($img_id,'gl-l');
+               if ( !isset($large_datas) ) { $large_datas = wp_get_attachment_image_src($value,'full'); }
 
-                $imgCaption = wp_get_attachment_caption($imgId);
-                $imgAlt = get_post_meta( $imgId, '_wp_attachment_image_alt', true);
+                $caption = wp_get_attachment_caption($img_id);
+                $alt = get_post_meta( $img_id, '_wp_attachment_image_alt', true);
 
                 // affichage
                 $return .= '<li class="wp-gallery-item">';
-                $return .= '<a class="wp-gallery-link" href="'.$imgLargeDatas.'" data-gl-caption="'.$imgCaption.'" data-gl-responsive="'.$imgMediumDatas.'" title="Afficher l\'image">';
-                $return .= '<img class="wp-gallery-img" src="'.$imgThumbDatas[0].'" width="'.$imgThumbDatas[1].'" height="'.$imgThumbDatas[2].'" alt="'.$imgAlt.'"/>';
+                $return .= '<a class="wp-gallery-link" href="'.$large_datas.'" data-gl-caption="'.$caption.'" data-gl-responsive="'.$medium_datas.'" title="Afficher l\'image">';
+                $return .= '<img class="wp-gallery-img" src="'.$thumbnail_datas[0].'" width="'.$thumbnail_datas[1].'" height="'.$thumbnail_datas[2].'" alt="'.$alt.'"/>';
                 $return .= '</a>';
                 $return .= '</li>';
 

@@ -11,7 +11,7 @@
 if ( !is_admin() ) {
 
     // si ce n'est pas Papier Codé !
-    if ( $currentUserRole != 'administrator' ) {
+    if ( $current_user_role != 'administrator' ) {
 
         show_admin_bar(false); // barre d'admin coté public
 

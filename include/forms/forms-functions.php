@@ -14,14 +14,14 @@
  * Afficher un label
  * 
  * @param string    $for        attribut for
- * @param bool      $required   champ obligatoire
  * @param string    $txt        texte du label
  * 
  */
 
-function pc_form_display_label( $for, $required, $txt ) {
+function pc_form_display_label( $for, $datas ) {
 
-    if ( $required ) { $txt .= '&nbsp;<abbr title="Champ obligatoire" class="form-required">*</abbr>'; }
+    $txt = ( isset($datas['form-label']) ) ? $datas['form-label'] : $datas['label'];
+    if ( isset($datas['required']) && $datas['required'] == true ) { $txt .= '&nbsp;<abbr title="Champ obligatoire" class="form-required">*</abbr>'; }
 
     echo '<label for="'.$for.'">'.$txt.'</label>';
 
@@ -36,11 +36,12 @@ function pc_form_display_label( $for, $required, $txt ) {
  * @param array     $datas
  *                  string  type        text/email/number/textearea
  *                  string  label       texte du label
- *                  string  css         classes css spéciales
  *                  bool    required    champ obligatoire
- *                  string  attr        attributs supplémentaires
- *                  bool    error       champ en erreur
- *                  string  desc        description/aide
+ *                  string  form-label  label pour l'affiche public
+ *                  string  form-css    classes css spéciales
+ *                  string  form-attr   attributs supplémentaires
+ *                  bool    form-error  champ en erreur
+ *                  string  form-desc   description/aide
  * @param bool      $email_sent         email envoyé
  * 
  */
@@ -54,11 +55,11 @@ function pc_form_display_field_input_textarea( $name, $datas, $mail_sent = false
         array(
             'type'		    => 'text',
             'label' 	    => 'Sans nom',
-            'css'           => '',
             'required' 	    => false,
-            'attr'          => '',
-            'error'		    => false,
-            'desc'          => '',
+            'form-css'      => '',
+            'form-attr'     => '',
+            'form-error'	=> false,
+            'form-desc'     => '',
         ),
         $datas
     );
@@ -72,19 +73,19 @@ function pc_form_display_field_input_textarea( $name, $datas, $mail_sent = false
     // classes css du container : défaut
     $css = 'form-item form-item--'.$type.' form-item--'.$name;
     // classes css du container : erreur
-    if ( $datas['error'] ) { $css .= ' form-item--error'; } 
+    if ( $datas['form-error'] ) { $css .= ' form-item--error'; } 
     // classes css du container : custom
-    if ( $datas['css'] != '' ) { $css .= ' '.$datas['css']; }
+    if ( $datas['form-css'] != '' ) { $css .= ' '.$datas['form-css']; }
 
     // attributs custom
-    $other = ( $datas['attr'] != '' ) ? ' '.$datas['attr'] : '';
+    $other = ( $datas['form-attr'] != '' ) ? ' '.$datas['form-attr'] : '';
 
     // champ obligatoire
     $other .= ( $datas['required'] ) ? ' required' : '';
     
     // accessibilité
-    $other .= ( $datas['desc'] != '' ) ? ' aria-describedby="desc-'.$name.'"' : '';
-    $other .= ( $datas['error'] ) ? ' aria-invalid="true"' : '';
+    $other .= ( $datas['form-desc'] != '' ) ? ' aria-describedby="desc-'.$name.'"' : '';
+    $other .= ( $datas['form-error'] ) ? ' aria-invalid="true"' : '';
 
 
     /*----------  affichage  ----------*/
@@ -92,7 +93,7 @@ function pc_form_display_field_input_textarea( $name, $datas, $mail_sent = false
     echo '<li class="'.$css.'">';
 
         // label
-        pc_form_display_label( $name, $datas['required'], $datas['label-txt'] );
+        pc_form_display_label( $name, $datas );
         
         echo '<div>';
 
@@ -109,7 +110,7 @@ function pc_form_display_field_input_textarea( $name, $datas, $mail_sent = false
             }
 
             // description/aide
-            if ( $datas['desc'] != '' ) { echo '<p id="desc-'.$name.'">'.$datas['desc'].'</p>'; }
+            if ( $datas['form-desc'] != '' ) { echo '<p id="desc-'.$name.'">'.$datas['form-desc'].'</p>'; }
 
         echo '</div>';
 
@@ -125,11 +126,12 @@ function pc_form_display_field_input_textarea( $name, $datas, $mail_sent = false
  * @param string    $name               attribut name et id
  * @param array     $datas
  *                  string  label       texte du label
- *                  string  css         classes css spéciales
  *                  bool    required    champ obligatoire
- *                  string  attr        attributs supplémentaires
- *                  bool    error       champ en erreur
- *                  string  desc        description/aide
+ *                  string  form-label  label pour l'affichage public
+ *                  string  form-css    classes css spéciales
+ *                  string  form-attr   attributs supplémentaires
+ *                  bool    form-error  champ en erreur
+ *                  string  form-desc   description/aide
  * @param bool      $email_sent         email envoyé
  * 
  */
@@ -142,11 +144,11 @@ function pc_form_display_field_checkbox( $name, $datas, $mail_sent = false ) {
     $datas = array_merge(
         array(
             'label' 	    => 'Sans nom',
-            'css'           => '',
             'required' 	    => false,
-            'attr'          => '',
-            'error'		    => false,
-            'desc'          => '',
+            'form-css'      => '',
+            'form-attr'     => '',
+            'form-error'	=> false,
+            'form-desc'     => '',
         ),
         $datas
     );
@@ -154,12 +156,12 @@ function pc_form_display_field_checkbox( $name, $datas, $mail_sent = false ) {
     // classes css du container : défaut
     $css = 'form-item form-item--checkbox form-item--'.$name;
     // classes css du container : erreur
-    if ( $datas['error'] ) { $css .= ' form-item--error'; } 
+    if ( $datas['form-error'] ) { $css .= ' form-item--error'; } 
     // classes css du container : custom
-    if ( $datas['css'] != '' ) { $css .= ' '.$datas['css']; }
+    if ( $datas['form-css'] != '' ) { $css .= ' '.$datas['form-css']; }
 
     // attributs custom
-    $other = ( $datas['attr'] != '' ) ? ' '.$datas['attr'] : '';
+    $other = ( $datas['form-attr'] != '' ) ? ' '.$datas['form-attr'] : '';
 
     // champ obligatoire
     $other .= ( $datas['required'] ) ? ' required' : '';
@@ -168,8 +170,8 @@ function pc_form_display_field_checkbox( $name, $datas, $mail_sent = false ) {
     $other .= ( !$mail_sent && isset($_POST[$name]) ) ? ' checked' : '';
 
     // accessibilité
-    $other .= ( $datas['desc'] != '' ) ? ' aria-describedby="desc-'.$name.'"' : '';
-    $other .= ( $datas['error'] ) ? ' aria-invalid="true"' : '';
+    $other .= ( $datas['form-desc'] != '' ) ? ' aria-describedby="desc-'.$name.'"' : '';
+    $other .= ( $datas['form-error'] ) ? ' aria-invalid="true"' : '';
 
 
     /*----------  Affichage  ----------*/
@@ -177,12 +179,32 @@ function pc_form_display_field_checkbox( $name, $datas, $mail_sent = false ) {
     echo '<li class="'.$css.'">';
         echo '<div>';
             echo '<input type="checkbox" name="'.$name.'" id="'.$name.'" value="1"'.$other.' />';
-            echo '<label for="'.$name.'">'.$datas['label-txt'].'</label>';
+            pc_form_display_label( $name, $datas );
         echo '</div>';
-        if ( $datas['desc'] != '' ) { echo '<p id="desc-'.$name.'">'.$datas['desc'].'</p>'; };
+        if ( $datas['form-desc'] != '' ) { echo '<p id="desc-'.$name.'">'.$datas['form-desc'].'</p>'; };
 	echo '</li>';
 
 }
 
 
 /*=====  FIN affichage d'un champ  =====*/
+
+function theme_post_search_join( $join ){
+    global $pagenow, $wpdb;
+    if ( is_admin() && $pagenow == 'edit.php' && ! empty( $_GET['post_type'] ) && $_GET['post_type'] == CONTACT_POST_SLUG && ! empty( $_GET['s'] ) ) {
+        $join .= 'LEFT JOIN ' . $wpdb->postmeta . ' ON ' . $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
+    }
+    return $join;
+}
+add_filter( 'posts_join', 'theme_post_search_join' );
+
+function theme_search_where( $where ){
+    global $pagenow, $wpdb;
+    if ( is_admin() && $pagenow == 'edit.php' && ! empty( $_GET['post_type'] ) && $_GET['post_type'] == CONTACT_POST_SLUG && ! empty( $_GET['s'] ) ) {
+        $where = preg_replace(
+       "/\(\s*" . $wpdb->posts . ".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
+       "(" . $wpdb->posts . ".post_title LIKE $1) OR (" . $wpdb->postmeta . ".meta_value LIKE $1)", $where );
+    }
+    return $where;
+}
+add_filter( 'posts_where', 'theme_search_where' );

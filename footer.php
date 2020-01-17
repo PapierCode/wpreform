@@ -6,14 +6,14 @@
 	===============================*/ ?>
 	
 	<address>
-		<?php global $projectSettings; ?>
+		<?php global $settings_project; ?>
 		<dl>
-			<dt><?= $projectSettings['coord-name']; ?></dt>
-			<dd><?= $projectSettings['coord-address']; ?></dd>
-			<dd><?= $projectSettings['coord-postal-code']; ?></dd>
-			<dd><?= $projectSettings['coord-city']; ?></dd>
-			<dd><?= $projectSettings['coord-phone-1']; ?></dd>
-			<?php if ( $projectSettings['coord-phone-2'] != '' ) { echo '<dd>'.$projectSettings['coord-phone-2'].'</dd>'; } ; ?>
+			<dt><?= $settings_project['coord-name']; ?></dt>
+			<dd><?= $settings_project['coord-address']; ?></dd>
+			<dd><?= $settings_project['coord-postal-code']; ?></dd>
+			<dd><?= $settings_project['coord-city']; ?></dd>
+			<dd><?= $settings_project['coord-phone-1']; ?></dd>
+			<?php if ( $settings_project['coord-phone-2'] != '' ) { echo '<dd>'.$settings_project['coord-phone-2'].'</dd>'; } ; ?>
 		</dl>
 	</address>
 
@@ -24,38 +24,38 @@
 	=            Microdonnées            =
 	====================================*/
 
-		global $imgSizes;
-		$localbusiness = array(
+		global $images_project_sizes;
+		$local_business = array(
 			'@context' => 'http://schema.org',
 			'@type' => 'LocalBusiness',
 			'address' => array(
 				'@type' => 'PostalAddress',
-				'streetAddress' => $projectSettings['coord-address'],
-				'postalCode' => $projectSettings['coord-postal-code'],
-				'addressLocality' => $projectSettings['coord-city'],
+				'streetAddress' => $settings_project['coord-address'],
+				'postalCode' => $settings_project['coord-postal-code'],
+				'addressLocality' => $settings_project['coord-city'],
 				'addressRegion' => 'FR'
 			),
 			'geo' => array(
 				'@type' => 'GeoCoordinates',
-				'latitude' => $projectSettings['coord-lat'],
-				'longitude' => $projectSettings['coord-long']
+				'latitude' => $settings_project['coord-lat'],
+				'longitude' => $settings_project['coord-long']
 			),
-			'description' => $projectSettings['micro-desc'],
-			'name' => $projectSettings['coord-name'],
+			'description' => $settings_project['micro-desc'],
+			'name' => $settings_project['coord-name'],
 			'image' => array(
 				'@type' => 'ImageObject',
 				'url' => get_bloginfo('template_directory').'/images/logo.jpg',
-				"width" => $imgSizes['share']['width'],
-				"height" => $imgSizes['share']['height']
+				"width" => $images_project_sizes['share']['width'],
+				"height" => $images_project_sizes['share']['height']
 			),
-			'telephone' => pc_phone($projectSettings['coord-phone-1']),
+			'telephone' => pc_phone($settings_project['coord-phone-1']),
 			'pricerange' => '€€'
 		);
 		
-		$localbusiness = apply_filters( 'pc_filter_local_business', $localbusiness ); ?>
+		$local_business = apply_filters( 'pc_filter_local_business', $local_business ); ?>
 
 		<script type="application/ld+json">
-			<?= json_encode($localbusiness,JSON_UNESCAPED_SLASHES); ?>
+			<?= json_encode($local_business,JSON_UNESCAPED_SLASHES); ?>
 		</script>
 
 
@@ -67,10 +67,10 @@
 
 	<nav id="footer-nav" class="f-nav">
 		<ul class="f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1 reset-list">
-			<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; <?= $projectSettings['coord-name']; ?></li>
+			<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; <?= $settings_project['coord-name']; ?></li>
 		<?php
-			$footer_shortcuts_config = array(
-				'theme_location'  	=> 'footer_primary',
+			$nav_footer_config = array(
+				'theme_location'  	=> 'nav-footer',
 				'nav_prefix'		=> array('f-nav', 'f-p-nav'), // custom
 				'items_wrap'      	=> '%3$s',
 				'depth'           	=> 1,
@@ -79,7 +79,7 @@
 				'fallback_cb'     	=> false,
 				'walker'          	=> new Pc_Walker_Nav_Menu()
 			);
-			wp_nav_menu( $footer_shortcuts_config );
+			wp_nav_menu( $nav_footer_config );
 		?>
 		</ul>
 	</nav>

@@ -75,21 +75,21 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
 
     function pc_display_page_states( $states, $post ) {
 
-            $currentScreen = get_current_screen();
-            if ( $currentScreen->id == 'edit-page') {
+            $current_screen = get_current_screen();
+            if ( $current_screen->id == 'edit-page') {
 
-                global $projectSettings; // cf. functions.php
-                global $pageContentFrom; // cf. functions.php
+                global $settings_project; // cf. functions.php
+                global $page_content_from; // cf. functions.php
 
                 switch ( $post->ID ) {
-                    case $projectSettings['cgu-page']:
+                    case $settings_project['cgu-page']:
                         $states[] = 'Conditions générales d\'utilisation';
                         break;
                 }
 
-                $contentFrom = get_post_meta( $post->ID, 'content-from', true );
-                foreach ( $pageContentFrom as $name => $slug ) {
-                    if ( $contentFrom == $slug ) { $states[] = $name; }
+                $content_from = get_post_meta( $post->ID, 'content-from', true );
+                foreach ( $page_content_from as $name => $slug ) {
+                    if ( $content_from == $slug ) { $states[] = $name; }
                 }
 
             }
@@ -107,43 +107,44 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
 
 /*----------  Page  ----------*/
 
-add_filter( 'manage_page_posts_columns', 'pc_admin_page_list_custom_columns' );
+add_filter( 'manage_page_posts_columns', 'pc_admin_list_column_img' );
 
-if ( isset($pcSettings['news-active']) ) {
-    add_action( 'manage_'.NEWS_POST_SLUG.'_posts_columns', 'pc_admin_page_list_custom_columns', 10, 2);
+if ( isset($settings_pc['news-active']) ) {
+    add_action( 'manage_'.NEWS_POST_SLUG.'_posts_columns', 'pc_admin_list_column_img', 10, 2);
 }
 
-    function pc_admin_page_list_custom_columns( $columns ) {
+    function pc_admin_list_column_img( $columns ) {
 
         unset($columns['author']);
 
         // nouvelle colonne "image" en 2e position
-        $newColumns = array();
+        $new_columns = array();
         foreach($columns as $key => $value) {
-            $newColumns[$key] = $value;
+            $new_columns[$key] = $value;
             if ( $key == 'cb' ){
-                $newColumns['thumbnail'] = 'Visuel';
+                $new_columns['thumbnail'] = 'Visuel';
             }
         }
-        return $newColumns;
+        return $new_columns;
 
     }
 
+
 /*----------  Visuel  ----------*/
 
-add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img', 10, 2);
+add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img_content', 10, 2);
 
-if ( isset($pcSettings['news-active']) ) {
-    add_action( 'manage_'.NEWS_POST_SLUG.'_posts_custom_column', 'pc_admin_list_column_img', 10, 2);
+if ( isset($settings_pc['news-active']) ) {
+    add_action( 'manage_'.NEWS_POST_SLUG.'_posts_custom_column', 'pc_admin_list_column_img_content', 10, 2);
 }
 
-    function pc_admin_list_column_img( $column, $postId ) {
+    function pc_admin_list_column_img_content( $column, $postId ) {
 
         if ( 'thumbnail' === $column ) {
             
-            $imgId = get_post_meta( $postId,'thumbnail-img',true );
-            if ( $imgId != '' ) {
-                echo pc_get_img( $imgId, 'st' );
+            $img_id = get_post_meta( $postId,'thumbnail-img',true );
+            if ( $img_id != '' ) {
+                echo pc_get_img( $img_id, 'st' );
             } else {
                 echo '<img src="'.get_bloginfo('template_directory').'/images/admin-no-thumb.jpg" />';
             }

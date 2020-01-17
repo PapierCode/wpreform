@@ -15,7 +15,7 @@
 =======================================*/
 
 // cf. plugin [PC] Custom WP
-$pcSettings = get_option('pc-settings-option');
+$settings_pc = get_option('pc-settings-option');
 
 
 /*=====  FIN Réglages projet  ======*/
@@ -29,6 +29,9 @@ define('NEWS_POST_SLUG', 'news');
 define('NEWS_TAX_SLUG', 'newstax');
 define('NEWS_TAX_QUERY_VAR', 'actucat');
 
+// Formulaire du contact
+define('CONTACT_POST_SLUG', 'contact');
+
 
 /*=====  FIN Slug custom post & tax  =====*/
 
@@ -38,7 +41,7 @@ define('NEWS_TAX_QUERY_VAR', 'actucat');
 
 /*----------  Rôle utilisateur connecté  ----------*/
 
-$currentUserRole = wp_get_current_user()->roles[0];
+$current_user_role = ( is_user_logged_in() ) ? wp_get_current_user()->roles[0] : '';
 
 
 /*=====  FIN Variables utiles  =====*/
@@ -48,17 +51,17 @@ $currentUserRole = wp_get_current_user()->roles[0];
 =============================================================*/
 
 // défaut
-$pageContentFrom = array(
+$page_content_from = array(
     'contactform' => array('Formulaire de contact','include/forms/form-contact/form-contact_template.php'),
 );
 
 // si actualités activées
-if ( isset($pcSettings['news-active']) ) {
-    $pageContentFrom[NEWS_POST_SLUG] = array('Liste des actualités','include/templates/template_news-list.php');
+if ( isset($settings_pc['news-active']) ) {
+    $page_content_from[NEWS_POST_SLUG] = array('Liste des actualités','include/templates/template_news-list.php');
 }
 
 // ajout par plugin
-$pageContentFrom = apply_filters( 'pc_filter_page_content_from', $pageContentFrom );
+$page_content_from = apply_filters( 'pc_filter_page_content_from', $page_content_from );
 
 
 /*=====  FIN Contenu supplémentaire dans les pages  =====*/
@@ -76,6 +79,7 @@ include 'include/custom-admin/custom-admin.php';
 
 // configuration projet
 include 'include/settings.php';
+$settings_project = get_option('project-settings-option');
 
 // block editor
 include 'include/block-editor/block-editor.php';
@@ -121,17 +125,13 @@ include 'include/custom-posts/custom-metabox_seo-social.php';
 include 'include/custom-posts/custom-metabox_subpage.php';
 
 
+/*----------  Formulaires  ----------*/
+
+// contact
+include 'include/forms/form-contact/form-contact_post.php';
+
+
 /*=====  End of includes  ======*/
-
-/*=========================================
-=            Paramètres projet            =
-=========================================*/
-
-// cf. include/admin_project-settings.php
-$projectSettings = get_option('project-settings-option');
-
-
-/*=====  FIN Paramètres projet  ======*/
 
 /*========================================
 =            Expérimentations            =
@@ -146,6 +146,5 @@ $projectSettings = get_option('project-settings-option');
 //     }
 //     return $posts;
 // }
-
 
 /*=====  FIN Expérimentations  =====*/

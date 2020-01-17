@@ -48,14 +48,14 @@ function pc_meta_subpage_line( $classes, $options, $current = '', $save = array(
 
 /*----------  Update sous-page  ----------*/
 
-function pc_update_subpage( $postId, $postParent ) {
+function pc_update_subpage( $post_id, $post_parent ) {
     
     // prévention contre une boucle infinie 1/2
     remove_action( 'save_post', 'pc_sub_page_save' );
     // update
     wp_update_post(array(
-        'ID' => $postId,
-        'post_parent' => $postParent
+        'ID' => $post_id,
+        'post_parent' => $post_parent
     ));
     // prévention contre une boucle infinie 2/2
     add_action( 'save_post', 'pc_sub_page_save' );
@@ -71,8 +71,8 @@ function pc_update_subpage( $postId, $postParent ) {
 
 function pc_page_content_sub( $post ) {
 
-    global $pcSettings;  // cf. functions.php
-    global $pageContentFrom; // cf. functions.php
+    global $settings_pc;  // cf. functions.php
+    global $page_content_from; // cf. functions.php
 
     // input hidden de vérification pour la sauvegarde
     wp_nonce_field( basename( __FILE__ ), 'none-page-content-sup' );
@@ -92,13 +92,13 @@ function pc_page_content_sub( $post ) {
     ======================================================*/
     
     // en bdd
-    $selectedArchive = get_post_meta( $post->ID, 'content-from', true );
+    $content_from_saved = get_post_meta( $post->ID, 'content-from', true );
 
     // affichage
     echo '<tr><th><label for="content-from">Contenu spécifique</label></th><td>';
         echo '<select id="content-from" name="content-from"><option value=""></option>';
-        foreach ($pageContentFrom as $slug => $datas ) {
-            echo '<option value="'.$slug.'" '.selected($selectedArchive,$slug,false).'>'.$datas[0].'</option>';
+        foreach ($page_content_from as $slug => $datas ) {
+            echo '<option value="'.$slug.'" '.selected($content_from_saved,$slug,false).'>'.$datas[0].'</option>';
         }
         echo '</select>';
     echo '</td></tr>';
@@ -113,7 +113,7 @@ function pc_page_content_sub( $post ) {
     if( $post->post_parent < 1 ) { // si la page en cours n'est pas enfant
 
         // pages pour le select
-        $allSubpages = get_posts(array(
+        $all_subpages = get_posts(array(
             'post_type' => 'page',
             'post_status' => 'publish',
             'posts_per_page' => -1,
@@ -128,25 +128,25 @@ function pc_page_content_sub( $post ) {
             ),
         ));
         // liste des sous-pages sauvegardées
-        $subpagesSaved = get_post_meta( $post->ID, 'content-subpages', true );
-        $subpagesSavedArray = explode(',',$subpagesSaved);
+        $subpages_saved = get_post_meta( $post->ID, 'content-subpages', true );
+        $subpages_saved_array = explode(',',$subpages_saved);
 
         // affichage
         echo '<tr><th><label>Sous-pages</label></th><td>';
             echo '<div class="pc-repeater" data-type="subpage">';
-            foreach ($subpagesSavedArray as $key => $id) {
-                pc_meta_subpage_line( 'pc-repeater-item', $allSubpages, $id, $subpagesSavedArray );
+            foreach ($subpages_saved_array as $key => $id) {
+                pc_meta_subpage_line( 'pc-repeater-item', $all_subpages, $id, $subpages_saved_array );
             }
             echo '</div>';
             // c'est ce input qui est sauvegardé !
-            echo '<input type="hidden" value="'.$subpagesSaved.'" name="content-subpages" class="pc-repeater-input" />';
+            echo '<input type="hidden" value="'.$subpages_saved.'" name="content-subpages" class="pc-repeater-input" />';
             // btn ajout ligne
             echo '<p><button type="button" class="pc-repeater-btn-more button">Ajouter une sous-page</button></p>';
         echo '</td></tr>';
 
         // source pour le js
         echo '<tr style="display:none"><td colspan="2">';
-            pc_meta_subpage_line( 'pc-repeater-item pc-repeater-src', $allSubpages );
+            pc_meta_subpage_line( 'pc-repeater-item pc-repeater-src', $all_subpages );
         echo '</td></tr>';
 
     } // FIN if $post->post_parent < 1
@@ -168,7 +168,7 @@ function pc_page_content_sub( $post ) {
 
 add_action( 'save_post', 'pc_sub_page_save' );
 
-function pc_sub_page_save( $postId ) {
+function pc_sub_page_save( $post_id ) {
 
     // check input hidden de vérification
     if ( isset($_POST['none-page-content-sup']) && wp_verify_nonce( $_POST['none-page-content-sup'], basename( __FILE__ ) ) ) {
@@ -184,35 +184,35 @@ function pc_sub_page_save( $postId ) {
             // valeur renvoyée par le form
             $temp = $value;
             // valeur en bdd
-            $save = get_post_meta( $postId, $name, true );
+            $save = get_post_meta( $post_id, $name, true );
 
 
             /*----------  Traitement des sous-pages  ----------*/
             
             // si ce n'est pas une révision et si c'est la liste de sous-pages
-            if ( !wp_is_post_revision( $postId ) && $name == 'content-subpages' ) {
+            if ( !wp_is_post_revision( $post_id ) && $name == 'content-subpages' ) {
 
-                $subpagesTemp = explode(',',$temp);
-                $subpagesSave = explode(',',$save);
+                $subpages_temp = explode(',',$temp);
+                $subpages_saved = explode(',',$save);
                 
                 // nouvelle liste de sous-pages
-                if ( $temp != '' && count($subpagesTemp) > 0 ) {
-                    foreach ($subpagesTemp as $tempId) {
+                if ( $temp != '' && count($subpages_temp) > 0 ) {
+                    foreach ($subpages_temp as $temp_id) {
                         // si ce n'est pas déjà une sous-page
-                        if ( !in_array($tempId,$subpagesSave) ) {
-                            pc_update_subpage( $tempId, $postId );
+                        if ( !in_array($temp_id,$subpages_saved) ) {
+                            pc_update_subpage( $temp_id, $post_id );
                         // si c'est déjà une sous-page
                         } else {
                             // suppression dans le tableau représentant la sauvegarde
                             // voir "sous-page à détacher" ci-dessous
-                            unset($subpagesSave[array_search($tempId, $subpagesSave)]);
+                            unset($subpages_saved[array_search($temp_id, $subpages_saved)]);
                         }
                     }
                 }
 
                 // sous-page à détacher 
-                if ( $save != '' && count($subpagesSave) > 0 ) {
-                    foreach ($subpagesSave as $saveId) { pc_update_subpage( $saveId, '' ); }
+                if ( $save != '' && count($subpages_saved) > 0 ) {
+                    foreach ($subpages_saved as $save_id) { pc_update_subpage( $save_id, '' ); }
                 }
             }
 
@@ -221,15 +221,15 @@ function pc_sub_page_save( $postId ) {
             
             // si une valeur arrive & si rien en bdd
             if ( $temp && '' == $save ) {
-                add_post_meta( $postId, $name, $temp, true );
+                add_post_meta( $post_id, $name, $temp, true );
 
             // si une valeur arrive & différente de la bdd
             } elseif ( $temp && $temp != $save ) {
-                update_post_meta( $postId, $name, $temp );
+                update_post_meta( $post_id, $name, $temp );
 
             // si rien n'arrive & si un truc en bdd
             } elseif ( '' == $temp && $save ) {
-                delete_post_meta( $postId, $name );
+                delete_post_meta( $post_id, $name );
             }
 
         };

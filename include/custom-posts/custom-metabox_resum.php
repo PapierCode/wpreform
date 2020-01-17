@@ -8,17 +8,9 @@
 
 if ( class_exists('PC_Add_metabox') ) {
 
+$metabox_resum_for = array( 'page', NEWS_POST_SLUG );
 
-/*----------  Cibles  ----------*/
-
-$resumFor = array( 'page', NEWS_POST_SLUG );
-
-
-/*===========================
-=            SEO            =
-===========================*/
-
-$resumMetaboxSeoContent = array(
+$metabox_resum_fields = array(
     'desc'          => '<p>Pour l\'affichage de cette page sous sa forme résumée dans votre site (dans une liste d\'articles par exemple).</p><p><strong>Remarques :<br/></strong>- si ces champs ne sont pas saisis, le titre de la page et les premiers mots du contenu sont utilisés,<br/>- si un visuel n\'est pas sélectionné (encart "Visuel" ci-dessus), une image générique est utilisée.</p>',
     'prefix'        => 'resum',
     'fields'        => array(
@@ -41,9 +33,7 @@ $resumMetaboxSeoContent = array(
     )
 );
 
-$resumMetaboxSeo = new PC_Add_Metabox( $resumFor, 'Résumé', 'page-metabox-resum', $resumMetaboxSeoContent, 'normal', 'low' );
+$metabox_resum_declaration = new PC_Add_Metabox( $metabox_resum_for, 'Résumé', 'page-metabox-resum', $metabox_resum_fields, 'normal', 'low' );
 
-
-/*=====  FIN SEO  ======*/
 
 } // FIN if class_exist()

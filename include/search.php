@@ -6,7 +6,7 @@
  */
 
 
- /* !!! Modifier le nom de la table !!! */
+$table_meta_name = _get_meta_table('post');
 
 /*=======================================================================
 =            Indexation des customs fields pour la recherche            =
@@ -19,11 +19,11 @@
 // http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_join
 
 function pc_search_join( $join ) {
-    global $wpdb;
+    global $wpdb, $table_meta_name;
 
-    if ( !is_admin() && is_search() ) {
+    if ( is_admin() || is_search() ) {
         //$join .= ' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
-        $join .= ' LEFT JOIN '.$wpdb->postmeta. ' biometa ON '. $wpdb->posts . '.ID = biometa.post_id ';
+        $join .= ' LEFT JOIN '.$wpdb->postmeta. ' '.$table_meta_name.' ON '. $wpdb->posts . '.ID = '.$table_meta_name.'.post_id ';
     }
 
     return $join;
@@ -35,15 +35,15 @@ add_filter('posts_join', 'pc_search_join' );
 // http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_where
 
 function pc_search_where( $where ) {
-    global $pagenow, $wpdb;
+    global $pagenow, $wpdb, $table_meta_name;
 
-    if ( !is_admin() && is_search() ) {
+    if ( is_admin() || is_search() ) {
         // $where = preg_replace(
         //     "/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
         //     "(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->postmeta.".meta_value LIKE $1)", $where );
         $where = preg_replace(
             "/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
-            "(".$wpdb->posts.".post_title LIKE $1) OR (biometa.meta_value LIKE $1)", $where );
+            "(".$wpdb->posts.".post_title LIKE $1) OR ('.$table_meta_name.'.meta_value LIKE $1)", $where );
     }
 
     return $where;
@@ -57,7 +57,7 @@ add_filter( 'posts_where', 'pc_search_where' );
 function pc_search_distinct( $where ) {
     global $wpdb;
 
-    if ( !is_admin() && is_search() ) {
+    if ( is_admin() || is_search() ) {
         return "DISTINCT";
     }
 

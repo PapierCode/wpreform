@@ -13,7 +13,7 @@ if ( class_exists('PC_Add_Admin_Page') ) {
 /*----------  Contenu  ----------*/
 
 // sections et champs associés
-$homeAdminContent = array(
+$settings_home_fields = array(
     array(
         'title'     => 'Contenu',
         'id'        => 'content',
@@ -90,19 +90,34 @@ $homeAdminContent = array(
     )
 );
 
+$settings_home_fields = apply_filters( 'pc_filter_settings_home_fields', $settings_home_fields );
+
 
 /*----------  Création  ----------*/
 
-$homeAdmin = new PC_Add_Admin_Page(
+$settings_home_declaration = new PC_Add_Admin_Page(
     'Page d\'accueil',
 	'',
     'Accueil',
     'home-settings',
-    $homeAdminContent,
+    $settings_home_fields,
     'editor',
     11,
-    'dashicons-admin-home'
+    'dashicons-admin-home',
+    'pc_sanitize_settings_home'
 );
 
+
+/*----------  Sanitize  ----------*/
+
+function pc_sanitize_settings_home( $datas ) {
+
+    $datas = apply_filters( 'pc_filter_settings_home_sanitize_fields', $datas );
+
+    global $settings_home_field;
+
+    return pc_sanitize_fields( $settings_home_field, $datas );
+
+}
 
 } // FIN if class_exists

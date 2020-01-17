@@ -6,12 +6,10 @@
 *
 **/
 
-// champs
-include 'form-contact_settings.php';
 // traitement du form
 include 'form-contact_validation.php';
 // recaptcha
-$captcha = new PC_recaptcha( $pcSettings['google-recaptcha-site'], $pcSettings['google-recaptcha-secret'] );
+$captcha = new PC_recaptcha( $settings_pc['google-recaptcha-site'], $settings_pc['google-recaptcha-secret'] );
 
 ?>
 
@@ -29,15 +27,15 @@ if( $form_contact_mail_sent_error ) { echo '<p class="msg msg--error msg--block"
 
 	<?php // affichage des champs
 
-		foreach ($form_contact_fields as $name => $datas) {
+		foreach ($form_contact_fields as $id => $datas) {
 
 			if ( $datas['type'] == 'text' || $datas['type'] == 'number' || $datas['type'] == 'email' || $datas['type'] == 'textarea' ) {
 
-				pc_form_display_field_input_textarea( $name, $datas, $form_contact_mail_sent );
+				pc_form_display_field_input_textarea( $id, $datas, $form_contact_mail_sent );
 
 			} else if ( $datas['type'] == 'checkbox' ) {
 
-				pc_form_display_field_checkbox( $name, $datas, $form_contact_mail_sent );
+				pc_form_display_field_checkbox( $id, $datas, $form_contact_mail_sent );
 
 			} // FIN if $datas['type']	
 
@@ -48,8 +46,8 @@ if( $form_contact_mail_sent_error ) { echo '<p class="msg msg--error msg--block"
 		<li class="form-item form-item--captcha">
 			<span class="form-label label-like <?php if($form_contact_spam_error) echo 'msg msg--error'; ?>" aria-hidden="true"><?= $form_contact_settings['label-recaptcha'].$form_contact_settings['label-required']; ?></span>
 			<?php
-				echo $captcha->script();
-				echo $captcha->html();
+				//echo $captcha->script();
+				//echo $captcha->html();
 			?>
 		</li>
 		

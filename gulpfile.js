@@ -79,7 +79,7 @@ const terser		= require( 'gulp-terser' ); // minification js
 
 /*----------  Commentaire pour le thème Wordpress  ----------*/
     
-    var theme_name 	    = 'Preform Papier Code',
+    var theme_name 	    = 'PC Preform',
         theme_author 	= 'www.papier-code.fr'
         theme_desc 		= 'Base de projet',
         wp_comment 		= '/* \nTheme Name: '+theme_name+' \nAuthor: '+theme_author+' \nDescription: '+theme_desc+' \n*/\n\n';
