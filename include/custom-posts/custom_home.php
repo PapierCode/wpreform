@@ -13,6 +13,7 @@ if ( class_exists('PC_Add_Admin_Page') ) {
 /*----------  Contenu  ----------*/
 
 // sections et champs associés
+global $settings_home_fields;
 $settings_home_fields = array(
     array(
         'title'     => 'Contenu',
@@ -114,9 +115,8 @@ function pc_sanitize_settings_home( $datas ) {
 
     $datas = apply_filters( 'pc_filter_settings_home_sanitize_fields', $datas );
 
-    global $settings_home_field;
-
-    return pc_sanitize_fields( $settings_home_field, $datas );
+    global $settings_home_fields;
+    return pc_sanitize_settings_fields( $settings_home_fields, $datas );
 
 }
 

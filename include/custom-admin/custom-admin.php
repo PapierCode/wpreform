@@ -78,11 +78,11 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
             $current_screen = get_current_screen();
             if ( $current_screen->id == 'edit-page') {
 
-                global $settings_project; // cf. functions.php
+                global $settings_form_contact; // cf. functions.php
                 global $page_content_from; // cf. functions.php
 
                 switch ( $post->ID ) {
-                    case $settings_project['cgu-page']:
+                    case $settings_form_contact['cgu-page']:
                         $states[] = 'Conditions générales d\'utilisation';
                         break;
                 }

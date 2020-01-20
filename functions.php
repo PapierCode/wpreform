@@ -29,9 +29,6 @@ define('NEWS_POST_SLUG', 'news');
 define('NEWS_TAX_SLUG', 'newstax');
 define('NEWS_TAX_QUERY_VAR', 'actucat');
 
-// Formulaire du contact
-define('CONTACT_POST_SLUG', 'contact');
-
 
 /*=====  FIN Slug custom post & tax  =====*/
 
@@ -51,9 +48,7 @@ $current_user_role = ( is_user_logged_in() ) ? wp_get_current_user()->roles[0] :
 =============================================================*/
 
 // défaut
-$page_content_from = array(
-    'contactform' => array('Formulaire de contact','include/forms/form-contact/form-contact_template.php'),
-);
+$page_content_from = array();
 
 // si actualités activées
 if ( isset($settings_pc['news-active']) ) {
@@ -91,11 +86,6 @@ include 'include/block-editor/block-editor.php';
 include 'include/clean-wp_head.php';
 
 
-/*----------  Formulaires  ----------*/
-
-include 'include/forms/forms-functions.php';
-
-
 /*----------  Templates communs  ----------*/
 
 // sprite SVG
@@ -123,12 +113,6 @@ include 'include/custom-posts/custom-metabox_thumbnail.php';
 include 'include/custom-posts/custom-metabox_resum.php';
 include 'include/custom-posts/custom-metabox_seo-social.php';
 include 'include/custom-posts/custom-metabox_subpage.php';
-
-
-/*----------  Formulaires  ----------*/
-
-// contact
-include 'include/forms/form-contact/form-contact_post.php';
 
 
 /*=====  End of includes  ======*/

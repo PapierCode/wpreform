@@ -133,44 +133,6 @@ $settings_project_field = array(
                 'css'       => 'width:100%'
             )
         )
-    ),
-    array(
-        'title'     => 'Conditions générales d\'utilisation',
-        'id'        => 'cgu',
-        'prefix'    => 'cgu',
-        'fields'    => array(
-            array(
-                'type'      => 'select',
-                'label_for' => 'page',
-                'label'     => 'Page des CGU',
-                'options'   => $pages_list,
-                'required'  => true
-            )
-        )
-    ),
-    array(
-        'title'     => 'Formulaire de contact',
-        'id'        => 'contact-form',
-        'prefix'    => 'form',
-        'fields'    => array(
-            array(
-                'type'      => 'text',
-                'label_for' => 'for',
-                'label'     => 'Destinataires',
-                'desc'      => '1 ou plusieurs e-mails séparés par des virgules, sans espaces.',
-                'css'       => 'width:100%;',
-                'attr'      => 'placeholder="contact@mon-site.fr,devis@gmail.com"',
-                'required'  => true
-            ),
-            array(
-                'type'      => 'text',
-                'label_for' => 'subject',
-                'label'     => 'Sujet de l\'e-mail',
-                'css'       => 'width:100%;',
-                'attr'      => 'placeholder="Formulaire de contact"',
-                'required'  => true
-            )
-        )
     )
 );
 
@@ -200,7 +162,7 @@ function pc_sanitize_settings_project( $datas ) {
 
     global $settings_project_field;
 
-    return pc_sanitize_fields( $settings_project_field, $datas );
+    return pc_sanitize_settings_fields( $settings_project_field, $datas );
 
 }
 
