@@ -14,7 +14,6 @@ function pc_html_css_class() {
 	// type de page
 	if ( is_home() ) { $class = 'is-home'; }
 	else if ( is_page() ) { $class = 'is-page'; }
-	else if ( is_singular( NEWS_POST_SLUG ) ) { $class = 'is-news'; }
 	else if ( is_404() ) { $class = 'is-404'; }
 	else { $class = ''; }
 	// pour modifier
@@ -123,9 +122,9 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 			}
 
 
-		/*----------  page.php & single-news.php  ----------*/
+		/*----------  page.php & single.php  ----------*/
 
-		} elseif ( is_page() || is_singular( NEWS_POST_SLUG ) ) {
+		} elseif ( is_page() || is_singular() ) {
 
 			// custom fields
 			$postId = get_the_id();

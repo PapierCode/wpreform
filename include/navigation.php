@@ -114,22 +114,12 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 =            Item parent actif si page enfatn affichée            =
 =================================================================*/
 
-add_filter( 'wp_nav_menu_objects', 'pc_nav_menu_item_active', NULL, 2 );
+add_filter( 'wp_nav_menu_objects', 'pc_nav_page_parent_active', NULL, 2 );
 
-	function pc_nav_menu_item_active( $menu_items, $args ) {
+	function pc_nav_page_parent_active( $menu_items, $args ) {
 
 		// si menu d'entête
 		if ( $args->theme_location == 'nav-header' ) {
-
-			// si single-news.php
-			if ( is_singular( NEWS_POST_SLUG ) ) {
-
-				// page qui publie les actus
-				$news_page = pc_get_page_by_custom_content( NEWS_POST_SLUG, 'object' );
-				// si la page qui publie les actus a un parent ou pas
-				$id_to_search = ( $news_page->post_parent > 0 ) ? $news_page->post_parent : $news_page->ID;
-
-			}
 
 			// si page.php
 			if ( is_page() ) {

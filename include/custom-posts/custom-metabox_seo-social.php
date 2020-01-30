@@ -8,7 +8,8 @@
 
 if ( class_exists('PC_Add_metabox') ) {
 
-$metabox_seo_for = array( 'page', NEWS_POST_SLUG );
+$metabox_seo_for = array( 'page' );
+$metabox_seo_for = apply_filters( 'pc_filter_metabox_seo_for', $metabox_seo_for );
 
 $metabox_seo_fields = array(
     'desc'          => $settings_pc['help-seo-social'],

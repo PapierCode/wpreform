@@ -133,6 +133,20 @@ $settings_project_field = array(
                 'css'       => 'width:100%'
             )
         )
+    ),
+    array(
+        'title'     => 'Conditions générales d\'utilisation',
+        'id'        => 'cgu',
+        'prefix'    => 'cgu',
+        'fields'    => array(
+            array(
+                'type'      => 'select',
+                'label_for' => 'page',
+                'label'     => 'Page des CGU',
+                'options'   => $pages_list,
+                'required'  => true
+            )
+        )
     )
 );
 

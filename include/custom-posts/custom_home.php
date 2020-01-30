@@ -39,24 +39,7 @@ $settings_home_fields = array(
                     )
                 ),
                 'required'  => true
-            ),
-            array(
-                'type'      => 'text',
-                'label_for' => 'newstitle',
-                'label'     => 'Titre des actualités',
-                'css'       => 'width:100%',
-                'required'  => true
-            ),
-            array(
-                'type'      => 'select',
-                'label_for' => 'nbnews',
-                'label'     => 'Nombre d\'actualités',
-                'required'  => true,
-                'options'   => array(
-                    '2' => '2',
-                    '4' => '4'
-                )
-            ),
+            )
         )
     ),
     array(

@@ -20,18 +20,6 @@ $settings_pc = get_option('pc-settings-option');
 
 /*=====  FIN Réglages projet  ======*/
 
-/*==============================================
-=            Slug custom post & tax            =
-==============================================*/
-
-// Actualités
-define('NEWS_POST_SLUG', 'news');
-define('NEWS_TAX_SLUG', 'newstax');
-define('NEWS_TAX_QUERY_VAR', 'actucat');
-
-
-/*=====  FIN Slug custom post & tax  =====*/
-
 /*========================================
 =            Variables utiles            =
 ========================================*/
@@ -50,12 +38,7 @@ $current_user_role = ( is_user_logged_in() ) ? wp_get_current_user()->roles[0] :
 // défaut
 $page_content_from = array();
 
-// si actualités activées
-if ( isset($settings_pc['news-active']) ) {
-    $page_content_from[NEWS_POST_SLUG] = array('Liste des actualités','include/templates/template_news-list.php');
-}
-
-// ajout par plugin
+// ajout par plugin ou thème enfant
 $page_content_from = apply_filters( 'pc_filter_page_content_from', $page_content_from );
 
 
@@ -106,7 +89,6 @@ include 'include/templates/_templates_images.php';
 /*----------  Custom posts  ----------*/
 
 include 'include/custom-posts/custom_home.php';
-include 'include/custom-posts/custom-post_news.php';
 
 // Metaboxes
 include 'include/custom-posts/custom-metabox_thumbnail.php';

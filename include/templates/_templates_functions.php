@@ -16,7 +16,7 @@
 add_filter( 'excerpt_length', function() { return 30; }, 999 );
 add_filter( 'excerpt_more', function() { return ''; }, 999 );
 
-function pc_display_post_resum( $post_id, $css = '', $hn = 2, $date = false, $tax = false ) {
+function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 
     $metas = get_post_meta($post_id);
 	$title = (isset($metas['resum-title'])) ? $metas['resum-title'][0] : get_the_title($post_id);
@@ -37,29 +37,10 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2, $date = false, $ta
     }
     echo '</figure>';
 
-    /*----------  Date  ----------*/
+    /*----------  Ajout par plugin ou thème enfant  ----------*/
+    
+    do_action( 'pc_display_post_resum_more', $post_id );
 
-    if ( $date ) { echo '<time class="st-date" datetime="'.get_the_date('c',$post_id).'">Publié le '.get_the_date('',$post_id).'</time>'; }
-
-    /*----------  Taxonomy  ----------*/
-
-    if ( $tax && taxonomy_exists( NEWS_TAX_SLUG ) ) {
-
-        // toutes les taxonomies 'newscategories' attachées au post (tableau d'objets)
-        $terms = wp_get_post_terms( $post_id, NEWS_TAX_SLUG, array( "fields" => "all" ) );
-
-        // si il y a au moins une tax
-        if ( count( $terms ) > 0 ) {
-
-            echo '<ul class="st-tax-list">';
-            foreach ( $terms as $term_datas ) {
-                echo '<li class="reset-list st-tax-list-item"><a class="st-tax-list-link" href="'.pc_get_page_by_custom_content(NEWS_POST_SLUG).'?'.NEWS_TAX_QUERY_VAR.'='.$term_datas->slug.'" title="Tous les actualités publiées dans '.$term_datas->name.'" rel="nofollow">'.$term_datas->name.'</a></li>';
-            }
-            echo '</ul>';
-
-        }
-
-    }
 
     /*----------  Description + lire la suite  ----------*/		
     

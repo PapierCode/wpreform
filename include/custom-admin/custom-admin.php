@@ -78,18 +78,19 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
             $current_screen = get_current_screen();
             if ( $current_screen->id == 'edit-page') {
 
-                global $settings_form_contact; // cf. functions.php
+                global $settings_project; // cf. functions.php
                 global $page_content_from; // cf. functions.php
 
                 switch ( $post->ID ) {
-                    case $settings_form_contact['cgu-page']:
+                    case $settings_project['cgu-page']:
                         $states[] = 'Conditions générales d\'utilisation';
                         break;
                 }
 
+                // contenu supplémentaire
                 $content_from = get_post_meta( $post->ID, 'content-from', true );
-                foreach ( $page_content_from as $name => $slug ) {
-                    if ( $content_from == $slug ) { $states[] = $name; }
+                foreach ( $page_content_from as $id => $datas ) {
+                    if ( $content_from == $id ) { $states[] = $datas[0]; }
                 }
 
             }
@@ -108,10 +109,6 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
 /*----------  Page  ----------*/
 
 add_filter( 'manage_page_posts_columns', 'pc_admin_list_column_img' );
-
-if ( isset($settings_pc['news-active']) ) {
-    add_action( 'manage_'.NEWS_POST_SLUG.'_posts_columns', 'pc_admin_list_column_img', 10, 2);
-}
 
     function pc_admin_list_column_img( $columns ) {
 
@@ -133,10 +130,6 @@ if ( isset($settings_pc['news-active']) ) {
 /*----------  Visuel  ----------*/
 
 add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img_content', 10, 2);
-
-if ( isset($settings_pc['news-active']) ) {
-    add_action( 'manage_'.NEWS_POST_SLUG.'_posts_custom_column', 'pc_admin_list_column_img_content', 10, 2);
-}
 
     function pc_admin_list_column_img_content( $column, $postId ) {
 

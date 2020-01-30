@@ -1,39 +1,45 @@
 <?php
 /**
  * 
- * Templates : structre globale
+ * Templates : structure globale
  * 
  */
 
-/*======================================
-=            Main structure            =
-======================================*/
 
-/*----------  Ouverture  ----------*/
+/*----------  Accueil  ----------*/
 
-function pc_display_main_start( $classes = '' ) {
+add_action( 'pc_home_content_before', 'pc_display_main_start', 10 );
 
-    echo '<main id="main" class="main '.$classes.'"><div class="main-inner">';
+add_action( 'pc_home_content', 'pc_display_home_content', 10, 1 );
+
+add_action( 'pc_home_content_footer', 'pc_display_main_footer_start', 10 );
+add_action( 'pc_home_content_footer', 'pc_display_share_links', 20 );
+add_action( 'pc_home_content_footer', 'pc_display_main_footer_end', 30 );
+
+add_action( 'pc_home_content_after', 'pc_display_main_end', 10 );
+
+
+/*----------  Page & post  ----------*/
+
+add_action( 'pc_content_before', 'pc_display_main_start', 10 );
+
+add_action( 'pc_content_before', 'pc_display_main_title', 20, 1 );
+
+add_action( 'pc_content_footer', 'pc_display_main_footer_start', 10 );
+add_action( 'pc_content_footer', 'pc_display_main_footer_subpage_backlink', 20, 1 );
+add_action( 'pc_content_footer', 'pc_display_share_links', 30 );
+add_action( 'pc_content_footer', 'pc_display_main_footer_end', 40 );
+
+add_action( 'pc_content_after', 'pc_display_main_end', 10 );
+
+
+/*----------  Fonctions associées  ----------*/
+
+function pc_display_main_start() {
+
+    echo '<main id="main" class="main"><div class="main-inner">';
 
 }
-
-
-/*----------  Titre (H1)  ----------*/
-
-function pc_display_main_title( $text ) {
-
-    echo '<h1>'.$text.'</h1>';
-
-    // actualités filtrées, affichage de la catégorie en sous titre
-    if ( get_query_var( NEWS_TAX_QUERY_VAR ) ) {
-        $current_news_cat = get_term_by( 'slug', get_query_var( NEWS_TAX_QUERY_VAR ), NEWS_TAX_SLUG );
-        echo '<p>Pour la catégorie <em>'.$current_news_cat->name.'</em></p>';
-    }
-
-}
-
-
-/*----------  Fermeture  ----------*/
 
 function pc_display_main_end() {
 
@@ -41,8 +47,41 @@ function pc_display_main_end() {
 
 }
 
+function pc_display_main_title( $post ) {
 
-/*=====  FIN Main structure  =====*/
+    echo '<h1>'.get_the_title( $post->ID ).'</h1>';
+
+}
+
+function pc_display_main_footer_start() {
+
+    echo '<footer>';
+
+}
+
+function pc_display_main_footer_end() {
+
+    echo '</footer>';
+
+}
+
+function pc_display_main_footer_subpage_backlink( $post ) {
+
+    if ( $post->post_type == 'page' && $post->post_parent > 0 ) {
+
+        echo '<a href="'.get_the_permalink($post->post_parent).'" class="" title="">< page parent</a>';
+
+    }
+
+}
+
+function pc_display_home_content( $settings_home ) {
+
+    echo '<h1>'.$settings_home['content-title'].'</h1>';
+    echo pc_wp_wysiwyg( $settings_home['content-intro'] );
+
+}
+
 
 /*=========================================
 =            Wysiwyg container            =

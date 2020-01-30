@@ -8,7 +8,8 @@
 
 if ( class_exists('PC_Add_metabox') ) {
 
-$metabox_thumbnail_for = array( 'page', NEWS_POST_SLUG );
+$metabox_thumbnail_for = array( 'page' );
+$metabox_thumbnail_for = apply_filters( 'pc_filter_metabox_thumbnail_for', $metabox_thumbnail_for );
 
 $metabox_thumbnail_fields = array(
     'desc'          => '<p>Le visuel utilisé pour afficher cette page sous sa forme résumée et le partage sur les réseaux sociaux.</p>',
