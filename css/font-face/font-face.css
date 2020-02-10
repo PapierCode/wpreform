@@ -2,7 +2,7 @@
 @font-face {
     font-family: "Raleway 900";
     font-style: normal;
-    font-weight: 900;
+    font-weight: 700;
     src: url("raleway-v14-latin-900.woff2") format("woff2"), 
         url("raleway-v14-latin-900.woff") format("woff");
 }

@@ -27,10 +27,10 @@ function pc_define_default_img_sizes() {
 }
     
 $images_project_sizes = array(
-    'st'    => array( 'width'=>150, 'height'=>150, 'crop'=>true ), // affecte pc_get_default_st()
-    'share' => array( 'width'=>300, 'height'=>300, 'crop'=>true ),
-    'gl-m'  => array( 'width'=>800, 'height'=>800, 'crop'=>false ),
-    'gl-l'  => array( 'width'=>1200, 'height'=>1200, 'crop'=>false )
+    'st-s'  => array( 'width'=>400, 'height'=>250, 'crop'=>true ),
+    'st-l'	=> array( 'width'=>700, 'height'=>400, 'crop'=>true ),
+    'gl-m'	=> array( 'width'=>800, 'height'=>800, 'crop'=>false ),
+    'gl-l'	=> array( 'width'=>1200, 'height'=>1200, 'crop'=>false )
 );
 
 $images_project_sizes = apply_filters( 'pc_filter_add_img_sizes', $images_project_sizes );
@@ -39,6 +39,25 @@ foreach ( $images_project_sizes as $size => $datas ) {
     add_image_size( $size, $datas['width'], $datas['height'], $datas['crop'] );
 }
 
+// si l'image recadrée est trop petite, faut tirer dessus
+add_filter( 'image_resize_dimensions', 'pc_image_resize_crop_upscale', 10, 6 );
+
+    function pc_image_resize_crop_upscale( $default, $orig_w, $orig_h, $new_w, $new_h, $crop ){
+
+        if ( !$crop ) return null; // si l'image ne doit pas être taillée pour correspondre à la taille demandée
+    
+        $aspect_ratio = $orig_w / $orig_h;
+        $size_ratio = max($new_w / $orig_w, $new_h / $orig_h);
+    
+        $crop_w = round($new_w / $size_ratio);
+        $crop_h = round($new_h / $size_ratio);
+    
+        $s_x = floor( ($orig_w - $crop_w) / 2 );
+        $s_y = floor( ($orig_h - $crop_h) / 2 );
+    
+		return array( 0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h );
+		
+    }
 
 /*=====  FIN Tailles  =====*/
 

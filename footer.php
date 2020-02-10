@@ -1,4 +1,4 @@
-<footer class="footer"><div class="footer-inner">
+<footer class="footer layout"><div class="footer-inner">
 
 	<?php
 	/*===============================

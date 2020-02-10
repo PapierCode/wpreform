@@ -37,7 +37,7 @@ add_action( 'pc_content_after', 'pc_display_main_end', 10 );
 
 function pc_display_main_start() {
 
-    echo '<main id="main" class="main"><div class="main-inner">';
+    echo '<main id="main" class="main layout"><div class="main-inner">';
 
 }
 

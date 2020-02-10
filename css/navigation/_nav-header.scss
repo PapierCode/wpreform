@@ -9,29 +9,177 @@
 =            Bouton ouvrir/fermer            =
 ============================================*/
 
-.btn-h-nav-box {
+$h-nav-btn-size : 40;
+$h-nav-space-default : 10;
+
+.h-nav-btn-box {
     position: absolute;
-    top:0;
-    right:rem(10);
+    top:$space-default;
+    right:$space-default;
     z-index: 1;
-    padding:rem(10);
-    transition:transform .3s ease;
+    transition:transform $t-nav ease;
 
     .h-nav-is-open & {
-        transform:translateX(rem($h-nav-width));
-        transition:transform .3s ease;
+        transform:translateX(rem($h-nav-width-min));
+        transition:transform $t-nav ease;
         bottom:0;
-    }
+	}
+	/* $mq-nav-l */
+	@media ( min-width : em($mq-nav-l) ) {
+		right:$space-default;
+		.h-nav-is-open & {
+			transform:translateX($h-nav-width-l);
+		}
+	}
+	/* $mq-nav-max */
+	@media ( min-width : em($mq-nav-max) ) {
+		display:none;
+	}
 }
-.btn-h-nav {
-    display:block;
+
+.h-nav-btn {
+    display: flex;
+	align-items: center;
     
     .h-nav-is-open & {
         position: sticky;
-        top:rem(10);
+        top:$space-default;
     }
 }
 
+
+
+.h-nav-btn-ico {	
+
+	$line-w : 24;
+	$line-h : 4;
+	$arrow-translate : 10;
+
+	background-color: $black;
+	width: rem($h-nav-btn-size);
+	height: rem($h-nav-btn-size);
+	position: relative;
+	transition:all $t-nav-btn-ico ease;
+
+	overflow: hidden;
+	&:before, &:after {
+		content: "";
+		width: rem($line-w);
+		height: rem($line-h);
+		position: absolute;
+		z-index: 1;
+		top:50%;
+		left:50%;
+		margin: rem(-$line-h/2,0,0,-$line-w/2);
+		background-color: #fff;
+		transform-origin:center center 0;
+		transition:all $t-nav-btn-ico ease;
+	}
+	&:before { transform:translateY(rem(-$arrow-translate)); }
+	&:after { transform:translateY(rem($arrow-translate)); }
+
+	.h-nav-is-open & {
+		background-color: $black;
+		&:before, &:after { transition:all $t-nav-btn-ico ease; }
+		&:before { transform: translateY(0) rotate(-45deg); }
+		&:after { transform: translateY(0) rotate(45deg); }
+	}
+
+	.h-nav-btn:hover &, .h-nav-btn:focus & {
+		background-color: transparent;
+		transition:all $t-nav-btn-ico ease;
+
+		&:before, &:after {
+			background-color: $black;
+			transition:all $t-nav-btn-ico ease;
+			transition:all $t-nav-btn-ico ease;
+		}
+		&:before {
+			transform: translate(rem($arrow-translate),0) rotate(45deg);
+			transform-origin: left top;
+		}
+		&:after {
+			transform: translate(rem($arrow-translate),0) rotate(-45deg);
+			transform-origin: left bottom;
+		}
+	}
+
+	.h-nav-is-open .h-nav-btn:hover &, .h-nav-is-open .h-nav-btn:focus & {
+		&:before {
+			transform: translateY(0) rotate(-45deg);
+			transform-origin: right top;
+		}
+		&:after {
+			transform: translateY(0) rotate(45deg);
+			transform-origin: right bottom;
+		}
+	}
+}
+.h-nav-btn-ico--inner {
+	display: block;
+	&:before { display:none; }
+	&:after { transform:none; }
+	
+	.h-nav-is-open & {
+		&:after { transform: translateX(rem(100)); }
+	}
+
+	.h-nav-is-open .h-nav-btn:hover &, .h-nav-is-open .h-nav-btn:focus &,
+	.h-nav-btn:hover &, .h-nav-btn:focus & {
+		&:after { transform: translateX(rem(100)); }
+	}
+}
+.h-nav-btn-txt {
+	position: absolute;
+	top:-666em;
+
+	/* $mq-space-m */
+	@media ( min-width : em($mq-space-m) ) {
+		position: static;
+		overflow: hidden;
+		font-family: var(--font);
+		font-size: rem(26);
+		text-transform: uppercase;
+		padding: rem(5);
+		align-self: stretch;
+		display: flex;
+		align-items: center;
+		max-width: rem(100);
+		transition:all $t-nav-btn-ico ease;
+
+		.h-nav-is-open & {
+			max-width: 0;
+			padding: 0;
+			transition:all $t-nav-btn-ico ease;
+		}
+	}
+}
+
+.btn-overlay {
+	position: absolute;
+	z-index: 1;
+	left:0;
+	right: 0;
+	bottom: 0;
+	top:0;
+	transform: translateX(-100%);
+	background-color:$black;
+	width: 100%;
+	height:100%;
+	opacity: 0;
+	transition:opacity $t-nav ease, transform 0s ease $t-nav;
+
+	.h-nav-is-open & {
+		transform: translateX(0);
+		opacity:.6;
+		transition:opacity $t-nav ease;
+	}
+
+	/* $mq-max */
+	@media ( min-width : em($mq-max) ) {
+		display:none;
+	}
+}
 
 
 /*=====  FIN Bouton ouvrir/fermer  =====*/
@@ -46,13 +194,17 @@
 	left: 100%;
 	bottom: 0;
 
-	width: rem($h-nav-width);
-	padding: rem(50,10,10,10);
+	width: rem($h-nav-width-min);
+	padding: calc( #{rem($h-nav-btn-size)} + #{2 * $space-default} ) $space-default $space-default $space-default;
 
-	background-color: orange;
+	background-color: $yellow;
 
-	/* $mq-nav */
-	@media ( min-width : em($mq-nav) ) {
+	/* $mq-space-l */
+	@media ( min-width : em($mq-nav-l) ) {
+		width:$h-nav-width-l;
+	}
+	/* $mq-nav-max */
+	@media ( min-width : em($mq-nav-max) ) {
 		// reset
 		position: static;
 		width: auto;
@@ -61,6 +213,20 @@
 	}
 }
 
+.h-nav-inner {
+
+    .h-nav-is-open & {
+        position: sticky;
+        z-index: 2;
+        top:calc( #{rem($h-nav-btn-size)} + #{2 * $space-default} );
+    }
+
+    /* $mq-nav-max */
+    @media ( min-width : em($mq-nav-max) ) {
+        position: static;       
+    }
+
+}
 
 /*=====  FIN Container  =====*/
 
@@ -69,26 +235,23 @@
 =============================*/
 
 .h-nav-list {
-
-    .h-nav-is-open & {
-        position: sticky;
-        z-index: 2;
-        top:rem(50);
-    }
-
-    /* $mq-nav */
-    @media ( min-width : em($mq-nav) ) {
-        position: static;
-        display:flex;
-        flex-wrap: wrap;        
-    }
+	/* $mq-max */
+	@media ( min-width : em($mq-max) ) {
+		display: flex;
+		flex-wrap: wrap;
+	}
 }
 
 .h-nav-item {
+	&:nth-child(n+2) {
+		margin-top:rem($h-nav-space-default);
+	}
 
-    /* $mq-nav */
-    @media ( min-width : em($mq-nav) ) {
-        margin-right:rem(10);        
+    /* $mq-nav-max */
+    @media ( min-width : em($mq-nav-max) ) {        
+		&:nth-child(n+2) {
+			margin:rem(0,0,0,$h-nav-space-default);
+		}       
     }
 }
 
@@ -99,26 +262,130 @@
 =            Lien            =
 ============================*/
 
-html {
-    --theme-color : #ccc;
-}
-
 .h-nav-link, .h-nav-link:visited {
-    display:block;
-    padding:rem(5,10);
 
-    font-family: var(--nav-h-font);
+	$after-size-s : 14;
+	$after-size-l : 20;
+
+	display:block;
+	position: relative;
+    padding:rem($h-nav-space-default);
+
+	font-family: var(--nav-h-font);
     text-decoration: none;
 
-    background-color:var(--theme-color);
-    color:hsl( var(--h-nav-link-txt-hue), var(--h-nav-link-txt-saturation), var(--h-nav-link-txt-light) );
+	color: $beige;
+	background-color:$black;
+	transition: all .3s ease;
+
+	.is-active & {
+		background-color: $red;
+		color:$black;
+		&:after {
+			content:"";
+			position: absolute;
+			right:rem($h-nav-space-default);
+			top:50%;
+			transform:translateY(rem(-$after-size-l/2));
+			width: rem($after-size-l);
+			height: rem($after-size-l);
+			border-radius:50%;
+			background-color: $black;
+			transition: transform .3s ease;
+		}
+	}
 
     &:hover, &:focus {
-        
-    }
+		color: $black;
+		background-color:$beige;
+		transition: all .3s ease;
+
+		&:after {
+			transition: transform .3s ease;
+		}
+	}
+	
+	/* $mq-nav-l */
+	@media ( min-width : em($mq-nav-l) ) {
+		.is-active & {
+			transform:translateX(-$space-default/2);
+			color:$black;
+			&:after {
+				right:rem(-$after-size-l/2);
+			}
+		}
+		&:hover, &:focus {
+			transform:translateX(-$space-default/2);
+	
+			&:after {
+				transform:translate(rem(-$after-size-l),rem(-$after-size-l/2));
+			}
+		}
+	}
+	/* $mq-nav-max */
+	@media ( min-width : em($mq-nav-max) ) {
+		.is-active & {
+
+			background-color: $yellow;
+			transform:translateY(rem($h-nav-space-default));
+
+			&:before {
+				content:"";
+				position: absolute;
+				left:0;
+				right:0;
+				top:90%;
+				height:$space-default/2;
+			}			
+			&:after {
+				top: auto;
+				right: 50%;
+				width: rem($after-size-s);
+				height: rem($after-size-s);
+				bottom:rem(-$after-size-s/2);
+				transform:translate(rem($after-size-s/2),calc(#{$space-default/2} - #{rem($h-nav-space-default)}))
+			}
+		}
+		&:hover, &:focus {
+			background-color: $beige;
+			transform:translateY(rem($h-nav-space-default));
+
+			&:after {
+				transform:translate(rem($after-size-s/2),0)
+			}
+		}
+	}
 }
 
 .h-nav-link-inner {}
 
 
 /*=====  FIN Lien  =====*/
+
+/*=======================================
+=            Réseaux sociaux            =
+=======================================*/
+
+.social-list--header {
+	display: flex;
+	justify-content: center;
+	margin-top: $space-default;
+
+	.social-item {
+		margin-right:rem(10);
+	}
+
+	/* $mq-max */
+	@media ( min-width : em($mq-max) ) {
+		position:absolute;
+		top:0;
+		right:0;
+		margin: 0;
+
+		.social-item {
+			margin:rem(0,0,0,10);
+		}
+	}
+}
+
+/*=====  FIN Réseaux sociaux  =====*/

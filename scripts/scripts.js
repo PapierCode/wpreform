@@ -42,28 +42,10 @@ $win.resize(winChange);
 =            navigation            =
 ==================================*/
 
-var $overlay = $('.btn-overlay');
-
-
-/*----------  Navigation avec menu déroulants  ----------*/
-
-// $primaryNav.nav({
-// 	// timerClose (temporisation avant de supprimer .is-open, défaut 1000 ms)
-// 	// mediaQuery (point de changement menu accordéon / déroulant, défaut 768)
-// });
-
 /*----------  btn open/close  ----------*/
 
-$('.btn-h-nav').click(function() {
+$('.js-h-nav').click(function() {
 	$html.toggleClass('h-nav-is-open');
-});
-
-
-/*----------  overlay  ----------*/
-
-$overlay.click(function() {
-    $html.removeClass('nav-is-open');
-    $(this).addClass('visually-hidden');
 });
 
 

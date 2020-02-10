@@ -16,24 +16,29 @@
 	</ul>
 
 	<div class="body-inner">
-		<header class="header">
+		<header class="header layout">
 			<div class="header-inner">
 				<div class="h-logo">
 					<a href="<?php bloginfo('url'); ?>" class="h-logo-link" title="Accueil <?php bloginfo('name'); ?>">
 						<?php
 						$logo_datas = array(
 							'url' => get_bloginfo('template_directory').'/images/logo.svg',
-							'width' => 140,
-							'height' => 120,
+							'width' => 150,
+							'height' => 150,
 							'alt' => 'Logo'
 						);
 						$logo_datas = apply_filters( 'pc_filter_header_logo', $logo_datas );
 						?>
 						<img class="h-logo" src="<?= $logo_datas['url']; ?>" alt="<?= $logo_datas['alt']; ?>" width="<?= $logo_datas['width']; ?>" height="<?= $logo_datas['height']; ?>" />
 					</a>
-					<div class="btn-h-nav-box"><button type="button" title="Ouvrir/fermer le menu" class="btn-h-nav reset-btn ico-menu js-menu" aria-hidden="true" tabindex="-1"><span class="btn-menu-inner ico-menu"><span class="">Menu</span></span></button></div>
+					<div class="h-nav-btn-box">
+						<button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-h-nav reset-btn" aria-hidden="true" tabindex="-1">
+							<span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span>
+							<span class="h-nav-btn-txt">Menu</span>
+						</button>
+					</div>
 				</div>
-				<nav id="header-nav" class="h-nav">
+				<nav id="header-nav" class="h-nav"><div class="h-nav-inner">
 					<?php
 						$nav_header_config = array(
 							'theme_location'  	=> 'nav-header',
@@ -46,9 +51,11 @@
 							'fallback_cb'     	=> false,
 							'walker'          	=> new Pc_Walker_Nav_Menu()
 						);
-						wp_nav_menu( $nav_header_config );
-						// + include/navigation.php
+						wp_nav_menu( $nav_header_config ); // + include/navigation.php
+						pc_nav_social_links();
 					?>
-				</nav>
+				</div></nav>
 			</div>
 		</header>
+
+		<button type="button" title="Fermer le menu" class="btn-overlay reset-btn js-h-nav" aria-hidden="true" tabindex="-1"><span class="visually-hidden">Fermer le menu</span></button>

@@ -1,0 +1,57 @@
+/**
+*
+* Composants : partage
+*
+**/
+
+
+$facebook-color		: #3b5998;
+$twitter-color 		: #00aced;
+$linkedin-color		: #007bb5;
+$instagram-color	: #c32aa3;
+
+.social-list {
+	display:flex;
+}
+.social-item {}
+
+.social-link {
+	display: block;
+	padding: rem(10);
+	background-color: $black;;
+	transition:background-color .3s ease;
+	
+	path {
+		fill:$beige;
+		transition:fill .3s ease;
+	}
+
+	&:hover, &:focus {
+		transition:background-color .3s ease;
+
+		path {
+			transition:fill .3s ease;
+		}
+	}
+}
+
+.social-link--facebook {
+	&:hover, &:focus {
+	   background-color: $facebook-color;
+	}
+}
+.social-link--twitter {
+	&:hover, &:focus {
+	   background-color: $twitter-color;
+	}
+}
+.social-link--linkedin {
+	&:hover, &:focus {
+	   background-color: $linkedin-color;
+	}
+}
+.social-link--instagram {
+	&:hover, &:focus {
+	   background-color: $instagram-color;
+	}
+}

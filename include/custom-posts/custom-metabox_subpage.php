@@ -199,7 +199,7 @@ function pc_sub_page_save( $post_id ) {
             /*----------  Traitement des sous-pages  ----------*/
             
             // si ce n'est pas une révision et si c'est la liste de sous-pages
-            if ( !wp_is_post_revision( $post_id ) && $name == 'content-subpages' ) {
+            if ( $name == 'content-subpages' ) {
 
                 $subpages_temp = explode(',',$temp);
                 $subpages_saved = explode(',',$save);

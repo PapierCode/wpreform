@@ -27,7 +27,7 @@ foreach ($all_pages as $page) {
 /*----------  Contenu  ----------*/
 
 // sections et champs associés
-$settings_project_field = array(
+$settings_project_fields = array(
     array(
         'title'     => 'Coordonnées',
         'id'        => 'contact-informations',
@@ -115,20 +115,26 @@ $settings_project_field = array(
         'prefix'    => 'social',
         'fields'    => array(
             array(
-                'type'      => 'text',
-                'label_for' => 'fb',
+                'type'      => 'url',
+                'label_for' => 'facebook',
                 'label'     => 'Facebook',
                 'css'       => 'width:100%'
             ),
             array(
-                'type'      => 'text',
-                'label_for' => 'tw',
+                'type'      => 'url',
+                'label_for' => 'twitter',
                 'label'     => 'Twitter',
                 'css'       => 'width:100%'
             ),
             array(
-                'type'      => 'text',
-                'label_for' => 'in',
+                'type'      => 'url',
+                'label_for' => 'instagram',
+                'label'     => 'Instagram',
+                'css'       => 'width:100%'
+			),
+            array(
+                'type'      => 'url',
+                'label_for' => 'linkedin',
                 'label'     => 'LinkedIn',
                 'css'       => 'width:100%'
             )
@@ -150,7 +156,7 @@ $settings_project_field = array(
     )
 );
 
-$settings_project_fields = apply_filters( 'pc_filter_settings_project_fields', $settings_project_field );
+$settings_project_fields = apply_filters( 'pc_filter_settings_project_fields', $settings_project_fields );
 
 
 /*----------  Création  ----------*/
@@ -174,9 +180,9 @@ function pc_sanitize_settings_project( $datas ) {
 
     $datas = apply_filters( 'pc_filter_settings_project_sanitize_fields', $datas );
 
-    global $settings_project_field;
+    global $settings_project_fields;
 
-    return pc_sanitize_settings_fields( $settings_project_field, $datas );
+    return pc_sanitize_settings_fields( $settings_project_fields, $datas );
 
 }
 

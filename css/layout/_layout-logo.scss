@@ -5,5 +5,12 @@
 **/
 
 .h-logo-link {
-    text-decoration: none;
+	text-decoration: none;
+	display: block;
+	max-width: rem(100);
+
+	/* $mq-space-m */
+	@media ( min-width : em($mq-space-m) ) {
+		max-width: none;
+	}
 }

@@ -137,7 +137,7 @@ add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img_content
             
             $img_id = get_post_meta( $postId,'thumbnail-img',true );
             if ( $img_id != '' ) {
-                echo pc_get_img( $img_id, 'st' );
+                echo pc_get_img( $img_id, 'square-150' );
             } else {
                 echo '<img src="'.get_bloginfo('template_directory').'/images/admin-no-thumb.jpg" />';
             }

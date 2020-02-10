@@ -33,13 +33,17 @@ $base-line-height		: 1.5;
 
 /*----------  Project  ----------*/
 
-//...
+$beige 		: #f9f5ec;
+$red 		: #fd4b4b;
+$yellow		: #ffd17b;
+$blue		: #bfe8ea;
+$black		: #2a1010;
 
 
 /*----------  Défaut  ----------*/
 
-$body-bg-color			: #fff;
-$font-color-default		: #333;
+$body-bg-color			: $beige;
+$font-color-default		: $black;
 
 $color-placeholder		: #777;
 
@@ -52,32 +56,52 @@ $color-placeholder		: #777;
 
 /*----------  Gouttières  ----------*/
 
-$space-s				 : 10;
-$space-m				 : 20;
-$space-l				 : 30;
+$space-s				: 10;
+$space-m				: 20;
+$space-l				: 30;
+$space-default			: 5vw;
 
 
 /*----------  Largeur maximum  ----------*/
 
 $max-width				: 1230;
 $max-width-txt          : 700;
-$h-nav-width            : 240; // navigation cachée
+
+// navigation masquée
+$h-nav-width-min 		: 260;
+$h-nav-width-l			: 50vw;
+
 
 
 /*----------  Medias Queries  ----------*/
 
-$mq-max					: $max-width;
-$mq-nav 				: $max-width;
-
+// génériques
 $mq-space-m				: 480;
 $mq-space-l				: 760;
+$mq-max					: $max-width;
 
-$mq-title-size			: 760;
-$mq-gallery-nav		    : 760;
-$mq-contact-form        : 760;
+// navigation
+$mq-nav-l	 			: 640;
+$mq-nav-max 			: $max-width;
+
+// divers
+$mq-title-size			: $mq-space-l;
+$mq-gallery-nav		    : $mq-space-l;
+$mq-contact-form        : $mq-space-l;
 
 
 /*=====  FIN Agencement  ======*/
+
+/*==========================================
+=            Durées d'animation            =
+==========================================*/
+
+// nav
+$t-nav					: .5s;
+$t-nav-btn-ico			: .6s;
+
+
+/*=====  FIN Durées d'animation  =====*/
 
 /*===============================
 =            Imports            =
@@ -100,7 +124,7 @@ $mq-contact-form        : 760;
 @import "components/cpt-messages";
 @import "components/cpt-loader";
 @import "components/cpt-gallery";
-@import "components/cpt-sharing";
+@import "components/cpt-social";
 @import "components/cpt-wysiwyg";
 
 
