@@ -1,0 +1,96 @@
+/**
+*
+* Classic : publications
+*
+** Communs
+** Article résumé
+** Accueil
+*
+**/
+
+/*===============================
+=            Communs            =
+===============================*/
+
+.cl-editor {}
+
+
+/*=====  FIN Communs  =====*/
+
+/*======================================
+=            Article résumé            =
+======================================*/
+
+.st {
+	margin-top: $space;
+	background-color: #eee;
+
+	/* $mq-layout-m */
+	@media ( min-width : em($mq-layout-m) ) {
+		padding:rem($space--st)
+	}
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		margin-top:0;
+	}
+}
+
+
+/*=====  FIN Article résumé  =====*/
+
+/*===============================
+=            Partage            =
+===============================*/
+
+.social-share {
+	margin-top:$space;
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		margin-top:0;
+	}
+}
+
+
+/*=====  FIN Partage  =====*/
+
+/*===============================
+=            Accueil            =
+===============================*/
+
+/*----------  Raccourcis  ----------*/
+
+.home-shortcuts {
+	/* $mq-layout-m */
+	@media ( min-width : em($mq-layout-m) ) {
+		margin-left:-$space;
+	}
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		gap:$space;
+		margin-left: 0;
+	}
+	/* $mq-layout-max--cl */
+	@media ( min-width : em($mq-layout-max--cl) ) {
+		gap:rem(40);
+	}
+}
+.home-shortcut-item {
+	margin-top:$space;
+
+	/* $mq-layout-m */
+	@media ( min-width : em($mq-layout-m) ) {
+		width: calc( 50% - #{$space} );
+		margin-left:$space;
+	}
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		width:auto;
+		margin:0;
+	}
+}
+.home-shortcut-link {}
+
+
+
+/*=====  FIN Accueil  =====*/

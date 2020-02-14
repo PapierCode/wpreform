@@ -8,6 +8,8 @@ $sprite = array(
 
 	'cross' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="#fff" d="M20 2.9l-2.9-2.9-7.1 7.1-7.1-7.1-2.9 2.9 7.1 7.1-7.1 7.1 2.9 2.9 7.1-7.1 7.1 7.1 2.9-2.9-7.1-7.1z"/></svg>',
 
+	'cross-16' => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="6" width="4" height="16"/><rect y="6" width="16" height="4"/></svg>',
+
 	'map' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M10,0A6.38,6.38,0,0,0,3.5,6.25,6,6,0,0,0,4.14,9L10,20,15.79,9.09a6,6,0,0,0,.71-2.84A6.38,6.38,0,0,0,10,0Zm0,10A3.83,3.83,0,0,1,6.1,6.25,3.83,3.83,0,0,1,10,2.5a3.83,3.83,0,0,1,3.9,3.75A3.83,3.83,0,0,1,10,10Z" fill="#fff"/></svg>',
 
 	'calendar' => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M13,1V0H11V1H5V0H3V1H0V16H16V1Zm2,14H1V6H15ZM15,5H1V2H3V4H5V2h6V4h2V2h2Z" fill="#fff"/><rect x="3" y="8" width="2" height="2" fill="#fff"/><rect x="11" y="8" width="2" height="2" fill="#fff"/><rect x="7" y="8" width="2" height="2" fill="#fff"/><rect x="3" y="11" width="2" height="2" fill="#fff"/><rect x="11" y="11" width="2" height="2" fill="#fff"/><rect x="7" y="11" width="2" height="2" fill="#fff"/></svg>',

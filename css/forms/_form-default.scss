@@ -24,8 +24,8 @@
 		margin: rem(10,0,0,0);
 	}
 
-	/* $mq-contact-form */
-	@media ( min-width : em($mq-contact-form) ) {
+	/* $mq-form */
+	@media ( min-width : em($mq-form) ) {
 		display: flex;
 		align-items: flex-start;
 		& + & {
@@ -49,8 +49,8 @@
 	margin-top: rem(10);
 	padding-right: rem(10);
 
-	/* $mq-contact-form */
-	@media ( min-width : em($mq-contact-form) ) {
+	/* $mq-form */
+	@media ( min-width : em($mq-form) ) {
 		min-width : rem(300);
 		margin-top: 0;
 	}
@@ -70,8 +70,8 @@
 		outline: none;
 	}
 
-	/* $mq-contact-form */
-	@media ( min-width : em($mq-contact-form) ) {
+	/* $mq-form */
+	@media ( min-width : em($mq-form) ) {
 		margin-top: 0;
 	}
 }
@@ -105,8 +105,8 @@
 		margin-top: rem(5);
 	}
 
-	/* $mq-contact-form */
-	@media ( min-width : em($mq-contact-form) ) {
+	/* $mq-form */
+	@media ( min-width : em($mq-form) ) {
 		display: block;
 	}
 }
@@ -123,14 +123,14 @@
 	.g-recaptcha {
 		margin-top: rem(10);
 
-		/* $mq-contact-form */
-		@media ( min-width : em($mq-contact-form) ) {
+		/* $mq-form */
+		@media ( min-width : em($mq-form) ) {
 			margin-left:auto;
 			margin-top: 0;
 		}
 	}
-	/* $mq-contact-form */
-	@media ( min-width : em($mq-contact-form) ) {
+	/* $mq-form */
+	@media ( min-width : em($mq-form) ) {
 		padding-top: rem(20);
 		border-top:1px solid #ccc;
 	}
@@ -140,8 +140,8 @@
 	transform-origin:left top;
 	transform:scale(0.9);
 
-	/* $mq-space-m */
-	@media (min-width:em($mq-space-m)) {
+	/* $mq-layout-m */
+	@media (min-width:em($mq-layout-m)) {
 		transform:scale(1);
 	}
 }
@@ -159,8 +159,8 @@
 	margin-top: rem(30);
 	border-top:2px solid #ccc;
 
-	/* $mq-contact-form */
-	@media ( min-width : em($mq-contact-form) ) {
+	/* $mq-form */
+	@media ( min-width : em($mq-form) ) {
 		display: block;
 	}
 }

@@ -2,160 +2,53 @@
 *
 * Publications : commmuns
 *
+** Communs
+** Article résumé
+** Partage
+*
 **/
 
-/*==========================
-=            H1            =
-==========================*/
+/*===============================
+=            Communs            =
+===============================*/
 
-h1, .h1-like {
-	color:$font-color-default;
-	font-family: var(--font);
-	font-weight: 900;
-	margin: 0;
-
-	font-size: rem(28);
-	line-height: $base-line-height;
-
-	/* $mq-title-size */
-	@media ( min-width : em($mq-title-size) ) {
-		font-size: rem(40);
-		line-height: $base-line-height;
+.editor {
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		grid-column-end:span 2;
 	}
+}
+.editor-inner {
+	max-width: rem($txt-mw);
 }
 
 
-/*=====  FIN H1  =====*/
+/*=====  FIN Communs  =====*/
 
 /*======================================
 =            Article résumé            =
 ======================================*/
 
-$st-img-size : 150;
-$st-padding : 20;
-
-.st-list {
-	max-width: rem($max-width);
-	color:$black;
-	max-width: rem(800);
-
-	/* $mq-space-l */
-	@media ( min-width : em($mq-space-l) ) {
-		display:grid;
-		grid-template-columns: 1fr 1fr;
-		gap: $space-default ;
-	}
-}
-
 .st {
+	padding:$space;
 	position: relative;
-	margin-top:calc( #{rem($st-padding)} + #{rem(25)} );
-
-	&:before {
-		content:"";
-		position: absolute;
-		z-index: -1;
-		background-color: $blue;
-		opacity: 0;
-		transition:all .5s ease;
-		transform-origin: center;
-		transform: scale(.7);
-		top:rem(-$st-padding);
-		right:rem(-$st-padding);
-		bottom:rem(-$st-padding);
-		left:rem(-$st-padding);
-	}
+	transition:all .5s ease;
 
 	&:hover, &:focus {
-	   &:before {
-		   opacity:1;
-		   transform: scale(1);
-		   transition:all .5s ease;
-	   }
+	   background-color: $blue;
+	   transition:all .5s ease;
 	}
 
-	/* $mq-space-l */
-	@media ( min-width : em($mq-space-l) ) {
-		.is-home & {
-			&:first-child {
-				margin-top:$space-default;
-				grid-column-start: 1;
-				grid-column-end: -1;
-			}
-		}
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		margin:0;
 	}
 }
 .st-inner {
 	display: flex;
 	flex-direction: column;
-	position: relative;
 	height: 100%;
-
-	&:before, &:after {
-		content:"";
-		position: absolute;
-		z-index: 1;
-		height: rem(4);
-		background-color: $black;
-		transition:all .3s ease;
-	}
-	&:before {
-		top:0;
-		right:0;
-		left:0;
-	}
-	&:after {
-		bottom:rem(-2*$st-padding);
-		right:rem(-2*$st-padding);
-		left:rem(-2*$st-padding);
-		opacity: 0;
-		transform:translateX(rem(2*$st-padding)) rotate(2deg);
-	}
-
-	.st:hover & {
-		&:before, &:after {
-			transition:all .3s ease;
-			right:rem(-$st-padding);
-			left:rem(-$st-padding);
-		}
-		&:before {
-			top:rem(-$st-padding);
-		}
-		&:after {
-			bottom:rem(-$st-padding);
-			transform:translateX(0) rotate(0);
-			opacity: 1;
-		}
-	}
 }
-
-// .st-ico {
-// 	position: absolute;
-// 	z-index: 1;
-// 	display: flex;
-// 	align-items: center;
-// 	top:0;
-// 	left:50%;
-// 	transform:translate(-50%,-50%);
-// 	transition:transform .3s ease;
-// 	padding:rem(10);
-// 	border-radius:50%;
-// 	height:rem(68);
-// 	border:4px solid $black;
-// 	background-color: $beige;
-
-// 	svg {
-// 		transform: translateY(rem(-2));
-// 	}
-// 	path {
-// 		fill:$black;
-// 	}
-
-// 	.st:hover & {
-// 		transform:translate(-50%, calc( -50% + #{rem(3*$st-padding)}));
-// 		transition:transform .3s ease;
-// 	}
-// }
 
 .st-title {
 	font-family: var(--font);
@@ -163,93 +56,67 @@ $st-padding : 20;
 	font-size: rem(24);
 	line-height: 1.2;
 
-	margin:rem(1.5*$st-padding,0,.5*$st-padding,0);
+	margin:rem($space--st,0,.5*$space--st,0);
 
 	a {
 		color:$black;
 		text-decoration: none;
 
+		&:before {
+			content:"";
+			position: absolute;
+			top:0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
 		&:hover, &:focus {
-		   text-decoration: underline;
+			&:before {}
 		}
 	}
 
-	/* $mq-max */
-	@media ( min-width : em($mq-max) ) {
+	/* $mq-title-size */
+	@media ( min-width : em($mq-title-size) ) {
 		font-size: rem(28);
 	}
 }
 
 .st-figure {
-
+	overflow: hidden;
 	img {
 		width: 100%;
-		filter:grayscale(100%);
-		transition:filter .5s ease;
+		transform-origin: center;
+		transition:.5s ease;
 	}
-
-	&:before, &:after {
-		content:"";
-		position: absolute;
-		z-index: 1;
-		top:rem(-2*$st-padding);
-		bottom:rem(-2*$st-padding);
-		width: rem(4);
-		background-color: $black;
-		opacity: 0;
-		transition:all .3s ease;
-	}
-	&:before {
-		left:rem(-2*$st-padding);
-		transform: translateY(rem(2*$st-padding)) rotate(-2deg);
-	}
-	&:after {
-		right:rem(-2*$st-padding);
-		transform: translateY(rem(-2*$st-padding)) rotate(2deg);
-	}
-
 	.st:hover & {
 		img {
-			filter: grayscale(0);
-			transition:filter .3s ease;
-		}
-		&:before, &:after {
-			transition:all .5s ease;
-			top:rem(-$st-padding);
-			bottom:rem(-$st-padding);
-			transform:translateY(0) rotate(0);
-			opacity: 1;
-		}
-		&:before {
-			left:rem(-$st-padding);
-		}
-		&:after {
-			right:rem(-$st-padding);
+			transform:scale(1.1);
+			transition:.5s ease;
 		}
 	}
 }
 
 .st-desc {
-	margin:rem($st-padding/2,0,0,0);
+	margin:0;
 
-	a, a:visited {
-		display: inline-block;
-		padding:rem(0,5);
-		background-color: $blue;
-		color:$black;
-		font-size: rem(14);
-		font-family:var(--font-alt);
-		text-decoration: none;
-		text-transform: uppercase;
-		transition:all .3s ease;
+	span {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		vertical-align: middle;
+		background-color: $black;
+		width: rem(24);
+		height: rem(24);
+		margin-left:rem(5);
 
-		&:hover, &:focus {
-		   background-color:$black;
-		   color:$beige;
-		   transition:all .3s ease;
-		   .st:hover & {
-			   color:$beige;
-		   }
+		svg {
+			fill:$beige;
+		}
+	}
+
+	.st:hover & {
+		svg {
+			fill:$blue;
 		}
 	}
 }
@@ -264,15 +131,20 @@ $st-padding : 20;
 .social-share {
 	display: flex;
 	align-items: center;
-	margin-top:$space-default;
+	justify-content: flex-end;
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		grid-column-end: span 2;
+	}
 }
 .social-share-title {
-	margin:rem(0,10,0,0);
+	margin:0;
 }
 .social-list--share {
 
 	.social-item {
-		margin-right:rem(10);
+		margin-left:rem(10);
 	}
 }
 

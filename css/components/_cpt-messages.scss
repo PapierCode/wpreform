@@ -54,8 +54,8 @@ $msg-success-color		: #1f8900;
 	}
 
 	/* @mq-space-m */
-	@media ( min-width : em($mq-space-m) ) {
-		margin: rem($space-l,0,$space-l,0);
+	@media ( min-width : em($mq-layout-m) ) {
+		margin: rem(30,0,30,0);
 	}
 }
 

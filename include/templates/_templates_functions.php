@@ -91,10 +91,13 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 	do_action( 'pc_action_post_resum_after_title', $post_id );
 	
 
-    /*----------  Description + lire la suite  ----------*/		
+	/*----------  Description + lire la suite  ----------*/
+	
+	$ico_more = pc_svg('cross-16',false,'svg-block');
+	$ico_more = apply_filters( 'pc_filter_post_resum_ico_more', $ico_more );
     
     $resum = (isset($metas['resum-desc'])) ? wp_trim_words($metas['resum-desc'][0],20,'') : get_the_excerpt($post_id) ;
-	echo '<p class="st-desc">'.$resum.'... <a class="st-more" href="'.get_the_permalink($post_id).'" title="Lire la suite de '.$title.'">Lire la suite</a></p>';
+	echo '<p class="st-desc">'.$resum.'...<span>'.$ico_more.'</span></p>';
 	
     do_action( 'pc_action_post_resum_before_end', $post_id );
 

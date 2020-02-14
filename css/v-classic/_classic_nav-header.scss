@@ -1,0 +1,146 @@
+/**
+*
+* Classic : navigation dans l'entête
+*
+** Bouton ouvrir/fermer
+** Container
+** Liste
+** Lien
+** Réseaux sociaux
+*
+*
+**/
+
+/*============================================
+=            Bouton ouvrir/fermer            =
+============================================*/
+
+.h-nav-btn-box {
+	/* $mq-nav-max--cl */
+	@media ( min-width : em($mq-nav-max--cl) ) {
+		display:none;
+	}
+}
+.btn-overlay {
+	/* $mq-nav-max--cl */
+	@media ( min-width : em($mq-nav-max--cl) ) {
+		display:none;
+	}
+}
+
+
+/*=====  FIN Bouton ouvrir/fermer  =====*/
+
+/*=================================
+=            Container            =
+=================================*/
+
+.h-nav {
+	/* $mq-nav-max--cl */
+	@media ( min-width : em($mq-nav-max--cl) ) {
+		// reset
+		position: static;
+		width: auto;
+		padding: 0;
+		background-color: transparent;
+	}
+}
+.h-nav-inner {
+    /* $mq-nav-max--cl */
+    @media ( min-width : em($mq-nav-max--cl) ) {
+        position: static;       
+    }
+
+}
+
+/*=====  FIN Container  =====*/
+
+/*=============================
+=            Liste            =
+=============================*/
+
+.h-nav-list {
+	/* $mq-nav-max--cl */
+	@media ( min-width : em($mq-nav-max--cl) ) {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
+.h-nav-item {
+    /* $mq-nav-max--cl */
+    @media ( min-width : em($mq-nav-max--cl) ) {        
+		&:nth-child(n+2) {
+			margin:rem(0,0,0,$space--h-nav);
+		}       
+    }
+}
+
+
+/*=====  FIN Liste  =====*/
+
+/*============================
+=            Lien            =
+============================*/
+
+.h-nav-link, .h-nav-link:visited {
+
+	$after-size : 14;
+
+	/* $mq-nav-max--cl */
+	@media ( min-width : em($mq-nav-max--cl) ) {
+		.is-active & {
+
+			background-color: $yellow;
+			transform:translateY(rem($space--h-nav));
+
+			&:before {
+				content:"";
+				position: absolute;
+				left:0;
+				right:0;
+				top:90%;
+				height:$space/2;
+			}			
+			&:after {
+				top: auto;
+				right: 50%;
+				width: rem($after-size);
+				height: rem($after-size);
+				bottom:rem(-$after-size/2);
+				transform:translate(rem($after-size/2),calc(#{$space/2} - #{rem($space--h-nav)}))
+			}
+		}
+		&:hover, &:focus {
+			background-color: $beige;
+			transform:translateY(rem($space--h-nav));
+
+			&:after {
+				transform:translate(rem($after-size/2),0)
+			}
+		}
+	}
+}
+
+/*=====  FIN Lien  =====*/
+
+/*=======================================
+=            Réseaux sociaux            =
+=======================================*/
+
+.social-list--header {
+
+	/* $mq-nav-max--cl */
+	@media ( min-width : em($mq-nav-max--cl) ) {
+		position:absolute;
+		top:$space/2;
+		right:$space;
+		margin:0;
+
+		.social-item {
+			margin:rem(0,0,0,10);
+		}
+	}
+}
+
+
+/*=====  FIN Réseaux sociaux  =====*/

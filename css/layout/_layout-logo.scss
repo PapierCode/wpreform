@@ -9,8 +9,8 @@
 	display: block;
 	max-width: rem(100);
 
-	/* $mq-space-m */
-	@media ( min-width : em($mq-space-m) ) {
+	/* $mq-layout-m */
+	@media ( min-width : em($mq-layout-m) ) {
 		max-width: none;
 	}
 }

@@ -1,0 +1,148 @@
+/**
+*
+* Fullscreen : structure principale
+*
+** Communs
+** Html & Body
+** Header
+** Main
+** Aside
+** Footer
+*
+**/
+
+/*===============================
+=            Communs            =
+===============================*/
+
+.fs-bloc {
+	padding: $space;
+
+	/* $mq-layout-max--fs */
+	@media ( min-width : em($mq-layout-max--fs) ) {
+		padding:rem(50);
+	}
+}
+
+
+/*=====  FIN Communs  =====*/
+
+/*===================================
+=            Html & body            =
+===================================*/
+
+html {}
+body {}
+
+.body-inner {}
+
+
+/*=====  FIN Html & body  =====*/
+
+/*==============================
+=            Header            =
+==============================*/
+
+.header {
+
+	&.layout {
+		padding:$space;
+	}
+}
+.header-inner {}
+
+
+/*=====  FIN Header  =====*/
+
+/*============================
+=            Main            =
+============================*/
+
+.main {
+	background-color: $beige;
+}
+.main-inner {
+	max-width: rem($layout-mw--fs);
+	margin:0 auto;
+	border:1px solid $grey;
+
+	> * {
+		background-color: $beige;
+	}
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		gap:1px;
+		background-color: $grey;
+	}
+	/* $mq-layout-xl */
+	@media ( min-width : em($mq-layout-xl) ) {
+		grid-template-columns: repeat( 6, 1fr );
+
+		&:before {
+			content:"";
+			grid-column-end: span 6;
+			height: $space;
+			background-color: $beige;
+		}
+	}
+	/* $mq-layout-max--fs */
+	@media ( min-width : em($mq-layout-max--fs) ) {
+		&:before {
+			height:rem(50);
+		}
+	}
+}
+
+.main-header {
+	background-image:url(http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/high-angle-view-of-lower-east-side-manhattan-downtown-new-york-city-usa-640006562-5ae52a273de423003776ae2e-scaled.jpg);
+	background-position: center;
+	background-size: cover;
+	position: absolute;
+	z-index: -1;
+	left: 0;
+	right: 0;
+	top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+h1 {
+	padding:$space/2 $space;
+	background-color: rgba($beige,.7);
+}
+
+.main-footer {
+	/* $mq-layout-xl */
+	@media ( min-width : em($mq-layout-xl) ) {
+		grid-column-end: span 6;
+	}
+}
+
+
+/*=====  FIN Main  =====*/
+
+/*=============================
+=            Aside            =
+=============================*/
+
+.aside {}
+.aside-inner {}
+
+
+/*=====  FIN Aside  =====*/
+
+/*==============================
+=            Footer            =
+==============================*/
+
+.footer {
+}
+.footer-inner {
+	padding:$space;
+	max-width: rem($layout-mw--fs);
+	margin:0 auto;
+}
+
+
+/*=====  FIN Footer  =====*/

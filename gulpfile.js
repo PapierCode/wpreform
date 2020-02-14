@@ -14,7 +14,7 @@
 
 // Chargement des plugins
 
-const gulp          = require( 'gulp' ); // base
+const { src, dest, watch, series }          = require( 'gulp' ); // base
 
 const sass          = require( 'gulp-sass' ); // scss to css
 const postcss 		= require( 'gulp-postcss' ); // package
@@ -28,62 +28,6 @@ const jshint		= require( 'gulp-jshint' ); // recherche d'erreurs js
 const concat		= require( 'gulp-concat' ); // empile plusieurs fichiers js en un seul
 const terser		= require( 'gulp-terser' ); // minification js
 
-
-
-/*----------  Sources  ----------*/
-
-    // css
-    var css_src = ['css/style.scss'],
-
-    // jshint sources
-    jshint_src = [
-        'scripts/scripts.js'
-    ],
-
-    // js sources globales + jshint sources
-    js_global_src = [
-        'scripts/vendor/jquery-3.4.1.min.js'
-    ].concat(jshint_src);
-
-
-/*----------  Destinations  ----------*/
-
-    // css
-    var css_dir_final = './',
-
-    // js
-    js_file_final = 'scripts.min.js',
-    js_dir_final = 'scripts/';
-
-
-/*----------  Monitoring  ----------*/
-    
-    // css
-    var watch_css = 'css/**/*.scss',
-
-    // js
-    watch_js = ['scripts/**/*.js', '!scripts/scripts.min.js'];
-
-
-
-
-/*----------  Post CSS plugins  ----------*/
-
-    var plugins = [
-        inlinesvg(),
-        autoprefixer({ grid: 'autoplace' }),
-        mqpacker({ sort: true }),
-        cssnano()
-    ];
-
-
-/*----------  Commentaire pour le thème Wordpress  ----------*/
-    
-    var theme_name 	    = 'PC Preform',
-        theme_author 	= 'www.papier-code.fr'
-        theme_desc 		= 'Base de projet',
-        wp_comment 		= '/* \nTheme Name: '+theme_name+' \nAuthor: '+theme_author+' \nDescription: '+theme_desc+' \n*/\n\n';
-
     
 /*=====  FIN Initialisation  ======*/
 
@@ -91,20 +35,50 @@ const terser		= require( 'gulp-terser' ); // minification js
 =            Tâche CSS            =
 =================================*/
 
-// exécuter avec "gulp css"
+// plugins CSS
+var plugins = [
+	inlinesvg(),
+	autoprefixer({ grid: 'false' }),
+	mqpacker({ sort: true }),
+	cssnano()
+];
 
+// commentaire WP
+var theme_name 	    = 'PC Preform',
+	theme_author 	= 'www.papier-code.fr'
+	theme_desc 		= 'Base de projet',
+	wp_comment 		= '/* \nTheme Name: '+theme_name+' \nAuthor: '+theme_author+' \nDescription: '+theme_desc+' \n*/\n\n';
+
+
+/*----------  Fonctions  ----------*/
+	
 function css() {
     
-    return gulp
-        .src( css_src )
+    return src( ['css/style.scss'] )
         .pipe(sass({ precision: 3 }))
         .pipe(postcss( plugins ))
         .pipe(banner( wp_comment ))
-        .pipe(gulp.dest( css_dir_final ));
+        .pipe(dest( './' ));
 
 }
 
-exports.css = css;
+function classic_css() {
+    
+    return src( ['css/v-classic.scss'] )
+        .pipe(sass({ precision: 3 }))
+        .pipe(postcss( plugins ))
+        .pipe(dest( 'css' ));
+
+}
+
+function fullscreen_css() {
+    
+    return src( ['css/v-fullscreen.scss'] )
+        .pipe(sass({ precision: 3 }))
+        .pipe(postcss( plugins ))
+        .pipe(dest( 'css' ));
+
+}
 
 
 
@@ -114,21 +88,34 @@ exports.css = css;
 =            Tâche JS            =
 ================================*/
 
-function js() {
+jshint_src = [
+	'scripts/scripts.js'
+],
 
-	gulp.src( jshint_src )
+js_global_src = [
+	'scripts/vendor/jquery-3.4.1.min.js'
+].concat(jshint_src);
+
+
+/*----------  Fonctions  ----------*/
+
+function js_hint() {
+
+	return src( jshint_src )
         .pipe(jshint())
         .pipe(jshint.reporter( 'default' ));
 
-    return gulp
-        .src( js_global_src )
-        .pipe(concat( js_file_final ))
+}
+
+function js() {
+
+    return src( js_global_src )
+        .pipe(concat( 'scripts.min.js' ))
         .pipe(terser())
-        .pipe(gulp.dest( js_dir_final ));
+        .pipe(dest( 'scripts/' ));
 
 }
 
-exports.js = js;
 
 /*=====  FIN Tâche JS  =====*/
 
@@ -136,13 +123,10 @@ exports.js = js;
 =            Monitoring            =
 ==================================*/
 
-function watchFiles() {
-    gulp.watch( watch_css, css );
-    gulp.watch( watch_js, js );
-}
-
-const watch = gulp.series(watchFiles);
-exports.watch = watch;
+exports.watch = function() {
+	watch( 'css/**/*.scss', series(css,classic_css,fullscreen_css) )
+	watch( ['scripts/**/*.js', '!scripts/scripts.min.js'], series(js_hint,js) )
+};
 
 
 /*=====  FIN Monitoring  ======*/

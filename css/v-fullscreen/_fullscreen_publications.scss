@@ -1,0 +1,71 @@
+/**
+*
+* Classic : publications
+*
+** Article résumé
+** Accueil
+*
+**/
+
+/*===============================
+=            Communs            =
+===============================*/
+
+.fs-editor {
+	/* $mq-layout-xl */
+	@media ( min-width : em($mq-layout-xl) ) {
+		grid-column-end: span 3;
+	}
+}
+
+
+/*=====  FIN Communs  =====*/
+
+/*======================================
+=            Article résumé            =
+======================================*/
+
+.st {
+	margin-top:0;
+
+	/* $mq-layout-xl */
+	@media ( min-width : em($mq-layout-xl) ) {
+		grid-column-end: span 2;
+		
+		.is-home &:last-of-type {
+			position: absolute;
+			left:-666em;
+		}
+	}
+}
+
+
+/*=====  FIN Article résumé  =====*/
+
+/*===============================
+=            Accueil            =
+===============================*/
+
+/*----------  Raccourcis  ----------*/
+
+.home-shortcuts {
+	/* $mq-layout-xl */
+	@media ( min-width : em($mq-layout-xl) ) {
+		grid-column-end: span 3;
+	}
+}
+.home-shortcut-item {
+	/* $mq-layout-m */
+	@media ( min-width : em($mq-layout-m) ) {
+		width: 50%;
+	}
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		width:auto;
+	}
+}
+.home-shortcut-link {}
+
+
+
+/*=====  FIN Accueil  =====*/

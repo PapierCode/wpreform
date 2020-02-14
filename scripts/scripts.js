@@ -1,16 +1,34 @@
+/*=============================
+=            Tools            =
+=============================*/
+
+/*----------  Conversion em  ----------*/
+
+var em = function(size,base) {
+	if ( base == undefined ) { base = 18; }
+	return size / base + 'em';
+};
+
+
+/*=====  FIN Tools  ======*/
+
 $(document).ready(function(){
 
 /*=================================
 =            variables            =
 =================================*/
 
-var $win 		= $(window),
-	$html 		= $('html'),
-	$body 		= $('body'),
-	$main 		= $('.main'),
-	$primaryNav = $('#primary-nav'),
+var $win 			= $(window),
+	$html 			= $('html'),
+	$body 			= $('body'),
+	$header 		= $('.header'),
+	$main 			= $('.main'),
+	$main_header 	= $main.find('.main-header'),
+	$primaryNav 	= $('#primary-nav'),
 
-	urlIcons 	= '/wp-content/themes/preform/images/icons/';
+	urlIcons 		= '/wp-content/themes/preform/images/icons/',
+	
+	win_h, win_w, header_h, win_w_old = 0;
 
 /*=====  End of variables  ======*/
 
@@ -27,6 +45,24 @@ function winChange() {
 	} else {
 
 	}
+
+	/*----------  Fullscreen  ----------*/
+	
+	if ( $html.hasClass('theme-fullscreen') ) {
+
+		win_h = $win.height() + 100;
+		win_w = $win.width();
+		header_h = $header.outerHeight();
+
+		if ( win_w != win_w_old ) {
+			// éléments concernés par le plein écran
+			$main_header.css( 'min-height', em(win_h) );
+			$main.css( 'margin-top', em(win_h-header_h) );
+			win_w_old = win_w;
+		}
+
+	}
+	
 
 
 } // fin winWidthChange()

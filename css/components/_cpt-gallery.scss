@@ -20,9 +20,9 @@
 $gl-opening-duration 	: 400ms;
 $gl-closing-duration 	: 400ms; // reporter dans l'option "closingDuration" du plugin jQuery
 
-$gl-bg-color				: rgba(0,0,0,0.8);
+$gl-bg-color			: rgba(0,0,0,0.8);
 
-$gl-btn-bg-color			: #000;
+$gl-btn-bg-color		: #000;
 $gl-btn-bg-color-hover	: purple;
 
 
@@ -99,7 +99,7 @@ $gl-btn-bg-color-hover	: purple;
 .gl-slide-container {
 	text-align: center;
 	height: 100%;
-	padding: rem(70,$space-s,100,$space-s);
+	padding: rem(70,10,100,10);
 	&:before {
 		content: "";
 		display: inline-block;
@@ -114,7 +114,7 @@ $gl-btn-bg-color-hover	: purple;
 		padding: rem(70,70,100,70);
 	}
 	/* @mq-max */
-	@media ( min-width : em($mq-max) ) {
+	@media ( min-width : em($mq-gallery-max) ) {
 		padding: rem(90,90,100,90);
 	}
 }
@@ -179,7 +179,7 @@ $gl-btn-bg-color-hover	: purple;
 	}
 
 	/* @mq-max */
-	@media ( min-width : em($mq-max) ) {
+	@media ( min-width : em($mq-gallery-max) ) {
 		left: rem(20);
 	}
 }
@@ -194,7 +194,7 @@ $gl-btn-bg-color-hover	: purple;
 	}
 
 	/* @mq-max */
-	@media ( min-width : em($mq-max) ) {
+	@media ( min-width : em($mq-gallery-max) ) {
 		right: rem(20);
 	}
 }
@@ -208,7 +208,7 @@ $gl-btn-bg-color-hover	: purple;
 	right: rem(10);
 
 	/* @mq-max */
-	@media ( min-width : em($mq-max) ) {
+	@media ( min-width : em($mq-gallery-max) ) {
 		top: rem(20);
 		right: rem(20);
 	}
@@ -228,7 +228,7 @@ $gl-btn-bg-color-hover	: purple;
 	color: #fff;
 
 	/* @mq-max */
-	@media ( min-width:rem($mq-max)) {
+	@media ( min-width:rem($mq-gallery-max)) {
 		top: rem(20);
 		left: rem(20);
 	}

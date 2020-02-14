@@ -52,30 +52,6 @@
 }
 
 
-/*=================================
-=            Max-width            =
-=================================*/
-
-.mw {
-	max-width: rem($max-width);
-	padding-left: rem($space-s);
-	padding-right: rem($space-s);
-	margin-left: auto;
-	margin-right: auto;
-
-	/* $mq-space-m */
-	@media ( min-width : em($mq-space-m) ) {
-		padding-left: rem($space-m);
-		padding-right: rem($space-m);
-	}
-	/* $mq-space-l */
-	@media ( min-width : em($mq-space-l) ) {
-		padding-left: rem($space-l);
-		padding-right: rem($space-l);
-	}
-}
-
-
 /*==============================
 =            Iframe            =
 ==============================*/

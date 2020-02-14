@@ -2,4 +2,84 @@
 *
 * Publications : accueil
 *
+** Raccourcis
+*
 **/
+
+/*==================================
+=            Raccourcis            =
+==================================*/
+
+.home-shortcuts {
+
+	/* $mq-layout-m */
+	@media ( min-width : em($mq-layout-m) ) {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		grid-column-end: span 2;
+		display: grid;
+		grid-template-columns: repeat(2,1fr);
+	}
+}
+.home-shortcut-item {
+	min-height: 60vw;
+	display: flex;
+	justify-content: stretch;
+	align-items: stretch;
+
+	/* $mq-layout-m */
+	@media ( min-width : em($mq-layout-m) ) {
+		min-height: 15vw;
+	}
+}
+.home-shortcut-link {
+	position: relative;
+	background-color: $blue;
+	color:$black;
+	font-family: var(--font-alt);
+	line-height: 1.3;
+	text-decoration: none;
+	text-align: center;
+	overflow: hidden;
+
+	img {
+		object-fit: cover;
+		height: 100%;
+		width: 100%;
+		transition:transform .5s ease;
+	}
+	span {
+		position: absolute;
+		min-height: 0;
+		left:0;
+		bottom:0;
+		right:0;
+		padding: rem(10);
+		background-color: rgba($black,.8);
+		color:$beige;
+		transition:all .5s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&:hover, &:focus {
+
+		span {
+			background-color: $blue;
+			color:$black;
+			min-height:100%;
+			transition:all .5s ease;
+		}
+		img {
+			transform:translateY(-100%);
+			transition:transform .5s ease;
+		}
+	}
+}
+
+
+/*=====  FIN Raccourcis  =====*/

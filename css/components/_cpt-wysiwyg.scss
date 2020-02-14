@@ -12,7 +12,7 @@
 =            Variables            =
 =================================*/
 
-$margin-top-default 				: 20;
+$margin-top-default 			: 20;
 
 
 /*----------  Titres  ----------*/
@@ -34,20 +34,20 @@ $h3-line-height-small			: $hn-line-height;
 $h3-font-size-big					: 24;
 $h3-line-height-big				: $hn-line-height;
 
-$h2-color							: #333;
-$h3-color							: #333;
+$h2-color						: #333;
+$h3-color						: #333;
 
-$h2-margin-top-small				: 20;
+$h2-margin-top-small			: 20;
 $h2-margin-top-big				: 30;
 
-$h3-margin-top-small				: 10;
+$h3-margin-top-small			: 10;
 $h3-margin-top-big				: 20;
 
 
 /*----------  Liens  ----------*/
 
-$link-color							: orange;
-$link-color-hover					: red;
+$link-color						: orange;
+$link-color-hover				: red;
 $link-color-visited				: purple;
 
 
@@ -59,8 +59,11 @@ $link-color-visited				: purple;
 
 .editor {
 
-	max-width: rem($max-width-txt);
-
+	.editor-inner {
+		:first-child {
+			margin-top:0;
+		}
+	}
 
 	/*----------  Communs  ----------*/
 
@@ -125,14 +128,14 @@ $link-color-visited				: purple;
 	blockquote {
 
 		/* @mq-space-m */
-		@media ( min-width : em($mq-space-m) ) {
-			margin-left: rem($space-m);
-			margin-right: rem($space-m);
+		@media ( min-width : em($mq-layout-m) ) {
+			margin-left: rem(20);
+			margin-right: rem(20);
 		}
 		/* @mq-space-l */
-		@media ( min-width : em($mq-space-l) ) {
-			margin-left: rem($space-l);
-			margin-right: rem($space-l);
+		@media ( min-width : em($mq-layout-l) ) {
+			margin-left: rem(30);
+			margin-right: rem(30);
 		}
 	}
 
@@ -191,16 +194,16 @@ $link-color-visited				: purple;
 		display:flex;
 		flex-wrap:wrap;
 		justify-content:center;
-		margin: rem($margin-top-default,0,0,-$space-s);
+		margin: rem($margin-top-default,0,0,-10);
 
 		/* @mq-space-m */
-		@media ( min-width : em($mq-space-m) ) {
-			margin-left: rem(-$space-m);
+		@media ( min-width : em($mq-layout-m) ) {
+			margin-left: rem(-20);
 		}
 	}
 	.wp-gallery-item {
-		padding-left: rem($space-s);
-		margin-top: rem($space-s);
+		padding-left: rem(10);
+		margin-top: rem(10);
 		width: 50%;
 
 		/* 430 (2 x img) + (3 x marge) */
@@ -208,9 +211,9 @@ $link-color-visited				: purple;
 			width: 33.3333%;
 		}
 		/* @mq-space-m */
-		@media ( min-width : em($mq-space-m) ) {
-			padding-left: rem($space-m);
-			margin-top: rem($space-m);
+		@media ( min-width : em($mq-layout-m) ) {
+			padding-left: rem(20);
+			margin-top: rem(20);
 			width: 25%;
 		}
 	}

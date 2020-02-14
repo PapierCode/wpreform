@@ -1,0 +1,114 @@
+
+
+/*===================================
+=            Typographie            =
+===================================*/
+
+
+/*----------  Défaut  ----------*/
+
+$base-font-family		: Arial, Roboto, "Nimbus Sans L", sans-serif;
+
+$mq-font-size		   	: 16; // pour le calcul des medias queries
+$base-font-size			: 18;
+$base-line-height		: 1.5;
+
+
+/*=====  FIN Typographie  ======*/
+
+/*================================
+=            Couleurs            =
+================================*/
+
+/*----------  Project  ----------*/
+
+$beige 		: #f9f5ec;
+$red 		: #fd4b4b;
+$yellow		: #ffd17b;
+$blue		: #bfe8ea;
+$grey 		: #e4ddd5;
+$black		: #2a1010;
+
+
+/*----------  Défaut  ----------*/
+
+$body-bg-color			: $beige;
+$font-color-default		: $black;
+
+$color-placeholder		: #777;
+
+
+/*=====  FIN Couleurs  ======*/
+
+/*==================================
+=            Agencement            =
+==================================*/
+
+/**
+*
+* mq 	: media querie
+* h 	: header
+* w 	: width
+* mw 	: max width
+* cl 	: classic
+* fs 	: fullscreen
+*
+*/
+
+
+/*----------  Layout global  ----------*/
+
+$space					: 4vw;
+$layout-mw--cl			: 1200;
+$layout-mw--fs			: 1400;
+$txt-mw          		: 700;
+
+$mq-layout-m			: 480;
+$mq-layout-l			: 760;
+$mq-layout-xl			: 1000;
+$mq-layout-max--cl		: $layout-mw--cl;
+$mq-layout-max--fs		: $layout-mw--fs;
+
+
+/*----------  Navigation  ----------*/
+
+$h-nav-w-s	 			: 80vw; // masquée
+$h-nav-w-l				: 50vw; // masquée
+$space--h-nav 			: 10;
+
+$mq-nav-l	 			: 640;
+$mq-nav-max--cl			: $layout-mw--cl;
+
+
+/*----------  Divers  ----------*/
+
+$space--st 				: 20;
+
+$mq-title-size			: $mq-layout-l;
+$mq-gallery-nav		    : $mq-layout-l;
+$mq-gallery-max			: 1200;
+$mq-form        		: $mq-layout-l;
+
+
+/*----------  Media Queries Classic  ----------*/
+
+// navigation
+
+
+/*----------  Media Queries Fullscreen  ----------*/
+
+// layout
+
+
+/*=====  FIN Agencement  ======*/
+
+/*==========================================
+=            Durées d'animation            =
+==========================================*/
+
+// nav
+$t-nav					: .5s;
+$t-nav-btn-ico			: .6s;
+
+
+/*=====  FIN Durées d'animation  =====*/

@@ -12,7 +12,7 @@ $metabox_thumbnail_for = array( 'page' );
 $metabox_thumbnail_for = apply_filters( 'pc_filter_metabox_thumbnail_for', $metabox_thumbnail_for );
 
 $metabox_thumbnail_fields = array(
-    'desc'          => '<p>Le visuel utilisé pour afficher cette page sous sa forme résumée et le partage sur les réseaux sociaux.</p>',
+    'desc'          => '<p>Le visuel utilisé pour afficher cette page sous sa forme résumée dans votre site et le partage sur les réseaux sociaux.</p>',
     'prefix'        => 'thumbnail',
     'fields'        => array(
         array(

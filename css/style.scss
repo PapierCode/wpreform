@@ -1,113 +1,11 @@
 /**
 *
-* [PC] CSS V2
-* Imports & Configuration
-*
-** Typographie
-** Couleurs
-** Agencement
-** Imports
+* styles.css
 *
 **/
 
-
-/*===================================
-=            Typographie            =
-===================================*/
-
-
-/*----------  Défaut  ----------*/
-
-$base-font-family		: Arial, Roboto, "Nimbus Sans L", sans-serif;
-
-$mq-font-size		   	: 16; // pour le calcul des medias queries
-$base-font-size			: 18;
-$base-line-height		: 1.5;
-
-
-/*=====  FIN Typographie  ======*/
-
-/*================================
-=            Couleurs            =
-================================*/
-
-/*----------  Project  ----------*/
-
-$beige 		: #f9f5ec;
-$red 		: #fd4b4b;
-$yellow		: #ffd17b;
-$blue		: #bfe8ea;
-$black		: #2a1010;
-
-
-/*----------  Défaut  ----------*/
-
-$body-bg-color			: $beige;
-$font-color-default		: $black;
-
-$color-placeholder		: #777;
-
-
-/*=====  FIN Couleurs  ======*/
-
-/*==================================
-=            Agencement            =
-==================================*/
-
-/*----------  Gouttières  ----------*/
-
-$space-s				: 10;
-$space-m				: 20;
-$space-l				: 30;
-$space-default			: 5vw;
-
-
-/*----------  Largeur maximum  ----------*/
-
-$max-width				: 1230;
-$max-width-txt          : 700;
-
-// navigation masquée
-$h-nav-width-min 		: 260;
-$h-nav-width-l			: 50vw;
-
-
-
-/*----------  Medias Queries  ----------*/
-
-// génériques
-$mq-space-m				: 480;
-$mq-space-l				: 760;
-$mq-max					: $max-width;
-
-// navigation
-$mq-nav-l	 			: 640;
-$mq-nav-max 			: $max-width;
-
-// divers
-$mq-title-size			: $mq-space-l;
-$mq-gallery-nav		    : $mq-space-l;
-$mq-contact-form        : $mq-space-l;
-
-
-/*=====  FIN Agencement  ======*/
-
-/*==========================================
-=            Durées d'animation            =
-==========================================*/
-
-// nav
-$t-nav					: .5s;
-$t-nav-btn-ico			: .6s;
-
-
-/*=====  FIN Durées d'animation  =====*/
-
-/*===============================
-=            Imports            =
-===============================*/
-
-@import "vars";
+@import "vars_sass";
+@import "vars_css";
 
 /*----------  Framework  ----------*/
 
@@ -151,6 +49,3 @@ $t-nav-btn-ico			: .6s;
 /*----------  Formulaires  ----------*/
 
 @import "forms/form-default";
-
-
-/*=====  FIN imports  ======*/
