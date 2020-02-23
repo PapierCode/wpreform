@@ -10,20 +10,20 @@ include '_head.php';
 
 <ul class="home-shortcuts reset-list">
 	<li class="home-shortcut-item"><a href="" class="home-shortcut-link">
-		<img src="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/high-angle-view-of-lower-east-side-manhattan-downtown-new-york-city-usa-640006562-5ae52a273de423003776ae2e-700x400.jpg" />
-		<span>Ubi autem in planitie</span>
+		<span class="home-shortcut-img"><img src="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/aa06a936963957-700x440.jpg" /></span>
+		<span class="home-shortcut-txt">Ubi autem in planitie</span>
 	</a></li>
 	<li class="home-shortcut-item"><a href="" class="home-shortcut-link">
-		<img src="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/high-angle-view-of-lower-east-side-manhattan-downtown-new-york-city-usa-640006562-5ae52a273de423003776ae2e-700x400.jpg" />
-		<span>Quod contingit adsidue</span>
+		<span class="home-shortcut-img"><img src="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/bfa084369957-700x440.jpg" /></span>
+		<span class="home-shortcut-txt">Quod contingit adsidue</span>
 	</a></li>
 	<li class="home-shortcut-item"><a href="" class="home-shortcut-link">
-		<img src="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/high-angle-view-of-lower-east-side-manhattan-downtown-new-york-city-usa-640006562-5ae52a273de423003776ae2e-700x400.jpg" />
-		<span>Septembris initium mensis ad nundinas</span>
+		<span class="home-shortcut-img"><img src="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/ordi-orange-700x440.jpg" /></span>
+		<span class="home-shortcut-txt">Septembris initium mensis ad nundinas</span>
 	</a></li>
 	<li class="home-shortcut-item"><a href="" class="home-shortcut-link">
-		<img src="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/high-angle-view-of-lower-east-side-manhattan-downtown-new-york-city-usa-640006562-5ae52a273de423003776ae2e-700x400.jpg" />
-		<span>Quae mittunt</span>
+		<span class="home-shortcut-img"><img src="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/d261ab36963957-700x440.jpg" /></span>
+		<span class="home-shortcut-txt">Quae mittunt</span>
 	</a></li>
 </ul>
 

@@ -1,0 +1,39 @@
+/**
+*
+* Guide de style
+*
+**/
+
+.btn {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	height: rem(40);
+	padding:rem(0,10);
+	background-color: $black;
+
+	color:$beige;
+	text-decoration: none;
+	font-weight: 700;
+
+	transition:all .3s ease;
+
+	svg {
+		margin-right: rem(5);
+	}
+	path {
+		fill:$beige;
+		transition:fill .3s ease;
+	}
+
+	&:hover, &:focus {
+		background-color: $blue;
+		color:$black;
+		transition:all .3s ease;
+
+		path {
+			fill:$black;
+			transition:fill .3s ease;
+		}
+	}
+}

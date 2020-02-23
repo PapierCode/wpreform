@@ -11,6 +11,8 @@
 *
 **/
 
+
+
 /*============================================
 =            Bouton ouvrir/fermer            =
 ============================================*/
@@ -242,7 +244,7 @@ $h-nav-btn-size : 40;
 
 	color: $beige;
 	background-color:$black;
-	transition: all .3s ease;
+	transition: all $t-nav-link ease;
 
 	.is-active & {
 		background-color: $red;
@@ -257,17 +259,17 @@ $h-nav-btn-size : 40;
 			height: rem($after-size);
 			border-radius:50%;
 			background-color: $black;
-			transition: transform .3s ease;
+			transition: transform $t-nav-link ease;
 		}
 	}
 
     &:hover, &:focus {
 		color: $black;
 		background-color:$beige;
-		transition: all .3s ease;
+		transition: all $t-nav-link ease;
 
 		&:after {
-			transition: transform .3s ease;
+			transition: transform $t-nav-link ease;
 		}
 	}
 	

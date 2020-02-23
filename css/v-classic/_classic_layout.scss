@@ -6,7 +6,6 @@
 ** Html & Body
 ** Header
 ** Main
-** Aside
 ** Footer
 *
 **/
@@ -20,7 +19,7 @@
 
 	/* $mq-layout-max--cl */
 	@media ( min-width : em($mq-layout-max--cl) ) {
-		padding: $space/2 $space;
+		padding: rem($space-max) $space;
 	}
 }
 
@@ -73,41 +72,29 @@ body {}
 
 .main {}
 .main-inner {
-	max-width:rem( ( (400 + 2*$space--st) * 2 ) ) ; // 400 = image width
+	max-width:rem($content-mw--cl);
 	
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		gap: $space;
 	}
-	/* $mq-layout-max--cl */
-	@media ( min-width : em($mq-layout-max--cl) ) {
-		gap: rem(40);
+	/* $mq-content-max--cl */
+	@media ( min-width : em($mq-content-max--cl) ) {
+		gap: rem($space-max);
 	}
 }
 
 .main-header {
-
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		grid-column-end: span 2;
 	}
 }
-h1 {}
 
 .main-footer {}
 
 
 /*=====  FIN Main  =====*/
-
-/*=============================
-=            Aside            =
-=============================*/
-
-.aside {}
-.aside-inner {}
-
-
-/*=====  FIN Aside  =====*/
 
 /*==============================
 =            Footer            =

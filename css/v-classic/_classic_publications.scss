@@ -12,6 +12,8 @@
 =            Communs            =
 ===============================*/
 
+/*----------  Container WP editor  ----------*/
+
 .cl-editor {}
 
 
@@ -23,15 +25,16 @@
 
 .st {
 	margin-top: $space;
-	background-color: #eee;
+	padding:$space;
 
-	/* $mq-layout-m */
-	@media ( min-width : em($mq-layout-m) ) {
-		padding:rem($space--st)
+	&:not(.st--fake) {
+		border:1px solid $grey;
 	}
+
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		margin-top:0;
+		padding:rem($space--st)
 	}
 }
 
@@ -60,33 +63,22 @@
 
 /*----------  Raccourcis  ----------*/
 
-.home-shortcuts {
-	/* $mq-layout-m */
-	@media ( min-width : em($mq-layout-m) ) {
-		margin-left:-$space;
-	}
+.home-shortcuts {	
+
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		gap:$space;
 		margin-left: 0;
 	}
-	/* $mq-layout-max--cl */
-	@media ( min-width : em($mq-layout-max--cl) ) {
-		gap:rem(40);
+	/* $mq-content-max--cl */
+	@media ( min-width : em($mq-content-max--cl) ) {
+		gap:rem($space-max);
 	}
 }
 .home-shortcut-item {
-	margin-top:$space;
-
-	/* $mq-layout-m */
-	@media ( min-width : em($mq-layout-m) ) {
-		width: calc( 50% - #{$space} );
-		margin-left:$space;
-	}
-	/* $mq-layout-l */
-	@media ( min-width : em($mq-layout-l) ) {
-		width:auto;
-		margin:0;
+	/* $mq-content-max--cl */
+	@media ( min-width : em($mq-content-max--cl) ) {
+		min-height: rem(250);
 	}
 }
 .home-shortcut-link {}

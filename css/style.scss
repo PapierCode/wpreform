@@ -22,14 +22,16 @@
 @import "components/cpt-messages";
 @import "components/cpt-loader";
 @import "components/cpt-gallery";
+@import "components/cpt-pager";
 @import "components/cpt-social";
 @import "components/cpt-wysiwyg";
+@import "components/cpt-contact";
 
 
 /*----------  Layout  ----------*/
 
 @import "layout/layout";
-@import "layout/layout-logo";
+@import "layout/buttons";
 
 
 /*----------  Navigation  ----------*/

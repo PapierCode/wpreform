@@ -5,7 +5,6 @@
 ** Html & Body
 ** Header
 ** Main
-** Aside
 ** Footer
 *
 **/
@@ -47,6 +46,17 @@ body {}
 .header {}
 .header-inner {}
 
+.h-logo-link {
+	text-decoration: none;
+	display: inline-block;
+	max-width: rem(100);
+
+	/* $mq-layout-m */
+	@media ( min-width : em($mq-layout-m) ) {
+		max-width: none;
+	}
+}
+
 
 /*=====  FIN Header  =====*/
 
@@ -66,22 +76,6 @@ body {}
 
 .main-header {}
 
-h1, .h1-like {
-	color:$font-color-default;
-	font-family: var(--font);
-	font-weight: 900;
-	margin: 0;
-
-	font-size: rem(28);
-	line-height: $base-line-height;
-
-	/* $mq-title-size */
-	@media ( min-width : em($mq-title-size) ) {
-		font-size: rem(40);
-		line-height: $base-line-height;
-	}
-}
-
 .main-footer {
 
 	/* $mq-layout-l */
@@ -89,21 +83,11 @@ h1, .h1-like {
 		grid-column-end: span 2;
 		display:grid;
 		grid-template-columns: repeat(2,1fr);
-		gap:$space;
 	}
 }
 
+
 /*=====  FIN Main  =====*/
-
-/*=============================
-=            Aside            =
-=============================*/
-
-.aside {}
-.aside-inner {}
-
-
-/*=====  FIN Aside  =====*/
 
 /*==============================
 =            Footer            =
@@ -112,12 +96,9 @@ h1, .h1-like {
 .footer {
 	background-color:$black;
 	color:$beige;
+	padding-top:.5*$space;
 }
-.footer-inner {
-	display:flex;
-	justify-content: space-between;
-	align-items: flex-start;
-}
+.footer-inner {}
 
 
 /*=====  FIN Footer  =====*/

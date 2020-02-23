@@ -81,7 +81,6 @@ function fullscreen_css() {
 }
 
 
-
 /*=====  FIN Tâche CSS  ======*/
 
 /*================================

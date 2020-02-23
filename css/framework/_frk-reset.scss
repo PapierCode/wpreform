@@ -23,11 +23,16 @@ html {
 
 body {
 	font-family: $base-font-family;
-	font-size: rem($base-font-size);
+	font-size: rem($base-font-size-s);
 	line-height: $base-line-height;
 
 	background-color: $body-bg-color;
 	color: $font-color-default;
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		font-size: rem($base-font-size-l);
+	}
 }
 
 

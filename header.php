@@ -17,19 +17,20 @@
 
 	<div class="body-inner">
 		<header class="header layout">
-			<div class="header-inner">
+			<div class="header-inner cl-bloc fs-bloc">
 				<div class="h-logo">
 					<a href="<?php bloginfo('url'); ?>" class="h-logo-link" title="Accueil <?php bloginfo('name'); ?>">
 						<?php
-						$logo_datas = array(
+						global $settings_project;
+						$logo_header_datas = array(
 							'url' => get_bloginfo('template_directory').'/images/logo.svg',
 							'width' => 150,
 							'height' => 150,
-							'alt' => 'Logo'
+							'alt' => 'Logo '.$settings_project['coord-name']
 						);
-						$logo_datas = apply_filters( 'pc_filter_header_logo', $logo_datas );
+						$logo_header_datas = apply_filters( 'pc_filter_header_logo', $logo_header_datas );
 						?>
-						<img class="h-logo" src="<?= $logo_datas['url']; ?>" alt="<?= $logo_datas['alt']; ?>" width="<?= $logo_datas['width']; ?>" height="<?= $logo_datas['height']; ?>" />
+						<img class="h-logo" src="<?= $logo_header_datas['url']; ?>" alt="<?= $logo_header_datas['alt']; ?>" width="<?= $logo_header_datas['width']; ?>" height="<?= $logo_header_datas['height']; ?>" />
 					</a>
 					<div class="h-nav-btn-box">
 						<button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-h-nav reset-btn" aria-hidden="true" tabindex="-1">

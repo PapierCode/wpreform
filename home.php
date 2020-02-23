@@ -11,7 +11,7 @@ do_action( 'pc_home_content_before', $settings_home );
 	===============================*/ 
 
 	do_action( 'pc_home_content', $settings_home );
-	
+
 
 	/*=====  FIN Contenu  =====*/
 

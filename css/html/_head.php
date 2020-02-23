@@ -38,7 +38,7 @@
 		</header>
 
 		<button type="button" title="Fermer le menu" class="btn-overlay reset-btn js-h-nav" aria-hidden="true" tabindex="-1"><span class="visually-hidden">Fermer le menu</span></button>
-		
+
 		<main id="main" class="main cl-bloc"><div class="main-inner">
 		
 			<header class="main-header">

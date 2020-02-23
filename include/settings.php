@@ -17,6 +17,8 @@ if ( class_exists('PC_Add_Admin_Page') ) {
 $all_pages = get_posts( array(
     'post_type' => 'page',
     'nopaging' => true,
+	'order' => 'ASC',
+	'orderby' => 'title'
 ) );
 $pages_list = array();
 foreach ($all_pages as $page) {

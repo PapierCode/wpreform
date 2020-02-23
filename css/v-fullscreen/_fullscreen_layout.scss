@@ -6,7 +6,6 @@
 ** Html & Body
 ** Header
 ** Main
-** Aside
 ** Footer
 *
 **/
@@ -20,7 +19,7 @@
 
 	/* $mq-layout-max--fs */
 	@media ( min-width : em($mq-layout-max--fs) ) {
-		padding:rem(50);
+		padding:rem($space-max);
 	}
 }
 
@@ -32,8 +31,8 @@
 ===================================*/
 
 html {}
-body {}
 
+body {}
 .body-inner {}
 
 
@@ -43,13 +42,10 @@ body {}
 =            Header            =
 ==============================*/
 
-.header {
-
-	&.layout {
-		padding:$space;
-	}
-}
+.header {}
 .header-inner {}
+
+.h-logo-link {}
 
 
 /*=====  FIN Header  =====*/
@@ -59,7 +55,7 @@ body {}
 ============================*/
 
 .main {
-	background-color: $beige;
+	margin-top:75vh;
 }
 .main-inner {
 	max-width: rem($layout-mw--fs);
@@ -75,22 +71,9 @@ body {}
 		gap:1px;
 		background-color: $grey;
 	}
-	/* $mq-layout-xl */
-	@media ( min-width : em($mq-layout-xl) ) {
+	/* $mq-layout-xl--fs */
+	@media ( min-width : em($mq-layout-xl--fs) ) {
 		grid-template-columns: repeat( 6, 1fr );
-
-		&:before {
-			content:"";
-			grid-column-end: span 6;
-			height: $space;
-			background-color: $beige;
-		}
-	}
-	/* $mq-layout-max--fs */
-	@media ( min-width : em($mq-layout-max--fs) ) {
-		&:before {
-			height:rem(50);
-		}
 	}
 }
 
@@ -107,39 +90,23 @@ body {}
 	align-items: center;
 	justify-content: center;
 }
-h1 {
-	padding:$space/2 $space;
-	background-color: rgba($beige,.7);
-}
 
 .main-footer {
-	/* $mq-layout-xl */
-	@media ( min-width : em($mq-layout-xl) ) {
-		grid-column-end: span 6;
+	/* $mq-layout-xl--fs */
+	@media ( min-width : em($mq-layout-xl--fs) ) {
+		grid-column: 1 / 7;
 	}
 }
 
 
 /*=====  FIN Main  =====*/
 
-/*=============================
-=            Aside            =
-=============================*/
-
-.aside {}
-.aside-inner {}
-
-
-/*=====  FIN Aside  =====*/
-
 /*==============================
 =            Footer            =
 ==============================*/
 
-.footer {
-}
+.footer {}
 .footer-inner {
-	padding:$space;
 	max-width: rem($layout-mw--fs);
 	margin:0 auto;
 }

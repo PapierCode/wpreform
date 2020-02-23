@@ -1,6 +1,6 @@
 /**
 *
-* Publications : WYSIWYG
+* Composant : WYSIWYG
 *
 ** Variables
 ** Élements
@@ -12,7 +12,7 @@
 =            Variables            =
 =================================*/
 
-$margin-top-default 			: 20;
+$margin-top-default 			: 10;
 
 
 /*----------  Titres  ----------*/
@@ -24,14 +24,14 @@ $h2-font-family					: $hn-font-family;
 $h2-font-weight					: normal;
 $h2-font-size-small				: 24;
 $h2-line-height-small			: $hn-line-height;
-$h2-font-size-big					: 30;
+$h2-font-size-big				: 30;
 $h2-line-height-big				: $hn-line-height;
 
 $h3-font-family					: $hn-font-family;
 $h3-font-weight					: normal;
 $h3-font-size-small				: 20;
 $h3-line-height-small			: $hn-line-height;
-$h3-font-size-big					: 24;
+$h3-font-size-big				: 24;
 $h3-line-height-big				: $hn-line-height;
 
 $h2-color						: #333;
@@ -57,11 +57,26 @@ $link-color-visited				: purple;
 =            Élements            =
 ================================*/
 
-.editor {
+.editor {}
 
-	.editor-inner {
-		:first-child {
+.editor-inner {
+
+	
+	:first-child {
+		.theme-classic & {
+			margin-top:rem($margin-top-default);
+		}
+		.theme-fullscreen & {
 			margin-top:0;
+		}
+	}
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		:first-child {
+			.theme-classic & {
+				margin-top:rem(-$margin-top-default);
+			}
 		}
 	}
 
@@ -72,9 +87,11 @@ $link-color-visited				: purple;
 	ol,
 	blockquote,
 	.wp-caption {
-		font-size: rem($base-font-size);
-		line-height: $base-line-height;
-		margin: rem($margin-top-default,0,0,0);
+		margin: 2vw 0 0 0;
+		/* $txt-mw + 2*$space */
+		@media ( min-width : em($txt-mw + 2*$space-max) ) {
+			margin-top:rem(15);
+		}
 	}
 
 

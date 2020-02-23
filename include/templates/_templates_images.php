@@ -10,27 +10,33 @@
 =            Tailles            =
 ===============================*/
 
-add_action( 'after_switch_theme', 'pc_define_default_img_sizes' );
+// add_action( 'after_switch_theme', 'pc_define_default_img_sizes' );
 
-function pc_define_default_img_sizes() {
+// function pc_define_default_img_sizes() {
 
-    // update_option( 'thumbnail_crop', 0 );
-    // update_option( 'thumbnail_size_h', 150 );
-    // update_option( 'thumbnail_size_w', 150 );
-    // update_option( 'medium_size_h', 150 );
-    // update_option( 'medium_size_w', 150 );
-    // update_option( 'medium_large_size_h', 150 );
-    // update_option( 'medium_large_size_w', 150 );
-    // update_option( 'large_size_h', 150 );
-    // update_option( 'large_size_w', 150 );
+//     update_option( 'thumbnail_crop', 0 );
+//     update_option( 'thumbnail_size_h', 150 );
+//     update_option( 'thumbnail_size_w', 150 );
+//     update_option( 'medium_size_h', 150 );
+//     update_option( 'medium_size_w', 150 );
+//     update_option( 'medium_large_size_h', 150 );
+//     update_option( 'medium_large_size_w', 150 );
+//     update_option( 'large_size_h', 150 );
+//     update_option( 'large_size_w', 150 );
 
-}
+// }
     
 $images_project_sizes = array(
-    'st-s'  => array( 'width'=>400, 'height'=>250, 'crop'=>true ),
-    'st-l'	=> array( 'width'=>700, 'height'=>400, 'crop'=>true ),
-    'gl-m'	=> array( 'width'=>800, 'height'=>800, 'crop'=>false ),
-    'gl-l'	=> array( 'width'=>1200, 'height'=>1200, 'crop'=>false )
+	
+	'st-400'	=> array( 'width'=>400, 'height'=>250, 'crop'=>true ),
+	'st-500'	=> array( 'width'=>500, 'height'=>320, 'crop'=>true ),
+	'st-700'	=> array( 'width'=>700, 'height'=>440, 'crop'=>true ),
+	
+	'share'		=> array( 'width'=>300, 'height'=>300, 'crop'=>true ),
+	
+    'gl-m'		=> array( 'width'=>800, 'height'=>800, 'crop'=>false ),
+	'gl-l'		=> array( 'width'=>1200, 'height'=>1200, 'crop'=>false )
+	
 );
 
 $images_project_sizes = apply_filters( 'pc_filter_add_img_sizes', $images_project_sizes );

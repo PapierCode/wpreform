@@ -10,7 +10,8 @@
 $base-font-family		: Arial, Roboto, "Nimbus Sans L", sans-serif;
 
 $mq-font-size		   	: 16; // pour le calcul des medias queries
-$base-font-size			: 18;
+$base-font-size-s		: 16;
+$base-font-size-l		: 18;
 $base-line-height		: 1.5;
 
 
@@ -59,13 +60,19 @@ $color-placeholder		: #777;
 /*----------  Layout global  ----------*/
 
 $space					: 4vw;
+$space-max				: 40;
+
+$txt-mw          		: 700;
+$content-mw--cl			: 840; // (2 * st max width 400) + (1 * gap main-inner max 40) 
+
 $layout-mw--cl			: 1200;
 $layout-mw--fs			: 1400;
-$txt-mw          		: 700;
+
+$mq-content-max--cl		: $content-mw--cl;
 
 $mq-layout-m			: 480;
 $mq-layout-l			: 760;
-$mq-layout-xl			: 1000;
+$mq-layout-xl--fs		: 1100;
 $mq-layout-max--cl		: $layout-mw--cl;
 $mq-layout-max--fs		: $layout-mw--fs;
 
@@ -90,25 +97,18 @@ $mq-gallery-max			: 1200;
 $mq-form        		: $mq-layout-l;
 
 
-/*----------  Media Queries Classic  ----------*/
-
-// navigation
-
-
-/*----------  Media Queries Fullscreen  ----------*/
-
-// layout
-
-
 /*=====  FIN Agencement  ======*/
 
 /*==========================================
 =            Durées d'animation            =
 ==========================================*/
 
-// nav
+// navigation
 $t-nav					: .5s;
 $t-nav-btn-ico			: .6s;
+$t-nav-link 			: .3s;
 
+// article résumé
+$t-st-hover				: .5s;
 
 /*=====  FIN Durées d'animation  =====*/

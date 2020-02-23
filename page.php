@@ -12,7 +12,7 @@ do_action( 'pc_content_before', $post, $page_metas );
 	=            Contenu WYSIWYG            =
 	=======================================*/
 
-	the_content();
+	if ( $post->post_content != '' ) { the_content(); }
 	
 
 	/*=====  FIN Contenu WYSIWYG  =====*/
@@ -38,11 +38,10 @@ do_action( 'pc_content_before', $post, $page_metas );
 
 		$sub_pages_id = explode(',',$page_metas['content-subpages'][0]);
 
-		echo '<div class="st-list">';
 		foreach ($sub_pages_id as $postId) {
 			pc_display_post_resum( $postId, '', 2 );
 		}
-		echo '</div>';
+		pc_add_fake_st( count($sub_pages_id) );
 
 	}
 	

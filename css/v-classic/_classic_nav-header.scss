@@ -89,7 +89,6 @@
 	/* $mq-nav-max--cl */
 	@media ( min-width : em($mq-nav-max--cl) ) {
 		.is-active & {
-
 			background-color: $yellow;
 			transform:translateY(rem($space--h-nav));
 
@@ -98,8 +97,8 @@
 				position: absolute;
 				left:0;
 				right:0;
-				top:90%;
-				height:$space/2;
+				top:100%;
+				height:rem($space-max - $space--h-nav);
 			}			
 			&:after {
 				top: auto;
@@ -107,7 +106,7 @@
 				width: rem($after-size);
 				height: rem($after-size);
 				bottom:rem(-$after-size/2);
-				transform:translate(rem($after-size/2),calc(#{$space/2} - #{rem($space--h-nav)}))
+				transform:translate(rem($after-size/2),rem($space-max - $space--h-nav))
 			}
 		}
 		&:hover, &:focus {

@@ -12,6 +12,26 @@
 =            Communs            =
 ===============================*/
 
+/*----------  Titre de la page  ----------*/
+
+h1, .h1-like {
+	color:$font-color-default;
+	font-family: var(--font);
+	font-weight: 900;
+	margin: 0;
+
+	font-size: rem(28);
+	line-height: 1.2; // dépend de la font
+
+	/* $mq-title-size */
+	@media ( min-width : em($mq-title-size) ) {
+		font-size: rem(40);
+	}
+}
+
+
+/*----------  Container WP editor  ----------*/
+
 .editor {
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
@@ -23,6 +43,20 @@
 }
 
 
+/*----------  Navigation pager, page précédente  ----------*/
+
+.main-footer-nav {
+	margin-top:$space;
+	
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		margin-top:0;
+		grid-column: 1 / 2;
+	}
+
+}
+
+
 /*=====  FIN Communs  =====*/
 
 /*======================================
@@ -30,18 +64,12 @@
 ======================================*/
 
 .st {
-	padding:$space;
 	position: relative;
-	transition:all .5s ease;
+	transition:background-color $t-st-hover ease;
 
-	&:hover, &:focus {
+	&:not(.st--fake):hover {
 	   background-color: $blue;
-	   transition:all .5s ease;
-	}
-
-	/* $mq-layout-l */
-	@media ( min-width : em($mq-layout-l) ) {
-		margin:0;
+	   transition:background-color $t-st-hover ease
 	}
 }
 .st-inner {
@@ -70,8 +98,9 @@
 			bottom: 0;
 			left: 0;
 		}
-		&:hover, &:focus {
-			&:before {}
+		&:focus {
+			background-color: $blue;
+			outline: none;
 		}
 	}
 
@@ -83,15 +112,17 @@
 
 .st-figure {
 	overflow: hidden;
+
 	img {
 		width: 100%;
 		transform-origin: center;
-		transition:.5s ease;
+		transition:$t-st-hover ease;
 	}
+	
 	.st:hover & {
 		img {
 			transform:scale(1.1);
-			transition:.5s ease;
+			transition:$t-st-hover ease;
 		}
 	}
 }
@@ -107,7 +138,6 @@
 		background-color: $black;
 		width: rem(24);
 		height: rem(24);
-		margin-left:rem(5);
 
 		svg {
 			fill:$beige;
@@ -124,6 +154,17 @@
 
 /*=====  FIN Article résumé  =====*/
 
+/*=============================
+=            Pager            =
+=============================*/
+
+.pager-list {
+	justify-content: flex-start;
+}
+
+
+/*=====  FIN Pager  =====*/
+
 /*===============================
 =            Partage            =
 ===============================*/
@@ -132,17 +173,22 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	margin-top:$space;
+	padding-top:$space;
+	border-top:1px solid $grey;
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
-		grid-column-end: span 2;
+		margin-top:0;
+		padding-top: 0;
+		border:none;
+		grid-column: 2 / 3;
 	}
 }
 .social-share-title {
 	margin:0;
 }
 .social-list--share {
-
 	.social-item {
 		margin-left:rem(10);
 	}

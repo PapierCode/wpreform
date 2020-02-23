@@ -11,10 +11,23 @@
 =            Communs            =
 ===============================*/
 
+/*----------  Titre de la pge  ----------*/
+
+h1 {
+	padding:$space/2 $space;
+	background-color: rgba($beige,.7);
+}
+
+
+/*----------  Container WP editor  ----------*/
+
 .fs-editor {
-	/* $mq-layout-xl */
-	@media ( min-width : em($mq-layout-xl) ) {
-		grid-column-end: span 3;
+	/* $mq-layout-xl--fs */
+	@media ( min-width : em($mq-layout-xl--fs) ) {
+		grid-column-end: span 6;
+		.is-home & {
+			grid-column-end: span 3;
+		}
 	}
 }
 
@@ -26,10 +39,8 @@
 ======================================*/
 
 .st {
-	margin-top:0;
-
-	/* $mq-layout-xl */
-	@media ( min-width : em($mq-layout-xl) ) {
+	/* $mq-layout-xl--fs */
+	@media ( min-width : em($mq-layout-xl--fs) ) {
 		grid-column-end: span 2;
 		
 		.is-home &:last-of-type {
@@ -49,19 +60,34 @@
 /*----------  Raccourcis  ----------*/
 
 .home-shortcuts {
-	/* $mq-layout-xl */
-	@media ( min-width : em($mq-layout-xl) ) {
+	padding:0 $space;
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		padding: 0;
+		background-color: $grey;
+		gap:1px;
+	}
+	/* $mq-layout-xl--fs */
+	@media ( min-width : em($mq-layout-xl--fs) ) {
 		grid-column-end: span 3;
 	}
 }
 .home-shortcut-item {
-	/* $mq-layout-m */
-	@media ( min-width : em($mq-layout-m) ) {
-		width: 50%;
-	}
+
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
-		width:auto;
+		background-color: $beige;
+		padding:$space/2;
+	}
+	/* $mq-layout-xl--fs */
+	@media ( min-width : em($mq-layout-xl--fs) ) {
+		min-height: 20vw;
+	}
+	/* $mq-layout-max--fs */
+	@media ( min-width : em($mq-layout-max--fs) ) {
+		padding:rem($space-max/2);
+		min-height: rem(250);
 	}
 }
 .home-shortcut-link {}

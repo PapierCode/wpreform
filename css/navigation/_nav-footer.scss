@@ -9,9 +9,33 @@
 =            Liste            =
 =============================*/
 
-.f-nav-list {}
+.f-nav-list {
+	display: flex;
+	flex-wrap:wrap;
+	justify-content: center;
+	margin-top:2*$space;
+	font-size: rem(16);
 
-.f-nav-item {}
+	&:after {
+		content:"/";
+		margin-left:rem(5);
+	}
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		margin-top: $space;
+	}
+}
+
+.f-nav-item {
+
+	&:nth-child(n+2) {
+		&:before {
+			content:"/";
+			margin:rem(0,5);
+		}
+	}
+}
 
 
 /*=====  FIN Liste  ======*/
@@ -22,7 +46,11 @@
 
 .f-nav-link {
 	color:$beige;
-	&:hover, &:focus {}
+	text-decoration: none;
+
+	&:hover, &:focus {
+		text-decoration: underline;
+	}
 }
 
 .f-nav-link-inner {}

@@ -11,11 +11,13 @@
 
 function pc_html_css_class() {
 
+	// thème
+	global $settings_pc;
+	$class = 'theme-'.$settings_pc['preform-theme'];
 	// type de page
-	if ( is_home() ) { $class = 'is-home'; }
-	else if ( is_page() ) { $class = 'is-page'; }
-	else if ( is_404() ) { $class = 'is-404'; }
-	else { $class = ''; }
+	if ( is_home() ) { $class .= ' is-home'; }
+	else if ( is_page() ) { $class .= ' is-page'; }
+	else if ( is_404() ) { $class .= ' is-404'; }
 	// pour modifier
 	$class = apply_filters( 'pc_filter_html_css_class', $class );
 	// retour
@@ -32,7 +34,12 @@ function pc_html_css_class() {
 
 add_action( 'wp_enqueue_scripts', 'pc_enqueue_preform_style' );
 
-    function pc_enqueue_preform_style() {		
+    function pc_enqueue_preform_style() {
+
+		/*----------  Print  ----------*/
+    
+		wp_enqueue_style( 'preform-print-style', get_template_directory_uri().'/css/print.css', null, null, 'print' );
+
 		
 		/*----------  Font-face  ----------*/		
 		
@@ -48,9 +55,15 @@ add_action( 'wp_enqueue_scripts', 'pc_enqueue_preform_style' );
 
 
 		/*----------  Défaut  ----------*/
-    
-        wp_enqueue_style( 'preform-style', get_template_directory_uri().'/style.css', null, null, 'screen' );
-		wp_enqueue_style( 'preform-print-style', get_template_directory_uri().'/css/print.css', null, null, 'print' );
+
+		wp_enqueue_style( 'preform-style', get_template_directory_uri().'/style.css', null, null, 'screen' );
+
+		global $settings_pc;
+		if ( $settings_pc['preform-theme'] == 'fullscreen' ) {
+			wp_enqueue_style( 'preform-fullscreen-style', get_template_directory_uri().'/css/v-fullscreen.css', null, null, 'screen' );
+		} else {
+			wp_enqueue_style( 'preform-classic-style', get_template_directory_uri().'/css/v-classic.css', null, null, 'screen' );
+		}
 
 
 	}
@@ -113,7 +126,7 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 			// titre
 			$meta_title = ( isset( $settings_home['seo-title'] ) && trim($settings_home['seo-title']) != '' ) ? $settings_home['seo-title'] : trim($settings_home['content-title']).' - '.trim($settings_project['coord-name']);
 			// description
-			$meta_description = ( isset( $settings_home['seo-desc'] ) && trim($settings_home['seo-desc']) != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-intro'],30,'...');
+			$meta_description = ( isset( $settings_home['seo-desc'] ) && trim($settings_home['seo-desc']) != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-txt'],30,'...');
 			
 			// visuel
 			if ( isset( $settings_home['seo-img'] ) && $settings_home['seo-img'] != '' ) {
@@ -170,8 +183,8 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 			array( 'property', 'og:title', $meta_title ),
 			array( 'property', 'og:description', $meta_description ),
 			array( 'property', 'og:image', $img_to_share ),
-			array( 'property', 'og:image:width', $images_project_sizes['square-300']['width'] ),
-			array( 'property', 'og:image:height', $images_project_sizes['square-300']['height'] ),
+			array( 'property', 'og:image:width', $images_project_sizes['share']['width'] ),
+			array( 'property', 'og:image:height', $images_project_sizes['share']['height'] ),
 			array( 'name', 'twitter:card', 'summary' ),
 			array( 'name', 'twitter:url', $url ),
 			array( 'name', 'twitter:title', $meta_title ),
