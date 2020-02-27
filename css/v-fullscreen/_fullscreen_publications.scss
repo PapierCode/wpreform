@@ -19,6 +19,32 @@ h1 {
 }
 
 
+/*----------  Boutton scroll to content  ----------*/
+
+.fs-more {}
+.fs-more-btn {
+	position: absolute;
+	bottom:15vh;
+	left:50%;
+	animation: fs-more-btn-anim 2s ease infinite;
+
+	svg {
+		transform-origin: center;
+		transform: rotate(-90deg);
+	}
+	&:hover, &:focus {
+	   animation:none;
+	}
+}
+
+@keyframes fs-more-btn-anim {
+	0%   { transform: translateY(0); }
+	20%  { transform: translateY(-50%); }
+	40%  { transform: translateY(0); }
+	100% { transform: translateY(0); }
+}
+
+
 /*----------  Container WP editor  ----------*/
 
 .fs-editor {

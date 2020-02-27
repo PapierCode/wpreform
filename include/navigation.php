@@ -112,7 +112,7 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 /*=====  End of Customisation menu  ======*/
 
 /*=================================================================
-=            Item parent actif si page enfatn affichée            =
+=            Item parent actif si page enfant affichée            =
 =================================================================*/
 
 add_filter( 'wp_nav_menu_objects', 'pc_nav_page_parent_active', NULL, 2 );
@@ -150,4 +150,4 @@ add_filter( 'wp_nav_menu_objects', 'pc_nav_page_parent_active', NULL, 2 );
 	};
 
 
-/*=====  FIN Item parent actif si page enfatn affichée  ======*/
+/*=====  FIN Item parent actif si page enfant affichée  ======*/

@@ -84,12 +84,17 @@ $('.js-h-nav').click(function() {
 	$html.toggleClass('h-nav-is-open');
 });
 
+/*----------  Thème fullscreen  ----------*/
 
-/*----------  back to top  ----------*/
+if ( $html.hasClass('theme-fullscreen')) {
 
-$('.back-to-top').click(function() {
-	$('html, body').animate({ scrollTop:0 }, 500);
-});
+	$('.fs-more-btn').click(function() {
+		$('html, body').animate({ scrollTop:win_h }, 500);
+	});
+
+}
+
+
 
 
 /*=====  End of navigation  ======*/

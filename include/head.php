@@ -3,17 +3,22 @@
 *
 * Contenu de la balise head
 *
+** Classe CSS sur la balsie HTML
+** Fichiers CSS
+** Favicon
+** Metas SEO & social
+*
 **/
 
-/*====================================================
-=            Class CSS sur la balise HTML            =
-====================================================*/
+/*=====================================================
+=            Classe CSS sur la balise HTML            =
+=====================================================*/
 
 function pc_html_css_class() {
 
 	// thème
-	global $settings_pc;
-	$class = 'theme-'.$settings_pc['preform-theme'];
+	global $preform_theme;
+	$class = 'theme-'.$preform_theme;
 	// type de page
 	if ( is_home() ) { $class .= ' is-home'; }
 	else if ( is_page() ) { $class .= ' is-page'; }
@@ -26,7 +31,7 @@ function pc_html_css_class() {
 }
 
 
-/*=====  FIN Class CSS sur la balise HTML  =====*/
+/*=====  FIN Classe CSS sur la balise HTML  =====*/
 
 /*====================================
 =            Fichiers CSS            =
@@ -58,8 +63,8 @@ add_action( 'wp_enqueue_scripts', 'pc_enqueue_preform_style' );
 
 		wp_enqueue_style( 'preform-style', get_template_directory_uri().'/style.css', null, null, 'screen' );
 
-		global $settings_pc;
-		if ( $settings_pc['preform-theme'] == 'fullscreen' ) {
+		global $preform_theme;
+		if ( $preform_theme == 'fullscreen' ) {
 			wp_enqueue_style( 'preform-fullscreen-style', get_template_directory_uri().'/css/v-fullscreen.css', null, null, 'screen' );
 		} else {
 			wp_enqueue_style( 'preform-classic-style', get_template_directory_uri().'/css/v-classic.css', null, null, 'screen' );

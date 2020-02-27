@@ -42,6 +42,7 @@ $h-nav-btn-size : 40;
 .h-nav-btn {
     display: flex;
 	align-items: center;
+	color:$black;
     
     .h-nav-is-open & {
         position: sticky;
@@ -73,7 +74,7 @@ $h-nav-btn-size : 40;
 		top:50%;
 		left:50%;
 		margin: rem(-$line-h/2,0,0,-$line-w/2);
-		background-color: #fff;
+		background-color: $beige;
 		transform-origin:center center 0;
 		transition:all $t-nav-btn-ico ease;
 	}

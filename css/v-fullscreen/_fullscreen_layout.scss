@@ -45,7 +45,11 @@ body {}
 .header {}
 .header-inner {}
 
-.h-logo-link {}
+.h-logo {}
+.h-logo-link {
+	position: relative;
+	z-index: 1;
+}
 
 
 /*=====  FIN Header  =====*/
@@ -82,7 +86,6 @@ body {}
 	background-position: center;
 	background-size: cover;
 	position: absolute;
-	z-index: -1;
 	left: 0;
 	right: 0;
 	top: 0;

@@ -1,7 +1,11 @@
 <?php
 /**
  * 
- * Gestion des images
+ * Fonctions pour les tempaltes : images & galeries
+ * 
+ ** Tailles
+ ** Galerie d'images (wysiwyg)
+ ** Image avec légende (wysiwyg)
  * 
  */
 

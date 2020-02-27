@@ -18,8 +18,8 @@
 
 	transition:all .3s ease;
 
-	svg {
-		margin-right: rem(5);
+	svg + span {
+		margin-left: rem(5);
 	}
 	path {
 		fill:$beige;

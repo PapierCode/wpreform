@@ -58,6 +58,7 @@ include 'include/custom-admin/custom-admin.php';
 // configuration projet
 include 'include/settings.php';
 $settings_project = get_option('project-settings-option');
+$preform_theme = ( isset( $_GET['dev_theme'] ) ) ? $_GET['dev_theme'] : $settings_pc['preform-theme'];
 
 // block editor
 include 'include/block-editor/block-editor.php';
@@ -76,14 +77,26 @@ include 'images/sprite.php';
 
 // head
 include 'include/head.php';
+
 // navigation
 include 'include/navigation.php';
-// fonctions utiles
-include 'include/templates/_templates_functions.php';
-// layout global
-include 'include/templates/_templates_layout.php';
 // images & galerie
-include 'include/templates/_templates_images.php';
+include 'include/fn-templates/fn-template_images.php';
+// réseaux sociaux
+include 'include/fn-templates/fn-template_social.php';
+// article résumé
+include 'include/fn-templates/fn-template_st.php';
+// modèle fullscreen
+include 'include/fn-templates/fn-template_fullscreen.php';
+
+// layout global
+include 'include/fn-templates/fn-template_layout.php';
+include 'include/fn-templates/fn-template_editor.php';
+
+// page
+include 'include/fn-templates/fn-template_page.php';
+// accueil
+include 'include/fn-templates/fn-template_home.php';
 
 
 /*----------  Custom posts  ----------*/
