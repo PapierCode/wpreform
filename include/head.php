@@ -133,18 +133,18 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 			$settings_home = get_option('home-settings-option');
 
 			// titre
-			$meta_title = ( isset( $settings_home['seo-title'] ) && trim($settings_home['seo-title']) != '' ) ? $settings_home['seo-title'] : trim($settings_home['content-title']);
+			$meta_title = ( isset( $settings_home['seo-title'] ) && $settings_home['seo-title'] != '' ) ? $settings_home['seo-title'] : $settings_home['content-title'];
 			// description
-			$meta_description = ( isset( $settings_home['seo-desc'] ) && trim($settings_home['seo-desc']) != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-txt'],30,'...');
+			$meta_description = ( isset( $settings_home['seo-desc'] ) && $settings_home['seo-desc'] != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-txt'],30,'...');
 			
 			// visuel
-			if ( $settings_home['visual-img'] != '' ) {
+			if ( isset($settings_home['visual-img']) && $settings_home['visual-img'] != '' ) {
 				$img_to_share = wp_get_attachment_image_src($settings_home['visual-img'],'share')[0];
 				if ( $settings_project['theme'] == 'fullscreen' ) { $css_custom .= pc_fs_main_header_css_bg($settings_home['visual-img']); }
 			}
 
 
-		/*----------  page.php & single.php  ----------*/
+		/*----------  page.php  ----------*/
 
 		} elseif ( is_page() ) {
 
@@ -175,7 +175,7 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 		} elseif ( is_404() ) {
 
 			// metas title & description
-			$meta_title = 'Page non trouvée - '.trim($settings_project['coord-name']);
+			$meta_title = 'Page non trouvée - '.$settings_project['coord-name'];
 			$meta_description = 'Désolé, cette page n\'existe pas ou a été supprimée.';
 			
 		}
