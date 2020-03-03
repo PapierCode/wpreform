@@ -42,7 +42,11 @@ body {}
 =            Header            =
 ==============================*/
 
-.header {}
+.header {
+	.is-fullscreen & {
+		background-color: transparent;
+	}
+}
 .header-inner {}
 
 .h-logo {}
@@ -59,12 +63,14 @@ body {}
 ============================*/
 
 .main {
-	margin-top:75vh;
+
+	.is-fullscreen {
+		margin-top:75vh;
+	}
 }
 .main-inner {
 	max-width: rem($layout-mw--fs);
 	margin:0 auto;
-	border:1px solid $grey;
 
 	> * {
 		background-color: $beige;
@@ -79,19 +85,33 @@ body {}
 	@media ( min-width : em($mq-layout-xl--fs) ) {
 		grid-template-columns: repeat( 6, 1fr );
 	}
+	/* $mq-layout-max--fs */
+	@media ( min-width : em($mq-layout-max--fs) ) {
+		border-left:1px solid $grey;
+		border-right:1px solid $grey;
+	}
 }
 
 .main-header {
-	background-image:url(http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/high-angle-view-of-lower-east-side-manhattan-downtown-new-york-city-usa-640006562-5ae52a273de423003776ae2e-scaled.jpg);
-	background-position: center;
-	background-size: cover;
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	grid-column: 1 / 3;
+
+	.is-fullscreen & {
+		height:75vh;
+		background-position: center;
+		background-size: cover;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* $mq-layout-xl--fs */
+	@media ( min-width : em($mq-layout-xl--fs) ) {
+		grid-column: 1 / 7;
+	}
 }
 
 .main-footer {

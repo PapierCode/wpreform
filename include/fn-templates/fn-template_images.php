@@ -39,7 +39,11 @@ $images_project_sizes = array(
 	'share'		=> array( 'width'=>300, 'height'=>300, 'crop'=>true ),
 	
     'gl-m'		=> array( 'width'=>800, 'height'=>800, 'crop'=>false ),
-	'gl-l'		=> array( 'width'=>1200, 'height'=>1200, 'crop'=>false )
+	'gl-l'		=> array( 'width'=>1200, 'height'=>1200, 'crop'=>false ),
+
+    'fs-s'		=> array( 'width'=>600, 'height'=>1000, 'crop'=>true ),
+    'fs-m'		=> array( 'width'=>1000, 'height'=>900, 'crop'=>true ),
+	'fs-l'		=> array( 'width'=>1600, 'height'=>880, 'crop'=>true ),
 	
 );
 

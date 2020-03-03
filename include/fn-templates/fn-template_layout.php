@@ -25,7 +25,10 @@ function pc_display_main_end() {
 
 function pc_display_main_title_start( ) {
 
-	echo '<header class="main-header"><div class="main-header-title">';
+	global $settings_project;
+	$css_class = ( $settings_project['is-fullscreen'] ) ? 'main-header' : 'main-header fs-bloc';
+
+	echo '<header class="'.$css_class.'"><div class="main-header-inner">';
 
 }
 

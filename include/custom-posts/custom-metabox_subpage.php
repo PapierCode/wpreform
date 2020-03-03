@@ -12,8 +12,8 @@
 
 add_action( 'admin_init', function() {
 
-    global $page_content_from;
-    $box_content_more_title = ( count( $page_content_from ) > 0 ) ? 'Contenu supplémentaire' : 'Sous-pages';
+    global $settings_project;
+    $box_content_more_title = ( count( $settings_project['page-content-from'] ) > 0 ) ? 'Contenu supplémentaire' : 'Sous-pages';
 
     add_meta_box(
         'page-content-sup',
@@ -74,20 +74,19 @@ function pc_update_subpage( $post_id, $post_parent ) {
 
 function pc_page_content_sub( $post ) {
 
-    global $settings_pc;  // cf. functions.php
-    global $page_content_from; // cf. functions.php
+    global $settings_project;  // cf. functions.php
 
     // input hidden de vérification pour la sauvegarde
     wp_nonce_field( basename( __FILE__ ), 'none-page-content-sup' );
 
     // début mise en page
     if ( $post->post_parent < 1 ) { // si parent ou à devenir
-        if ( count( $page_content_from ) > 0 ) {
-            echo '<p>Sélectionnez un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</p>';
+        if ( count( $settings_project['page-content-from'] ) > 0 ) {
+            echo '<p><strong>Sélectionnez un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</strong></p>';
         }
         echo '<p><em><strong>Remarque :</strong> lorsqu\'une page devient sous-page, son adresse (URL) est préfixée avec l\'adresse de la page parent, pour indiquer la hiérarchie.</em></p>';
     } else { // si enfant
-        echo '<p>Sélectionnez un contenu spécifique.<br/>';
+        echo '<p><strong>Sélectionnez un contenu spécifique.</strong></p>';
     }
     echo '<table class="form-table"><tbody>';
 
@@ -96,7 +95,7 @@ function pc_page_content_sub( $post ) {
     =            Sélection d'un contenu formaté            =
     ======================================================*/
 
-    if ( count( $page_content_from ) > 0 ) {
+    if ( count( $settings_project['page-content-from'] ) > 0 ) {
     
         // en bdd
         $content_from_saved = get_post_meta( $post->ID, 'content-from', true );
@@ -104,7 +103,7 @@ function pc_page_content_sub( $post ) {
         // affichage
         echo '<tr><th><label for="content-from">Contenu spécifique</label></th><td>';
             echo '<select id="content-from" name="content-from"><option value=""></option>';
-            foreach ($page_content_from as $slug => $datas ) {
+            foreach ( $settings_project['page-content-from'] as $slug => $datas ) {
                 echo '<option value="'.$slug.'" '.selected($content_from_saved,$slug,false).'>'.$datas[0].'</option>';
             }
             echo '</select>';

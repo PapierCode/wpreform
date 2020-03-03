@@ -4,9 +4,9 @@
 
 /*----------  Conversion em  ----------*/
 
-var em = function(size,base) {
-	if ( base == undefined ) { base = 18; }
-	return size / base + 'em';
+var rem = function(size,base) {
+	if ( base == undefined ) { base = 16; }
+	return size / base + 'rem';
 };
 
 
@@ -48,16 +48,19 @@ function winChange() {
 
 	/*----------  Fullscreen  ----------*/
 	
-	if ( $html.hasClass('theme-fullscreen') ) {
+	if ( $html.hasClass('is-fullscreen') ) {
 
 		win_h = $win.height() + 100;
 		win_w = $win.width();
 		header_h = $header.outerHeight();
 
+		console.log(win_h);
+		
+
 		if ( win_w != win_w_old ) {
 			// éléments concernés par le plein écran
-			$main_header.css( 'min-height', em(win_h) );
-			$main.css( 'margin-top', em(win_h-header_h) );
+			$main_header.css( 'min-height', rem(win_h) );
+			$main.css( 'margin-top', rem(win_h-header_h) );
 			win_w_old = win_w;
 		}
 

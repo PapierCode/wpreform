@@ -46,11 +46,15 @@ h1, .h1-like {
 /*----------  Navigation pager, page précédente  ----------*/
 
 .main-footer-nav {
-	margin-top:$space;
+	margin-bottom:$space;
+	padding-bottom: $space;
+	border-bottom:1px solid $grey;
 	
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
-		margin-top:0;
+		margin-bottom:0;
+		padding-bottom: 0;
+		border:none;
 		grid-column: 1 / 2;
 	}
 
@@ -67,9 +71,9 @@ h1, .h1-like {
 	position: relative;
 	transition:background-color $t-st-hover ease;
 
-	&:not(.st--fake):hover {
-	   background-color: $blue;
-	   transition:background-color $t-st-hover ease
+	&:hover {
+		background-color: $blue;
+		transition:background-color $t-st-hover ease;
 	}
 }
 .st-inner {
@@ -173,15 +177,9 @@ h1, .h1-like {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	margin-top:$space;
-	padding-top:$space;
-	border-top:1px solid $grey;
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
-		margin-top:0;
-		padding-top: 0;
-		border:none;
 		grid-column: 2 / 3;
 	}
 }

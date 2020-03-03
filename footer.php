@@ -74,7 +74,7 @@
 			'pricerange' => '€€'
 		);
 		
-		$local_business = apply_filters( 'pc_filter_local_business', $local_business ); ?>
+		$local_business = apply_filters( 'pc_filter_local_business', $local_business, $settings_project ); ?>
 
 		<script type="application/ld+json">
 			<?= json_encode($local_business,JSON_UNESCAPED_SLASHES); ?>

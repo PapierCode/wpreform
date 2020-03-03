@@ -6,6 +6,7 @@
  ** Css & js imports
  ** Formats d'images acceptés
  ** Nom des tailles d'images
+ ** Actions groupées
  ** Labels dans la liste de page
  ** Colonnes des listes d'articles
  ** TinyMCE custom
@@ -67,6 +68,23 @@ add_filter( 'image_size_names_choose', 'pc_rename_image_size_names' );
 
 /*=====  FIN Nom des tailles d'images  =====*/
 
+/*========================================
+=            Actions groupées            =
+========================================*/
+
+add_filter( 'bulk_actions-edit-page', 'pc_page_bluk_actions' );
+
+	function pc_page_bluk_actions( $actions ) {
+
+		unset($actions['edit']);
+		return $actions;
+
+	}
+
+
+
+/*=====  FIN Actions groupées  =====*/
+
 /*====================================================
 =            Labels dans la liste de page            =
 ====================================================*/
@@ -79,7 +97,6 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
             if ( $current_screen->id == 'edit-page') {
 
                 global $settings_project; // cf. functions.php
-                global $page_content_from; // cf. functions.php
 
                 switch ( $post->ID ) {
                     case $settings_project['cgu-page']:
@@ -89,7 +106,7 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
 
                 // contenu supplémentaire
                 $content_from = get_post_meta( $post->ID, 'content-from', true );
-                foreach ( $page_content_from as $id => $datas ) {
+                foreach ( $settings_project['page-content-from'] as $id => $datas ) {
                     if ( $content_from == $id ) { $states[] = $datas[0]; }
                 }
 
@@ -137,7 +154,7 @@ add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img_content
             
             $img_id = get_post_meta( $postId,'thumbnail-img',true );
             if ( $img_id != '' ) {
-                echo pc_get_img( $img_id, 'square-150' );
+                echo pc_get_img( $img_id, 'share' );
             } else {
                 echo '<img src="'.get_bloginfo('template_directory').'/images/admin-no-thumb.jpg" />';
             }

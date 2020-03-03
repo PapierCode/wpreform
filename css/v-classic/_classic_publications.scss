@@ -17,6 +17,18 @@
 .cl-editor {}
 
 
+/*----------  Navigation pager, page précédente  ----------*/
+
+.main-footer-nav {
+	margin-top:$space;
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		margin-top:0;
+	}
+}
+
+
 /*=====  FIN Communs  =====*/
 
 /*======================================
@@ -26,10 +38,7 @@
 .st {
 	margin-top: $space;
 	padding:$space;
-
-	&:not(.st--fake) {
-		border:1px solid $grey;
-	}
+	border:1px solid $grey;
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {

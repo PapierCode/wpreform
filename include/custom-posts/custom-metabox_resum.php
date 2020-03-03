@@ -12,7 +12,7 @@ $metabox_resum_for = array( 'page' );
 $metabox_resum_for = apply_filters( 'pc_filter_metabox_resum_for', $metabox_resum_for );
 
 $metabox_resum_fields = array(
-    'desc'          => '<p>Pour l\'affichage de cette page sous sa forme résumée dans votre site (dans une liste d\'articles par exemple).</p><p><strong>Remarques :<br/></strong>- si ces champs ne sont pas saisis, le titre de la page et les premiers mots du contenu sont utilisés,<br/>- si un visuel n\'est pas sélectionné (encart "Visuel" ci-dessus), une image générique est utilisée.</p>',
+    'desc'          => '<p><strong>Remplissez ces champs pour afficher cette page sous sa forme résumée</strong> (dans une liste de pages par exemple).</p><p><em><strong>Remarques :</strong> si ces champs ne sont pas saisis, le titre de la page et les premiers mots du contenu sont utilisés.</em></p>',
     'prefix'        => 'resum',
     'fields'        => array(
         array(
@@ -20,7 +20,7 @@ $metabox_resum_fields = array(
             'label'     => 'Titre',
             'desc'      => '',
             'id'        => 'title',
-            'attr'      => 'class="pc-counter" data-counter-max="70"',
+            'attr'      => 'class="pc-counter" data-counter-max="40"',
             'css'       => 'width:100%'
         ),
         array(
@@ -28,7 +28,7 @@ $metabox_resum_fields = array(
             'label'     => 'Description',
             'desc'      => '',
             'id'        => 'desc',
-            'attr'      => 'class="pc-counter" data-counter-max="200"',
+            'attr'      => 'class="pc-counter" data-counter-max="150"',
             'css'       => 'width:100%'
         )
     )

@@ -10,10 +10,12 @@
 // si la class est disponible
 if ( class_exists('PC_Add_Admin_Page') ) {
 
-/*----------  Contenu  ----------*/
+/*==============================
+=            Champs            =
+==============================*/
 
-// toutes les pages
-// select page
+/*----------  Contenu select pages  ----------*/
+
 $all_pages = get_posts( array(
     'post_type' => 'page',
 	'nopaging' => true,
@@ -25,7 +27,9 @@ foreach ($all_pages as $page) {
     $pages_list[$page->post_title] = $page->ID;
 }
 
-// sections et champs associés
+
+/*----------  Sections et champs communs aux thèmes  ----------*/
+
 global $settings_home_fields;
 $settings_home_fields = array(
     array(
@@ -43,7 +47,7 @@ $settings_home_fields = array(
             array(
                 'type'      => 'wysiwyg',
                 'label_for' => 'txt',
-                'label'     => 'Texte',
+                'label'     => 'Texte de présentation',
                 'options'   => array(
                     'media_buttons' => false,
                     'textarea_rows' => 10,
@@ -54,10 +58,10 @@ $settings_home_fields = array(
                 'required'  => true
         	)
         )
-    ),
+	),
     array(
 		'title'     => 'Pages à la une',
-		'desc'		=> 'Si le champ <em>Titre</em> n\'est pas rempli, le titre de la page est utilisé.',
+		'desc'		=> '<p><strong>Mettez en avant jusqu\'à 4 pages du menu de navigation sur la page d\'accueil.</strong> <br/><em>Si le champ <em>Titre</em> n\'est pas rempli, le titre de la page est utilisé. <br/>Le Visuel configuré dans la page est utilisé, si il n\'est pas sélectionné, le logo est utilisé.</em></p>',
         'id'        => 'pages',
         'prefix'    => 'pages',
         'fields'    => array(
@@ -116,8 +120,8 @@ $settings_home_fields = array(
         )
     ),
     array(
-        'title'     => 'Optimisation référencement & réseaux sociaux',
-        'desc'      => '<p>Pour l\'affichage de cette page sous sa forme résumée dans les résultats des moteurs de recherche et les réseaux sociaux.</p><p><strong>Remarques :<br/></strong>- si ces champs ne sont pas saisis, le titre de la page et les premiers mots du contenu sont utilisés,<br/>- si un visuel n\'est pas sélectionné, le logo est utilisé.</p>',
+        'title'     => 'Référencement & réseaux sociaux',
+        'desc'      => '<p><strong>Optimisez le titre et le résumé pour les moteurs de recherche et les réseaux sociaux.</strong> <br/><em>Si ces champs ne sont pas saisis, le titre de la page et les premiers mots du texte de présentation sont utilisés.</em></p>',
         'id'        => 'seo',
         'prefix'    => 'seo',
         'fields'    => array(
@@ -134,23 +138,54 @@ $settings_home_fields = array(
                 'label'     => 'Description',
                 'attr'      => 'class="pc-counter" data-counter-max="200"',
                 'css'       => 'width:100%'
-            ),
-            array(
-                'type'      => 'img',
-                'label_for' => 'img',
-                'label'     => 'Visuel',
-                'options'   => array(
-                    'btnremove' => true
-                )
-            ),
+            )
         )
     )
 );
 
+/*----------  Section et champ visuel  ----------*/
+
+$home_visual_field = array(
+	'title'     => 'Visuel',
+	'desc'      => '',
+	'id'        => 'visual',
+	'prefix'    => 'visual',
+	'fields'    => array(
+		array(
+			'type'      => 'img',
+			'label_for' => 'img',
+			'label'     => 'Visuel'
+		),
+	)
+);
+
+if ( $settings_project['theme'] == 'fullscreen' ) {
+
+	$home_visual_field['desc'] = '<p><strong>Sélectionnez le visuel qui s\'affiche en pleine page et pour le partage sur les réseaux sociaux</strong>, <em>dimensions minimum conseillées 2000x1500 pixels</em>.</p>';
+	$home_visual_field['fields'][0]['required'] = true;
+	$home_visual_field['fields'][0]['options'] = array( 'btnremove' => false );
+
+	array_unshift( $settings_home_fields, $home_visual_field );
+
+} else {
+
+	$home_visual_field['desc'] = '<p><strong>Sélectionnez le visuel pour le partage sur réseaux sociaux</strong>, <em>dimensions minimum conseillées 300x300 pixels, si un visuel n\'est pas sélectionné, le logo est utilisé.</em></p>';
+	$home_visual_field['fields'][0]['options'] = array( 'btnremove' => true );
+
+	$settings_home_fields[] = $home_visual_field;
+}
+
+
+/*----------  Filtre  ----------*/
+
 $settings_home_fields = apply_filters( 'pc_filter_settings_home_fields', $settings_home_fields );
 
 
-/*----------  Création  ----------*/
+/*=====  FIN Champs  =====*/
+
+/*================================
+=            Création            =
+================================*/
 
 $settings_home_declaration = new PC_Add_Admin_Page(
     'Page d\'accueil',
@@ -165,7 +200,11 @@ $settings_home_declaration = new PC_Add_Admin_Page(
 );
 
 
-/*----------  Sanitize  ----------*/
+/*=====  FIN Création  =====*/
+
+/*================================
+=            Sanitize            =
+================================*/
 
 function pc_sanitize_settings_home( $datas ) {
 
@@ -175,5 +214,8 @@ function pc_sanitize_settings_home( $datas ) {
     return pc_sanitize_settings_fields( $settings_home_fields, $datas );
 
 }
+
+
+/*=====  FIN Sanitize  =====*/
 
 } // FIN if class_exists

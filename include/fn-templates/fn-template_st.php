@@ -92,14 +92,12 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 =            Fake version            =
 ====================================*/
 
-// compléte la grille
-
 function pc_add_fake_st( $nb, $css = '' ) {
 
-	global $preform_theme;
+	global $settings_project;
 	$nb_fake_st = 0;
 
-	if ( $preform_theme == 'fullscreen' ) {
+	if ( $settings_project['theme'] == 'fullscreen' ) {
 
 		switch ( $nb ) {
 			case 1:
@@ -107,15 +105,10 @@ function pc_add_fake_st( $nb, $css = '' ) {
 				$nb_fake_st = 2;
 				break;
 			case 2:
+			case 3:
 			case 5:
 				$nb_fake_st = 1;
 				break;
-		}
-
-	} else {
-
-		if ( in_array( $nb, array(1,3,5) ) ) {
-			$nb_fake_st = 1;
 		}
 
 	}

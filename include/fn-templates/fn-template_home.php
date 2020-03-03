@@ -53,7 +53,7 @@ function pc_display_home_content( $settings_home ) {
 				$page_title = ($page_new_title != '') ? $page_new_title : get_the_title($page_id);
 				echo '<li class="home-shortcut-item"><a title="'.$page_title.'" href="'.get_the_permalink($page_id).'" class="home-shortcut-link"><span class="home-shortcut-img">';
 
-				$page_img_id = get_post_meta( $page_id, 'thumbnail-img', 'thumbnail-img' );
+				$page_img_id = get_post_meta( $page_id, 'thumbnail-img', true );
 				if ( $page_img_id != '' ) {
 					$page_img_urls = array(
 						wp_get_attachment_image_src($page_img_id,'st-400')[0],
@@ -87,3 +87,29 @@ function pc_display_home_content( $settings_home ) {
 
 
 /*=====  FIN Contenu  =====*/
+
+/*==========================================================
+=            Classes CSS en fonction du contenu            =
+==========================================================*/
+
+add_filter( 'pc_filter_html_css_class', 'pc_home_add_class' );
+		
+function pc_home_add_class( $class ) {
+
+	global $settings_home;
+
+	$home_pages = false;
+	for ($i=1; $i <= 4 ; $i++) {
+		if ( $settings_home['pages-page-'.$i] != '' ) {
+			$home_pages = true;
+			break;
+		}
+	}
+	if ( $home_pages ) { $class[] = 'is-home-with-shortcuts'; }
+
+	return $class;
+
+}
+
+
+/*=====  FIN Classes CSS en fonction du contenu  =====*/

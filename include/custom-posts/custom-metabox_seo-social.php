@@ -12,7 +12,7 @@ $metabox_seo_for = array( 'page' );
 $metabox_seo_for = apply_filters( 'pc_filter_metabox_seo_for', $metabox_seo_for );
 
 $metabox_seo_fields = array(
-    'desc'          => $settings_pc['help-seo-social'],
+    'desc'          => '<p><strong>Optimisez le titre et le résumé pour les moteurs de recherche et les réseaux sociaux.</strong></p><p><em><strong>Remarques :</strong> Si ces champs ne sont pas saisis, le titre de la page et la description du résumé (encart "Résumé" ci-dessus) sont utilisés</em>.</p>',
     'prefix'        => 'seo',
     'fields'        => array(
         array(
@@ -34,7 +34,7 @@ $metabox_seo_fields = array(
     )
 );
 
-$metabox_seo_declaration = new PC_Add_Metabox( $metabox_seo_for, 'Optimisations référencement (SEO) & Réseaux sociaux', 'page-metabox-seo', $metabox_seo_fields, 'normal', 'low' );
+$metabox_seo_declaration = new PC_Add_Metabox( $metabox_seo_for, 'Référencement (SEO) & Réseaux sociaux', 'page-metabox-seo', $metabox_seo_fields, 'normal', 'low' );
 
 
 } // FIN if class_exist()
