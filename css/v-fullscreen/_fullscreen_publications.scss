@@ -157,5 +157,20 @@ h1 {
 .home-shortcut-link {}
 
 
-
 /*=====  FIN Accueil  =====*/
+
+/*=============================================
+=            Formulaire de contact            =
+=============================================*/
+
+.form--contact {
+	grid-column: 1 / 7;
+
+	form {
+		max-width: rem($txt-mw);
+	}
+}
+
+
+
+/*=====  FIN Formulaire de contact  =====*/

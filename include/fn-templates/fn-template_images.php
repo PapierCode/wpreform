@@ -38,6 +38,7 @@ $images_project_sizes = array(
 	
 	'share'		=> array( 'width'=>300, 'height'=>300, 'crop'=>true ),
 	
+    'gl-th'		=> array( 'width'=>200, 'height'=>200, 'crop'=>true ),
     'gl-m'		=> array( 'width'=>800, 'height'=>800, 'crop'=>false ),
 	'gl-l'		=> array( 'width'=>1200, 'height'=>1200, 'crop'=>false ),
 
@@ -91,7 +92,7 @@ function pc_gallery_custom( $output = '', $atts, $instance ) {
 
         foreach ( $img_id_list as $img_id ) {
 
-            $thumbnail_datas = wp_get_attachment_image_src($img_id,'st');
+            $thumbnail_datas = wp_get_attachment_image_src($img_id,'gl-th');
 
             // si la vignette existe
             if ( isset($thumbnail_datas) && $thumbnail_datas[3] == 1 ) {

@@ -104,7 +104,7 @@ add_filter( 'pc_filter_html_css_class', 'pc_home_add_class' );
 function pc_home_add_class( $class ) {
 
 	global $home_pages;
-	if ( !empty($home_pages) ) { $class[] = 'is-home-with-shortcuts'; }
+	if ( is_home() && !empty($home_pages) ) { $class[] = 'is-home-with-shortcuts'; }
 
 	return $class;
 

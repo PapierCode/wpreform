@@ -44,6 +44,7 @@
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		font-size: rem(22);
+		padding:rem(0,20);
 	}
 }
 

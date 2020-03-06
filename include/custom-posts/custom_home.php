@@ -31,11 +31,13 @@ function pc_home_pages_line( $css_classe, $options, $current = '', $title = '' )
 }
 // bdd to array
 function pc_home_pages_bdd_to_array( $datas ) {
-	$set = explode('|',$datas);
 	$return = array();
-	foreach ($set as $value) {
-		$temp = explode('§',$value);
-		$return[$temp[0]] = $temp[1];
+	if ( $datas != '' ) {
+		$set = explode('|',$datas);
+		foreach ($set as $value) {
+			$temp = explode('§',$value);
+			$return[$temp[0]] = $temp[1];
+		}
 	}
 	return $return;
 }

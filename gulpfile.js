@@ -88,6 +88,7 @@ function fullscreen_css() {
 ================================*/
 
 jshint_src = [
+	'scripts/jquery-gallery.js',
 	'scripts/scripts.js'
 ],
 

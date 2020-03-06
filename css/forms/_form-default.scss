@@ -3,8 +3,8 @@
 * Formulaires : défaut
 *
 ** Container
+** Label
 ** Champs
-** CGU
 ** Captcha
 ** Validation
 *
@@ -22,8 +22,10 @@
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
-		display: flex;
-		align-items: flex-start;
+		&:not(.form-item--checkbox) {
+			display: flex;
+			align-items: flex-start;
+		}
 		& + & {
 			margin-top: rem(20);
 		}
@@ -80,7 +82,7 @@
 
 		&.error { border-color: $msg-error-color; }
 		&:focus {
-			border-color:$red;
+			background-color: $blue;
 			outline: none;
 		}
 	}
@@ -91,11 +93,18 @@
 				content:"";
 				display: inline-block;
 				flex-shrink: 0;
-				width: rem(18);
-				height: rem(18);
-				border:1px solid $black;
-				margin:rem(4,5,0,0);
+				width: rem(20);
+				height: rem(20);
+				border:rem(4) solid #fff;
+				outline:1px solid $black;
+				margin:rem(4,10,0,0);
 				background-color: #fff;
+			}
+		}
+		&:focus + label {
+			&:before {
+				background-color:$blue;
+				border-color:$blue;
 			}
 		}
 		&:checked + label {	
@@ -113,12 +122,6 @@
 }
 
 
-/*----------  checkbox  ----------*/
-
-.form-item--cgu {
-
-}
-
 /*----------  Description  ----------*/
 
 .form-item-desc {
@@ -127,7 +130,7 @@
 	margin-top:rem(5);
 
 	.form-item--checkbox & {
-		margin-left:rem(23);
+		margin-left:rem(30);
 	}
 }
 
@@ -139,7 +142,8 @@
 ===============================*/
 
 .form-item--captcha {
-	margin-top: rem(10);
+	padding-top: $space;
+	border-top:1px solid $grey;
 	.g-recaptcha {
 		margin-top: rem(10);
 
@@ -152,7 +156,6 @@
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		padding-top: rem(20);
-		border-top:1px solid #ccc;
 	}
 }
 
@@ -175,13 +178,14 @@
 
 .form-item--submit {
 	text-align: center;
+	justify-content: center;
 	padding: $space 0;
-	border-top:1px solid $grey;
-	border-bottom:1px solid $grey;
+	border:1px solid $grey;
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		display: block;
+		padding:rem(20) 0;
 	}
 }
 

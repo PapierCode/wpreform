@@ -62,7 +62,7 @@ $link-color-visited				: purple;
 .editor-inner {
 
 	
-	:first-child {
+	> :first-child {
 		.theme-classic & {
 			margin-top:rem($margin-top-default);
 		}

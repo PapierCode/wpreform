@@ -113,6 +113,7 @@
 
 </div> <?php // fin .body-inner ?>
 
+<?php pc_sprite_to_js(); ?>
 <script src="<?php bloginfo('template_directory'); ?>/scripts/scripts.min.js"></script>
 
 <?php wp_footer(); ?>

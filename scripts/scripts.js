@@ -115,16 +115,13 @@ $('button:not(.overlay), .p-nav-link').mouseup(function() {
 
 /*----------  gallery  ----------*/
 
-// var btnArrow = sprite.arrow.replace('<svg','<svg class="svg-block"'),
-// 	btnCross = sprite.cross.replace('<svg','<svg class="svg-block"');
-
-// $('.wp-gallery').gallery({
-// 	btnNextInner:btnArrow,
-// 	btnPrevInner:btnArrow,
-// 	btnCloseInner:btnCross,
-// 	moveDuration:500,
-// 	responsiveImg:true
-// });
+$('.wp-gallery').gallery({
+	btnNextInner:sprite.arrow,
+	btnPrevInner:sprite.arrow,
+	btnCloseInner:sprite.cross,
+	moveDuration:500,
+	responsiveImg:true
+});
 
 
 /*----------  iframe  ----------*/

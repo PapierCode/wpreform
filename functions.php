@@ -24,7 +24,7 @@ $settings_project = get_option('project-settings-option');
 /*----------  Thème (fullscreen ou classic)  ----------*/
 
 // si le thème n'est pas défini
-$settings_project['theme'] = ( $settings_pc['preform-theme'] && $settings_pc['preform-theme'] != '' ) ? $settings_pc['preform-theme'] : 'classic';
+$settings_project['theme'] = ( isset($settings_pc['preform-theme']) && $settings_pc['preform-theme'] != '' ) ? $settings_pc['preform-theme'] : 'classic';
 // pour changer de thème en direct
 $settings_project['theme'] = ( isset($_GET['dev_theme']) ) ? $_GET['dev_theme'] : $settings_pc['preform-theme'];
 // version fullscreen, une page peut être plein écran ou pas
