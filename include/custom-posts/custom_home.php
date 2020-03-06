@@ -14,18 +14,48 @@ if ( class_exists('PC_Add_Admin_Page') ) {
 =            Champs            =
 ==============================*/
 
-/*----------  Contenu select pages  ----------*/
+/*----------  Contenu repeater Pages à la une  ----------*/
 
-$all_pages = get_posts( array(
-    'post_type' => 'page',
-	'nopaging' => true,
-	'order' => 'ASC',
-	'orderby' => 'title'
-) );
-$pages_list = array();
-foreach ($all_pages as $page) {
-    $pages_list[$page->post_title] = $page->ID;
+// affichage d'une ligne du repeater
+function pc_home_pages_line( $css_classe, $options, $current = '', $title = '' ) {
+    $return = '<div class="'.$css_classe.'"><select><option value=""></option>';
+    foreach ($options as $subpage ) {
+        $return .= '<option value="'.$subpage->ID.'" '.selected($current,$subpage->ID,false).'>'.$subpage->post_title.'</option>';
+    }
+	$return .= '</select>';
+	$return .= '<input type="text"value="'.$title.'" style="vertical-align:middle;width:260px" maxlength="40"/>';
+    $return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-no"></span>';
+    $return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
+	$return .= '</div>';
+	return $return;
 }
+// bdd to array
+function pc_home_pages_bdd_to_array( $datas ) {
+	$set = explode('|',$datas);
+	$return = array();
+	foreach ($set as $value) {
+		$temp = explode('§',$value);
+		$return[$temp[0]] = $temp[1];
+	}
+	return $return;
+}
+
+// valeur en base
+$settings_home = get_option('home-settings-option');
+$home_pages_in_bdd = ( isset($settings_home['content-pages']) ) ? $settings_home['content-pages'] : '';
+$home_pages = pc_home_pages_bdd_to_array($home_pages_in_bdd);
+// affichage
+$home_pages_fields = '<div class="pc-repeater" data-type="homepages">';
+foreach ($home_pages as $id => $title) {
+	$home_pages_fields .= pc_home_pages_line( 'pc-repeater-item', $all_pages, $id, $title );
+}
+$home_pages_fields .= '</div>';
+$home_pages_fields .= '<input type="hidden" value="'.$home_pages_in_bdd.'" name="home-settings-option[content-pages]" class="pc-repeater-input" />';
+$home_pages_fields .= '<p><button type="button" class="pc-repeater-btn-more button">Ajouter une page</button></p>';
+// ligne cachée et copiée par le JS (ajout)
+$home_pages_fields .= '<div style="display:none">';
+$home_pages_fields .= pc_home_pages_line( 'pc-repeater-item pc-repeater-src', $all_pages );
+$home_pages_fields .= '</div>';
 
 
 /*----------  Sections et champs communs aux thèmes  ----------*/
@@ -56,69 +86,16 @@ $settings_home_fields = array(
                     )
                 ),
                 'required'  => true
-        	)
-        )
-	),
-    array(
-		'title'     => 'Pages à la une',
-		'desc'		=> '<p><strong>Mettez en avant jusqu\'à 4 pages du menu de navigation sur la page d\'accueil.</strong> <br/><em>Si le champ <em>Titre</em> n\'est pas rempli, le titre de la page est utilisé. <br/>Le Visuel configuré dans la page est utilisé, si il n\'est pas sélectionné, le logo est utilisé.</em></p>',
-        'id'        => 'pages',
-        'prefix'    => 'pages',
-        'fields'    => array(
-			array(
-                'type'      => 'select',
-                'label_for' => 'page-1',
-                'label'     => 'Page #1',
-                'options'   => $pages_list
 			),
 			array(
-                'type'      => 'text',
-                'label_for' => 'title-1',
-                'label'     => 'Titre #1',
-                'css'       => 'width:50%',
-                'attr'      => 'class="pc-counter" data-counter-max="40"',
-            ),
-			array(
-                'type'      => 'select',
-                'label_for' => 'page-2',
-                'label'     => 'Page #2',
-                'options'   => $pages_list
-            ),
-			array(
-                'type'      => 'text',
-                'label_for' => 'title-2',
-                'label'     => 'Titre #2',
-                'css'       => 'width:50%',
-                'attr'      => 'class="pc-counter" data-counter-max="40"',
-            ),
-			array(
-                'type'      => 'select',
-                'label_for' => 'page-3',
-                'label'     => 'Page #3',
-                'options'   => $pages_list
-            ),
-			array(
-                'type'      => 'text',
-                'label_for' => 'title-3',
-                'label'     => 'Titre #3',
-                'css'       => 'width:50%',
-                'attr'      => 'class="pc-counter" data-counter-max="40"',
-            ),
-			array(
-                'type'      => 'select',
-                'label_for' => 'page-4',
-                'label'     => 'Page #4',
-                'options'   => $pages_list
-            ),
-			array(
-                'type'      => 'text',
-                'label_for' => 'title-4',
-                'label'     => 'Titre #4',
-                'css'       => 'width:50%',
-                'attr'      => 'class="pc-counter" data-counter-max="40"',
-            ),
+                'type'      => 'custom',
+                'label_for' => 'pages',
+                'label'     => 'Pages à la une',
+                'desc'      => 'Aide ou description du champ',
+                'display'   => $home_pages_fields
+            )
         )
-    ),
+	),
     array(
         'title'     => 'Référencement & réseaux sociaux',
         'desc'      => '<p><strong>Optimisez le titre et le résumé pour les moteurs de recherche et les réseaux sociaux.</strong> <br/><em>Si ces champs ne sont pas saisis, le titre de la page et les premiers mots du texte de présentation sont utilisés.</em></p>',
@@ -208,7 +185,10 @@ $settings_home_declaration = new PC_Add_Admin_Page(
 
 function pc_sanitize_settings_home( $datas ) {
 
-    $datas = apply_filters( 'pc_filter_settings_home_sanitize_fields', $datas );
+	$datas = apply_filters( 'pc_filter_settings_home_sanitize_fields', $datas );
+	
+	$datas['content-pages'] = sanitize_text_field($datas['content-pages']);
+	$datas['content-pages'] = esc_attr($datas['content-pages']);
 
     global $settings_home_fields;
     return pc_sanitize_settings_fields( $settings_home_fields, $datas );

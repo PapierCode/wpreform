@@ -12,9 +12,9 @@
 	padding:rem(0,10);
 	background-color: $black;
 
+	font-family: var(--font);
 	color:$beige;
 	text-decoration: none;
-	font-weight: 700;
 
 	transition:all .3s ease;
 
@@ -36,4 +36,18 @@
 			transition:fill .3s ease;
 		}
 	}
+}
+
+.btn--xl {
+	font-size:rem(20);
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		font-size: rem(22);
+	}
+}
+
+.btn--red {
+	background-color: $red;
+	color:$black;
 }

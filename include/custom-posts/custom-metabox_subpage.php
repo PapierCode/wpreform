@@ -36,16 +36,17 @@ add_action( 'admin_init', function() {
 /*----------  Repeater sous-pages : affichage d'une ligne  ----------*/
 
 function pc_meta_subpage_line( $classes, $options, $current = '', $save = array() ) {
-    echo '<div class="'.$classes.'"><select><option value=""></option>';
+    $return = '<div class="'.$classes.'"><select><option value=""></option>';
     foreach ($options as $subpage ) {
         if ( $subpage->post_parent < 1 || in_array($subpage->ID,$save) ) { // si ce n'est pas déjà une sous-page
-            echo '<option value="'.$subpage->ID.'" '.selected($current,$subpage->ID,false).'>'.$subpage->post_title.'</option>';
+            $return .= '<option value="'.$subpage->ID.'" '.selected($current,$subpage->ID,false).'>'.$subpage->post_title.'</option>';
         }
     }
-    echo '</select>';
-    echo ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-no"></span>';
-    echo ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
-    echo '</div>';
+    $return .= '</select>';
+    $return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-no"></span>';
+    $return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
+	$return .= '</div>';
+	return $return;
 }
 
 
@@ -143,7 +144,7 @@ function pc_page_content_sub( $post ) {
         echo '<tr><th><label>Sous-pages</label></th><td>';
             echo '<div class="pc-repeater" data-type="subpage">';
             foreach ($subpages_saved_array as $key => $id) {
-                pc_meta_subpage_line( 'pc-repeater-item', $all_subpages, $id, $subpages_saved_array );
+                echo pc_meta_subpage_line( 'pc-repeater-item', $all_subpages, $id, $subpages_saved_array );
             }
             echo '</div>';
             // c'est ce input qui est sauvegardé !
@@ -154,7 +155,7 @@ function pc_page_content_sub( $post ) {
 
         // source pour le js
         echo '<tr style="display:none"><td colspan="2">';
-            pc_meta_subpage_line( 'pc-repeater-item pc-repeater-src', $all_subpages );
+            echo pc_meta_subpage_line( 'pc-repeater-item pc-repeater-src', $all_subpages );
         echo '</td></tr>';
 
     } // FIN if $post->post_parent < 1

@@ -1,6 +1,0 @@
-<article class="st st--news fs-bloc">
-	<div class="st-inner"><div class="st-details"><time class="st-date" datetime="2020-02-03T09:05:12+01:00">Actualité du 3 février 2020</time></div>
-	<figure class="st-figure"><img src="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/cee57736963957-700x400.jpg" alt="" srcset="http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/cee57736963957-400x250.jpg 400w, http://dev.preform.papier-code.fr/wp-content/uploads/2020/02/cee57736963957-700x400.jpg 700w" sizes="(max-width:400px) 400px, (min-width:401px) and (max-width:760px) 700px, (min-width:761px) 400px" /></figure>
-	<h3 class="st-title"><a href="http://dev.preform.papier-code.fr/news-actualites/in-his-tractibus-navigerum-nusquam/">In his tractibus navigerum nusquam</a></h3>
-	<p class="st-desc">Proinde concepta rabie saeviore, quam desperatio incendebat et fames, amplificatis viribus ardore incohibili in excidium urbium matris Seleuciae efferebantur, quam...<span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="6" width="4" height="16"/><rect y="6" width="16" height="4"/></svg></span></p>
-</div></article>

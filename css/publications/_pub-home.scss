@@ -48,13 +48,14 @@ $t-home-shortcut-hover : .5s;
 		min-height: 25vw;
 	}
 }
-.home-shortcut-item--fake {
-	display: none;
-	/* $mq-layout-m */
-	@media ( min-width : em($mq-layout-m) ) {
-		display:block;
-	}
-}
+// .home-shortcut-item--fake {
+// 	display: none;
+// 	/* $mq-layout-m */
+// 	@media ( min-width : em($mq-layout-m) ) {
+// 		display:block;
+// 	}
+// }
+
 .home-shortcut-link {
 	position: relative;
 	font-family: var(--font-alt);
@@ -100,6 +101,73 @@ $t-home-shortcut-hover : .5s;
 		color:$black;
 		min-height:100%;
 		transition:all $t-home-shortcut-hover ease;
+	}
+}
+.home-shortcut-ico {
+	position: absolute;
+	left:rem(10);
+	top:rem(10);
+	background-color: $beige;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: rem(40);
+	height: rem(40);
+	border-radius: 50%;
+	transition:transform $t-home-shortcut-hover ease;
+
+	svg {
+		fill:$black;
+	}
+
+	.home-shortcut-link:hover &, .home-shortcut-link:focus & {
+		transform:rotate(-90deg);	
+		transition:transform $t-home-shortcut-hover ease;
+	}
+}
+
+
+/*----------  Version impair  ----------*/
+
+.home-shortcuts--odd {
+	/* $mq-layout-m */
+	@media ( min-width : em($mq-layout-m) ) {
+		> :first-child {
+			width:100%;
+
+			.home-shortcut-link {
+				display: flex;
+				.home-shortcut-txt, .home-shortcut-img {
+					width: 50%;
+				}
+				&:hover, &:focus {
+					img {
+						transform:translateX(100%);
+					}
+					.home-shortcut-txt {
+						transform:translateX(-100%);
+					}
+					.home-shortcut-ico {
+						transform:translate(-50%,-50%) rotate(-90deg);
+					}
+				}
+			}
+			.home-shortcut-txt {
+				position: static;
+				padding:rem($space-max/2);
+			}
+			.home-shortcut-ico {
+				left:50%;
+				top:50%;
+				transform:translate(-50%,-50%) ;
+			}
+		}
+	}
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		> :first-child {
+			grid-column: 1 / 3;
+		}
 	}
 }
 

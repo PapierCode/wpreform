@@ -1,0 +1,12 @@
+/**
+*
+* Formulaires : contact
+*
+**/
+
+.form--contact {
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		grid-column: 1 / 3;
+	}
+}

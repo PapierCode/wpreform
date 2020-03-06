@@ -12,6 +12,8 @@ $sprite = array(
 
 	'map' => '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="20" viewBox="0 0 14 20"><path d="M7,0H7A7.24,7.24,0,0,0,0,7.44c0,2.25,1.08,4,2.29,5.74L7,20s4.45-6.41,4.72-6.81C12.92,11.44,14,9.69,14,7.44A7.24,7.24,0,0,0,7,0ZM7,10.32A3.12,3.12,0,1,1,10.12,7.2,3.12,3.12,0,0,1,7,10.32Z"/></svg>',
 
+	'link' => '<svg xmlns="http://www.w3.org/2000/svg" width="27" height="15" viewBox="0 0 27 15"><polygon points="6 15 0 15 0 0 18 0 18 9 15 9 15 3 3 3 3 12 6 12 6 15" fill="#1e1e1c"/><polygon points="27 15 9 15 9 6 12 6 12 12 24 12 24 3 21 3 21 0 27 0 27 15" fill="#1e1e1c"/></svg>',
+
 	'category' => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path d="M7,1H1V7l9,9,6-6ZM5,7A2,2,0,1,1,7,5,2,2,0,0,1,5,7Z" fill="#fff"/></svg>',
 
 	'facebook' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="#FFF" d="M7.2 4v2.9H5v3.5h2.2V20h4.4v-9.6h3s.3-1.7.4-3.5h-3.4V4.5c0-.4.5-.8 1-.8H15V.1C13.8 0 12.3 0 11.7 0 7.1 0 7.2 3.5 7.2 4z"/></svg>',

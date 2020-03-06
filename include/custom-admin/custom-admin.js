@@ -22,6 +22,10 @@ jQuery(document).ready(function($){
                     if ( toSave != '' ) { toSave += ','; }
                     toSave += $(this).children('select').val();
                     break;
+                case 'homepages':
+                    if ( toSave != '' ) { toSave += '|'; }
+                    toSave += $(this).children('select').val() + '§' + $(this).children('input').val();
+                    break;
             }
         });
         $pcRepeaterInput.val(toSave);
@@ -37,7 +41,6 @@ jQuery(document).ready(function($){
                 .clone()
                 .appendTo($pcRepeater)
                 .removeClass('pc-repeater-src');
-            pc_repeater_update(pcRepeaterType);
         });
 
         $pcRepeater.on( 'click', '.pc-repeater-btn-delete', function() {
@@ -45,6 +48,9 @@ jQuery(document).ready(function($){
             pc_repeater_update(pcRepeaterType);
         });
         $pcRepeater.on( 'change', 'select', function() {
+            pc_repeater_update(pcRepeaterType);
+        });
+        $pcRepeater.on( 'focusout', 'input', function() {
             pc_repeater_update(pcRepeaterType);
         });
     

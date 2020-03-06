@@ -29,30 +29,36 @@ add_action( 'pc_home_content_after', 'pc_display_main_end', 10 );  // layout com
 
 function pc_display_home_content( $settings_home ) {
 
-	// titre
+	/*----------  Header  ----------*/
+	
 	echo '<header class="main-header">';
 	echo '<h1>'.$settings_home['content-title'].'</h1>';
 	pc_fs_btn_scroll_to_content();
 	echo '</header>';
 
-	// wysiwyg
+
+	/*----------  Wysiwyg  ----------*/
+	
 	echo '<div class="editor fs-bloc fs-editor cl-editor"><div class="editor-inner">'.pc_wp_wysiwyg( $settings_home['content-txt'],false ).'</div></div>';
 
-	// pages à la une
-	$home_pages = array();
-	for ($i=1; $i <= 4 ; $i++) {
-		if ( $settings_home['pages-page-'.$i] != '' ) {
-			$home_pages[$settings_home['pages-page-'.$i]] = $settings_home['pages-title-'.$i];
-		}
-	}
+
+	/*----------  Pages à la une  ----------*/
+	
+	// bdd to array
+	$home_pages = ( isset($settings_home['content-pages']) ) ? pc_home_pages_bdd_to_array($settings_home['content-pages']) : '';
 
 	if ( !empty($home_pages) ) {
 
-		echo '<ul class="home-shortcuts reset-list">';
-			foreach ($home_pages as $page_id => $page_new_title) {
-				$page_title = ($page_new_title != '') ? $page_new_title : get_the_title($page_id);
-				echo '<li class="home-shortcut-item"><a title="'.$page_title.'" href="'.get_the_permalink($page_id).'" class="home-shortcut-link"><span class="home-shortcut-img">';
+		// pour les CSS, pair ou impair ?
+		$shortcuts_nb = ( count($home_pages)%2 == 1 ) ? 'home-shortcuts--odd' : 'home-shortcuts--even';
 
+		echo '<ul class="home-shortcuts '.$shortcuts_nb.' reset-list">';
+			foreach ($home_pages as $page_id => $page_new_title) {
+
+				// titre
+				$page_title = ($page_new_title != '') ? $page_new_title : get_the_title($page_id);
+				
+				// image de la page ou image par défaut
 				$page_img_id = get_post_meta( $page_id, 'thumbnail-img', true );
 				if ( $page_img_id != '' ) {
 					$page_img_urls = array(
@@ -65,20 +71,21 @@ function pc_display_home_content( $settings_home ) {
 						get_bloginfo('template_directory').'/images/st-default-400.jpg',
 						get_bloginfo('template_directory').'/images/st-default-500.jpg'
 					);
-					$page_img_alt = '';
+					$page_img_alt = $page_title;
 				}
-
 				$page_img_srcset = $page_img_urls[0].' 400w, '.$page_img_urls[1].' 500w';
 				$page_img_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 500px, (min-width:760px) and (max-width:840px) 400px (min-width:841px) 500px';
 				$page_img = '<img src="'.$page_img_urls[1].'" alt="'.$page_img_alt.'" srcset="'.$page_img_srcset.'" sizes="'.$page_img_sizes.'" />';
 				$page_img = apply_filters( 'pc_filter_home_shortcut_img', $page_img, $page_id );
-				echo $page_img;
 
-				echo '</span><span class="home-shortcut-txt">'.pc_words_limit($page_title,40).'</span></a></li>';
-			}
-			if ( count($home_pages) == 1 || count($home_pages) == 3 ) {
-				echo '<li class="home-shortcut-item home-shortcut-item--fake" aria-hidden="true"></li>';
-			}
+				// affichage
+				echo '<li class="home-shortcut-item"><a title="'.$page_title.'" href="'.get_the_permalink($page_id).'" class="home-shortcut-link"><span class="home-shortcut-img">';
+				echo $page_img;
+				echo '</span><span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($page_title),40).'</span>';
+				echo '</span><span class="home-shortcut-ico">'.pc_svg('link','','svg-block').'</span>';
+				echo '</a></li>';
+
+			} // FIN foreach $home_pages
 		echo '</ul>';
 
 	}
@@ -96,16 +103,8 @@ add_filter( 'pc_filter_html_css_class', 'pc_home_add_class' );
 		
 function pc_home_add_class( $class ) {
 
-	global $settings_home;
-
-	$home_pages = false;
-	for ($i=1; $i <= 4 ; $i++) {
-		if ( $settings_home['pages-page-'.$i] != '' ) {
-			$home_pages = true;
-			break;
-		}
-	}
-	if ( $home_pages ) { $class[] = 'is-home-with-shortcuts'; }
+	global $home_pages;
+	if ( !empty($home_pages) ) { $class[] = 'is-home-with-shortcuts'; }
 
 	return $class;
 

@@ -129,7 +129,7 @@ $('button:not(.overlay), .p-nav-link').mouseup(function() {
 
 /*----------  iframe  ----------*/
 
-$('iframe').each(function() {
+$('.editor iframe').each(function() {
 	$(this).wrap('<div class="iframe iframe_16-10"></div>');
 });
 
