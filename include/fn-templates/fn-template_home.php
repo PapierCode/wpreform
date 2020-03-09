@@ -74,15 +74,15 @@ function pc_display_home_content( $settings_home ) {
 					$page_img_alt = $page_title;
 				}
 				$page_img_srcset = $page_img_urls[0].' 400w, '.$page_img_urls[1].' 500w';
-				$page_img_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 500px, (min-width:760px) and (max-width:840px) 400px (min-width:841px) 500px';
+				$page_img_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 500px, (min-width:760px) and (max-width:840px) 400px, (min-width:841px) 500px';
 				$page_img = '<img src="'.$page_img_urls[1].'" alt="'.$page_img_alt.'" srcset="'.$page_img_srcset.'" sizes="'.$page_img_sizes.'" />';
 				$page_img = apply_filters( 'pc_filter_home_shortcut_img', $page_img, $page_id );
 
 				// affichage
-				echo '<li class="home-shortcut-item"><a title="'.$page_title.'" href="'.get_the_permalink($page_id).'" class="home-shortcut-link"><span class="home-shortcut-img">';
-				echo $page_img;
-				echo '</span><span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($page_title),40).'</span>';
-				echo '</span><span class="home-shortcut-ico">'.pc_svg('link','','svg-block').'</span>';
+				echo '<li class="home-shortcut-item"><a title="'.$page_title.'" href="'.get_the_permalink($page_id).'" class="home-shortcut-link">';
+				echo '<span class="home-shortcut-img">'.$page_img.'</span>';
+				echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($page_title),40).'</span>';
+				echo '<span class="home-shortcut-ico">'.pc_svg('link','','svg-block').'</span>';
 				echo '</a></li>';
 
 			} // FIN foreach $home_pages
