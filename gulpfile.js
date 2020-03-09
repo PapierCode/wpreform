@@ -14,7 +14,7 @@
 
 // Chargement des plugins
 
-const { src, dest, watch, series }          = require( 'gulp' ); // base
+const { src, dest, watch, series } = require( 'gulp' ); // base
 
 const sass          = require( 'gulp-sass' ); // scss to css
 const postcss 		= require( 'gulp-postcss' ); // package
@@ -44,9 +44,9 @@ var plugins = [
 ];
 
 // commentaire WP
-var theme_name 	    = 'WPréformaté',
+var theme_name 	    = 'WPreform',
 	theme_author 	= 'www.papier-code.fr'
-	theme_desc 		= 'Base de projet',
+	theme_desc 		= 'Wordpress theme toolkit',
 	wp_comment 		= '/* \nTheme Name: '+theme_name+' \nAuthor: '+theme_author+' \nDescription: '+theme_desc+' \n*/\n\n';
 
 
