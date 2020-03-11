@@ -44,7 +44,7 @@ body {}
 ==============================*/
 
 .header {
-	background-color:$red;
+	background-color:var(--color-1);
 }
 .header-inner {}
 
@@ -105,8 +105,8 @@ body {}
 ==============================*/
 
 .footer {
-	background-color:$black;
-	color:$beige;
+	background-color:var(--color-black);
+	color:var(--color-white);
 	padding-top:.5*$space;
 }
 .footer-inner {}

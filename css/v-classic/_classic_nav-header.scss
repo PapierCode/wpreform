@@ -89,7 +89,7 @@
 	/* $mq-nav-max--cl */
 	@media ( min-width : em($mq-nav-max--cl) ) {
 		.is-active & {
-			background-color: $yellow;
+			background-color: var(--color-2);
 			transform:translateY(rem($space--h-nav));
 
 			&:before {
@@ -110,7 +110,7 @@
 			}
 		}
 		&:hover, &:focus {
-			background-color: $beige;
+			background-color: var(--color-white);
 			transform:translateY(rem($space--h-nav));
 
 			&:after {

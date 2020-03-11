@@ -89,16 +89,16 @@ $t-home-shortcut-hover : .5s;
 	bottom:0;
 	right:0;
 	padding: rem(10);
-	background-color: rgba($black,.8);
-	color:$beige;
+	background-color: var(--color-black);
+	color:var(--color-white);
 	transition:all $t-home-shortcut-hover ease;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
 	.home-shortcut-link:hover &, .home-shortcut-link:focus & {
-		background-color: $blue;
-		color:$black;
+		background-color: var(--color-3);
+		color:var(--color-black);
 		min-height:100%;
 		transition:all $t-home-shortcut-hover ease;
 	}
@@ -107,7 +107,7 @@ $t-home-shortcut-hover : .5s;
 	position: absolute;
 	left:rem(10);
 	top:rem(10);
-	background-color: $beige;
+	background-color: var(--color-white);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -117,7 +117,7 @@ $t-home-shortcut-hover : .5s;
 	transition:transform $t-home-shortcut-hover ease;
 
 	svg {
-		fill:$black;
+		fill:var(--color-black);
 	}
 
 	.home-shortcut-link:hover &, .home-shortcut-link:focus & {

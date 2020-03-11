@@ -18,11 +18,11 @@ $instagram-color	: #c32aa3;
 .social-link {
 	display: block;
 	padding: rem(10);
-	background-color: $black;;
+	background-color: var(--color-black);
 	transition:background-color .3s ease;
 	
 	path {
-		fill:$beige;
+		fill:var(--color-white);
 		transition:fill .3s ease;
 	}
 

@@ -45,7 +45,7 @@
 ============================*/
 
 .f-nav-link {
-	color:$beige;
+	color:var(--color-white);
 	text-decoration: none;
 
 	&:hover, &:focus {

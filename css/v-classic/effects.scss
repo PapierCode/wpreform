@@ -12,7 +12,7 @@ $space--st : 30;
 		content:"";
 		position: absolute;
 		z-index: -1;
-		background-color: $blue;
+		background-color: var(--color-3);
 		opacity: 0;
 		transition:all .5s ease;
 		transform-origin: center;
@@ -51,7 +51,7 @@ $space--st : 30;
 		position: absolute;
 		z-index: 1;
 		height: rem(4);
-		background-color: $black;
+		background-color: var(--color-black);
 		transition:all .5s ease;
 	}
 	&:before {

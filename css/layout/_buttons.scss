@@ -10,10 +10,10 @@
 	align-items: center;
 	height: rem(40);
 	padding:rem(0,10);
-	background-color: $black;
+	background-color: var(--color-black);
 
 	font-family: var(--font);
-	color:$beige;
+	color:var(--color-white);
 	text-decoration: none;
 
 	transition:all .3s ease;
@@ -22,17 +22,17 @@
 		margin-left: rem(5);
 	}
 	path {
-		fill:$beige;
+		fill:var(--color-white);
 		transition:fill .3s ease;
 	}
 
 	&:hover, &:focus {
-		background-color: $blue;
-		color:$black;
+		background-color: var(--color-3);
+		color:var(--color-black);
 		transition:all .3s ease;
 
 		path {
-			fill:$black;
+			fill:var(--color-black);
 			transition:fill .3s ease;
 		}
 	}
@@ -49,6 +49,6 @@
 }
 
 .btn--red {
-	background-color: $red;
-	color:$black;
+	background-color: var(--color-1);
+	color:var(--color-black);
 }

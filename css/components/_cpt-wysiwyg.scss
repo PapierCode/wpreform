@@ -58,7 +58,6 @@ $link-color-visited				: purple;
 ================================*/
 
 .editor {}
-
 .editor-inner {
 
 	
@@ -73,7 +72,7 @@ $link-color-visited				: purple;
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
-		:first-child {
+		> :first-child {
 			.theme-classic & {
 				margin-top:rem(-$margin-top-default);
 			}
@@ -159,11 +158,22 @@ $link-color-visited				: purple;
 
 	/*----------  Titres  ----------*/
 
+
+	h2, h3  {
+		font-family: var(--font);
+		font-weight: normal;
+		margin-bottom: 0;
+
+		a {
+			color: inherit;
+			border: none;
+			background: none;
+			text-decoration: none;
+		}
+	}
+
 	h2 {
 		color:$h2-color;
-		font-family: $h2-font-family;
-		font-weight: $h2-font-weight;
-		margin-bottom: 0;
 
 		font-size: rem($h2-font-size-small);
 		line-height: $h2-line-height-small;
@@ -179,9 +189,6 @@ $link-color-visited				: purple;
 
 	h3 {
 		color:$h3-color;
-		font-family: $h3-font-family;
-		font-weight: $h3-font-weight;
-		margin-bottom: 0;
 
 		font-size: rem($h3-font-size-small);
 		line-height: $h3-line-height-small;
@@ -192,15 +199,6 @@ $link-color-visited				: purple;
 			font-size: rem($h3-font-size-big);
 			line-height: $h3-line-height-big;
 			margin-top: rem($h3-margin-top-big);
-		}
-	}
-
-	h2, h3  {
-		a {
-			color: inherit;
-			border: none;
-			background: none;
-			text-decoration: none;
 		}
 	}
 

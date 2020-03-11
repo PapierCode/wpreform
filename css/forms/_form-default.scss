@@ -77,12 +77,12 @@
 	textarea {
 		
 		width:100%;
-		border:1px solid $black;
+		border:1px solid var(--color-black);
 		padding:rem(10);
 
 		&.error { border-color: $msg-error-color; }
 		&:focus {
-			background-color: $blue;
+			background-color: var(--color-3);
 			outline: none;
 		}
 	}
@@ -96,20 +96,20 @@
 				width: rem(20);
 				height: rem(20);
 				border:rem(4) solid #fff;
-				outline:1px solid $black;
+				outline:1px solid var(--color-black);
 				margin:rem(4,10,0,0);
 				background-color: #fff;
 			}
 		}
 		&:focus + label {
 			&:before {
-				background-color:$blue;
-				border-color:$blue;
+				background-color:var(--color-3);
+				border-color:var(--color-3);
 			}
 		}
 		&:checked + label {	
 			&:before {
-				background-color: $red;
+				background-color: var(--color-1);
 			}
 		}
 	}
@@ -143,7 +143,7 @@
 
 .form-item--captcha {
 	padding-top: $space;
-	border-top:1px solid $grey;
+	border-top:1px solid var(--color-grey);
 	.g-recaptcha {
 		margin-top: rem(10);
 
@@ -180,7 +180,7 @@
 	text-align: center;
 	justify-content: center;
 	padding: $space 0;
-	border:1px solid $grey;
+	border:1px solid var(--color-grey);
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {

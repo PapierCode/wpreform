@@ -15,7 +15,7 @@
 /*----------  Titre de la page  ----------*/
 
 h1, .h1-like {
-	color:$font-color-default;
+	color:var(--color-black);
 	font-family: var(--font);
 	font-weight: 900;
 	margin: 0;
@@ -48,7 +48,7 @@ h1, .h1-like {
 .main-footer-nav {
 	margin-bottom:$space;
 	padding-bottom: $space;
-	border-bottom:1px solid $grey;
+	border-bottom:1px solid var(--color-grey);
 	
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
@@ -72,7 +72,7 @@ h1, .h1-like {
 	transition:background-color $t-st-hover ease;
 
 	&:hover {
-		background-color: $blue;
+		background-color: var(--color-3);
 		transition:background-color $t-st-hover ease;
 	}
 }
@@ -91,7 +91,7 @@ h1, .h1-like {
 	margin:rem($space--st,0,.5*$space--st,0);
 
 	a {
-		color:$black;
+		color:var(--color-black);
 		text-decoration: none;
 
 		&:before {
@@ -103,7 +103,7 @@ h1, .h1-like {
 			left: 0;
 		}
 		&:focus {
-			background-color: $blue;
+			background-color: var(--color-3);
 			outline: none;
 		}
 	}
@@ -139,18 +139,18 @@ h1, .h1-like {
 		align-items: center;
 		justify-content: center;
 		vertical-align: middle;
-		background-color: $black;
+		background-color: var(--color-black);
 		width: rem(24);
 		height: rem(24);
 
 		svg {
-			fill:$beige;
+			fill:var(--color-white);
 		}
 	}
 
 	.st:hover & {
 		svg {
-			fill:$blue;
+			fill:var(--color-3);
 		}
 	}
 }

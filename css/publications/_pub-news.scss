@@ -16,23 +16,17 @@
 	justify-content: center;
 	font-size: rem(16);
 	padding:rem(5,0);
-	transition:all .5s ease;
-
-	.st:hover & {
-		border-top-color: rgba($black,.15);
-		transition:all .5s ease;
-	}
 }
 
 // .st-ico {
 // 	padding: rem(6);
-// 	background-color: $blue;
+// 	background-color: var(--color-3);
 // 	border-radius: 50%;
 // 	margin-right:rem(5);
 // 	transition:all .3s ease;
 	
 // 	svg * {
-// 		fill:$black;
+// 		fill:var(--color-black);
 // 		transition:all .3s ease;
 // 	}
 // }
@@ -56,7 +50,7 @@
 	display: inline-flex;
 	align-items: center;
 	margin-right: rem($space--st/2);
-	color:$black;
+	color:var(--color-black);
 	font-style: italic;
 	transition:color .3s ease;
 }
@@ -69,7 +63,7 @@
 .st-tax-list-item {}
 .st-tax-list-link {
 	display: inline-block;
-	color:$black;
+	color:var(--color-black);
 	transition:all .3s ease;
 
 	&:hover, &:focus {
