@@ -1,14 +1,14 @@
 <footer class="footer"><div class="footer-inner cl-bloc fs-bloc">
 
 	<?php
-	/*===============================
-	=            Contact            =
-	===============================*/ ?>
+	/*===================================
+	=            Coordonnées            =
+	===================================*/ ?>
 	
-	<address class="contact">
+	<address class="coord">
 		<?php global $settings_project; ?>
-		<dl class="contact-list">
-			<dt class="contact-item contact-item--logo">
+		<dl class="coord-list">
+			<dt class="coord-item coord-item--logo">
 				<?php
 					$logo_footer_datas = array(
 						'url' => get_bloginfo('template_directory').'/images/logo-footer.svg',
@@ -20,19 +20,23 @@
 					?>
 					<img src="<?= $logo_footer_datas['url']; ?>" alt="<?= $logo_footer_datas['alt']; ?>" width="<?= $logo_footer_datas['width']; ?>" height="<?= $logo_footer_datas['height']; ?>" />
 			</dt>
-			<dd class="contact-item contact-item--addr">
-				<span class="contact-ico"><?= pc_svg('map',null,'svg-block'); ?></span>
-				<span class="contact-txt">
+			<dd class="coord-item coord-item--addr">
+				<span class="coord-ico"><?= pc_svg('map',null,'svg-block'); ?></span>
+				<span class="coord-txt">
 					<?= $settings_project['coord-address'].' <br/>'.$settings_project['coord-postal-code'].' '.$settings_project['coord-city']; ?>
-					<br aria-hidden="true"/><button aria-hidden="true" class="reset-btn">Afficher la carte</button>
+
+					<?php if ( $settings_project['coord-lat'] != '' && $settings_project['coord-long'] != '' ) { ?>
+						<br aria-hidden="true"/><button class="reset-btn btn-display-pop no-print" data-cible="map" data-lat="<?= $settings_project['coord-lat']; ?>" data-long="<?= $settings_project['coord-long']; ?>" aria-hidden="true">Afficher la carte</button>
+					<?php } ?>
+
 				</span>
 			</dd>
-			<dd class="contact-item contact-item--phone">
-				<span class="contact-ico"><?= pc_svg('phone',null,'svg-block'); ?></span>
-				<span class="contact-txt">
+			<dd class="coord-item coord-item--phone">
+				<span class="coord-ico"><?= pc_svg('phone',null,'svg-block'); ?></span>
+				<span class="coord-txt">
 					<a href="tel:<?= pc_phone($settings_project['coord-phone-1']); ?>"><?= $settings_project['coord-phone-1']; ?></a>
 					<?php if ( $settings_project['coord-phone-2'] != '' ) {
-						echo '<br/><span class="contact-sep"> - </span><a href="tel:'.pc_phone($settings_project['coord-phone-2']).'">'.$settings_project['coord-phone-2'].'</a>';
+						echo '<br/><span class="coord-sep"> - </span><a href="tel:'.pc_phone($settings_project['coord-phone-2']).'">'.$settings_project['coord-phone-2'].'</a>';
 					} ?>
 				</span>
 			</dd>
@@ -40,7 +44,7 @@
 	</address>
 
 
-	<?php /*=====  FIN Contact  =====*/
+	<?php /*=====  FIN Coordonnées  =====*/
 
 	/*====================================
 	=            Microdonnées            =
@@ -113,7 +117,12 @@
 
 </div> <?php // fin .body-inner ?>
 
-<?php pc_sprite_to_js(); ?>
+<?php /*----------  Pop-up plein écran  ----------*/ ?>
+<div class="pop no-print" aria-hidden="true"></div>
+
+<?php $sprite_to_js_array = array('arrow','cross');
+apply_filters( 'pc_filter_sprite_to_svg', $sprite_to_js_array );
+pc_sprite_to_js( $sprite_to_js_array ); ?>
 <script src="<?php bloginfo('template_directory'); ?>/scripts/scripts.min.js"></script>
 
 <?php wp_footer(); ?>

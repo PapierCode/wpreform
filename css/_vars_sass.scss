@@ -1,11 +1,6 @@
-
-
 /*===================================
 =            Typographie            =
 ===================================*/
-
-
-/*----------  Défaut  ----------*/
 
 $base-font-family		: Arial, Roboto, "Nimbus Sans L", sans-serif;
 
@@ -16,28 +11,6 @@ $base-line-height		: 1.5;
 
 
 /*=====  FIN Typographie  ======*/
-
-/*================================
-=            Couleurs            =
-================================*/
-
-/*----------  Project  ----------*/
-
-$beige 		: #f9f5ec;
-$black		: #2a1010;
-$grey 		: #e4ddd5;
-
-$red 		: #fd4b4b;
-$yellow		: #ffd17b;
-$blue		: #bfe8ea;
-
-
-/*----------  Défaut  ----------*/
-
-$color-placeholder		: #777;
-
-
-/*=====  FIN Couleurs  ======*/
 
 /*==================================
 =            Agencement            =
@@ -107,5 +80,6 @@ $t-nav-link 			: .3s;
 
 // article résumé
 $t-st-hover				: .5s;
+
 
 /*=====  FIN Durées d'animation  =====*/

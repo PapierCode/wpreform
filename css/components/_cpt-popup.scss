@@ -1,0 +1,70 @@
+/**
+*
+* Composants : pop-up plein écran
+*
+**/
+
+
+/*=================================
+=            Container            =
+=================================*/
+
+.pop {
+	display:none;
+
+	&.is-visible {
+		display: block;
+		position: fixed;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+		z-index: 9999;
+	}
+}
+
+.pop-inner {
+	height: 100%;
+}
+
+.pop-controls {
+	position: absolute;
+	z-index: 666;
+	top:$space;
+	right:$space;
+
+	button {
+		vertical-align: middle;
+		margin-left:rem(10);
+	}
+}
+
+
+/*=====  FIN Container  =====*/
+
+/*================================
+=            Contenus            =
+================================*/
+
+/*----------  Carte  ----------*/
+
+.pop--map {
+	background-color: hsla(var(--color-white-h),var(--color-white-s),var(--color-white-l),.8);
+}
+
+.map-marker {
+	&:before {
+		content:"";
+		position: absolute;
+		top:0;
+		right:0;
+		bottom:0;
+		left:0;
+		background-image:svg-load("../images/icons/map-favicon.svg");
+		background-position: center top;
+		background-repeat: no-repeat;
+	}
+}
+
+
+/*=====  FIN Contenus  =====*/

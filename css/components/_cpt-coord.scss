@@ -1,21 +1,21 @@
 /**
 *
-* Composant : contact
+* Composant : coord
 *
 **/
 
-.contact {}
+.coord {}
 
-.contact-list {
+.coord-list {
 	margin:0;
 	font-style: normal;
 }
 
-.contact-item {
+.coord-item {
 	margin:0;
 	display: flex;
 }
-.contact-item--logo {
+.coord-item--logo {
 
 	/* $mq-layout-m */
 	@media ( min-width : em($mq-layout-m) ) {
@@ -24,7 +24,7 @@
 		}
 	}
 }
-.contact-item--addr {
+.coord-item--addr {
 	margin-top:rem(20);
 
 	button {
@@ -57,7 +57,7 @@
 	}
 
 }
-.contact-item--phone {
+.coord-item--phone {
 	margin-top:rem(10);
 	
 	a {
@@ -68,7 +68,7 @@
 		   text-decoration: underline;
 		}
 	}
-	.contact-sep {
+	.coord-sep {
 		display: none;
 	}
 
@@ -78,13 +78,13 @@
 		br {
 			display:none;
 		}
-		.contact-sep {
+		.coord-sep {
 			display: inline;
 		}
 	}
 }
 
-.contact-ico {
+.coord-ico {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -97,4 +97,4 @@
 		fill:var(--color-black);
 	}
 }
-.contact-txt {}
+.coord-txt {}
