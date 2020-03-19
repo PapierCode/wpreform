@@ -198,18 +198,21 @@ function pc_sub_page_save( $post_id ) {
 
             /*----------  Traitement des sous-pages  ----------*/
             
-            // si ce n'est pas une révision et si c'est la liste de sous-pages
+            // si c'est la liste de sous-pages
             if ( $name == 'content-subpages' ) {
 
                 $subpages_temp = explode(',',$temp);
-                $subpages_saved = explode(',',$save);
+				$subpages_saved = explode(',',$save);
+				
+				$post_type = get_post_type( $post_id );
+				$real_post_id = ( $post_type == 'revision' ) ? wp_get_post_parent_id($post_id) : $post_id;
                 
                 // nouvelle liste de sous-pages
                 if ( $temp != '' && count($subpages_temp) > 0 ) {
                     foreach ($subpages_temp as $temp_id) {
                         // si ce n'est pas déjà une sous-page
                         if ( !in_array($temp_id,$subpages_saved) ) {
-                            pc_update_subpage( $temp_id, $post_id );
+                            pc_update_subpage( $temp_id, $real_post_id );
                         // si c'est déjà une sous-page
                         } else {
                             // suppression dans le tableau représentant la sauvegarde
@@ -222,7 +225,8 @@ function pc_sub_page_save( $post_id ) {
                 // sous-page à détacher 
                 if ( $save != '' && count($subpages_saved) > 0 ) {
                     foreach ($subpages_saved as $save_id) { pc_update_subpage( $save_id, '' ); }
-                }
+				}
+				
             }
 
 
