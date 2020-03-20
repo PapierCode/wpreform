@@ -59,7 +59,7 @@ function classic_css() {
     return src( ['css/v-classic.scss'] )
         .pipe(sass({ precision: 3 }))
         .pipe(postcss( plugins ))
-        .pipe(dest( 'css' ));
+        .pipe(dest( './' ));
 
 }
 
@@ -68,7 +68,7 @@ function fullscreen_css() {
     return src( ['css/v-fullscreen.scss'] )
         .pipe(sass({ precision: 3 }))
         .pipe(postcss( plugins ))
-        .pipe(dest( 'css' ));
+        .pipe(dest( './' ));
 
 }
 
