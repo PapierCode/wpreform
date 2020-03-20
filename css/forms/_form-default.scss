@@ -73,7 +73,7 @@
 		border-style: solid;
 		padding:rem(10);
 
-		&.error { border-color: $msg-error-color; }
+		&.error { border-color: var(--color-msg-error); }
 		&:focus {
 			outline: none;
 		}
