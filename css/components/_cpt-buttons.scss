@@ -1,6 +1,6 @@
 /**
 *
-* Guide de style
+* Boutons
 *
 **/
 
@@ -10,29 +10,20 @@
 	align-items: center;
 	height: rem(40);
 	padding:rem(0,10);
-	background-color: var(--color-black);
-
-	font-family: var(--font);
-	color:var(--color-white);
 	text-decoration: none;
-
 	transition:all .3s ease;
 
 	svg + span {
 		margin-left: rem(5);
 	}
 	path {
-		fill:var(--color-white);
 		transition:fill .3s ease;
 	}
 
 	&:hover, &:focus {
-		background-color: var(--color-3);
-		color:var(--color-black);
 		transition:all .3s ease;
 
 		path {
-			fill:var(--color-black);
 			transition:fill .3s ease;
 		}
 	}
@@ -46,9 +37,4 @@
 		font-size: rem(22);
 		padding:rem(0,20);
 	}
-}
-
-.btn--red {
-	background-color: var(--color-1);
-	color:var(--color-black);
 }

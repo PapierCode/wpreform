@@ -77,7 +77,8 @@
             currentImg,                         // current image index, return number
 
             $glMain,                            // gallery main container, return an object
-            $glContainer,                       // gallery moving container, return an object
+            $glHeader,                          // gallery header, return an object
+            $glSlides,                       // gallery moving container, return an object
             $allSlide,                          // slides list, return an object
             $slidePrev,                         // active slide before gallery move, return an object
             $slideActive,                       // current active slide, return an object
@@ -141,7 +142,7 @@
                 // prepare gallery as if it had moved
                 $itemsToMove = $allSlide.eq(currentImg).prevAll();
                 for (var k = $itemsToMove.length; k > 0; k--) {
-                   $itemsToMove.eq(k-1).appendTo($glContainer);
+                   $itemsToMove.eq(k-1).appendTo($glSlides);
                 }
                 // save and add class to the active slide
                 // add class "is-hidden" for gallery opening
@@ -166,34 +167,29 @@
 
             /*----------  base  ----------*/
 
-            var imgContainerHtml = '<div class="gl" aria-hidden="true"><div class="gl-container" style="width:'+imgNb*100+'%" ></div></div>';
+            var imgContainerHtml = '<div class="gl" aria-hidden="true"><div class="gl-main"><div class="gl-slides" style="width:'+imgNb*100+'%" ></div></div></div>';
 
             $body.append(imgContainerHtml);
             $glMain = $('.gl').on('click',overlayClic);
-            $glContainer = $('.gl-container');
+            $glSlides = $('.gl-slides');
 
 
             /*----------  add slides  ----------*/
 
             // create slides
             for (var i = 0; i < imgNb; i++) {
-                $glContainer.append('<div class="gl-slide is-hidden slide-'+i+'" style="width:'+(100/imgNb).toFixed(4)+'%"><div class="gl-slide-container"></div></div>');
+                $glSlides.append('<div class="gl-slide is-hidden slide-'+i+'" style="width:'+(100/imgNb).toFixed(4)+'%"><div class="gl-slide-inner"></div></div>');
             }
 
             $allSlide = $('.gl-slide');
 
 
-            /*----------  add loader  ----------*/
+            /*----------  add header & footer  ----------*/
 
-            $glMain.append('<div class="gl-loader loader">'+plugin.settings.loaderContent+'</div>');
+			$glMain.prepend('<div class="gl-header"><div class="gl-counter"><span class="gl-counter-current">'+(currentImg+1)+'</span> / <span class="gl-counter-all">'+imgUrls.length+'</span></div></div>');
+			$glMain.append('<div class="gl-footer"><div class="gl-caption"></div></div>');
 
-            $loader = $('.loader');
-
-
-            /*----------  add counter & caption  ----------*/
-
-            $glMain.append('<div class="gl-counter"><span class="gl-counter-current">'+(currentImg+1)+'</span> / <span class="gl-counter-all">'+imgUrls.length+'</span></div><div class="gl-caption"></div>');
-
+			$glHeader = $('.gl-header');
             $caption = $('.gl-caption');
             $counter = $('.gl-counter');
             $counterCurrent = $('.gl-counter-current');
@@ -203,17 +199,25 @@
 
             if (imgNb > 1) {
 
-                $glMain.append('<button class="gl-btn gl-btn-nav gl-btn-nav--prev reset-btn '+plugin.settings.btnPrevClass+'" aria-hidden="true" tabindex="-1">'+plugin.settings.btnPrevInner+'</button><button class="gl-btn gl-btn-nav gl-btn-nav--next reset-btn '+plugin.settings.btnNextClass+'" aria-hidden="true" tabindex="-1">'+plugin.settings.btnPrevInner+'</button>');
+                $glHeader.append('<button class="gl-btn gl-btn-nav gl-btn-nav--prev reset-btn '+plugin.settings.btnPrevClass+'" aria-hidden="true" tabindex="-1">'+plugin.settings.btnPrevInner+'</button><button class="gl-btn gl-btn-nav gl-btn-nav--next reset-btn '+plugin.settings.btnNextClass+'" aria-hidden="true" tabindex="-1">'+plugin.settings.btnPrevInner+'</button>');
 
                 $btnNav = $('.gl-btn-nav').on('mouseup', function() { $(this).blur(); });
                 $btnPrev = $('.gl-btn-nav--prev').on('click', function(){ prevImg(); });
-                $btnNext = $('.gl-btn-nav--next').on('click', function(){ nextImg(); });
+				$btnNext = $('.gl-btn-nav--next').on('click', function(){ nextImg(); });
+				
+				$glHeader.append('<button class="gl-btn gl-btn-close reset-btn '+plugin.settings.btnCloseClass+'">'+plugin.settings.btnCloseInner+'</button>');
+
+				
+				$btnClose = $('.gl-btn-close').on('click', function(){ galleryHide(); });
 
             }
 
-            $glMain.append('<button class="gl-btn gl-btn-close reset-btn '+plugin.settings.btnCloseClass+'">'+plugin.settings.btnCloseInner+'</button>');
 
-            $btnClose = $('.gl-btn-close').on('click', function(){ galleryHide(); });
+            /*----------  add loader  ----------*/
+
+            $glMain.append('<div class="gl-loader loader">'+plugin.settings.loaderContent+'</div>');
+
+            $loader = $('.loader');
 
 
             /*----------  my console  ----------*/
@@ -339,7 +343,7 @@
                     // to remove an effect
                     if (imgNb > 1 ) { $btnNav.removeClass('is-loading'); }
                     // add img to slide
-                    slide.addClass('is-loaded').children().append('<img src="'+cible+'" />');
+					slide.addClass('is-loaded').children().append('<img src="'+cible+'" />');
                     // add touche event
                     touchEvent(slide.find('img'));
                     // gallery opening
@@ -387,7 +391,7 @@
             // move it to the left
             // move last child to first position
             if (x < 0) {
-                $glContainer.css('left',x*100+'%').children(':last').prependTo($glContainer);
+                $glSlides.css('left',x*100+'%').children(':last').prependTo($glSlides);
                 $slidePrev.addClass('is-leaving-to-right');
                 $slideActive.addClass('is-coming-from-left');
             } else {
@@ -399,7 +403,7 @@
             /*----------  gallery animation  ----------*/
 
             // animation
-            $glContainer.animate({
+            $glSlides.animate({
                 left:'-='+x*100+'%'
             },{
                 duration:plugin.settings.moveDuration*Math.abs(x), // animation time
@@ -416,7 +420,7 @@
                     // reset gallery's position
                     // move first child to last position
                     if (x > 0) {
-                        $glContainer.css('left','0').children(':first').appendTo($glContainer);
+                        $glSlides.css('left','0').children(':first').appendTo($glSlides);
                         $slidePrev.removeClass('is-leaving-to-left');
                         $slideActive.removeClass('is-coming-from-right');
                     } else {

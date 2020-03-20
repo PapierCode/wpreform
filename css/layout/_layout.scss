@@ -43,9 +43,7 @@ body {}
 =            Header            =
 ==============================*/
 
-.header {
-	background-color:var(--color-1);
-}
+.header {}
 .header-inner {}
 
 .h-logo {}
@@ -105,8 +103,6 @@ body {}
 ==============================*/
 
 .footer {
-	background-color:var(--color-black);
-	color:var(--color-white);
 	padding-top:.5*$space;
 }
 .footer-inner {}

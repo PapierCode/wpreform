@@ -5,7 +5,6 @@
 $mq-font-size		   	: 16; // pour le calcul des medias queries
 $base-font-size-s		: 16;
 $base-font-size-l		: 18;
-$base-line-height		: 1.5;
 
 
 /*=====  FIN Typographie  ======*/
@@ -61,8 +60,8 @@ $mq-nav-max--cl			: $layout-mw--cl;
 $space--st 				: 20;
 
 $mq-title-size			: 600;
-$mq-gallery-nav		    : $mq-layout-l;
 $mq-gallery-max			: 1200;
+$gl-btn-size 			: 50;
 
 
 /*=====  FIN Agencement  ======*/
@@ -78,6 +77,9 @@ $t-nav-link 			: .3s;
 
 // article résumé
 $t-st-hover				: .5s;
+
+// accueil
+$t-home-shortcut-hover 	: .5s;
 
 
 /*=====  FIN Durées d'animation  =====*/

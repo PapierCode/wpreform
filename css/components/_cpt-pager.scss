@@ -7,51 +7,29 @@
 .pager-list {
 	display: flex;
 }
-.pager-item {
-	margin-right: rem(10);
-}
 .pager-link {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: rem(40);
-	height: rem(40);
-	background-color: var(--color-black);
-
 	text-decoration: none;
-	color:var(--color-white);
-	font-weight: 700;
-
 	transition: all .3s ease;
 	
 	path {
-		fill:var(--color-white);
 		transition: fill .3s ease;
 	}
 
-	&.is-active {
-		background-color:transparent;
-		color:var(--color-black);
-		border:2px solid var(--color-black);
-	}
-
 	&:not(.is-active):not(.pager-dots):hover, &:not(.is-active):not(.pager-dots):focus {
-	   background-color:var(--color-3);
-	   color:var(--color-black);
 	   transition: all .3s ease;
 
 	   path {
-		   fill:var(--color-black);
 		   transition: fill .3s ease;
 	   }
+	}
+	&.pager-dots {
+		width: auto;
 	}
 }
 .pager-link--prev {}
 .pager-link--next {
 	transform: rotate(180deg);
-}
-.pager-dots {
-	background-color: transparent;
-	color:var(--color-black);
-	width: auto;
 }

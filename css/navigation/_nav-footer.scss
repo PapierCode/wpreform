@@ -14,26 +14,10 @@
 	flex-wrap:wrap;
 	justify-content: center;
 	margin-top:2*$space;
-	font-size: rem(16);
-
-	&:after {
-		content:"/";
-		margin-left:rem(5);
-	}
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		margin-top: $space;
-	}
-}
-
-.f-nav-item {
-
-	&:nth-child(n+2) {
-		&:before {
-			content:"/";
-			margin:rem(0,5);
-		}
 	}
 }
 
@@ -45,7 +29,6 @@
 ============================*/
 
 .f-nav-link {
-	color:var(--color-white);
 	text-decoration: none;
 
 	&:hover, &:focus {

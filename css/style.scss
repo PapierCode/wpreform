@@ -4,12 +4,14 @@
 *
 **/
 
-@import "vars_sass";
-@import "vars_css";
+
+@import "framework/frk-functions";
+
+@import "vars-sass";
+
 
 /*----------  Framework  ----------*/
 
-@import "framework/frk-functions";
 @import "framework/frk-normalize";
 @import "framework/frk-reset";
 @import "framework/frk-helpers";
@@ -27,12 +29,12 @@
 @import "components/cpt-wysiwyg";
 @import "components/cpt-coord";
 @import "components/cpt-popup";
+@import "components/cpt-buttons";
 
 
 /*----------  Layout  ----------*/
 
 @import "layout/layout";
-@import "layout/buttons";
 
 
 /*----------  Navigation  ----------*/

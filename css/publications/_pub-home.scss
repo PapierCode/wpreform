@@ -10,8 +10,6 @@
 =            Raccourcis            =
 ==================================*/
 
-$t-home-shortcut-hover : .5s;
-
 .home-shortcuts {
 
 	/* $mq-layout-m */
@@ -48,18 +46,9 @@ $t-home-shortcut-hover : .5s;
 		min-height: 25vw;
 	}
 }
-// .home-shortcut-item--fake {
-// 	display: none;
-// 	/* $mq-layout-m */
-// 	@media ( min-width : em($mq-layout-m) ) {
-// 		display:block;
-// 	}
-// }
 
 .home-shortcut-link {
 	position: relative;
-	font-family: var(--font-alt);
-	line-height: 1.3;
 	text-decoration: none;
 	text-align: center;
 	overflow: hidden;
@@ -72,57 +61,13 @@ $t-home-shortcut-hover : .5s;
 		object-fit: cover;
 		height: 100%;
 		width: 100%;
-		transition:transform #{$t-home-shortcut-hover - .1} ease;
+		transition:all #{$t-home-shortcut-hover - .1} ease;
 	}
 
 	.home-shortcut-link:hover &, .home-shortcut-link:focus & {
 		img {
-			transform:translateY(-100%);
-			transition:transform #{$t-home-shortcut-hover + .1} ease;
+			transition:all #{$t-home-shortcut-hover + .1} ease;
 		}
-	}
-}
-.home-shortcut-txt {
-	position: absolute;
-	min-height: 0;
-	left:0;
-	bottom:0;
-	right:0;
-	padding: rem(10);
-	background-color: var(--color-black);
-	color:var(--color-white);
-	transition:all $t-home-shortcut-hover ease;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	.home-shortcut-link:hover &, .home-shortcut-link:focus & {
-		background-color: var(--color-3);
-		color:var(--color-black);
-		min-height:100%;
-		transition:all $t-home-shortcut-hover ease;
-	}
-}
-.home-shortcut-ico {
-	position: absolute;
-	left:rem(10);
-	top:rem(10);
-	background-color: var(--color-white);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: rem(40);
-	height: rem(40);
-	border-radius: 50%;
-	transition:transform $t-home-shortcut-hover ease;
-
-	svg {
-		fill:var(--color-black);
-	}
-
-	.home-shortcut-link:hover &, .home-shortcut-link:focus & {
-		transform:rotate(-90deg);	
-		transition:transform $t-home-shortcut-hover ease;
 	}
 }
 
@@ -141,27 +86,13 @@ $t-home-shortcut-hover : .5s;
 				.home-shortcut-txt, .home-shortcut-img {
 					width: 50%;
 				}
-				&:hover, &:focus {
-					img {
-						transform:translateX(100%);
-					}
-					.home-shortcut-txt {
-						transform:translateX(-100%);
-					}
-					.home-shortcut-ico {
-						transform:translate(-50%,-50%) rotate(-90deg);
-					}
-				}
+
 			}
 			.home-shortcut-txt {
 				position: static;
 				padding:rem($space-max/2);
 			}
-			.home-shortcut-ico {
-				left:50%;
-				top:50%;
-				transform:translate(-50%,-50%) ;
-			}
+
 		}
 	}
 	/* $mq-layout-l */

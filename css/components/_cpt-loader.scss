@@ -8,16 +8,19 @@
 *
 **/
 
+// !!!!!!!!!!!!!!!!!!!
+// $base-font-size-s ?
+// $base-font-size-l ?
+// $mq-title-size ?
 
 /*=================================
 =            Variables            =
 =================================*/
 
-$loader-item-bg 			: #fff;
 $loader-item-width 		: 20;
-$loader-item-height 		: $loader-item-width;
+$loader-item-height		: $loader-item-width;
 $loader-item-space 		: 5;
-$loader-width 				: ( 3 * $loader-item-width ) + ( 2 * $loader-item-space );
+$loader-width 			: ( 3 * $loader-item-width ) + ( 2 * $loader-item-space );
 
 
 /*=====  FIN Variables  ======*/
@@ -46,9 +49,7 @@ $loader-width 				: ( 3 * $loader-item-width ) + ( 2 * $loader-item-space );
 		margin-left: rem($loader-item-space);
 	}
 
-	background-color: $loader-item-bg;
 	border-radius: 100%;
-
 	animation: loader-animation 1.4s infinite ease-in-out both;
 }
 .loader-item--1 {

@@ -17,10 +17,6 @@
 =            Variables            =
 =================================*/
 
-$gl-opening-duration 	: 400ms;
-$gl-closing-duration 	: 400ms; // reporter dans l'option "closingDuration" du plugin jQuery
-
-$gl-bg-color			: rgba(0,0,0,0.8);
 
 $gl-btn-bg-color		: #000;
 $gl-btn-bg-color-hover	: purple;
@@ -39,34 +35,43 @@ $gl-btn-bg-color-hover	: purple;
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-
 	overflow: hidden;
-
-	background-color: $gl-bg-color;
+	display:flex;
+	flex-direction: column;
 
 	// utiliser une animation pour l'ouverture
 	// une transition ne fonctionne pas si l'élément est ajouté par le plugin
-	animation: gl-visible $gl-opening-duration ease;
+	animation: gl-visible 400ms ease;
 	// utiliser un transition pour la fermeture
 	// le plugin ajoute la class "is-hidden" avant de supprimer la gallerie
 	&.is-hidden {
 		transform:translateY(-100%);
-		transition:transform $gl-closing-duration ease;
+		transition:transform 400ms ease; // reporter dans l'option "closingDuration" du plugin jQuery
 	}
 }
 
 @keyframes gl-visible {
-	0% {
-		transform:translateY(-100%);
-	}
-	100% {
-		transform:translateY(0);
-	}
+	0% { transform:translateY(-100%); }
+	100% { transform:translateY(0); }
 }
 
-.gl-container {
-	position: relative;
-	height: 100%
+.gl-header {
+	display: flex;
+	align-items: center;
+	padding: $space;
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		padding:$space/2 $space;
+	}
+}
+.gl-main {
+	height: 0;
+	flex-grow: 1;
+}
+.gl-footer {
+	padding: $space/2 $space;
+	text-align: center;
 }
 
 
@@ -76,46 +81,31 @@ $gl-btn-bg-color-hover	: purple;
 =            Diapositives            =
 ====================================*/
 
-.gl-slide {
+.gl-slides {
 	position: relative;
-	float: left;
+	display: flex;
 	height: 100%;
-
-	&.is-leaving {}
-	&.is-leaving-to-right {}
-	&.is-leaving-to-left {}
-	&.is-coming {}
-	&.is-coming-from-left {}
-	&.is-coming-from-right {}
+}
+.gl-slide {
+	height: 100%;
 }
 
-@keyframes coming {}
-@keyframes comingfromleft {}
-@keyframes comingfromright {}
-@keyframes leaving {}
-@keyframes leavingtoright {}
-@keyframes leavingtoleft {}
-
-.gl-slide-container {
-	text-align: center;
+.gl-slide-inner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 100%;
-	padding: rem(70,10,100,10);
-	&:before {
-		content: "";
-		display: inline-block;
-		height: 50%;
-	}
+	padding: 0 $space;
+
 	> img {
+		object-fit: scale-down;
 		max-height: 100%;
+		max-width: 100%;
 	}
 
-	/* @mq-gallery-nav */
-	@media ( min-width : em($mq-gallery-nav) ) {
-		padding: rem(70,70,100,70);
-	}
-	/* @mq-max */
-	@media ( min-width : em($mq-gallery-max) ) {
-		padding: rem(90,90,100,90);
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		padding: 0 calc( #{rem($gl-btn-size)} + #{2*$space} );
 	}
 }
 
@@ -129,11 +119,14 @@ $gl-btn-bg-color-hover	: purple;
 /*----------  Communs  ----------*/
 
 .gl-btn {
-	background-color: $gl-btn-bg-color;
+	position: relative;
 	transition:background-color 0.3s ease;
 	transform-origin:center center 0;
-	padding: rem(15);
-	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: rem($gl-btn-size);
+	width: rem($gl-btn-size);
 
 	// si l'on clique sur l'enfant SVG
 	// ben ça clique à travers et ferme la galerie...
@@ -146,13 +139,19 @@ $gl-btn-bg-color-hover	: purple;
 		left: 0;
 	}
 
-	img {
-		vertical-align: bottom;
+	svg {
+		display: block;
+	}
+	path {
+		transition:fill .3s ease;
 	}
 
 	&:hover, &:focus {
-		background-color: $gl-btn-bg-color-hover;
 		transition:background-color 0.3s ease;
+			
+		path {
+			transition:fill .3s ease;
+		}
 	}
 }
 
@@ -160,59 +159,39 @@ $gl-btn-bg-color-hover	: purple;
 /*----------  Précédent / suivant  ----------*/
 
 .gl-btn-nav {
-	position: absolute;
-	top: rem(10);
 
-	/* @mq-gallery-nav */
-	@media ( min-width : em($mq-gallery-nav) ) {
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		position: absolute;
+		z-index: 1;
 		top: 50%;
 	}
 }
 .gl-btn-nav--prev {
-	right: rem(130);
 
-	/* @mq-gallery-nav */
-	@media ( min-width : em($mq-gallery-nav) ) {
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		transform: translateY(-50%);
 		right:auto;
-		left: rem(10);
-		margin-top: rem(-20);
-	}
-
-	/* @mq-max */
-	@media ( min-width : em($mq-gallery-max) ) {
-		left: rem(20);
+		left: $space;
 	}
 }
 .gl-btn-nav--next {
-	right: rem(70);
 	transform:rotate(180deg);
+	margin:0 $space/2;
 
-	/* @mq-gallery-nav */
-	@media ( min-width : em($mq-gallery-nav) ) {
-		right: rem(10);
-		margin-top: rem(-20);
-	}
-
-	/* @mq-max */
-	@media ( min-width : em($mq-gallery-max) ) {
-		right: rem(20);
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		margin:0;
+		transform: rotate(180deg) translateY(50%);
+		right: $space;
 	}
 }
 
 
 /*----------  Fermeture  ----------*/
 
-.gl-btn-close {
-	position: absolute;
-	top: rem(10);
-	right: rem(10);
-
-	/* @mq-max */
-	@media ( min-width : em($mq-gallery-max) ) {
-		top: rem(20);
-		right: rem(20);
-	}
-}
+.gl-btn-close {}
 
 
 /*=====  FIN Contrôles  ======*/
@@ -222,16 +201,7 @@ $gl-btn-bg-color-hover	: purple;
 ================================*/
 
 .gl-counter {
-	position: absolute;
-	top: rem(10);
-	left: rem(10);
-	color: #fff;
-
-	/* @mq-max */
-	@media ( min-width:rem($mq-gallery-max)) {
-		top: rem(20);
-		left: rem(20);
-	}
+	margin-right: auto;
 }
 .gl-counter-current {}
 .gl-counter-all {}
@@ -244,14 +214,8 @@ $gl-btn-bg-color-hover	: purple;
 ===============================*/
 
 .gl-caption {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	padding: rem(10);
-	color:#fff;
-	text-align: center;
-	background-color: rgba(0,0,0,0.5);
+	min-height: rem($gl-btn-size);
+	line-height: 1.3;;
 }
 
 
@@ -263,13 +227,17 @@ $gl-btn-bg-color-hover	: purple;
 
 .gl-loader {
 	position: absolute;
-	top: rem(10);
+	top: 50%;
 	left: 50%;
-	margin-left: rem(-$loader-width/2);
-	transform:translateY(0);
+	transform:translate(-50%,-50%);
 	transition:transform 0.5s ease;
+
+	&:before {
+		content:"";
+		position: absolute;
+	}
 	&.is-hidden {
-		transform:translateY(rem(-35));
+		transform:translate(-50%,-100vh);
 		transition:transform 0.5s ease;
 	}
 }

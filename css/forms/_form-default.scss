@@ -40,8 +40,6 @@
 =============================*/
 
 .form-label {
-	font-size: rem(18);
-	font-family: var(--font-alt);
 
 	a, a:visited {
 		color:inherit;
@@ -57,10 +55,6 @@
 	}
 }
 
-.form-label-required {
-	opacity: .6;
-}
-
 
 /*=====  FIN Label  =====*/
 
@@ -69,20 +63,18 @@
 ==============================*/
 
 .form-item-inner {
-
 	margin-top : rem(5);
 
 	input[type="text"],
 	input[type="email"],
-	textarea {
-		
+	textarea {		
 		width:100%;
-		border:1px solid var(--color-black);
+		border-width:1px;
+		border-style: solid;
 		padding:rem(10);
 
 		&.error { border-color: $msg-error-color; }
 		&:focus {
-			background-color: var(--color-3);
 			outline: none;
 		}
 	}
@@ -95,21 +87,11 @@
 				flex-shrink: 0;
 				width: rem(20);
 				height: rem(20);
-				border:rem(4) solid #fff;
-				outline:1px solid var(--color-black);
 				margin:rem(4,10,0,0);
-				background-color: #fff;
-			}
-		}
-		&:focus + label {
-			&:before {
-				background-color:var(--color-3);
-				border-color:var(--color-3);
-			}
-		}
-		&:checked + label {	
-			&:before {
-				background-color: var(--color-1);
+				border-width:rem(4);
+				border-style:solid;
+				outline-width:1px; 
+				outline-style:solid
 			}
 		}
 	}
@@ -143,7 +125,8 @@
 
 .form-item--captcha {
 	padding-top: $space;
-	border-top:1px solid var(--color-grey);
+	border-top-width:1px;
+	border-top-width:solid
 	.g-recaptcha {
 		margin-top: rem(10);
 
@@ -180,17 +163,14 @@
 	text-align: center;
 	justify-content: center;
 	padding: $space 0;
-	border:1px solid var(--color-grey);
+	border-width:1px;
+	border-style: solid;
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		display: block;
 		padding:rem(20) 0;
 	}
-}
-
-.form-submit {
-	text-transform: uppercase;
 }
 
 

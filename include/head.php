@@ -46,18 +46,6 @@ add_action( 'wp_enqueue_scripts', 'pc_enqueue_preform_style' );
     
 		wp_enqueue_style( 'preform-print-style', get_template_directory_uri().'/css/print.css', null, null, 'print' );
 
-		
-		/*----------  Font-face  ----------*/		
-		
-		// par defaut
-		$font = get_template_directory_uri().'/css/font-face/font-face.css';
-		// pour modifier ou retourner une chaine vide pour désactiver
-		$font = apply_filters( 'pc_filter_font_face', $font );
-		// chargement si non vide
-		if (  '' != trim($font) ) {
-			wp_enqueue_style( 'preform-font-face', $font, null, null, 'screen');
-		}
-
 
 		/*----------  Défaut  ----------*/
 

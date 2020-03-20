@@ -14,19 +14,8 @@
 
 /*----------  Titre de la page  ----------*/
 
-h1, .h1-like {
-	color:var(--color-black);
-	font-family: var(--font);
-	font-weight: 900;
+h1 {
 	margin: 0;
-
-	font-size: rem(28);
-	line-height: 1.2; // dépend de la font
-
-	/* $mq-title-size */
-	@media ( min-width : em($mq-title-size) ) {
-		font-size: rem(40);
-	}
 }
 
 
@@ -43,24 +32,6 @@ h1, .h1-like {
 }
 
 
-/*----------  Navigation pager, page précédente  ----------*/
-
-.main-footer-nav {
-	margin-bottom:$space;
-	padding-bottom: $space;
-	border-bottom:1px solid var(--color-grey);
-	
-	/* $mq-layout-l */
-	@media ( min-width : em($mq-layout-l) ) {
-		margin-bottom:0;
-		padding-bottom: 0;
-		border:none;
-		grid-column: 1 / 2;
-	}
-
-}
-
-
 /*=====  FIN Communs  =====*/
 
 /*======================================
@@ -69,12 +40,6 @@ h1, .h1-like {
 
 .st {
 	position: relative;
-	transition:background-color $t-st-hover ease;
-
-	&:hover {
-		background-color: var(--color-3);
-		transition:background-color $t-st-hover ease;
-	}
 }
 .st-inner {
 	display: flex;
@@ -83,15 +48,8 @@ h1, .h1-like {
 }
 
 .st-title {
-	font-family: var(--font);
-	font-weight: 900;
-	font-size: rem(24);
-	line-height: 1.2;
-
-	margin:rem($space--st,0,.5*$space--st,0);
 
 	a {
-		color:var(--color-black);
 		text-decoration: none;
 
 		&:before {
@@ -103,14 +61,8 @@ h1, .h1-like {
 			left: 0;
 		}
 		&:focus {
-			background-color: var(--color-3);
 			outline: none;
 		}
-	}
-
-	/* $mq-title-size */
-	@media ( min-width : em($mq-title-size) ) {
-		font-size: rem(28);
 	}
 }
 
@@ -119,14 +71,12 @@ h1, .h1-like {
 
 	img {
 		width: 100%;
-		transform-origin: center;
-		transition:$t-st-hover ease;
+		transition:all $t-st-hover ease;
 	}
 	
 	.st:hover & {
 		img {
-			transform:scale(1.1);
-			transition:$t-st-hover ease;
+			transition:all $t-st-hover ease;
 		}
 	}
 }
@@ -139,39 +89,43 @@ h1, .h1-like {
 		align-items: center;
 		justify-content: center;
 		vertical-align: middle;
-		background-color: var(--color-black);
 		width: rem(24);
 		height: rem(24);
-
-		svg {
-			fill:var(--color-white);
-		}
-	}
-
-	.st:hover & {
-		svg {
-			fill:var(--color-3);
-		}
 	}
 }
 
 
 /*=====  FIN Article résumé  =====*/
 
-/*=============================
-=            Pager            =
-=============================*/
+/*===================================
+=            Main footer            =
+===================================*/
+
+.main-footer-nav {
+	margin-bottom:$space;
+	padding-bottom: $space;
+	border-bottom-width:1px;
+	border-bottom-style: solid;
+	
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		margin-bottom:0;
+		padding-bottom: 0;
+		border:none;
+		grid-column: 1 / 2;
+	}
+
+}
+
+
+/*----------  Pager  ----------*/
 
 .pager-list {
 	justify-content: flex-start;
 }
 
 
-/*=====  FIN Pager  =====*/
-
-/*===============================
-=            Partage            =
-===============================*/
+/*----------  Partage  ----------*/
 
 .social-share {
 	display: flex;
@@ -186,11 +140,6 @@ h1, .h1-like {
 .social-share-title {
 	margin:0;
 }
-.social-list--share {
-	.social-item {
-		margin-left:rem(10);
-	}
-}
 
 
-/*=====  FIN Partage  =====*/
+/*=====  FIN Main footer  =====*/

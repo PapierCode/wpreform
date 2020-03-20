@@ -49,7 +49,7 @@
 /*----------  Carte  ----------*/
 
 .pop--map {
-	background-color: hsla(var(--color-white-h),var(--color-white-s),var(--color-white-l),.8);
+	background-color: hsla(var(--color-black-h),var(--color-black-s),var(--color-black-l),.6);
 }
 
 .map-marker {
@@ -60,7 +60,6 @@
 		right:0;
 		bottom:0;
 		left:0;
-		background-image:svg-load("../images/icons/map-favicon.svg");
 		background-position: center top;
 		background-repeat: no-repeat;
 	}

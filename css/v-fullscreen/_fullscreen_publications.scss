@@ -13,12 +13,7 @@
 
 /*----------  Titre de la pge  ----------*/
 
-h1 {
-	.is-fullscreen & {
-		padding:$space/2 $space;
-		background-color: hsla(var(--color-white-h),var(--color-white-s),var(--color-white-l),.7);
-	}
-}
+h1 {}
 
 
 /*----------  Boutton scroll to content  ----------*/
@@ -28,22 +23,11 @@ h1 {
 	position: absolute;
 	bottom:15vh;
 	left:50%;
-	animation: fs-more-btn-anim 2s ease infinite;
 
 	svg {
 		transform-origin: center;
 		transform: rotate(-90deg);
 	}
-	&:hover, &:focus {
-	   animation:none;
-	}
-}
-
-@keyframes fs-more-btn-anim {
-	0%   { transform: translateY(0); }
-	20%  { transform: translateY(-50%); }
-	40%  { transform: translateY(0); }
-	100% { transform: translateY(0); }
 }
 
 
@@ -68,7 +52,8 @@ h1 {
 ======================================*/
 
 .st {
-	border-bottom:1px solid var(--color-grey);
+	border-bottom-width:1px;
+	border-bottom-style:solid;
 
 	&.st--fake:hover {
 		background-color: var(--color-white);
@@ -129,7 +114,6 @@ h1 {
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		padding: 0;
-		background-color: var(--color-grey);
 		gap:1px;
 	}
 	/* $mq-layout-xl--fs */
@@ -141,7 +125,6 @@ h1 {
 
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
-		background-color: var(--color-white);
 		padding:$space/2;
 	}
 	/* $mq-layout-xl--fs */
