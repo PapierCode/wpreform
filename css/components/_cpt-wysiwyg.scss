@@ -6,6 +6,9 @@
 *
 **/
 
+@use "../framework/frk-functions" as *;
+@use "../vars-sass" as *;
+
 
 .editor {}
 .editor-inner {
@@ -226,9 +229,40 @@
 	}
 	.wp-gallery-link {
 		display: block;
-		border:none;		
+		position: relative;
+		overflow: hidden;
+		border:none;
+		outline:2px solid transparent;
+		transition:outline-color .5s ease;
+		
+		&:hover, &:focus {
+			outline-color: var(--color-black);
+			transition:outline-color .5s ease;
+			.wp-gallery-ico {
+				top:50%;
+				transition: top .4s ease;
+			}
+		}
 	}
 	.wp-gallery-img {}
+	.wp-gallery-ico {
+		position: absolute;
+		left:50%;
+		top:rem(-30);
+		transform:translate(-50%,-50%);
+		background-color: var(--color-black);
+		padding:rem(5);
+		transition: top .4s ease;
+
+		svg {
+			fill:var(--color-white);
+		}
+
+		.wp-gallery-link:hover &, .wp-gallery-link:focus & {
+			top:rem(-30);
+			transition: top .3s ease;
+		}
+	}
 	
 	
 	/*=====  FIN Galerie  =====*/

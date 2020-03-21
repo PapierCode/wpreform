@@ -4,6 +4,11 @@
 *
 **/
 
+
+@use "../framework/frk-functions" as *;
+@use "../vars-sass" as *;
+
+
 .btn {
 	display: inline-flex;
 	justify-content: center;

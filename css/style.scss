@@ -1,57 +1,47 @@
-/*! 
-Theme Name: WPreform 
-Author: www.papier-code.fr 
-Description: Wordpress theme toolkit 
-*/
-
-
-@import "framework/frk-functions";
-
-@import "vars-sass";
+@use "wp-theme";
 
 
 /*----------  Framework  ----------*/
 
-@import "framework/frk-normalize";
-@import "framework/frk-reset";
-@import "framework/frk-helpers";
+@use "framework/frk-normalize";
+@use "framework/frk-reset";
+@use "framework/frk-helpers";
 
 
 /*----------  Composants  ----------*/
 
-@import "components/cpt-skip-nav";
-// @import "components/cpt-cookies";
-@import "components/cpt-messages";
-@import "components/cpt-loader";
-@import "components/cpt-gallery";
-@import "components/cpt-pager";
-@import "components/cpt-social";
-@import "components/cpt-wysiwyg";
-@import "components/cpt-coord";
-@import "components/cpt-popup";
-@import "components/cpt-buttons";
+@use "components/cpt-skip-nav";
+// @use "components/cpt-cookies";
+@use "components/cpt-messages";
+@use "components/cpt-loader";
+@use "components/cpt-gallery";
+@use "components/cpt-pager";
+@use "components/cpt-social";
+@use "components/cpt-wysiwyg";
+@use "components/cpt-coord";
+@use "components/cpt-popup";
+@use "components/cpt-buttons";
 
 
-/*----------  Layout  ----------*/
+/*----------  Mise en page globale  ----------*/
 
-@import "layout";
+@use "layout";
 
 
 /*----------  Navigation  ----------*/
 
-@import "navigation/nav-header";
-@import "navigation/nav-footer";
+@use "navigation/nav-header";
+@use "navigation/nav-footer";
 
 
 /*----------  Publications  ----------*/
 
-@import "publications/pub-commons";
-@import "publications/pub-home";
-@import "publications/pub-page";
-@import "publications/pub-news";
+@use "publications/pub-commons";
+@use "publications/pub-home";
+@use "publications/pub-news";
 
 
 /*----------  Formulaires  ----------*/
 
-@import "forms/form-default";
-@import "forms/form-contact";
+@use "forms/form-default";
+@use "forms/form-contact";

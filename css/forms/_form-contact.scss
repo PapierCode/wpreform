@@ -4,6 +4,11 @@
 *
 **/
 
+
+@use "../framework/frk-functions" as *;
+@use "../vars-sass" as *;
+
+
 .form--contact {
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {

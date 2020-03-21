@@ -5,6 +5,10 @@
 **/
 
 
+@use "../framework/frk-functions" as *;
+@use "../vars-sass" as *;
+
+
 .skip-nav {
 	position: absolute;
 	margin: 0;

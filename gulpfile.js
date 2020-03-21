@@ -34,6 +34,8 @@ const terser		= require( 'gulp-terser' ); // minification js
 =            Tâche CSS            =
 =================================*/
 
+sass.compiler = require('sass');
+
 // plugins CSS
 var plugins = [
 	inlinesvg(),
