@@ -68,6 +68,12 @@ h1 {}
 		&:nth-of-type(4) + .st--fake {
 			display: none;
 		}
+		
+		.is-home & {
+			&:nth-of-type(1) + .st--fake:nth-of-type(2) {
+				display:block;
+			}
+		}
 	}
 
 	/* $mq-layout-xl--fs */
@@ -83,9 +89,14 @@ h1 {}
 			display: none;
 		}
 		
-		.is-home &:nth-of-type(4) {
-			position: absolute;
-			left:-666em;
+		.is-home & {
+			&:nth-of-type(4) {
+				position: absolute;
+				left:-666em;
+			}
+			&:nth-of-type(4) ~ .st--fake {
+				display:none;
+			}
 		}
 	}
 }

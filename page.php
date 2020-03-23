@@ -11,48 +11,13 @@ get_header();
 
 do_action( 'pc_page_content_before', $post, $page_metas );
 
-	/*=======================================
-	=            Contenu WYSIWYG            =
-	=======================================*/
+	do_action( 'pc_page_wysiwyg_before', $post, $page_metas );
 
 	if ( $post->post_content != '' ) { the_content(); }
-	
 
-	/*=====  FIN Contenu WYSIWYG  =====*/
+	do_action( 'pc_page_wysiwyg_after', $post, $page_metas );	
 
-	/*==============================================
-	=            Contenu supplémentaire            =
-	==============================================*/
-	
-	/*----------  Contenu spécifique  ----------*/
-			
-	if ( isset($page_metas['content-from']) ) {
-		
-		foreach ( $settings_project['page-content-from'] as $slug => $datas ) {
-			if ($slug == $page_metas['content-from'][0]) {
-				include $datas[1];
-			}
-		}
-
-
-	/*----------  Sous-pages  ----------*/		
-
-	} else if ( isset($page_metas['content-subpages']) ) {
-
-		$sub_pages_id = explode( ',',$page_metas['content-subpages'][0] );
-
-		foreach ( $sub_pages_id as $postId ) {
-			pc_display_post_resum( $postId, '', 2 );
-		}
-		pc_add_fake_st( count($sub_pages_id) );
-
-	}
-	
-	
-	/*=====  FIN Contenu supplémentaire  =====*/
-	
-
-do_action( 'pc_page_content_footer', $post, $page_metas );
+	do_action( 'pc_page_content_footer', $post, $page_metas );
 
 do_action( 'pc_page_content_after', $post, $page_metas );
 

@@ -12,7 +12,7 @@
 
 add_action( 'pc_home_content_before', 'pc_display_main_start', 10 ); // layout commun
 
-add_action( 'pc_home_content', 'pc_display_home_content', 10, 1 );
+add_action( 'pc_home_content', 'pc_display_home_content', 10, 1 ); // contenu
 
 add_action( 'pc_home_content_footer', 'pc_display_main_footer_start', 10 );  // layout commun
 add_action( 'pc_home_content_footer', 'pc_display_share_links', 20 );  // layout commun
