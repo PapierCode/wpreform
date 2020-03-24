@@ -75,7 +75,17 @@
 		}
 	}
 }
-
+.home-shortcut-txt {
+	transition:all $t-home-shortcut-hover ease;
+	.home-shortcut-link:hover &, .home-shortcut-link:focus & {
+		transition:all $t-home-shortcut-hover ease;
+	}
+}
+.home-shortcut-ico {
+	.home-shortcut-link:hover &, .home-shortcut-link:focus & {
+		transition:transform $t-home-shortcut-hover ease;
+	}
+}
 
 /*----------  Version impair  ----------*/
 
