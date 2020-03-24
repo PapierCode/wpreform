@@ -131,8 +131,8 @@ $h-nav-btn-size : 40;
 	position: absolute;
 	top:-666em;
 
-	/* $mq-layout-m */
-	@media ( min-width : em($mq-layout-m) ) {
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
 		position: static;
 		overflow: hidden;
 		padding: rem(5);
