@@ -30,7 +30,7 @@
 						);
 						$logo_header_datas = apply_filters( 'pc_filter_header_logo', $logo_header_datas );
 						?>
-						<img class="h-logo" src="<?= $logo_header_datas['url']; ?>" alt="<?= $logo_header_datas['alt']; ?>" width="<?= $logo_header_datas['width']; ?>" height="<?= $logo_header_datas['height']; ?>" />
+						<img class="h-logo-img" src="<?= $logo_header_datas['url']; ?>" alt="<?= $logo_header_datas['alt']; ?>" width="<?= $logo_header_datas['width']; ?>" height="<?= $logo_header_datas['height']; ?>" />
 					</a>
 					<div class="h-nav-btn-box">
 						<button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-h-nav reset-btn" aria-hidden="true" tabindex="-1">
