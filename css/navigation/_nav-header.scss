@@ -219,6 +219,10 @@ $h-nav-btn-size : 40;
 	position: relative;
     text-decoration: none;
 	transition: all $t-nav-link ease;
+
+	&:hover, &:focus {
+		transition: all $t-nav-link ease;	   
+	}
 }
 
 .h-nav-link-inner {}

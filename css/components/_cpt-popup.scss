@@ -52,10 +52,6 @@
 
 /*----------  Carte  ----------*/
 
-.pop--map {
-	background-color: hsla(var(--color-black-h),var(--color-black-s),var(--color-black-l),.6);
-}
-
 .map-marker {
 	&:before {
 		content:"";

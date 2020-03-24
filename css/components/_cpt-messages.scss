@@ -24,7 +24,7 @@
 	align-items: center;
 
 	&.msg--block {
-		background-color:var(--color-black);
+		background-color:var(--color-msg-default);
 	}
 
 	/* @mq-space-m */
@@ -41,7 +41,7 @@
 	width: rem(30);
 	height: rem(30);
 	border-radius: 50%;
-	background-color: var(--color-black);
+	background-color: var(--color-msg-default);
 	margin-right:rem(10);
 
 	svg {
@@ -52,7 +52,7 @@
 		background-color:var(--color-white);
 
 		svg {
-			fill: var(--color-black);
+			fill: var(--color-msg-default);
 		}
 	}
 }
