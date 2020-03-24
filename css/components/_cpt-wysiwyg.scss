@@ -83,7 +83,7 @@
 		color:var(--wysi-link-color);
 		text-decoration:none;
 		border-bottom-width:1px;
-		border-bottom-style: dotted;
+		border-bottom-style: solid;
 		border-bottom-color: var(--wysi-link-color);
 		transition:background-color 0.3s ease;
 		&:visited {

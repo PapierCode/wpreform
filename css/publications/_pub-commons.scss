@@ -45,6 +45,11 @@ h1 {
 
 .st {
 	position: relative;
+	transition:all $t-st-hover ease;
+
+	&:hover {
+		transition:all $t-st-hover ease;
+	}
 }
 .st-inner {
 	display: flex;
