@@ -1,4 +1,4 @@
-<footer class="footer"><div class="footer-inner cl-bloc fs-bloc">
+<footer class="footer cl-bloc fs-bloc"><div class="footer-inner">
 
 	<?php
 	/*===================================
