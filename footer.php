@@ -21,7 +21,7 @@
 					<img src="<?= $logo_footer_datas['url']; ?>" alt="<?= $logo_footer_datas['alt']; ?>" width="<?= $logo_footer_datas['width']; ?>" height="<?= $logo_footer_datas['height']; ?>" />
 			</dt>
 			<dd class="coord-item coord-item--addr">
-				<span class="coord-ico"><?= pc_svg('map',null,'svg-block'); ?></span>
+				<span class="coord-ico"><?= pc_svg('map'); ?></span>
 				<span class="coord-txt">
 					<?= $settings_project['coord-address'].' <br/>'.$settings_project['coord-postal-code'].' '.$settings_project['coord-city']; ?>
 
@@ -32,7 +32,7 @@
 				</span>
 			</dd>
 			<dd class="coord-item coord-item--phone">
-				<span class="coord-ico"><?= pc_svg('phone',null,'svg-block'); ?></span>
+				<span class="coord-ico"><?= pc_svg('phone'); ?></span>
 				<span class="coord-txt">
 					<a href="tel:<?= pc_phone($settings_project['coord-phone-1']); ?>"><?= $settings_project['coord-phone-1']; ?></a>
 					<?php if ( $settings_project['coord-phone-2'] != '' ) {

@@ -55,11 +55,11 @@ if ( !is_admin() ) {
     });
 
 
-    /*----------  CSS Gutenberg  ----------*/
+    /*----------  CSS Block Editor  ----------*/
 
-    add_action( 'wp_print_styles', 'pc_remove_gutenberg_css', 100 );
+    add_action( 'wp_print_styles', 'pc_remove_block_editor_css', 100 );
 
-        function pc_remove_gutenberg_css() {
+        function pc_remove_block_editor_css() {
             wp_dequeue_style( 'wp-block-library' );
             wp_deregister_style( 'wp-block-library' );
         }

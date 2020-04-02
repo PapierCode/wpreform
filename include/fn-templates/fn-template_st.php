@@ -73,7 +73,7 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 
 	/*----------  Description + lire la suite  ----------*/
 	
-	$ico_more = pc_svg('more-16',false,'svg-block');
+	$ico_more = pc_svg('more-16');
 	$ico_more = apply_filters( 'pc_filter_post_resum_ico_more', $ico_more );
     
     $resum = (isset($metas['resum-desc'])) ? wp_trim_words($metas['resum-desc'][0],20,'') : get_the_excerpt($post_id) ;

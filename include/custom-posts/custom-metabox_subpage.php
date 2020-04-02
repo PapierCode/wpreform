@@ -205,7 +205,7 @@ function pc_sub_page_save( $post_id ) {
 				$subpages_saved = explode(',',$save);
 				
 				$post_type = get_post_type( $post_id );
-				$real_post_id = ( $post_type == 'revision' ) ? wp_get_post_parent_id($post_id) : $post_id;
+				$real_post_id = ( wp_is_post_revision( $post_id ) ) ? wp_is_post_revision( $post_id ) : $post_id;
                 
                 // nouvelle liste de sous-pages
                 if ( $temp != '' && count($subpages_temp) > 0 ) {

@@ -28,7 +28,7 @@ function pc_nav_social_links() {
 
 			if ( !$ul ) { echo '<ul class="social-list social-list--header reset-list no-print">'; $ul = true; };
 
-			echo '<li class="social-item"><a class="social-link social-link--'.$field['label_for'].'" href="'.$settings_project[$id].'" title="'.$field['label'].' (nouvelle fenêtre)" target="_blank"><span class="visually-hidden">'.$field['label'].'</span>'.pc_svg($field['label_for'],false,'svg-block').'</a></li>';		
+			echo '<li class="social-item"><a class="social-link social-link--'.$field['label_for'].'" href="'.$settings_project[$id].'" title="'.$field['label'].' (nouvelle fenêtre)" target="_blank"><span class="visually-hidden">'.$field['label'].'</span>'.pc_svg($field['label_for']).'</a></li>';		
 			
 		}
 
@@ -58,19 +58,19 @@ function pc_display_share_links() {
             <li class="social-item">
                 <a href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($share_url); ?>" target="_blank" class="social-link social-link--facebook" rel="nofollow" title="Partager sur Facebook (nouvelle fenêtre)">
                     <span class="visually-hidden">Facebook</span>
-                    <?php echo pc_svg('facebook', false, 'svg-block'); ?>
+                    <?php echo pc_svg('facebook'); ?>
                 </a>
             </li>
             <li class="social-item">
                 <a href="http://twitter.com/intent/tweet?url=<?= urlencode($share_url); ?>" target="_blank" class="social-link social-link--twitter" rel="nofollow" title="Partager sur Twitter (nouvelle fenêtre)">
                     <span class="visually-hidden">Twitter</span>
-                    <?php echo pc_svg('twitter', false, 'svg-block'); ?>
+                    <?php echo pc_svg('twitter'); ?>
                 </a>
             </li>
             <li class="social-item">
                 <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= urlencode($share_url); ?>&title=<?= str_replace(' ', '%20', $meta_title); ?>&summary=<?= str_replace(' ', '%20', $meta_description); ?>" target="_blank" class="social-link social-link--linkedin" rel="nofollow" title="Partager sur LinkedIn (nouvelle fenêtre)">
                 <span class="visually-hidden">LinkedIn</span>
-                <?php echo pc_svg('linkedin', '#fff', 'svg-block'); ?>
+                <?php echo pc_svg('linkedin'); ?>
                 </a>
             </li>
         </ul>

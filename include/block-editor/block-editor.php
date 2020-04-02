@@ -6,6 +6,27 @@
  */
 
 
+ 	
+add_theme_support( 'disable-custom-font-sizes' );
+add_theme_support( 'editor-font-sizes', array() );
+
+add_theme_support( 'disable-custom-colors' );
+add_theme_support( 'editor-color-palette', array() );
+
+add_theme_support( 'disable-custom-gradients' );
+add_theme_support( '__experimental-editor-gradient-presets', array() );
+
+
+
+add_filter( 'block_editor_settings', 'pc_settings_block_editor' );
+
+function pc_settings_block_editor( $settings ) {
+
+	$settings['codeEditingEnabled'] = false;
+	return $settings;
+
+}
+
 /*==============================
 =            Police            =
 ==============================*/
@@ -13,16 +34,16 @@
 /*----------  Taille  ----------*/
 
 // désactive les tailles personnalisées
-add_theme_support('disable-custom-font-sizes');
+// add_theme_support('disable-custom-font-sizes');
 
 // Modifie les tailles prédéfinies
-add_theme_support( 'editor-font-sizes', array(
-    array(
-        'name' => 'Défaut',
-        'size' => 16,
-        'slug' => 'default'
-    )
-) );
+// add_theme_support( 'editor-font-sizes', array(
+//     array(
+//         'name' => 'Défaut',
+//         'size' => 16,
+//         'slug' => 'default'
+//     )
+// ) );
 
 /*----------  Notes  ----------*/
 
@@ -36,10 +57,10 @@ add_theme_support( 'editor-font-sizes', array(
 ============================================*/
 
 // désactive les couleurs prédéfinies
-add_theme_support( 'editor-color-palette' );
+// add_theme_support( 'editor-color-palette' );
 
 // désactive les couleurs personnalisées
-add_theme_support( 'disable-custom-colors' );
+// add_theme_support( 'disable-custom-colors' );
 
 
 /*----------  Notes  ----------*/
@@ -118,7 +139,7 @@ function pc_enqueue() {
     wp_enqueue_script(
         'pc-script',
         get_template_directory_uri().'/include/block-editor/block-editor.js',
-        array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' )
+        array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-element', 'wp-i18n', 'wp-editor', 'wp-hooks' )
     );
 }
 add_action( 'enqueue_block_editor_assets', 'pc_enqueue' );

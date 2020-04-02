@@ -134,7 +134,7 @@ $home_visual_field = array(
 			'type'      => 'img',
 			'label_for' => 'img',
 			'label'     => 'Visuel'
-		),
+		)
 	)
 );
 

@@ -11,27 +11,28 @@ jQuery(document).ready(function($){
     =            Sous-pages repeater            =
     ===========================================*/
     
-    var $pcRepeater = $('.pc-repeater'), // conteneur
-    $pcRepeaterInput = $('.pc-repeater-input') // champ sauvegardé
-
-    var pc_repeater_update = function( type ) {
-        var toSave = '';
-        $pcRepeater.children().each(function() {
-            switch (type) {
-                case 'subpage':
-                    if ( toSave != '' ) { toSave += ','; }
-                    toSave += $(this).children('select').val();
-                    break;
-                case 'homepages':
-                    if ( toSave != '' ) { toSave += '|'; }
-                    toSave += $(this).children('select').val() + '§' + $(this).children('input').val();
-                    break;
-            }
-        });
-        $pcRepeaterInput.val(toSave);
-    }
+	var $pcRepeater = $('.pc-repeater');	
     
     if ( $pcRepeater.length > 0 ) {
+
+    	$pcRepeaterInput = $('.pc-repeater-input') // champ sauvegardé
+
+		var pc_repeater_update = function( type ) {
+			var toSave = '';
+			$pcRepeater.children().each(function() {
+				switch (type) {
+					case 'subpage':
+						if ( toSave != '' ) { toSave += ','; }
+						toSave += $(this).children('select').val();
+						break;
+					case 'homepages':
+						if ( toSave != '' ) { toSave += '|'; }
+						toSave += $(this).children('select').val() + '§' + $(this).children('input').val();
+						break;
+				}
+			});
+			$pcRepeaterInput.val(toSave);
+		}
 
         var $pcRepeaterSrc = $('.pc-repeater-src'),
         pcRepeaterType = $pcRepeater.data('type');

@@ -59,7 +59,7 @@ include 'include/custom-posts/custom_home.php';
 // sprite SVG
 include 'images/sprite.php';
 // contenu de l'entête (head)
-include 'include/clean-wp_head.php';
+// include 'include/clean-wp_head.php';
 include 'include/head.php';
 // navigation
 include 'include/navigation.php';
@@ -111,5 +111,6 @@ include 'include/custom-admin/custom-admin.php';
 //     }
 //     return $posts;
 // }
+
 
 /*=====  FIN Expérimentations  =====*/

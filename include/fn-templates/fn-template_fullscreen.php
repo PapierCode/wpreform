@@ -41,7 +41,7 @@ function pc_fs_btn_scroll_to_content() {
 	
 	if ( $settings_project['theme'] == 'fullscreen' && $settings_project['is-fullscreen'] ) {
 		echo '<div class="fs-more">';
-		echo '<button type="button" class="fs-more-btn btn reset-btn" aria-hidden="true">'.pc_svg('arrow',null,'svg_block').'</button>';
+		echo '<button type="button" class="fs-more-btn btn reset-btn" aria-hidden="true">'.pc_svg('arrow').'</button>';
 		echo '</div>';
 	}
 

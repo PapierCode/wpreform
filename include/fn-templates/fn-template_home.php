@@ -82,7 +82,7 @@ function pc_display_home_content( $settings_home ) {
 				echo '<li class="home-shortcut-item"><a title="'.$page_title.'" href="'.get_the_permalink($page_id).'" class="home-shortcut-link">';
 				echo '<span class="home-shortcut-img">'.$page_img.'</span>';
 				echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($page_title),40).'</span>';
-				echo '<span class="home-shortcut-ico">'.pc_svg('link','','svg-block').'</span>';
+				echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';
 				echo '</a></li>';
 
 			} // FIN foreach $home_pages

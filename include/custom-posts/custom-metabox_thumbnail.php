@@ -21,7 +21,7 @@ $metabox_thumbnail_fields = array(
             'options'   => array(
                 'btnremove' => true
             )
-        )
+		)
     )
 );
 

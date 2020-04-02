@@ -17,7 +17,7 @@
 =            Css & js imports            =
 ========================================*/
 
-add_action( 'admin_enqueue_scripts', 'pc_admin_enqueue_scripts' );
+add_action( 'admin_enqueue_scripts', 'pc_admin_enqueue_scripts', 999 );
 
     function pc_admin_enqueue_scripts() {
 
