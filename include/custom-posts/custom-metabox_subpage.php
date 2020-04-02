@@ -75,7 +75,7 @@ function pc_update_subpage( $post_id, $post_parent ) {
 
 function pc_page_content_sub( $post ) {
 
-    global $settings_project;  // cf. functions.php
+	global $settings_project;  // cf. functions.php
 
     // input hidden de vérification pour la sauvegarde
     wp_nonce_field( basename( __FILE__ ), 'none-page-content-sup' );
@@ -204,15 +204,14 @@ function pc_sub_page_save( $post_id ) {
                 $subpages_temp = explode(',',$temp);
 				$subpages_saved = explode(',',$save);
 				
-				$post_type = get_post_type( $post_id );
-				$real_post_id = ( wp_is_post_revision( $post_id ) ) ? wp_is_post_revision( $post_id ) : $post_id;
+				//$real_post_id = ( wp_is_post_revision( $post_id ) ) ? wp_is_post_revision( $post_id ) : $post_id;
                 
                 // nouvelle liste de sous-pages
                 if ( $temp != '' && count($subpages_temp) > 0 ) {
                     foreach ($subpages_temp as $temp_id) {
                         // si ce n'est pas déjà une sous-page
                         if ( !in_array($temp_id,$subpages_saved) ) {
-                            pc_update_subpage( $temp_id, $real_post_id );
+                            pc_update_subpage( $temp_id, $post_id );
                         // si c'est déjà une sous-page
                         } else {
                             // suppression dans le tableau représentant la sauvegarde
