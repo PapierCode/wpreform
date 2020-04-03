@@ -59,11 +59,10 @@ include 'include/custom-posts/custom_home.php';
 // sprite SVG
 include 'images/sprite.php';
 // contenu de l'entête (head)
-// include 'include/clean-wp_head.php';
 include 'include/head.php';
 // navigation
 include 'include/navigation.php';
-// wysiwyg classique
+// wysiwyg par défaut
 include 'include/fn-templates/fn-template_editor.php';
 // images & galerie
 include 'include/fn-templates/fn-template_images.php';
@@ -75,6 +74,8 @@ include 'include/fn-templates/fn-template_st.php';
 
 /*----------  Templates : layouts  ----------*/
 
+// entête (header)
+include 'include/fn-templates/fn-template_header.php';
 // layout global
 include 'include/fn-templates/fn-template_layout.php';
 // spécificités fullscreen
