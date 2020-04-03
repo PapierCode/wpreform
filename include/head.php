@@ -34,61 +34,11 @@ function pc_html_css_class() {
 
 /*=====  FIN Classe CSS sur la balise HTML  =====*/
 
-/*====================================
-=            Fichiers CSS            =
-====================================*/
-
-add_action( 'wp_enqueue_scripts', 'pc_enqueue_preform_style' );
-
-    function pc_enqueue_preform_style() {
-
-		/*----------  Print  ----------*/
-    
-		wp_enqueue_style( 'preform-print-style', get_template_directory_uri().'/print.css', null, null, 'print' );
-
-
-		/*----------  Screen  ----------*/
-
-		wp_enqueue_style( 'preform-style', get_template_directory_uri().'/style.css', null, null, 'screen' );
-
-		global $settings_project;
-		if ( $settings_project['theme'] == 'fullscreen' ) {
-			wp_enqueue_style( 'preform-fullscreen-style', get_template_directory_uri().'/v-fullscreen.css', null, null, 'screen' );
-		} else {
-			wp_enqueue_style( 'preform-classic-style', get_template_directory_uri().'/v-classic.css', null, null, 'screen' );
-		}
-
-
-	}
-
-
-/*=====  FIN Fichiers CSS  =====*/
-
-/*===============================
-=            Favicon            =
-===============================*/
-
-add_action( 'wp_head', 'pc_favicon' );
-
-	function pc_favicon() {
-
-		// défaut
-		$url = get_bloginfo( 'template_directory' ).'/images/favicon.png';
-		// pour modifier
-		$url = apply_filters( 'pc_filter_favicon', $url );
-		// affichage
-		echo '<link rel="icon" type="image/png" href="'.$url.'" />';
-
-	};
-
-
-/*=====  FIN Favicon  =====*/
-
 /*==========================================
 =            Metas SEO & social            =
 ==========================================*/
 
-add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
+add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 
 	function pc_metas_seo_and_social() {
 
@@ -206,3 +156,80 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 1 );
 
 
 /*=====  FIN Metas SEO & social  =====*/
+
+/*====================================
+=            Fichiers CSS            =
+====================================*/
+
+add_action( 'wp_enqueue_scripts', 'pc_enqueue_preform_style', 5 );
+
+    function pc_enqueue_preform_style() {
+
+		/*----------  Print  ----------*/
+    
+		wp_enqueue_style( 'preform-print-style', get_template_directory_uri().'/print.css', null, null, 'print' );
+
+
+		/*----------  Screen  ----------*/
+
+		wp_enqueue_style( 'preform-style', get_template_directory_uri().'/style.css', null, null, 'screen' );
+
+		global $settings_project;
+		if ( $settings_project['theme'] == 'fullscreen' ) {
+			wp_enqueue_style( 'preform-fullscreen-style', get_template_directory_uri().'/v-fullscreen.css', null, null, 'screen' );
+		} else {
+			wp_enqueue_style( 'preform-classic-style', get_template_directory_uri().'/v-classic.css', null, null, 'screen' );
+		}
+
+
+	}
+
+
+/*=====  FIN Fichiers CSS  =====*/
+
+/*===============================
+=            Favicon            =
+===============================*/
+
+add_action( 'wp_head', 'pc_favicon', 5 );
+
+	function pc_favicon() {
+
+		// défaut
+		$url = get_bloginfo( 'template_directory' ).'/images/favicon.png';
+		// pour modifier
+		$url = apply_filters( 'pc_filter_favicon', $url );
+		// affichage
+		echo '<link rel="icon" type="image/png" href="'.$url.'" />';
+
+	};
+
+
+/*=====  FIN Favicon  =====*/
+
+/*====================================
+=            Statistiques            =
+====================================*/
+
+add_action( 'wp_head', 'pc_statistics_tracker', 20 );
+
+	function pc_statistics_tracker() {
+
+		global $settings_pc;
+
+		if ( $settings_pc['matomo-analytics-code'] != '' ) {
+
+			pc_display_tag_matomo( $settings_pc['matomo-analytics-code'] );
+
+		} else if ( $settings_pc['google-analytics-code'] != '' ) {
+
+			pc_display_tag_analytics( $settings_pc['google-analytics-code'] );
+
+		}
+
+
+	};
+
+
+
+/*=====  FIN Statistiques  =====*/
