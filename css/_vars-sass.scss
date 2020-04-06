@@ -30,13 +30,10 @@ $base-font-size-l		: 18;
 $space					: 4vw;
 $space-max				: 40;
 
-$txt-mw          		: 700;
-$content-mw--cl			: 840; // (2 * st max width 400) + (1 * gap main-inner max 40) 
+$txt-mw          		: 800;
 
 $layout-mw--cl			: 1200;
 $layout-mw--fs			: 1400;
-
-$mq-content-max--cl		: $content-mw--cl;
 
 $mq-layout-m			: 480;
 $mq-layout-l			: 760;

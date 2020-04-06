@@ -13,7 +13,9 @@
 
 /*----------  Titre de la pge  ----------*/
 
-h1 {}
+h1 {
+	max-width: var(--txt-mw);
+}
 
 
 /*----------  Boutton scroll to content  ----------*/
@@ -34,6 +36,10 @@ h1 {}
 /*----------  Container WP editor  ----------*/
 
 .fs-editor {
+	
+	.editor-inner {
+		max-width: var(--txt-mw);
+	}
 
 	/* $mq-layout-xl--fs */
 	@media ( min-width : em($mq-layout-xl--fs) ) {
@@ -161,7 +167,7 @@ h1 {}
 	grid-column: 1 / 7;
 
 	form {
-		max-width: rem($txt-mw);
+		max-width: var(--txt-mw);
 	}
 }
 

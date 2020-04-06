@@ -23,10 +23,24 @@ $settings_project = get_option('project-settings-option');
 
 /*----------  Thème (fullscreen ou classic)  ----------*/
 
-// si le thème n'est pas défini
-$settings_project['theme'] = ( isset($settings_pc['preform-theme']) && $settings_pc['preform-theme'] != '' ) ? $settings_pc['preform-theme'] : 'classic';
-// pour changer de thème en direct
-$settings_project['theme'] = ( isset($_GET['dev_theme']) ) ? $_GET['dev_theme'] : $settings_pc['preform-theme'];
+// thème par défaut
+$settings_project['theme'] = 'classic';
+// thème configuré dans l'admin
+if ( isset($settings_pc['preform-theme']) && $settings_pc['preform-theme'] != '' ) {
+	$settings_project['theme'] = $settings_pc['preform-theme'];
+}
+// thème modifié par l'url
+if ( isset($_GET['th']) ) {
+	switch ($_GET['th']) {
+		case 'f':
+			$settings_project['theme'] = 'fullscreen';
+			break;
+		case 'c':
+			$settings_project['theme'] = 'classic';
+			break;
+	}
+}
+
 // version fullscreen, une page peut être plein écran ou pas
 $settings_project['is-fullscreen'] = false;
 

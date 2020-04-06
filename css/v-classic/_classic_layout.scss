@@ -70,14 +70,14 @@ body {}
 
 .main {}
 .main-inner {
-	max-width:rem($content-mw--cl);
+	max-width:var(--txt-mw);
 	
 	/* $mq-layout-l */
 	@media ( min-width : em($mq-layout-l) ) {
 		gap: $space;
 	}
-	/* $mq-content-max--cl */
-	@media ( min-width : em($mq-content-max--cl) ) {
+	/* $mq-layout-max--cl */
+	@media ( min-width : em($mq-layout-max--cl) ) {
 		gap: rem($space-max);
 	}
 }

@@ -78,14 +78,14 @@
 		gap:$space;
 		margin-left: 0;
 	}
-	/* $mq-content-max--cl */
-	@media ( min-width : em($mq-content-max--cl) ) {
+	/* $mq-layout-max--cl */
+	@media ( min-width : em($mq-layout-max--cl) ) {
 		gap:rem($space-max);
 	}
 }
 .home-shortcut-item {
-	/* $mq-content-max--cl */
-	@media ( min-width : em($mq-content-max--cl) ) {
+	/* $mq-layout-max--cl */
+	@media ( min-width : em($mq-layout-max--cl) ) {
 		min-height: rem(250);
 	}
 }

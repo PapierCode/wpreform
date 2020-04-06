@@ -123,9 +123,10 @@
 <?php $sprite_to_js_array = array('arrow','cross');
 apply_filters( 'pc_filter_sprite_to_svg', $sprite_to_js_array );
 pc_sprite_to_js( $sprite_to_js_array ); ?>
-<script src="<?php bloginfo('template_directory'); ?>/scripts/scripts.min.js"></script>
 
 <?php wp_footer(); ?>
+
+<script src="<?php bloginfo('template_directory'); ?>/scripts/scripts.min.js"></script>
 
 </body>
 </html>

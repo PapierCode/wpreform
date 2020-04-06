@@ -221,15 +221,9 @@ add_action( 'wp_head', 'pc_statistics_tracker', 20 );
 
 			pc_display_tag_matomo( $settings_pc['matomo-analytics-code'] );
 
-		} else if ( $settings_pc['google-analytics-code'] != '' ) {
-
-			pc_display_tag_analytics( $settings_pc['google-analytics-code'] );
-
 		}
 
-
 	};
-
 
 
 /*=====  FIN Statistiques  =====*/

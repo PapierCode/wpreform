@@ -49,8 +49,8 @@
 	.wp-caption {
 		margin: var(--wysi-space-default-s) 0 0 0;
 
-		/* $txt-mw + 2*$space */
-		@media ( min-width : em($txt-mw + 2*$space-max) ) {
+		/* $mq-layout-l */
+		@media ( min-width : em($mq-layout-l) ) {
 			margin-top:var(--wysi-space-default-l);
 		}
 	}
