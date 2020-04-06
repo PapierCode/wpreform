@@ -9,6 +9,23 @@
 @use "../vars-sass" as *;
 
 
+/*===============================
+=            Accueil            =
+===============================*/
+
+.home-news-title {
+	margin:2*$space 0 0 0;
+
+	/* $mq-layout-l */
+	@media ( min-width : em($mq-layout-l) ) {
+		margin:0;
+		grid-column: 1/3;
+	}
+}
+
+
+/*=====  FIN Accueil  =====*/
+
 /*==============================
 =            Résumé            =
 ==============================*/

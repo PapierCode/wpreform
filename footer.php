@@ -128,5 +128,7 @@ pc_sprite_to_js( $sprite_to_js_array ); ?>
 
 <script src="<?php bloginfo('template_directory'); ?>/scripts/scripts.min.js"></script>
 
+<?php do_action( 'pc_after_scripts_js' ); ?>
+
 </body>
 </html>

@@ -233,15 +233,15 @@
 		overflow: hidden;
 		border:none;
 		outline:2px solid transparent;
-		transition:outline-color .5s ease;
+		transition:outline-color .3s ease;
 		
 		&:hover, &:focus {
 			outline-color: var(--color-black);
-			transition:outline-color .5s ease;
+			transition:outline-color .3s ease;
 			
 			.wp-gallery-ico {
 				top:50%;
-				transition: top .3s ease;
+				transition: top .4s ease;
 			}
 		}
 	}
