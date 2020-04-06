@@ -56,7 +56,6 @@
 	position: relative;
 	text-decoration: none;
 	text-align: center;
-	overflow: hidden;
 }
 .home-shortcut-img {
 	display: block;
@@ -77,11 +76,14 @@
 }
 .home-shortcut-txt {
 	transition:all $t-home-shortcut-hover ease;
+	
 	.home-shortcut-link:hover &, .home-shortcut-link:focus & {
 		transition:all $t-home-shortcut-hover ease;
 	}
 }
 .home-shortcut-ico {
+	transition:transform $t-home-shortcut-hover ease;
+
 	.home-shortcut-link:hover &, .home-shortcut-link:focus & {
 		transition:transform $t-home-shortcut-hover ease;
 	}
