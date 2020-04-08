@@ -1,6 +1,13 @@
-@import "framework/frk-functions";
-@import "vars-sass";
+/*----------  Mise en apge globale  ----------*/
 
-@import "v-classic/classic_nav-header";
-@import "v-classic/classic_layout";
-@import "v-classic/classic_publications";
+@use "v-classic/classic_layout";
+
+
+/*----------  Navigation  ----------*/
+
+@use "v-classic/classic_nav-header";
+
+
+/*----------  Publications  ----------*/
+
+@use "v-classic/classic_publications";

@@ -1,5 +1,8 @@
-@import "framework/frk-functions";
-@import "vars-sass";
+/*----------  Mise en page globale  ----------*/
 
-@import "v-fullscreen/fullscreen_layout";
-@import "v-fullscreen/fullscreen_publications";
+@use "v-fullscreen/fullscreen_layout";
+
+
+/*----------  Publications  ----------*/
+
+@use "v-fullscreen/fullscreen_publications";

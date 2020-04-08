@@ -57,8 +57,7 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 		$url = 'https://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 		
 		// défaut
-		$img_to_share		= get_bloginfo( 'template_directory' ).'/images/logo.jpg';
-		$img_to_share 		= apply_filters( 'pc_filter_img_default_to_share', $img_to_share );
+		$img_to_share		= pc_get_img_default_url_to_share();
 		$meta_title 		= $settings_project['coord-name'];
 		$meta_description 	= $settings_project['micro-desc'];
 

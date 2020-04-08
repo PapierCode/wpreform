@@ -70,7 +70,7 @@
 			'name' => $settings_project['coord-name'],
 			'image' => array(
 				'@type' => 'ImageObject',
-				'url' => get_bloginfo('template_directory').'/images/logo.jpg',
+				'url' => pc_get_img_default_url_to_share(),
 				"width" => $images_project_sizes['share']['width'],
 				"height" => $images_project_sizes['share']['height']
 			),
