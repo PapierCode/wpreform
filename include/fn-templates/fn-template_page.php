@@ -22,6 +22,7 @@ add_action( 'pc_page_content_footer', 'pc_display_main_footer_start', 10 );  // 
 add_action( 'pc_page_content_footer', 'pc_display_subpage_backlink', 20, 1 ); // lien retour
 add_action( 'pc_page_content_footer', 'pc_display_share_links', 30 ); // layout commun
 add_action( 'pc_page_content_footer', 'pc_display_main_footer_end', 40 ); // layout commun
+add_action( 'pc_page_content_footer', 'pc_display_schema_post', 50, 2 ); // données structurées
 
 add_action( 'pc_page_content_after', 'pc_display_main_end', 10 ); // layout commun
 
@@ -64,6 +65,32 @@ function pc_display_specific_content( $post, $page_metas ) {
 
 
 /*=====  FIN Contenu supplémentaire   =====*/
+
+/*==============================
+=            Résumé            =
+==============================*/
+
+function pc_get_page_excerpt( $post_id, $post_metas ) {
+
+	if ( isset( $post_metas['seo-desc'] ) && $post_metas['seo-desc'][0] != '' ) {
+
+		$excerpt = $post_metas['seo-desc'][0];
+
+	} else if ( isset( $post_metas['resum-desc'] ) && $post_metas['resum-desc'][0] != '' ) {
+
+		$excerpt = $post_metas['resum-desc'][0];
+
+	} else {
+
+		$excerpt = get_the_excerpt( $post_id );
+	}
+	
+	return $excerpt;
+
+}
+
+
+/*=====  FIN Résumé  =====*/
 
 /*==============================================
 =            Sous-page, lien retour            =

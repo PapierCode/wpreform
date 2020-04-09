@@ -86,24 +86,17 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 		} elseif ( is_page() ) {
 
 			$post_id = get_the_id();
-			$page_metas = get_post_meta( $post_id );
+			$post_metas = get_post_meta( $post_id );
 
 			// titre
-			$meta_title = ( isset( $page_metas['seo-title'] ) ) ? $page_metas['seo-title'][0] : get_the_title($post_id);
+			$meta_title = ( isset( $post_metas['seo-title'] ) ) ? $post_metas['seo-title'][0] : get_the_title($post_id);
 			// description
-			if ( isset( $page_metas['seo-desc'] ) ) {
-				$meta_description = $page_metas['seo-desc'][0];
-			}
-			else if ( isset( $page_metas['resum-desc'] ) ) {
-				$meta_description = $page_metas['resum-desc'][0];
-			} else {
-				$meta_description = get_the_excerpt($post_id);
-			}
+			$meta_description = pc_get_page_excerpt( $post_id, $post_metas );
 			
 			// visuel
-			if ( isset( $page_metas['thumbnail-img'] ) ) {
-				$img_to_share = wp_get_attachment_image_src($page_metas['thumbnail-img'][0],'share')[0];
-				if ( $settings_project['theme'] == 'fullscreen' ) { $css_custom .= pc_fs_main_header_css_bg($page_metas['thumbnail-img'][0]); }
+			if ( isset( $post_metas['thumbnail-img'] ) ) {
+				$img_to_share = wp_get_attachment_image_src($post_metas['thumbnail-img'][0],'share')[0];
+				if ( $settings_project['theme'] == 'fullscreen' ) { $css_custom .= pc_fs_main_header_css_bg($post_metas['thumbnail-img'][0]); }
 			}
 
 

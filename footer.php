@@ -1,6 +1,9 @@
 <footer class="footer cl-bloc fs-bloc"><div class="footer-inner">
 
 	<?php
+	
+	do_action( 'pc_footer_before_address' );
+
 	/*===================================
 	=            Coordonnées            =
 	===================================*/ ?>
@@ -41,51 +44,13 @@
 				</span>
 			</dd>
 		</dl>
+		<?php pc_display_schema_local_business(); ?>
 	</address>
 
 
 	<?php /*=====  FIN Coordonnées  =====*/
 
-	/*====================================
-	=            Microdonnées            =
-	====================================*/
-
-		global $images_project_sizes;
-		$local_business = array(
-			'@context' => 'http://schema.org',
-			'@type' => 'LocalBusiness',
-			'address' => array(
-				'@type' => 'PostalAddress',
-				'streetAddress' => $settings_project['coord-address'],
-				'postalCode' => $settings_project['coord-postal-code'],
-				'addressLocality' => $settings_project['coord-city'],
-				'addressRegion' => 'FR'
-			),
-			'geo' => array(
-				'@type' => 'GeoCoordinates',
-				'latitude' => $settings_project['coord-lat'],
-				'longitude' => $settings_project['coord-long']
-			),
-			'description' => $settings_project['micro-desc'],
-			'name' => $settings_project['coord-name'],
-			'image' => array(
-				'@type' => 'ImageObject',
-				'url' => pc_get_img_default_url_to_share(),
-				"width" => $images_project_sizes['share']['width'],
-				"height" => $images_project_sizes['share']['height']
-			),
-			'telephone' => pc_phone($settings_project['coord-phone-1']),
-			'pricerange' => '€€'
-		);
-		
-		$local_business = apply_filters( 'pc_filter_local_business', $local_business, $settings_project );
-
-		if ( !empty($local_business) ) {
-			echo '<script type="application/ld+json">'.json_encode($local_business,JSON_UNESCAPED_SLASHES).'</script>';
-		}
-
-
-	/*=====  FIN Microdonnées  =====*/
+	do_action( 'pc_footer_before_nav' );
 
 	/*==================================
 	=            Navigation            =
@@ -97,7 +62,7 @@
 		<?php
 			$nav_footer_config = array(
 				'theme_location'  	=> 'nav-footer',
-				'nav_prefix'		=> array('f-nav', 'f-p-nav'), // custom
+				'nav_prefix'		=> array('f-nav','f-p-nav'), // custom
 				'items_wrap'      	=> '%3$s',
 				'depth'           	=> 1,
 				'item_spacing'		=> 'discard',
@@ -110,7 +75,12 @@
 		</ul>
 	</nav>
 
-	<?php /*=====  FIN Navigation  =====*/ ?>
+	<?php /*=====  FIN Navigation  =====*/
+	
+	
+	do_action( 'pc_footer_after_nav' );
+			
+	?>
 
 
 </div></footer>
