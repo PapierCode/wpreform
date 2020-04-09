@@ -122,6 +122,12 @@ $settings_home_fields = array(
     )
 );
 
+
+/*----------  Filtre  ----------*/
+
+$settings_home_fields = apply_filters( 'pc_filter_settings_home_fields', $settings_home_fields );
+
+
 /*----------  Section et champ visuel  ----------*/
 
 $home_visual_field = array(
@@ -153,11 +159,6 @@ if ( $settings_project['theme'] == 'fullscreen' ) {
 
 	$settings_home_fields[] = $home_visual_field;
 }
-
-
-/*----------  Filtre  ----------*/
-
-$settings_home_fields = apply_filters( 'pc_filter_settings_home_fields', $settings_home_fields );
 
 
 /*=====  FIN Champs  =====*/

@@ -161,6 +161,7 @@ function pc_display_schema_post( $post, $post_metas ) {
 	$author_last_name = get_the_author_meta( 'last_name', $author_id );
 	
 	// post
+	$post_id = $post->ID;
 	$post_url = get_the_permalink($post_id);	
 	$post_img = ( isset( $post_metas['thumbnail-img'] ) ) ? pc_get_img( $post_metas['thumbnail-img'][0], 'share', 'datas' ) : $img_default;
 
