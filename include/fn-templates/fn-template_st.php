@@ -27,6 +27,7 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 
     $metas = get_post_meta($post_id);
 	$title = (isset($metas['resum-title'])) ? $metas['resum-title'][0] : get_the_title($post_id);
+	$url = get_the_permalink($post_id);
 
     echo '<article class="st fs-bloc '.$css.'"><div class="st-inner">';
     
@@ -66,7 +67,7 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 
     /*----------  Titre  ----------*/
 
-    echo '<h'.$hn.' class="st-title"><a href="'.get_the_permalink($post_id).'">'.$title.'</a></h'.$hn.'>';
+	echo '<h'.$hn.' class="st-title"><a href="'.$url.'">'.$title.'</a></h'.$hn.'>';
 	
 	do_action( 'pc_action_post_resum_after_title', $post_id );
 	
@@ -82,6 +83,24 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
     do_action( 'pc_action_post_resum_before_end', $post_id );
 
 	echo '</div></article>';
+	
+
+	/*----------  Données structurées  ----------*/
+	
+	global $st_schema, $images_project_sizes;
+	$st_schema = array(
+		'@type' => 'ListItem',
+		'name' => $title,
+		'description' => $resum,
+		'url' => $url,
+		'image' => array(
+			'@type'		=>'ImageObject',
+			'url' 		=> $st_img_urls[2],
+			'width' 	=> $images_project_sizes['st-700']['width'],
+			'height' 	=> $images_project_sizes['st-700']['height']
+		)
+	);
+	
 	
 };
 

@@ -40,6 +40,22 @@ function pc_display_home_content( $settings_home ) {
 	/*----------  Wysiwyg  ----------*/
 	
 	echo '<div class="editor fs-bloc fs-editor cl-editor"><div class="editor-inner">'.pc_wp_wysiwyg( $settings_home['content-txt'],false ).'</div></div>';
+	
+
+	/*----------  Données structurées  ----------*/
+	
+	$home_schema = array(
+		'@context' => 'http://schema.org/',
+		'@type'=> 'CollectionPage',
+		'name' => $settings_home['content-title'],
+		'headline' => $settings_home['content-title'],
+		'description' => ( isset( $settings_home['seo-desc'] ) && $settings_home['seo-desc'] != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-txt'],30,'...'),
+		'mainEntity' => array(
+			'@type' => 'ItemList',
+			'itemListElement' => array()
+		),
+		'isPartOf' => pc_get_schema_website()
+	);
 
 
 	/*----------  Pages à la une  ----------*/
@@ -57,6 +73,8 @@ function pc_display_home_content( $settings_home ) {
 
 				// titre
 				$page_title = ($page_new_title != '') ? $page_new_title : get_the_title($page_id);
+				// lien
+				$page_url = get_the_permalink($page_id);
 				
 				// image de la page ou image par défaut
 				$page_img_id = get_post_meta( $page_id, 'thumbnail-img', true );
@@ -79,16 +97,35 @@ function pc_display_home_content( $settings_home ) {
 				$page_img = apply_filters( 'pc_filter_home_shortcut_img', $page_img, $page_id );
 
 				// affichage
-				echo '<li class="home-shortcut-item"><a title="'.$page_title.'" href="'.get_the_permalink($page_id).'" class="home-shortcut-link">';
+				echo '<li class="home-shortcut-item"><a title="'.$page_title.'" href="'.$page_url.'" class="home-shortcut-link">';
 				echo '<span class="home-shortcut-img">'.$page_img.'</span>';
 				echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($page_title),40).'</span>';
 				echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';
 				echo '</a></li>';
 
+				// ajout données structurées
+				global $images_project_sizes;
+				$home_schema['mainEntity']['itemListElement'][] = array(
+					'@type' => 'ListItem',
+					'name' => $page_title,
+					'url' => $page_url,
+					'image' => array(
+						'@type'		=>'ImageObject',
+						'url' 		=> $page_img_urls[1],
+						'width' 	=> $images_project_sizes['st-500']['width'],
+						'height' 	=> $images_project_sizes['st-500']['height']
+					)
+				);
+
 			} // FIN foreach $home_pages
 		echo '</ul>';
 
 	}
+
+	/*----------  Affichage données structurées  ----------*/
+	
+	$home_schema = apply_filters( 'pc_filter_schema_home', $home_schema );
+	echo '<script type="application/ld+json">'.json_encode($home_schema,JSON_UNESCAPED_SLASHES).'</script>';
 
 }
 
