@@ -223,11 +223,11 @@ function pc_display_schema_local_business() {
  * @param object	$post			Propriétés de l'article
  * @param array		$post_metas		Métadonnées de l'article
  * 
- * @return 			Affiche les données structurées de l'article
+ * @return array	Données structurées d'un article
  * 
  */
 
-function pc_display_schema_article( $post, $post_metas ) {
+function pc_get_schema_article( $post, $post_metas, $context = false ) {
 
 	global $settings_project;
 	
@@ -237,8 +237,7 @@ function pc_display_schema_article( $post, $post_metas ) {
 	$post_img = ( isset( $post_metas['thumbnail-img'] ) ) ? pc_get_img( $post_metas['thumbnail-img'][0], 'share', 'datas' ) : pc_get_img_default_to_share();
 
 	// données structurées
-	$article = array(
-		'@context' => 'http://schema.org',
+	$schema = array(
 		'@type' => 'Article',
 		'url' => $post_url.'#main',
 		'datePublished' => get_the_date( 'c', $post_id ),
@@ -257,13 +256,12 @@ function pc_display_schema_article( $post, $post_metas ) {
 		'isPartOf' => pc_get_schema_website()
 	);
 
+	if( $context ) { $schema = array_merge( array('@context' =>'http://schema.org'), $schema ); }
+	
 	// filtre
-	$article = apply_filters( 'pc_filter_schema_article', $article, $post, $post_metas );
+	$schema = apply_filters( 'pc_filter_schema_article', $schema, $post, $post_metas );
 
-	// affichage
-	if ( !empty( $article ) ) {
-		echo '<script type="application/ld+json">'.json_encode($article,JSON_UNESCAPED_SLASHES).'</script>';
-	}
+	return $schema;
 
 }
 

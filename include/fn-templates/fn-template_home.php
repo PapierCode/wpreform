@@ -44,7 +44,7 @@ function pc_display_home_content( $settings_home ) {
 
 	/*----------  Données structurées  ----------*/
 	
-	$home_schema = array(
+	$schema_collection_page = array(
 		'@context' => 'http://schema.org/',
 		'@type'=> 'CollectionPage',
 		'name' => $settings_home['content-title'],
@@ -105,7 +105,7 @@ function pc_display_home_content( $settings_home ) {
 
 				// ajout données structurées
 				global $images_project_sizes;
-				$home_schema['mainEntity']['itemListElement'][] = array(
+				$schema_collection_page['mainEntity']['itemListElement'][] = array(
 					'@type' => 'ListItem',
 					'name' => $page_title,
 					'url' => $page_url,
@@ -124,8 +124,8 @@ function pc_display_home_content( $settings_home ) {
 
 	/*----------  Affichage données structurées  ----------*/
 	
-	$home_schema = apply_filters( 'pc_filter_schema_home', $home_schema );
-	echo '<script type="application/ld+json">'.json_encode($home_schema,JSON_UNESCAPED_SLASHES).'</script>';
+	$schema_collection_page = apply_filters( 'pc_filter_schema_collection_page_home', $schema_collection_page );
+	echo '<script type="application/ld+json">'.json_encode($schema_collection_page,JSON_UNESCAPED_SLASHES).'</script>';
 
 }
 

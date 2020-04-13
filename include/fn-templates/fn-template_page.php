@@ -11,7 +11,7 @@
 =============================*/
 
 add_action( 'pc_page_content_before', 'pc_display_main_start', 10 );  // layout commun
-add_action( 'pc_page_content_before', 'pc_display_schema_article', 20, 2 ); // données structurées
+add_action( 'pc_page_content_before', 'pc_display_schema_post', 20, 2 ); // données structurées
 
 add_action( 'pc_page_content_before', 'pc_display_main_title_start', 20 );  // layout commun
 add_action( 'pc_page_content_before', 'pc_display_main_title', 30, 1 );  // layout commun
@@ -28,6 +28,27 @@ add_action( 'pc_page_content_after', 'pc_display_main_end', 10 ); // layout comm
 
 
 /*=====  FIN Hooks  =====*/
+
+/*===========================================
+=            Données structurées            =
+===========================================*/
+
+function pc_display_schema_post( $post, $post_metas ) {
+
+	$schema = pc_get_schema_article( $post, $post_metas, true );
+
+	// filtre
+	$schema = apply_filters( 'pc_filter_schema_post', $schema, $post, $post_metas );
+
+	// affichage
+	if ( !empty( $schema ) ) {
+		echo '<script type="application/ld+json">'.json_encode($schema,JSON_UNESCAPED_SLASHES).'</script>';
+	}
+
+}
+
+
+/*=====  FIN Données structurées  =====*/
 
 /*===============================================
 =            Contenu supplémentaire             =
@@ -55,24 +76,28 @@ function pc_display_specific_content( $post, $post_metas ) {
 		// liste
 		$sub_pages_id = explode( ',',$post_metas['content-subpages'][0] );
 		// données structurées
-		$sub_pages_schema = array(
-			'@context' => 'https://schema.org',
-			'@type' => 'ItemList',
-			'itemListElement' => array(	)
+		$schema_sub_pages = array(
+			'@context' => 'http://schema.org/',
+			'@type'=> 'CollectionPage',
+			'mainEntity' => array(
+				'@type' => 'ItemList',
+				'itemListElement' => array()
+			),
+			'isPartOf' => pc_get_schema_article( $post, $post_metas )
 		);
 		global $st_schema;
 
 		// affichage des résumés de pages
-		foreach ( $sub_pages_id as $key => $postId ) {
-			pc_display_post_resum( $postId, '', 2 );
+		foreach ( $sub_pages_id as $key => $post_id ) {
+			pc_display_post_resum( $post_id, '', 2 );
 			// données structurées
 			$st_schema['position'] = $key + 1;
-			$sub_pages_schema['itemListElement'][] = $st_schema;
+			$schema_sub_pages['mainEntity']['itemListElement'][] = $st_schema;
 		}
 		pc_add_fake_st( count($sub_pages_id) );
 
 		// affichage des données structurées
-		echo '<script type="application/ld+json">'.json_encode($sub_pages_schema,JSON_UNESCAPED_SLASHES).'</script>';
+		echo '<script type="application/ld+json">'.json_encode($schema_sub_pages,JSON_UNESCAPED_SLASHES).'</script>';
 
 	}
 
