@@ -13,6 +13,7 @@ function pc_get_schema_client_type() {
 
 	$type = 'Organization';
 	$type = apply_filters( 'pc_filter_schema_client_type', $type );
+
 	return $type;
 
 }
@@ -30,10 +31,13 @@ function pc_get_schema_author( $author_id ) {
 	$author_first_name = get_the_author_meta( 'first_name', $author_id );
 	$author_last_name = get_the_author_meta( 'last_name', $author_id );
 
-	return array(
+	$author = array(
 		'@type' => 'Person',
 		'name' => $author_first_name.' '.$author_last_name
 	);
+	$author = apply_filters( 'pc_filter_schema_author', $author );
+
+	return $author;
 
 }
 
@@ -65,6 +69,8 @@ function pc_get_schema_same_as() {
 
 	}
 
+	$same_as = apply_filters( 'pc_filter_schema_same_as', $same_as );
+
 	return $same_as;
 
 }
@@ -77,11 +83,8 @@ function pc_get_schema_same_as() {
 =================================*/
 
 /**
- * 
- * @param string	$name	Nom de la structure qui publie le contenu
- * @param array		$img	URL, largeur et hauteur de l'image (logo)
- * 
- * @return array	Données de la propriété Publisher
+ *  
+ * @return array Données de la propriété Publisher
  * 
  */
 
@@ -90,7 +93,7 @@ function pc_get_schema_publisher() {
 	global $settings_project;
 	$img = pc_get_img_default_to_share();
 
-	$schema_publisher = array(
+	$publisher = array(
 		'@type' => pc_get_schema_client_type(),
 		'name' => $settings_project['coord-name'],
 		'logo'	=> array(
@@ -102,9 +105,11 @@ function pc_get_schema_publisher() {
 	);
 
 	$same_as = pc_get_schema_same_as();
-	if ( !empty( $same_as ) ) { $schema_publisher['sameAs'] = $same_as; };
+	if ( !empty( $same_as ) ) { $publisher['sameAs'] = $same_as; };
 
-	return $schema_publisher;
+	$publisher = apply_filters( 'pc_filter_schema_publisher', $publisher );
+
+	return $publisher;
 
 }
 
@@ -125,13 +130,16 @@ function pc_get_schema_website( ) {
 
 	global $settings_project;
 
-	return array(
+	$website = array(
 		'@type' => 'WebSite',
 		'url' => get_site_url(),
 		'name' => $settings_project['coord-name'],
 		'description' => $settings_project['micro-desc'],
 		'publisher'	=> pc_get_schema_publisher()
 	);
+	$website = apply_filters( 'pc_filter_schema_website', $website );
+
+	return $website;
 
 }
 

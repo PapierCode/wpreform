@@ -189,11 +189,11 @@ add_action( 'wp_head', 'pc_favicon', 5 );
 	function pc_favicon() {
 
 		// défaut
-		$url = get_bloginfo( 'template_directory' ).'/images/favicon.png';
+		$url = get_bloginfo( 'template_directory' ).'/images/favicon.jpg';
 		// pour modifier
 		$url = apply_filters( 'pc_filter_favicon', $url );
 		// affichage
-		echo '<link rel="icon" type="image/png" href="'.$url.'" />';
+		echo '<link rel="icon" type="image/jpg" href="'.$url.'" />';
 
 	};
 

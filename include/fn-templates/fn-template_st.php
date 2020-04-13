@@ -51,12 +51,12 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 				get_bloginfo('template_directory').'/images/st-default-500.jpg',
 				get_bloginfo('template_directory').'/images/st-default-700.jpg'
 			);
-			$st_img_urls = apply_filters( 'pc_filter_st_img_default_urls', $st_img_urls );
+			$st_img_urls = apply_filters( 'pc_filter_img_default_st', $st_img_urls );
 			$st_img_alt	= '';
 		}
 
 		$st_img_srcset = $st_img_urls[0].' 400w, '.$st_img_urls[1].' 500w, '.$st_img_urls[2].' 700w';
-		$st_img_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 700px, (min-width:761px) 500px';
+		$st_img_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 700px, (min-width:760px) 500px';
 
 		$st_img = '<img src="'.$st_img_urls[2].'" alt="'.$st_img_alt.'" srcset="'.$st_img_srcset.'" sizes="'.$st_img_sizes.'" />';
 		$st_img = apply_filters( 'pc_filter_st_img', $st_img, $post_id );
