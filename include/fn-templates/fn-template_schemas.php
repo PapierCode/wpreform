@@ -227,7 +227,7 @@ function pc_display_schema_local_business() {
  * 
  */
 
-function pc_display_schema_post( $post, $post_metas ) {
+function pc_display_schema_article( $post, $post_metas ) {
 
 	global $settings_project;
 	
@@ -237,7 +237,7 @@ function pc_display_schema_post( $post, $post_metas ) {
 	$post_img = ( isset( $post_metas['thumbnail-img'] ) ) ? pc_get_img( $post_metas['thumbnail-img'][0], 'share', 'datas' ) : pc_get_img_default_to_share();
 
 	// données structurées
-	$schema_post = array(
+	$article = array(
 		'@context' => 'http://schema.org',
 		'@type' => 'Article',
 		'url' => $post_url.'#main',
@@ -258,11 +258,11 @@ function pc_display_schema_post( $post, $post_metas ) {
 	);
 
 	// filtre
-	$schema_post = apply_filters( 'pc_filter_schema_post', $schema_post, $post, $post_metas );
+	$article = apply_filters( 'pc_filter_schema_article', $article, $post, $post_metas );
 
 	// affichage
-	if ( !empty( $schema_post ) ) {
-		echo '<script type="application/ld+json">'.json_encode($schema_post,JSON_UNESCAPED_SLASHES).'</script>';
+	if ( !empty( $article ) ) {
+		echo '<script type="application/ld+json">'.json_encode($article,JSON_UNESCAPED_SLASHES).'</script>';
 	}
 
 }

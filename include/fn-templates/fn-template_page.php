@@ -11,7 +11,7 @@
 =============================*/
 
 add_action( 'pc_page_content_before', 'pc_display_main_start', 10 );  // layout commun
-add_action( 'pc_page_content_before', 'pc_display_schema_post', 20, 2 ); // données structurées
+add_action( 'pc_page_content_before', 'pc_display_schema_article', 20, 2 ); // données structurées
 
 add_action( 'pc_page_content_before', 'pc_display_main_title_start', 20 );  // layout commun
 add_action( 'pc_page_content_before', 'pc_display_main_title', 30, 1 );  // layout commun
