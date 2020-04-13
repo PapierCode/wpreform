@@ -84,8 +84,6 @@ include 'include/fn-templates/fn-template_images.php';
 include 'include/fn-templates/fn-template_social.php';
 // article résumé
 include 'include/fn-templates/fn-template_st.php';
-// données structurées
-include 'include/fn-templates/fn-template_schemas.php';
 
 
 /*----------  Templates : layouts  ----------*/
