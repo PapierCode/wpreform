@@ -1,11 +1,12 @@
-<?php get_header(); ?>
+<?php
 
-<main id="main" class="main mw">
-	<div class="main-inner mw">	
+get_header();
 
-		<h1>Cette page n'existe pas</h1>
+do_action( 'pc_404_content_before' );
 
-	</div>
-</main>
+	$content_404 = apply_filters( 'pc_filter_404_content', '<h1>Cette page n\'existe pas</h1>' );
+	echo $content_404;
 
-<?php get_footer(); ?>
+do_action( 'pc_404_content_after' );
+
+get_footer();

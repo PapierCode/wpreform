@@ -33,36 +33,40 @@ add_action( 'admin_init', function() {
 =            Fonctions            =
 =================================*/
 
-/*----------  Repeater sous-pages : affichage d'une ligne  ----------*/
+/*----------  Ligne du repeater sous-pages  ----------*/
 
-function pc_meta_subpage_line( $classes, $options, $current = '', $save = array() ) {
-    $return = '<div class="'.$classes.'"><select><option value=""></option>';
-    foreach ($options as $subpage ) {
-        if ( $subpage->post_parent < 1 || in_array($subpage->ID,$save) ) { // si ce n'est pas déjà une sous-page
-            $return .= '<option value="'.$subpage->ID.'" '.selected($current,$subpage->ID,false).'>'.$subpage->post_title.'</option>';
-        }
-    }
-    $return .= '</select>';
-    $return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-no"></span>';
-    $return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
+/**
+ * 
+ * @param string	$css_class	Classes css associées à la ligne
+ * @param array		$subpages	Posts sélectionnables (tableau d'objets) 
+ * @param int		$current	Id du post associé à ligne
+ * @param array		$saved		Toutes les sous-pages sauvegardées (tableau d'id)
+ * 
+ * @return string	HTML
+ * 	
+ */
+
+function pc_meta_subpage_line( $css_class, $subpages, $current = '', $saved = array() ) {
+
+	$return = '<div class="'.$css_class.'">';
+	
+		// sélecteur de page
+		$return .= '<select><option value=""></option>';
+		foreach ( $subpages as $subpage ) {
+			if ( $subpage->post_parent < 1 || in_array( $subpage->ID,$saved ) ) { // si ce n'est pas déjà une sous-page
+				$return .= '<option value="'.$subpage->ID.'" '.selected( $current,$subpage->ID,false ).'>'.$subpage->post_title.'</option>';
+			}
+		}
+		$return .= '</select>';
+
+		// effacer la ligne
+		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-no"></span>';
+		// déplacer la ligne
+		$return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
+	
 	$return .= '</div>';
+
 	return $return;
-}
-
-
-/*----------  Update sous-page  ----------*/
-
-function pc_update_subpage( $post_id, $post_parent ) {
-    
-    // prévention contre une boucle infinie 1/2
-    remove_action( 'save_post', 'pc_sub_page_save' );
-    // update
-    wp_update_post(array(
-        'ID' => $post_id,
-        'post_parent' => $post_parent
-    ));
-    // prévention contre une boucle infinie 2/2
-    add_action( 'save_post', 'pc_sub_page_save' );
 
 }
 
@@ -78,15 +82,16 @@ function pc_page_content_sub( $post ) {
 	global $settings_project;  // cf. functions.php
 
     // input hidden de vérification pour la sauvegarde
-    wp_nonce_field( basename( __FILE__ ), 'none-page-content-sup' );
+	wp_nonce_field( basename( __FILE__ ), 'nonce-page-content-from' );
 
     // début mise en page
-    if ( $post->post_parent < 1 ) { // si parent ou à devenir
+    if ( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
         if ( !empty( $settings_project['page-content-from'] ) ) {
             echo '<p><strong>Sélectionnez un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</strong></p>';
         }
-        echo '<p><em><strong>Remarque :</strong> lorsqu\'une page devient sous-page, son adresse (URL) est préfixée avec l\'adresse de la page parent, pour indiquer la hiérarchie.</em></p>';
-    } else { // si enfant
+		echo '<p><em><strong>Remarque :</strong> lorsqu\'une page devient sous-page, son adresse (URL) est préfixée avec l\'adresse de la page parent, pour indiquer la hiérarchie.</em></p>';
+		
+    } else { // si la page courante est une sous-page
         echo '<p><strong>Sélectionnez un contenu spécifique.</strong></p>';
     }
     echo '<table class="form-table"><tbody>';
@@ -98,8 +103,9 @@ function pc_page_content_sub( $post ) {
 
     if ( !empty( $settings_project['page-content-from'] ) ) {
 	
-		// filtre
+		// les types de contenu
 		$metabox_select_content_from = $settings_project['page-content-from'];
+		// filtre (par exemple pour supprimer un type déjà sélectionné)
 		$metabox_select_content_from = apply_filters( 'pc_filter_metabox_select_content_from', $metabox_select_content_from, $post );
         // en bdd
         $content_from_saved = get_post_meta( $post->ID, 'content-from', true );
@@ -122,9 +128,9 @@ function pc_page_content_sub( $post ) {
     =            Sélection de pages enfants (repeater)            =
     =============================================================*/
     
-    if( $post->post_parent < 1 ) { // si la page en cours n'est pas enfant
+    if( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
 
-        // pages pour le select
+        // les pages qui sont ou peuvent être sous-page
         $all_subpages = get_posts(array(
             'post_type' => 'page',
             'post_status' => 'publish',
@@ -141,14 +147,14 @@ function pc_page_content_sub( $post ) {
         ));
         // liste des sous-pages sauvegardées
         $subpages_saved = get_post_meta( $post->ID, 'content-subpages', true );
-        $subpages_saved_array = explode(',',$subpages_saved);
+        $subpages_saved_array = explode( ',', $subpages_saved );
 
         // affichage
         echo '<tr><th><label>Sous-pages</label></th><td>';
             echo '<div class="pc-repeater" data-type="subpage">';
-            foreach ($subpages_saved_array as $key => $id) {
-                echo pc_meta_subpage_line( 'pc-repeater-item', $all_subpages, $id, $subpages_saved_array );
-            }
+				foreach ( $subpages_saved_array as $id ) {
+					echo pc_meta_subpage_line( 'pc-repeater-item', $all_subpages, $id, $subpages_saved_array );
+				}
             echo '</div>';
             // c'est ce input qui est sauvegardé !
             echo '<input type="hidden" value="'.$subpages_saved.'" name="content-subpages" class="pc-repeater-input" />';
@@ -181,9 +187,10 @@ function pc_page_content_sub( $post ) {
 add_action( 'save_post', 'pc_sub_page_save' );
 
 	function pc_sub_page_save( $post_id ) {
+		//pc_var($_POST); exit();
 
 		// check input hidden de vérification
-		if ( isset($_POST['none-page-content-sup']) && wp_verify_nonce( $_POST['none-page-content-sup'], basename( __FILE__ ) ) ) {
+		if ( isset($_POST['nonce-page-content-from']) && wp_verify_nonce( $_POST['nonce-page-content-from'], basename( __FILE__ ) ) ) {
 
 			// champs à traiter
 			$fields = array(
@@ -193,6 +200,8 @@ add_action( 'save_post', 'pc_sub_page_save' );
 
 			foreach ($fields as $name => $value) {
 
+				// pour manipuler la bdd
+				global $wpdb;
 				// valeur renvoyée par le form
 				$temp = $value;
 				// valeur en bdd
@@ -206,15 +215,17 @@ add_action( 'save_post', 'pc_sub_page_save' );
 
 					$subpages_temp = explode(',',$temp);
 					$subpages_saved = explode(',',$save);
-					
-					//$real_post_id = ( wp_is_post_revision( $post_id ) ) ? wp_is_post_revision( $post_id ) : $post_id;
-					
+										
 					// nouvelle liste de sous-pages
 					if ( $temp != '' && count($subpages_temp) > 0 ) {
 						foreach ($subpages_temp as $temp_id) {
 							// si ce n'est pas déjà une sous-page
 							if ( !in_array($temp_id,$subpages_saved) ) {
-								pc_update_subpage( $temp_id, $post_id );
+								$wpdb->update(
+									$wpdb->prefix.'posts',
+									array('post_parent' => $post_id),
+									array('ID' => $temp_id)
+								);
 							// si c'est déjà une sous-page
 							} else {
 								// suppression dans le tableau représentant la sauvegarde
@@ -226,7 +237,13 @@ add_action( 'save_post', 'pc_sub_page_save' );
 
 					// sous-page à détacher 
 					if ( $save != '' && count($subpages_saved) > 0 ) {
-						foreach ($subpages_saved as $save_id) { pc_update_subpage( $save_id, '' ); }
+						foreach ($subpages_saved as $save_id) {
+							$wpdb->update(
+								$wpdb->prefix.'posts',
+								array('post_parent' => 0),
+								array('ID' => $save_id)
+							);
+						}
 					}
 					
 				}

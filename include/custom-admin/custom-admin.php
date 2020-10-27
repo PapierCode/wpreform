@@ -166,32 +166,3 @@ add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img_content
 
 
 /*=====  FIN Colonnes des listes d'articles  =====*/
-
-/*======================================
-=            TinyMCE custom            =
-======================================*/
-
-// https://codex.wordpress.org/TinyMCE_Custom_Styles
-// ajouter 'styleselect' dans la configuration de la barre d'outils
-
-/* add_filter( 'tiny_mce_before_init', 'tinymce_project_styles' );
-
-    function tinymce_project_styles( $init_array ) {
-
-        // liste des styles
-        $style_formats = array(
-            array(
-                'title' => 'Vert',
-                'inline' => 'span',
-                'classes' => 'txt-green',
-                'wrapper' => false
-            )
-        );
-        // mise à jour tu tableau en paramétre (JSON encodage)
-        $init_array['style_formats'] = json_encode( $style_formats );
-        return $init_array;
-
-    } */
-
-
-/*=====  FIN TinyMCE custom  ======*/

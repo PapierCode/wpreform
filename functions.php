@@ -17,32 +17,8 @@ $settings_pc = get_option('pc-settings-option');
 
 /*----------  Configuration projet (client)  ----------*/
 
-include 'include/settings.php';
+include 'include/settings_project.php';
 $settings_project = get_option('project-settings-option');
-
-
-/*----------  Thème (fullscreen ou classic)  ----------*/
-
-// thème par défaut
-$settings_project['theme'] = 'classic';
-// thème configuré dans l'admin
-if ( isset($settings_pc['preform-theme']) && $settings_pc['preform-theme'] != '' ) {
-	$settings_project['theme'] = $settings_pc['preform-theme'];
-}
-// thème modifié par l'url
-if ( isset($_GET['th']) ) {
-	switch ($_GET['th']) {
-		case 'f':
-			$settings_project['theme'] = 'fullscreen';
-			break;
-		case 'c':
-			$settings_project['theme'] = 'classic';
-			break;
-	}
-}
-
-// version fullscreen, une page peut être plein écran ou pas
-$settings_project['is-fullscreen'] = false;
 
 
 /*----------  Contenu spécifique ajouté dans les pages (formulaire, liste d'actualités,...)  ----------*/
@@ -72,39 +48,41 @@ include 'include/custom-posts/custom_home.php';
 
 // sprite SVG
 include 'images/sprite.php';
-// contenu de l'entête (head)
-include 'include/head.php';
+// fonctions réutilisables
+include 'include/templates_commons/templates_misc.php';
 // navigation
-include 'include/navigation.php';
+include 'include/templates_commons/templates_navigation.php';
 // wysiwyg par défaut
-include 'include/fn-templates/fn-template_editor.php';
+include 'include/templates_commons/templates_editor.php';
 // images & galerie
-include 'include/fn-templates/fn-template_images.php';
-// réseaux sociaux (liens et partage)
-include 'include/fn-templates/fn-template_social.php';
+include 'include/templates_commons/templates_images.php';
+// liens réseaux sociaux & partage
+include 'include/templates_commons/templates_social.php';
+// layout global
+include 'include/templates_commons/templates_layout.php';
 // article résumé
-include 'include/fn-templates/fn-template_st.php';
+include 'include/templates_commons/templates_st.php';
+// contenu de l'entête (head)
+include 'include/templates_commons/templates_head.php';
 
 
-/*----------  Templates : layouts  ----------*/
+/*----------  Templates : spécifiques  ----------*/
 
 // entête (header)
-include 'include/fn-templates/fn-template_header.php';
-// layout global
-include 'include/fn-templates/fn-template_layout.php';
-// spécificités fullscreen
-include 'include/fn-templates/fn-template_fullscreen.php';
+include 'include/template_header.php';
 // page
-include 'include/fn-templates/fn-template_page.php';
+include 'include/template_page.php';
+// 404
+include 'include/template_404.php';
 // accueil
-include 'include/fn-templates/fn-template_home.php';
+include 'include/template_home.php';
 
 
 /*----------  Modification de l'admin  ----------*/
 
 // généralités
 include 'include/custom-admin/custom-admin.php';
-// block editor
+// block editor... work not in progress !
 // include 'include/block-editor/block-editor.php';
 
 
@@ -126,5 +104,6 @@ include 'include/custom-admin/custom-admin.php';
 //     }
 //     return $posts;
 // }
+
 
 /*=====  FIN Expérimentations  =====*/

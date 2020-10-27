@@ -10,7 +10,7 @@
 
 function pc_display_main_start() {
 
-    echo '<main id="main" class="main cl-bloc"><div class="main-inner">';
+    echo '<main id="main" class="main"><div class="main-inner">';
 
 }
 
@@ -25,10 +25,7 @@ function pc_display_main_end() {
 
 function pc_display_main_title_start( ) {
 
-	global $settings_project;
-	$css_class = ( $settings_project['is-fullscreen'] ) ? 'main-header' : 'main-header fs-bloc';
-
-	echo '<header class="'.$css_class.'"><div class="main-header-inner">';
+	echo '<header class="main-header"><div class="main-header-inner">';
 
 }
 
@@ -40,7 +37,6 @@ function pc_display_main_title( $post ) {
 
 function pc_display_main_title_end( $post ) {
 	
-	pc_fs_btn_scroll_to_content();
 	echo '</div></header>';
 
 }
@@ -50,7 +46,7 @@ function pc_display_main_title_end( $post ) {
 
 function pc_display_main_footer_start() {
 
-    echo '<footer class="main-footer fs-bloc"><div class="main-footer-inner">';
+    echo '<footer class="main-footer"><div class="main-footer-inner">';
 
 }
 

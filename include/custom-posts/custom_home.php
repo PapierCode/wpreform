@@ -10,55 +10,109 @@
 // si la class est disponible
 if ( class_exists('PC_Add_Admin_Page') ) {
 
-/*==============================
-=            Champs            =
-==============================*/
+/*=================================
+=            Fonctions            =
+=================================*/
 
-/*----------  Contenu repeater Pages à la une  ----------*/
+/*----------  Pages à la une : ligne du repeater  ----------*/
 
-// affichage d'une ligne du repeater
-function pc_home_pages_line( $css_classe, $options, $current = '', $title = '' ) {
-    $return = '<div class="'.$css_classe.'"><select><option value=""></option>';
-    foreach ($options as $subpage ) {
-        $return .= '<option value="'.$subpage->ID.'" '.selected($current,$subpage->ID,false).'>'.$subpage->post_title.'</option>';
-    }
-	$return .= '</select>';
-	$return .= '<input type="text"value="'.$title.'" style="vertical-align:middle;width:260px" maxlength="40"/>';
-    $return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-no"></span>';
-    $return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
+/**
+ * 
+ * @param string	$css_class		Classes css associées à la ligne
+ * @param array		$pages			Posts sélectionnables (tableau d'objets)
+ * @param int		$current		Id du post associé à ligne
+ * @param string	$title			Titre de remplacement
+ * 
+ * @return string	HTML
+ * 
+ */
+
+function pc_home_pages_line( $css_class, $pages, $current = '', $title = '' ) {
+
+	$return = '<div class="'.$css_class.'">';
+	$return .= '<select><option value=""></option>';
+		
+		// selecteur
+		foreach ($pages as $subpage ) {
+			$return .= '<option value="'.$subpage->ID.'" '.selected($current,$subpage->ID,false).'>'.$subpage->post_title.'</option>';
+		}
+		$return .= '</select>';
+		// titre
+		$return .= '<input type="text"value="'.$title.'" style="vertical-align:middle;width:260px" maxlength="40"/>';
+		// effacer la ligne
+		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-no"></span>';
+		// supprimer la ligne
+		$return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
+
 	$return .= '</div>';
+
 	return $return;
+
 }
-// bdd to array
+
+/*----------  Pages à la une : conversion valeur sauvegardée  ----------*/
+
+/**
+ * 
+ * @param string	$datas		Valeur du champ en bdd
+ * 
+ * @return array	id => titre
+ * 
+ */
+
 function pc_home_pages_bdd_to_array( $datas ) {
+
 	$return = array();
 	if ( $datas != '' ) {
-		$set = explode('|',$datas);
-		foreach ($set as $value) {
-			$temp = explode('§',$value);
+		$set = explode( '|', $datas );
+		foreach ( $set as $value ) {
+			$temp = explode( '§', $value );
 			$return[$temp[0]] = $temp[1];
 		}
 	}
 	return $return;
+
 }
 
-// valeur en base
+
+/*=====  FIN Fonctions  =====*/
+
+/*=========================================================
+=            Pages à la une : contenu repeater            =
+=========================================================*/
+
+/*----------  Valeur en bdd  ----------*/
+
+// tout le contenu de l'accueil
 $settings_home = get_option('home-settings-option');
-$home_pages_in_bdd = ( isset($settings_home['content-pages']) ) ? $settings_home['content-pages'] : '';
+// pages à la une sauvegardées
+$home_pages_in_bdd = ( isset($settings_home['content-pages']) && $settings_home['content-pages'] !='' ) ? $settings_home['content-pages'] : '';
+// conversion
 $home_pages = pc_home_pages_bdd_to_array($home_pages_in_bdd);
-// affichage
+
+// html à afficher
 $home_pages_fields = '<div class="pc-repeater" data-type="homepages">';
-foreach ($home_pages as $id => $title) {
-	$home_pages_fields .= pc_home_pages_line( 'pc-repeater-item', $all_pages, $id, $title );
-}
+	// une ligne par page à la une
+	foreach ($home_pages as $id => $title) {
+		$home_pages_fields .= pc_home_pages_line( 'pc-repeater-item', $all_pages, $id, $title );
+	}
 $home_pages_fields .= '</div>';
+// c'est ce input qui est sauvegardé !
 $home_pages_fields .= '<input type="hidden" value="'.$home_pages_in_bdd.'" name="home-settings-option[content-pages]" class="pc-repeater-input" />';
+// btn ajout ligne
 $home_pages_fields .= '<p><button type="button" class="pc-repeater-btn-more button">Ajouter une page</button></p>';
-// ligne cachée et copiée par le JS (ajout)
+// source pour le js
 $home_pages_fields .= '<div style="display:none">';
-$home_pages_fields .= pc_home_pages_line( 'pc-repeater-item pc-repeater-src', $all_pages );
+	$home_pages_fields .= pc_home_pages_line( 'pc-repeater-item pc-repeater-src', $all_pages );
 $home_pages_fields .= '</div>';
 
+
+/*=====  FIN Pages à la une : contenu repeater  =====*/
+
+
+/*==============================
+=            Champs            =
+==============================*/
 
 /*----------  Sections et champs communs aux thèmes  ----------*/
 
@@ -93,7 +147,6 @@ $settings_home_fields = array(
                 'type'      => 'custom',
                 'label_for' => 'pages',
                 'label'     => 'Pages à la une',
-                'desc'      => 'Aide ou description du champ',
                 'display'   => $home_pages_fields
             )
         )
@@ -126,39 +179,6 @@ $settings_home_fields = array(
 /*----------  Filtre  ----------*/
 
 $settings_home_fields = apply_filters( 'pc_filter_settings_home_fields', $settings_home_fields );
-
-
-/*----------  Section et champ visuel  ----------*/
-
-$home_visual_field = array(
-	'title'     => 'Visuel',
-	'desc'      => '',
-	'id'        => 'visual',
-	'prefix'    => 'visual',
-	'fields'    => array(
-		array(
-			'type'      => 'img',
-			'label_for' => 'img',
-			'label'     => 'Visuel'
-		)
-	)
-);
-
-if ( $settings_project['theme'] == 'fullscreen' ) {
-
-	$home_visual_field['desc'] = '<p><strong>Sélectionnez le visuel qui s\'affiche en pleine page et pour le partage sur les réseaux sociaux</strong>, <em>dimensions minimum conseillées 2000x1500 pixels</em>.</p>';
-	$home_visual_field['fields'][0]['required'] = true;
-	$home_visual_field['fields'][0]['options'] = array( 'btnremove' => false );
-
-	array_unshift( $settings_home_fields, $home_visual_field );
-
-} else {
-
-	$home_visual_field['desc'] = '<p><strong>Sélectionnez le visuel pour le partage sur réseaux sociaux</strong>, <em>dimensions minimum conseillées 300x300 pixels, si un visuel n\'est pas sélectionné, le logo est utilisé.</em></p>';
-	$home_visual_field['fields'][0]['options'] = array( 'btnremove' => true );
-
-	$settings_home_fields[] = $home_visual_field;
-}
 
 
 /*=====  FIN Champs  =====*/

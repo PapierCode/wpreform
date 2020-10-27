@@ -1,4 +1,4 @@
-<footer class="footer cl-bloc fs-bloc"><div class="footer-inner">
+<footer class="footer"><div class="footer-inner">
 
 	<?php
 	
@@ -47,8 +47,12 @@
 		<?php pc_display_schema_local_business(); ?>
 	</address>
 
+	<?php 
+	
+	do_action( 'pc_footer_before_address' );
+	
 
-	<?php /*=====  FIN Coordonnées  =====*/
+	/*=====  FIN Coordonnées  =====*/
 
 	do_action( 'pc_footer_before_nav' );
 
@@ -75,12 +79,12 @@
 		</ul>
 	</nav>
 
-	<?php /*=====  FIN Navigation  =====*/
-	
+	<?php 
 	
 	do_action( 'pc_footer_after_nav' );
-			
-	?>
+	
+	
+	/*=====  FIN Navigation  =====*/ ?>
 
 
 </div></footer>

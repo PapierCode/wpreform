@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html class="<?= pc_html_css_class();  ?>" lang="fr">
+<html class="<?= pc_get_html_css_class();  ?>" lang="fr">
 
 <head>
 	<meta charset="utf-8" />
@@ -12,8 +12,24 @@
 
 <body>
 
-	<ul class="skip-nav no-print"><?php if(!is_home()) { ?><li><a href="<?php bloginfo('url'); ?>" title="Retour à la page d'accueil">Accueil</a></li><?php } ?><li><a href="#header-nav" title="Accès à la navigation">Navigation principale</a></li><li><a href="#main" title="Accès direct au contenu">Contenu</a></li><li><a href="#footer-nav" title="Accès à la navigation du pied de page">Navigation pied de page</a></li>
-	</ul>
+	<ul class="skip-nav no-print"><?php
+
+		if( !is_home() ) { 
+			echo '<li><a href="'.get_bloginfo('url').'" title="Retour à la page d\'accueil">Accueil</a></li>';
+		}
+
+		$skip_nav_list = array(
+			'#header-nav' => array( 'Navigation principale', 'Accès direct à la navigation principale' ),
+			'#main' => array( 'Contenu de la page', 'Accès direct au contenu' ),
+			'#footer-nav' => array( 'Navigation du pied de page', 'Accès direct à la navigation du pied de page' )
+		);
+		$skip_nav_list = apply_filters( 'pc_filter_skip_nav', $skip_nav_list );
+		
+		foreach ( $skip_nav_list as $anchor => $texts ) {
+			echo '<li><a href="'.$anchor.'" title="'.$texts[1].'">'.$texts[0].'</a></li>';
+		}
+		
+	?></ul>
 
 	<div class="body-inner">
 

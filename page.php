@@ -4,9 +4,6 @@ if ( have_posts() ) : while ( have_posts() ) : the_post(); // Boucle WP (1/2)
 
 $page_metas = get_post_meta($post->ID);
 
-// version fullscreen et visuel associé ?
-if ( $settings_project['theme'] == 'fullscreen' && isset($page_metas['thumbnail-img'])) { $settings_project['is-fullscreen'] = true; }
-
 get_header();
 
 do_action( 'pc_page_content_before', $post, $page_metas );

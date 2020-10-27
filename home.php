@@ -1,8 +1,6 @@
 <?php
 
 $settings_home = get_option('home-settings-option');
-// version fullscreen et visuel associé ?
-if ( $settings_project['theme'] == 'fullscreen' && isset( $settings_home['visual-img'] ) && $settings_home['visual-img'] != '' ) { $settings_project['is-fullscreen'] = true; }
 
 get_header();
 
