@@ -3,14 +3,46 @@
  * 
  * Fonctions réseaux sociaux
  * 
+ ** Liens
  ** Partage
  * 
  */
 
+/*=============================
+=            Liens            =
+=============================*/
 
-/*==================================
-=            Partage RS            =
-==================================*/
+function pc_display_social_links( $css_class ) {
+
+	global $settings_project, $settings_project_fields;
+
+	$prefix = $settings_project_fields[2]['prefix'];
+	$ul = false;
+	
+	foreach( $settings_project_fields[2]['fields'] as $field ) {
+
+		$id = $prefix.'-'.$field['label_for'];
+		
+		if ( isset($settings_project[$id]) && $settings_project[$id] != '' ) {
+
+			if ( !$ul ) { echo '<ul class="social-list reset-list no-print '.$css_class.'">'; $ul = true; };
+
+			echo '<li class="social-item"><a class="social-link social-link--'.$field['label_for'].'" href="'.$settings_project[$id].'" title="'.$field['label'].' (nouvelle fenêtre)" target="_blank"><span class="visually-hidden">'.$field['label'].'</span>'.pc_svg($field['label_for']).'</a></li>';		
+			
+		}
+
+	}
+
+	if ( $ul ) { echo '</ul>'; };	
+
+}
+ 
+ 
+/*=====  FIN Liens  =====*/
+
+/*===============================
+=            Partage            =
+===============================*/
 
 function pc_display_share_links() {
 
@@ -46,4 +78,4 @@ function pc_display_share_links() {
 <?php }
 
 
-/*=====  FIN Partage RS  =====*/
+/*=====  FIN Partage  =====*/

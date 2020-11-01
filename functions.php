@@ -48,8 +48,6 @@ include 'include/custom-posts/custom_home.php';
 
 // sprite SVG
 include 'images/sprite.php';
-// fonctions réutilisables
-include 'include/templates_commons/templates_misc.php';
 // navigation
 include 'include/templates_commons/templates_navigation.php';
 // wysiwyg par défaut
@@ -104,6 +102,5 @@ include 'include/custom-admin/custom-admin.php';
 //     }
 //     return $posts;
 // }
-
 
 /*=====  FIN Expérimentations  =====*/

@@ -4,7 +4,7 @@
 
 /*----------  Conversion em  ----------*/
 
-var rem = function(size,base) {
+var rem = function( size, base ) {
 	if ( base == undefined ) { base = 16; }
 	return size / base + 'rem';
 };
@@ -21,15 +21,8 @@ $(document).ready(function(){
 var $win 			= $(window),
 	$html 			= $('html'),
 	$body 			= $('body'),
-	$head 			= $('head'),
-	$header 		= $('.header'),
-	$main 			= $('.main'),
-	$main_header 	= $main.find('.main-header'),
-	$primaryNav 	= $('#primary-nav'),
-
-	urlIcons 		= '/wp-content/themes/preform/images/icons/',
+	$head 			= $('head');
 	
-	win_h, win_w, header_h, win_w_old = 0;
 
 /*=====  End of variables  ======*/
 
@@ -38,7 +31,7 @@ var $win 			= $(window),
 ==================================*/
 
 // fonction executée au chargement de la page et à chaque modification de taille de la fenêtre
-function winChange() {
+/* function win_resize() {
 
 	// 768px
 	if (window.matchMedia('(min-width: 48em)').matches) {
@@ -47,30 +40,11 @@ function winChange() {
 
 	}
 
-	/*----------  Fullscreen  ----------*/
-	
-	if ( $html.hasClass('is-fullscreen') ) {
-
-		win_h = $win.height() + 100;
-		win_w = $win.width();
-		header_h = $header.outerHeight();		
-
-		if ( win_w != win_w_old ) {
-			// éléments concernés par le plein écran
-			$main_header.css( 'min-height', rem(win_h) );
-			$main.css( 'margin-top', rem(win_h-header_h) );
-			win_w_old = win_w;
-		}
-
-	}
-	
-
-
 } // fin winWidthChange()
 
-winChange();
+win_resize();
 
-$win.resize(winChange);
+$win.resize( win_resize ); * /
 
 
 /*=====  End of Responsive  ======*/
@@ -84,16 +58,6 @@ $win.resize(winChange);
 $('.js-h-nav').click(function() {
 	$html.toggleClass('h-nav-is-open');
 });
-
-/*----------  Thème fullscreen  ----------*/
-
-if ( $html.hasClass('theme-fullscreen')) {
-
-	$('.fs-more-btn').click(function() {
-		$('html, body').animate({ scrollTop:win_h }, 500);
-	});
-
-}
 
 
 /*=====  End of navigation  ======*/
@@ -284,8 +248,7 @@ if ( $popBtnOpen.length > 0 ) {
 =======================================*/
 
 // cookie es-tu là ?
-/*
-if (getCookie('cookies') === '') {
+/* if (getCookie('cookies') === '') {
 
 	// création du message
 	$('body').prepend('<p class="cookies-msg is-hidden no-print">En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de <strong>cookies</strong>, <a href="'+cguUrl+'" title="Conditions générales d\'utilisation" class="cookies-msg-link" rel="nofollow">en savoir plus</a>. <button type="button" class="btn cookies-msg-btn reset-btn">J\'accepte</button></p>');
@@ -307,8 +270,7 @@ if (getCookie('cookies') === '') {
 
 	});
 
-}
-*/
+} */
 
 
 /*=====  FIN Message cookies  ======*/

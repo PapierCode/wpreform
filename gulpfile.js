@@ -22,6 +22,7 @@ const cssnano 		= require( 'cssnano' ); // minification css
 const autoprefixer 	= require( 'autoprefixer' ); // ajout des préfixes
 const mqcombine 	= require( 'postcss-sort-media-queries' ); // factorisation des medias queries
 const inlinesvg		= require( 'postcss-inline-svg' ); // svg to data:URI
+const rename		= require( 'gulp-rename' ); // svg to data:URI
 
 const jshint		= require( 'gulp-jshint' ); // recherche d'erreurs js
 const concat		= require( 'gulp-concat' ); // empile plusieurs fichiers js en un seul
@@ -50,24 +51,6 @@ var plugins = [
 function css() {
     
     return src( ['css/style.scss'] )
-        .pipe(sass({ precision: 3 }))
-        .pipe(postcss( plugins ))
-        .pipe(dest( './' ));
-
-}
-
-function classic_css() {
-    
-    return src( ['css/v-classic.scss'] )
-        .pipe(sass({ precision: 3 }))
-        .pipe(postcss( plugins ))
-        .pipe(dest( './' ));
-
-}
-
-function fullscreen_css() {
-    
-    return src( ['css/v-fullscreen.scss'] )
         .pipe(sass({ precision: 3 }))
         .pipe(postcss( plugins ))
         .pipe(dest( './' ));
@@ -118,7 +101,7 @@ function js() {
 ==================================*/
 
 exports.watch = function() {
-	watch( 'css/**/*.scss', series(css,classic_css,fullscreen_css) )
+	// watch( 'css/**/*.scss', series(csss) )
 	watch( ['scripts/**/*.js', '!scripts/scripts.min.js'], series(js_hint,js) )
 };
 

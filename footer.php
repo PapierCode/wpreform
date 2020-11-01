@@ -83,9 +83,8 @@
 	
 	do_action( 'pc_footer_after_nav' );
 	
-	
-	/*=====  FIN Navigation  =====*/ ?>
 
+	/*=====  FIN Navigation  =====*/ ?>
 
 </div></footer>
 

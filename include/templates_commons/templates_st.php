@@ -3,20 +3,48 @@
  * 
  * Fonctions pour les templates : article résumé (st)
  * 
- ** Description auto (excerpt)
+ ** Excerpt WP
+ ** Excerpt Preform
  ** Affichage
  * 
  */
 
-/*========================================
-=            Description auto            =
-========================================*/
+/*==================================
+=            Excerpt WP            =
+==================================*/
 
 add_filter( 'excerpt_length', function() { return 20; }, 999 );
 add_filter( 'excerpt_more', function() { return ''; }, 999 );
 
 
-/*=====  FIN Description auto  =====*/
+/*=====  FIN Excerpt WP  =====*/
+
+
+/*========================================
+=            Excerpt Preform             =
+========================================*/
+
+function pc_get_page_excerpt( $post_id, $post_metas, $seo_for = false ) {
+
+	if ( $seo_for && isset( $post_metas['seo-desc'] ) && $post_metas['seo-desc'][0] != '' ) {
+
+		$excerpt = $post_metas['seo-desc'][0];
+
+	} else if ( isset( $post_metas['resum-desc'] ) && $post_metas['resum-desc'][0] != '' ) {
+
+		$excerpt = $post_metas['resum-desc'][0];
+
+	} else {
+
+		$excerpt = get_the_excerpt( $post_id );
+	}
+	
+	return $excerpt;
+
+}
+
+
+/*=====  FIN Excerpt Preform   =====*/
 
 /*=================================
 =            Affichage            =

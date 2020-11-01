@@ -18,7 +18,7 @@ add_action( 'admin_init', function() {
     add_meta_box(
         'page-content-sup',
         $box_content_more_title,
-        'pc_page_content_sub',
+        'pc_page_content_sup',
         array('page'),
         'normal',
         'high'
@@ -46,7 +46,7 @@ add_action( 'admin_init', function() {
  * 	
  */
 
-function pc_meta_subpage_line( $css_class, $subpages, $current = '', $saved = array() ) {
+function pc_repeater_subpage_line( $css_class, $subpages, $current = '', $saved = array() ) {
 
 	$return = '<div class="'.$css_class.'">';
 	
@@ -77,7 +77,7 @@ function pc_meta_subpage_line( $css_class, $subpages, $current = '', $saved = ar
 =            Contenu de la metaboxe            =
 ==============================================*/
 
-function pc_page_content_sub( $post ) {
+function pc_page_content_sup( $post ) {
 
 	global $settings_project;  // cf. functions.php
 
@@ -153,7 +153,7 @@ function pc_page_content_sub( $post ) {
         echo '<tr><th><label>Sous-pages</label></th><td>';
             echo '<div class="pc-repeater" data-type="subpage">';
 				foreach ( $subpages_saved_array as $id ) {
-					echo pc_meta_subpage_line( 'pc-repeater-item', $all_subpages, $id, $subpages_saved_array );
+					echo pc_repeater_subpage_line( 'pc-repeater-item', $all_subpages, $id, $subpages_saved_array );
 				}
             echo '</div>';
             // c'est ce input qui est sauvegardé !
@@ -164,7 +164,7 @@ function pc_page_content_sub( $post ) {
 
         // source pour le js
         echo '<tr style="display:none"><td colspan="2">';
-            echo pc_meta_subpage_line( 'pc-repeater-item pc-repeater-src', $all_subpages );
+            echo pc_repeater_subpage_line( 'pc-repeater-item pc-repeater-src', $all_subpages );
         echo '</td></tr>';
 
     } // FIN if $post->post_parent < 1
@@ -187,7 +187,6 @@ function pc_page_content_sub( $post ) {
 add_action( 'save_post', 'pc_sub_page_save' );
 
 	function pc_sub_page_save( $post_id ) {
-		//pc_var($_POST); exit();
 
 		// check input hidden de vérification
 		if ( isset($_POST['nonce-page-content-from']) && wp_verify_nonce( $_POST['nonce-page-content-from'], basename( __FILE__ ) ) ) {

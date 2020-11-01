@@ -66,31 +66,6 @@ function pc_display_header_logo() {
 
 /*----------  Navigation  ----------*/
 
-function pc_display_social_links() {
-
-	global $settings_project, $settings_project_fields;
-
-	$prefix = $settings_project_fields[2]['prefix'];
-	$ul = false;
-	
-	foreach( $settings_project_fields[2]['fields'] as $field ) {
-
-		$id = $prefix.'-'.$field['label_for'];
-		
-		if ( isset($settings_project[$id]) && $settings_project[$id] != '' ) {
-
-			if ( !$ul ) { echo '<ul class="social-list social-list--header reset-list no-print">'; $ul = true; };
-
-			echo '<li class="social-item"><a class="social-link social-link--'.$field['label_for'].'" href="'.$settings_project[$id].'" title="'.$field['label'].' (nouvelle fenêtre)" target="_blank"><span class="visually-hidden">'.$field['label'].'</span>'.pc_svg($field['label_for']).'</a></li>';		
-			
-		}
-
-	}
-
-	if ( $ul ) { echo '</ul>'; };	
-
-}
-
 function pc_display_header_nav() {
 
 	echo '<nav id="header-nav" class="h-nav"><div class="h-nav-inner">';
@@ -108,7 +83,7 @@ function pc_display_header_nav() {
 		);
 		wp_nav_menu( $nav_header_config ); // + include/navigation.php
 		
-		pc_display_social_links();
+		pc_display_social_links( 'social-list--header' );
 
 	echo '</div></nav>';
 
