@@ -31,7 +31,7 @@ add_action( 'pc_header_end', 'pc_display_nav_overlay', 20 );
 
 function pc_display_header_start() {
 
-	echo '<header class="header layout"><div class="header-inner">';
+	echo '<header class="header"><div class="header-inner">';
 
 }
 
