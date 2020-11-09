@@ -53,7 +53,10 @@ function pc_display_header_logo() {
 			);
 			$logo_header_datas = apply_filters( 'pc_filter_header_logo', $logo_header_datas );
 
-			echo '<img class="h-logo-img" src="'.$logo_header_datas['url'].'" alt="'.$logo_header_datas['alt'].'" width="'.$logo_header_datas['width'].'" height="'.$logo_header_datas['height'].'" />';
+			$logo_header_logo_img_tag = '<img class="h-logo-img" src="'.$logo_header_datas['url'].'" alt="'.$logo_header_datas['alt'].'" width="'.$logo_header_datas['width'].'" height="'.$logo_header_datas['height'].'" />';
+			$logo_header_logo_img_tag = apply_filters( 'pc_filter_header_logo_img_tag', $logo_header_logo_img_tag, $logo_header_datas );
+			
+			echo $logo_header_logo_img_tag;
 
 		echo '</a>';
 
