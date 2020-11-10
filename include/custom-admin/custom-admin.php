@@ -136,7 +136,7 @@ add_filter( 'manage_page_posts_columns', 'pc_admin_list_column_img' );
         foreach($columns as $key => $value) {
             $new_columns[$key] = $value;
             if ( $key == 'cb' ){
-                $new_columns['thumbnail'] = 'Visuel';
+                $new_columns['visual'] = 'Visuel';
             }
         }
         return $new_columns;
@@ -150,9 +150,9 @@ add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img_content
 
     function pc_admin_list_column_img_content( $column, $postId ) {
 
-        if ( 'thumbnail' === $column ) {
+        if ( 'visual' === $column ) {
             
-            $img_id = get_post_meta( $postId,'thumbnail-img',true );
+            $img_id = get_post_meta( $postId,'visual-id',true );
             if ( $img_id != '' ) {
                 echo pc_get_img( $img_id, 'share' );
             } else {

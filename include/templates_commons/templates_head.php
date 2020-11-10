@@ -79,8 +79,8 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 				$meta_description = ( isset( $post_metas['seo-desc'] ) && $post_metas['seo-desc'] != '' ) ? $post_metas['seo-desc'] : wp_trim_words($post_metas['content-txt'],30,'...');
 
 				// visuel
-				if ( isset($datas['visual-img']) && $datas['visual-img'] != '' ) {
-					$img_to_share = wp_get_attachment_image_src($datas['visual-img'],'share')[0];
+				if ( isset($datas['visual-id']) && $datas['visual-id'] != '' ) {
+					$img_to_share = wp_get_attachment_image_src($datas['visual-id'],'share')[0];
 				}
 
 			} elseif ( is_page() ) {
@@ -95,8 +95,8 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 				$meta_description = pc_get_page_excerpt( $post_id, $post_metas, true );
 
 				// visuel
-				if ( isset( $datas['thumbnail-img'] ) ) {
-					$img_to_share = wp_get_attachment_image_src($datas['thumbnail-img'][0],'share')[0];
+				if ( isset( $datas['visual-id'] ) ) {
+					$img_to_share = wp_get_attachment_image_src($datas['visual-id'][0],'share')[0];
 				}
 
 			} elseif ( is_404() ) {

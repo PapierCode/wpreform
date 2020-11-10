@@ -66,13 +66,13 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 	
 	echo '<figure class="st-figure">';
 	
-		if ( isset($post_metas['thumbnail-img']) ) {
+		if ( isset($post_metas['visual-id']) ) {
 			$st_img_urls = array(
-				wp_get_attachment_image_src($post_metas['thumbnail-img'][0],'st-400')[0],
-				wp_get_attachment_image_src($post_metas['thumbnail-img'][0],'st-500')[0],
-				wp_get_attachment_image_src($post_metas['thumbnail-img'][0],'st-700')[0]
+				wp_get_attachment_image_src($post_metas['visual-id'][0],'st-400')[0],
+				wp_get_attachment_image_src($post_metas['visual-id'][0],'st-500')[0],
+				wp_get_attachment_image_src($post_metas['visual-id'][0],'st-700')[0]
 			);
-			$st_img_alt	= get_post_meta($post_metas['thumbnail-img'][0], '_wp_attachment_image_alt', true);			
+			$st_img_alt	= get_post_meta($post_metas['visual-id'][0], '_wp_attachment_image_alt', true);			
 		} else {
 			$st_img_urls = array(
 				get_bloginfo('template_directory').'/images/st-default-400.jpg',

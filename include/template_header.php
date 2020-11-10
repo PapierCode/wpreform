@@ -45,18 +45,18 @@ function pc_display_header_logo() {
 		echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="Accueil '.get_bloginfo('name').'">';
 
 			global $settings_project;
-			$logo_header_datas = array(
+			$header_logo_datas = array(
 				'url' => get_bloginfo('template_directory').'/images/logo.svg',
 				'width' => 150,
 				'height' => 150,
 				'alt' => 'Logo '.$settings_project['coord-name']
 			);
-			$logo_header_datas = apply_filters( 'pc_filter_header_logo', $logo_header_datas );
+			$header_logo_datas = apply_filters( 'pc_filter_header_logo', $header_logo_datas );
 
-			$logo_header_logo_img_tag = '<img class="h-logo-img" src="'.$logo_header_datas['url'].'" alt="'.$logo_header_datas['alt'].'" width="'.$logo_header_datas['width'].'" height="'.$logo_header_datas['height'].'" />';
-			$logo_header_logo_img_tag = apply_filters( 'pc_filter_header_logo_img_tag', $logo_header_logo_img_tag, $logo_header_datas );
+			$header_logo_img_tag = '<img class="h-logo-img" src="'.$header_logo_datas['url'].'" alt="'.$header_logo_datas['alt'].'" width="'.$header_logo_datas['width'].'" height="'.$header_logo_datas['height'].'" />';
+			$header_logo_img_tag = apply_filters( 'pc_filter_header_logo_img_tag', $header_logo_img_tag, $header_logo_datas );
 			
-			echo $logo_header_logo_img_tag;
+			echo $header_logo_img_tag;
 
 		echo '</a>';
 

@@ -46,7 +46,7 @@ if ( class_exists('PC_Add_metabox') ) {
 		)
 	);
 
-	$metabox_resum_fields = apply_filters( 'pc_filter_metabox_thumbnail_fields', $metabox_resum_fields );
+	$metabox_resum_fields = apply_filters( 'pc_filter_metabox_resum_fields', $metabox_resum_fields );
 	
 
 	/*----------  Déclaration  ----------*/

@@ -84,7 +84,8 @@ function pc_page_content_sup( $post ) {
     // input hidden de vérification pour la sauvegarde
 	wp_nonce_field( basename( __FILE__ ), 'nonce-page-content-from' );
 
-    // début mise en page
+	// début mise en page
+	echo '<div class="pc-metabox-help">';
     if ( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
         if ( !empty( $settings_project['page-content-from'] ) ) {
             echo '<p><strong>Sélectionnez un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</strong></p>';
@@ -93,7 +94,8 @@ function pc_page_content_sup( $post ) {
 		
     } else { // si la page courante est une sous-page
         echo '<p><strong>Sélectionnez un contenu spécifique.</strong></p>';
-    }
+	}
+	echo '</div>';
     echo '<table class="form-table"><tbody>';
 
 

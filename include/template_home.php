@@ -78,7 +78,7 @@ function pc_display_home_content( $settings_home ) {
 				$page_url = get_the_permalink( $page_id );
 				
 				// image de la page ou image par défaut
-				$page_img_id = get_post_meta( $page_id, 'thumbnail-img', true );
+				$page_img_id = get_post_meta( $page_id, 'visual-id', true );
 				if ( $page_img_id != '' ) {
 					$page_img_urls = array(
 						wp_get_attachment_image_src( $page_img_id, 'st-400' )[0],

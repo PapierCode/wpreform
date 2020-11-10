@@ -35,7 +35,7 @@ $current_user_role = ( is_user_logged_in() ) ? wp_get_current_user()->roles[0] :
 /*----------  Custom posts & métaboxes  ----------*/
 
 // Metaboxes
-include 'include/custom-posts/custom-metabox_thumbnail.php';
+include 'include/custom-posts/custom-metabox_visual.php';
 include 'include/custom-posts/custom-metabox_resum.php';
 include 'include/custom-posts/custom-metabox_seo-social.php';
 include 'include/custom-posts/custom-metabox_subpage.php';
