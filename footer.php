@@ -1,6 +1,6 @@
-<footer class="footer"><div class="footer-inner">
+<?php
 
-	<?php
+do_action( 'pc_footer_start' );
 	
 	do_action( 'pc_footer_before_address' );
 
@@ -84,24 +84,13 @@
 	do_action( 'pc_footer_after_nav' );
 	
 
-	/*=====  FIN Navigation  =====*/ ?>
+	/*=====  FIN Navigation  =====*/
+	
 
-</div></footer>
+do_action( 'pc_footer_end' );
 
-</div> <?php // fin .body-inner ?>
-
-<?php /*----------  Pop-up plein écran  ----------*/ ?>
-<div class="pop no-print" aria-hidden="true"></div>
-
-<?php $sprite_to_js_array = array('arrow','cross');
-apply_filters( 'pc_filter_sprite_to_svg', $sprite_to_js_array );
-pc_sprite_to_js( $sprite_to_js_array ); ?>
-
-<?php wp_footer(); ?>
-
-<script src="<?php bloginfo('template_directory'); ?>/scripts/scripts.min.js"></script>
-
-<?php do_action( 'pc_after_scripts_js' ); ?>
+wp_footer(); 
+do_action( 'pc_wp_footer' ); ?>
 
 </body>
 </html>

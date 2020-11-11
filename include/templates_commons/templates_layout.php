@@ -42,6 +42,21 @@ function pc_display_main_title_end( $post ) {
 }
 
 
+/*----------  Main content  ----------*/
+
+function pc_display_main_content_start() {
+
+	echo '<div class="main-content">';
+
+}
+
+function pc_display_main_content_end() {
+
+	echo '</div>';
+
+}
+
+
 /*----------  Footer  ----------*/
 
 function pc_display_main_footer_start() {

@@ -68,6 +68,8 @@ include 'include/templates_commons/templates_head.php';
 
 // entête (header)
 include 'include/template_header.php';
+// Pied de page (footer)
+include 'include/template_footer.php';
 // page
 include 'include/template_page.php';
 // 404

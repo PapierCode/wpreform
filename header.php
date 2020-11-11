@@ -31,9 +31,9 @@
 		
 	?></ul>
 
-	<div class="body-inner">
+	<?php
 
-		<?php
+	do_action( 'pc_body_start' );
 
 		do_action( 'pc_header_start' );
 

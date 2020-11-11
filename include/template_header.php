@@ -12,6 +12,8 @@
 =            Hooks            =
 =============================*/
 
+add_action( 'pc_body_start', 'pc_display_body_inner_start', 10 );
+
 add_action( 'pc_header_start', 'pc_display_header_start', 10 );
 
 add_action( 'pc_header_logo', 'pc_display_header_logo', 10 );
@@ -26,6 +28,15 @@ add_action( 'pc_header_end', 'pc_display_nav_overlay', 20 );
 /*=========================================
 =            Contenu des hooks            =
 =========================================*/
+
+/*----------  Début du container body  ----------*/
+
+function pc_display_body_inner_start() {
+
+	echo '<div class="body-inner">';
+
+}
+
 
 /*----------  Début de l'entête  ----------*/
 

@@ -12,11 +12,17 @@
 
 add_action( 'pc_home_content_before', 'pc_display_main_start', 10 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_home_content', 'pc_display_home_content', 10, 1 ); // contenu
+add_action( 'pc_home_content', 'pc_display_main_title_start', 10 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_home_main_title', 20, 1 ); // contenu
+add_action( 'pc_home_content', 'pc_display_main_title_end', 30 ); // layout commun -> templates_layout.php
+
+add_action( 'pc_home_content', 'pc_display_main_content_start', 40 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_home_main_content', 50, 1 ); // contenu
+add_action( 'pc_home_content', 'pc_display_main_content_end', 100 ); // layout commun -> templates_layout.php
 
 add_action( 'pc_home_content_footer', 'pc_display_main_footer_start', 10 ); // layout commun -> templates_layout.php
 add_action( 'pc_home_content_footer', 'pc_display_share_links', 20 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content_footer', 'pc_display_main_footer_end', 30 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content_footer', 'pc_display_main_footer_end', 100 ); // layout commun -> templates_layout.php
 
 add_action( 'pc_home_content_after', 'pc_display_main_end', 10 ); // layout commun -> templates_layout.php
 
@@ -27,15 +33,16 @@ add_action( 'pc_home_content_after', 'pc_display_main_end', 10 ); // layout comm
 =            Contenu            =
 ===============================*/
 
-function pc_display_home_content( $settings_home ) {
+function pc_display_home_main_title( $settings_home ) {
 
-	/*----------  Header  ----------*/
+	/*----------  Title  ----------*/
 	
-	echo '<header class="main-header">';
-		do_action( 'pc_home_title_before', $settings_home );
-		echo '<h1>'.$settings_home['content-title'].'</h1>';
-		do_action( 'pc_home_title_after', $settings_home );
-	echo '</header>';
+	echo '<h1>'.$settings_home['content-title'].'</h1>';
+
+}
+
+
+function pc_display_home_main_content( $settings_home ) {
 
 
 	/*----------  Wysiwyg  ----------*/
