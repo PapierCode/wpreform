@@ -97,6 +97,7 @@ function pc_display_home_main_content( $settings_home ) {
 						get_bloginfo( 'template_directory' ).'/images/st-default-400.jpg',
 						get_bloginfo( 'template_directory' ).'/images/st-default-500.jpg'
 					);
+					$page_img_urls = apply_filters( 'pc_filter_img_default_st', $page_img_urls );
 					$page_img_alt = $page_title;
 				}
 				$page_img_srcset = $page_img_urls[0].' 400w, '.$page_img_urls[1].' 500w';
