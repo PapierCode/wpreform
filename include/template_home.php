@@ -37,7 +37,7 @@ function pc_display_home_main_title( $settings_home ) {
 
 	/*----------  Title  ----------*/
 	
-	echo '<h1>'.$settings_home['content-title'].'</h1>';
+	echo '<h1><span>'.$settings_home['content-title'].'</span></h1>';
 
 }
 
