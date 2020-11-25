@@ -31,7 +31,7 @@ function pc_display_main_title_start( ) {
 
 function pc_display_main_title( $post ) {
 	
-	echo '<h1>'.get_the_title( $post->ID ).'</h1>';
+	echo '<h1><span>'.get_the_title( $post->ID ).'</span></h1>';
 
 }
 
