@@ -166,3 +166,36 @@ add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img_content
 
 
 /*=====  FIN Colonnes des listes d'articles  =====*/
+
+/*======================================
+=            TinyMCE custom            =
+======================================*/
+
+add_action( 'admin_init', 'pc_admin_add_tinymce_css' );
+
+	function pc_admin_add_tinymce_css() {
+
+		add_editor_style( get_bloginfo( 'template_directory').'/include/custom-admin/custom-admin.css' );
+
+	}
+
+
+add_filter( 'tiny_mce_before_init', 'pc_admin_tinymce_formats' ); 
+
+    function pc_admin_tinymce_formats( $init_array ) {  
+        
+        $style_formats = array(  
+            array(  
+                'title' => 'Introduction',
+                'block' => 'p',
+                'classes' => 'wysi-intro'
+            )
+		);      
+		
+        $init_array['style_formats'] = json_encode( $style_formats );  
+        return $init_array;  
+      
+	}
+
+
+/*=====  FIN TinyMCE custom  =====*/
