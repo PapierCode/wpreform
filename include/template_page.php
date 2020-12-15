@@ -17,7 +17,6 @@ add_action( 'pc_page_content_before', 'pc_display_main_title_start', 20 ); // la
 add_action( 'pc_page_content_before', 'pc_display_main_title', 30, 1 ); // layout commun -> templates_layout.php
 add_action( 'pc_page_content_before', 'pc_display_main_title_end', 100 ); // layout commun -> templates_layout.php
 
-
 add_action( 'pc_page_wysiwyg_before', 'pc_display_main_content_start', 10 ); // layout commun -> templates_layout.php
 add_action( 'pc_page_wysiwyg_after', 'pc_display_st_list_start', 20, 2 ); // début container st
 add_action( 'pc_page_wysiwyg_after', 'pc_display_specific_content', 30, 2 ); // contenu supplémentaire
