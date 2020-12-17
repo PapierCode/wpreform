@@ -23,7 +23,7 @@ function pc_display_main_end() {
 
 /*----------  Header & title  ----------*/
 
-function pc_display_main_title_start( ) {
+function pc_display_main_title_start() {
 
 	echo '<header class="main-header"><div class="main-header-inner">';
 
@@ -35,7 +35,7 @@ function pc_display_main_title( $post ) {
 
 }
 
-function pc_display_main_title_end( $post ) {
+function pc_display_main_title_end() {
 	
 	echo '</div></header>';
 
