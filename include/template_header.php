@@ -50,24 +50,25 @@ function pc_display_header_start() {
 /*----------  Logo  ----------*/
 
 function pc_display_header_logo() {
+	
+	global $settings_project;
 
 	echo '<div class="h-logo">';
 
-		echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="Accueil '.get_bloginfo('name').'">';
+		echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="Accueil '.$settings_project['coord-name'].'">';
 
-			global $settings_project;
-			$header_logo_datas = array(
+			$logo_datas = array(
 				'url' => get_bloginfo('template_directory').'/images/logo.svg',
 				'width' => 150,
 				'height' => 150,
 				'alt' => 'Logo '.$settings_project['coord-name']
 			);
-			$header_logo_datas = apply_filters( 'pc_filter_header_logo', $header_logo_datas );
+			$logo_datas = apply_filters( 'pc_filter_header_logo', $logo_datas );
 
-			$header_logo_img_tag = '<img class="h-logo-img" src="'.$header_logo_datas['url'].'" alt="'.$header_logo_datas['alt'].'" width="'.$header_logo_datas['width'].'" height="'.$header_logo_datas['height'].'" />';
-			$header_logo_img_tag = apply_filters( 'pc_filter_header_logo_img_tag', $header_logo_img_tag, $header_logo_datas );
+			$logo_img_tag = '<img class="h-logo-img" src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" />';
+			$logo_img_tag = apply_filters( 'pc_filter_logo_img_tag', $logo_img_tag, $logo_datas );
 			
-			echo $header_logo_img_tag;
+			echo $logo_img_tag;
 
 		echo '</a>';
 
@@ -84,7 +85,7 @@ function pc_display_header_nav() {
 
 	echo '<nav id="header-nav" class="h-nav"><div class="h-nav-inner">';
 
-		$nav_header_config = array(
+		$nav_args = array(
 			'theme_location'  	=> 'nav-header',
 			'nav_prefix'		=> array('h-nav', 'h-p-nav'), // custom
 			'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1 reset-list',
@@ -95,7 +96,7 @@ function pc_display_header_nav() {
 			'fallback_cb'     	=> false,
 			'walker'          	=> new Pc_Walker_Nav_Menu()
 		);
-		wp_nav_menu( $nav_header_config ); // + include/navigation.php
+		wp_nav_menu( $nav_args ); // + include/navigation.php
 		
 		pc_display_social_links( 'social-list--header' );
 
