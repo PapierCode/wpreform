@@ -93,6 +93,8 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
 
     function pc_display_page_states( $states, $post ) {
 
+		if ( !is_customize_preview() ) {
+
             $current_screen = get_current_screen();
             if ( $current_screen->id == 'edit-page') {
 
@@ -110,7 +112,9 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
                     if ( $content_from == $id ) { $states[] = $datas[0]; }
                 }
 
-            }
+			}
+		
+		}
 
         return $states;
 

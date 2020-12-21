@@ -87,14 +87,14 @@ function pc_display_specific_content( $post, $post_metas ) {
 			),
 			'isPartOf' => pc_get_schema_article( $post, $post_metas, $sub_pages_ids )
 		);
-		global $st_schema;
+		global $post_resum_schema;
 
 		// affichage des résumés de pages
 		foreach ( $sub_pages_ids as $key => $post_id ) {
 			pc_display_post_resum( $post_id, '', 2 );
 			// données structurées
 			$st_schema['position'] = $key + 1;
-			$sub_pages_schema['mainEntity']['itemListElement'][] = $st_schema;
+			$sub_pages_schema['mainEntity']['itemListElement'][] = $post_resum_schema;
 		}
 
 		do_action( 'pc_st_list_fake', count($sub_pages_ids), '' );
@@ -125,7 +125,7 @@ function pc_display_subpage_backlink( $post ) {
 
     if ( $post->post_type == 'page' && $post->post_parent > 0 ) {
 
-        echo '<nav class="main-footer-nav"><a href="'.get_the_permalink($post->post_parent).'" class="btn" title="Page précédente">'.pc_svg('arrow').'<span>Retour</span></a></nav>';
+        echo '<nav class="main-footer-nav"><a href="'.get_the_permalink($post->post_parent).'" class="button" title="Page précédente">'.pc_svg('arrow').'<span>Retour</span></a></nav>';
 
     }
 

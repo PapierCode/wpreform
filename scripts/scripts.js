@@ -128,7 +128,7 @@ if ( $popBtnOpen.length > 0 ) {
 		if ( $this.data('cible') == 'map' ) {
 
 			// ajout  container map et contrôles
-			$pop.addClass('pop--map').append('<div id="map" class="pop-inner map"></div><div class="pop-controls"><button type="button" class="pop-btn-hide btn reset-btn" title="Fermer" data-cible="map">'+sprite.cross+'</button><button type="button" class="map-btn-zoom map-btn-zoom--in btn reset-btn">zoom +</button><button type="button" class="map-btn-zoom map-btn-zoom--out btn reset-btn">zoom -</button></div>');
+			$pop.addClass('pop--map').append('<div id="map" class="pop-inner map"></div><div class="pop-controls"><button type="button" class="pop-btn-hide button" title="Fermer" data-cible="map">'+sprite.cross+'</button><button type="button" class="map-btn-zoom map-btn-zoom--in button">zoom +</button><button type="button" class="map-btn-zoom map-btn-zoom--out button">zoom -</button></div>');
 			// coordonnées GPS
 			var mapLat = $this.data('lat'),
 			mapLong = $this.data('long'),
@@ -251,7 +251,7 @@ if ( $popBtnOpen.length > 0 ) {
 /* if (getCookie('cookies') === '') {
 
 	// création du message
-	$('body').prepend('<p class="cookies-msg is-hidden no-print">En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de <strong>cookies</strong>, <a href="'+cguUrl+'" title="Conditions générales d\'utilisation" class="cookies-msg-link" rel="nofollow">en savoir plus</a>. <button type="button" class="btn cookies-msg-btn reset-btn">J\'accepte</button></p>');
+	$('body').prepend('<p class="cookies-msg is-hidden no-print">En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de <strong>cookies</strong>, <a href="'+cguUrl+'" title="Conditions générales d\'utilisation" class="cookies-msg-link" rel="nofollow">en savoir plus</a>. <button type="button" class="button cookies-msg-btn">J\'accepte</button></p>');
 
 	var $cookiesMsg = $('.cookies-msg');
 
