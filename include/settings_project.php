@@ -143,7 +143,8 @@ $settings_project_fields = array(
         )
     ),
     array(
-        'title'     => 'Conditions générales d\'utilisation',
+		'title'     => 'Conditions Générales d\'Utilisation',
+		'desc'		=> '<p>Indiquez la page des Conditions Générales d\'Utilisation pour que certains modules puissent y faire référence.</p>',
         'id'        => 'cgu',
         'prefix'    => 'cgu',
         'fields'    => array(

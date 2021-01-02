@@ -45,11 +45,10 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 
 		global $images_project_sizes; // tailles d'images déclarées
 		global $settings_project; // config projet
+		global $texts_lengths; // limites de textes
 
 		// réutilisable
-		global $meta_title;
-		global $meta_description;
-		global $img_to_share;
+		global $meta_title, $meta_description, $img_to_share;
 
 		// url de la page en cours
 		$url = 'https://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
@@ -76,7 +75,7 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 				$meta_title = ( isset( $post_metas['seo-title'] ) && $post_metas['seo-title'] != '' ) ? $post_metas['seo-title'] : $post_metas['content-title'];
 
 				// description
-				$meta_description = ( isset( $post_metas['seo-desc'] ) && $post_metas['seo-desc'] != '' ) ? $post_metas['seo-desc'] : wp_trim_words($post_metas['content-txt'],30,'...');
+				$meta_description = ( isset( $post_metas['seo-desc'] ) && $post_metas['seo-desc'] != '' ) ? $post_metas['seo-desc'] : wp_trim_words( $post_metas['content-txt'], $texts_lengths['excerpt'], '...' );
 
 				// visuel
 				if ( isset($datas['visual-id']) && $datas['visual-id'] != '' ) {

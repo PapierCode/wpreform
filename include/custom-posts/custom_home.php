@@ -152,7 +152,7 @@ $settings_home_fields = array(
         )
 	),
     array(
-        'title'     => 'Référencement & réseaux sociaux',
+        'title'     => 'Référencement (SEO) & réseaux sociaux',
         'desc'      => '<p><strong>Optimisez le titre et le résumé pour les moteurs de recherche et les réseaux sociaux.</strong> <br/><em>Si ces champs ne sont pas saisis, le titre de la page et les premiers mots du texte de présentation sont utilisés.</em></p>',
         'id'        => 'seo',
         'prefix'    => 'seo',
@@ -161,14 +161,14 @@ $settings_home_fields = array(
                 'type'      => 'text',
                 'label_for' => 'title',
                 'label'     => 'Titre',
-                'attr'      => 'class="pc-counter" data-counter-max="70"',
+                'attr'      => 'class="pc-counter" data-counter-max="'.$texts_lengths['seo-title'].'"',
                 'css'       => 'width:100%'
             ),
             array(
                 'type'      => 'textarea',
                 'label_for' => 'desc',
                 'label'     => 'Description',
-                'attr'      => 'class="pc-counter" data-counter-max="200"',
+                'attr'      => 'class="pc-counter" data-counter-max="'.$texts_lengths['seo-desc'].'"',
                 'css'       => 'width:100%'
             )
         )

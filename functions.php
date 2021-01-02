@@ -14,6 +14,15 @@
 
 $settings_pc = get_option('pc-settings-option');
 
+$texts_lengths = array(
+	'excerpt' => 20,
+	'resum-title' => 40,
+	'resum-desc' => 150,
+	'seo-title' => 70,
+	'seo-desc' => 200
+);
+$texts_lengths = apply_filters( 'pc_filter_texts_lengths', $texts_lengths );
+
 
 /*----------  Configuration projet (client)  ----------*/
 

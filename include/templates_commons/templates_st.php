@@ -13,7 +13,7 @@
 =            Excerpt WP            =
 ==================================*/
 
-add_filter( 'excerpt_length', function() { return 20; }, 999 );
+add_filter( 'excerpt_length', function() { global $texts_lengths; return  $texts_lengths['excerpt']; }, 999 );
 add_filter( 'excerpt_more', function() { return ''; }, 999 );
 
 
@@ -59,9 +59,9 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 
 	/*----------  Visuel  ----------*/
 
-	$img_post = get_post( $post_metas['visual-id'][0] );
+	$img_post = ( isset($post_metas['visual-id']) ) ? get_post( $post_metas['visual-id'][0] ) : null;
 
-	if ( isset($post_metas['visual-id']) && is_object( $img_post ) ) {
+	if ( is_object( $img_post ) ) {
 
 		$img_urls = array(
 			wp_get_attachment_image_src( $post_metas['visual-id'][0],'st-400' )[0],
@@ -100,7 +100,7 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 	/*----------  Données structurées  ----------*/
 	
 	global $post_resum_schema, $images_project_sizes;
-	$st_schema = array(
+	$post_resum_schema = array(
 		'@type' => 'ListItem',
 		'name' => $title,
 		'description' => $resum,

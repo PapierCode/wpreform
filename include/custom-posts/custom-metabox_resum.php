@@ -32,7 +32,7 @@ if ( class_exists('PC_Add_metabox') ) {
 				'label'     => 'Titre',
 				'desc'      => '',
 				'id'        => 'title',
-				'attr'      => 'class="pc-counter" data-counter-max="40"',
+				'attr'      => 'class="pc-counter" data-counter-max="'.$texts_lengths['resum-title'].'"',
 				'css'       => 'width:100%'
 			),
 			array(
@@ -40,7 +40,7 @@ if ( class_exists('PC_Add_metabox') ) {
 				'label'     => 'Description',
 				'desc'      => '',
 				'id'        => 'desc',
-				'attr'      => 'class="pc-counter" data-counter-max="150"',
+				'attr'      => 'class="pc-counter" data-counter-max="'.$texts_lengths['resum-desc'].'"',
 				'css'       => 'width:100%'
 			)
 		)

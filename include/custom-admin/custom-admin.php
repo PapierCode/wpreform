@@ -59,8 +59,7 @@ add_filter( 'image_size_names_choose', 'pc_rename_image_size_names' );
         return $sizes = array(
             'thumbnail' => '1/4 de page',
             'medium'    => '1/2 page',
-            'large'     => 'Pleine largeur',
-            'full'      => 'Originale'
+            'large'     => 'Pleine largeur'
         );
 
     }
@@ -140,7 +139,7 @@ add_filter( 'manage_page_posts_columns', 'pc_admin_list_column_img' );
         foreach($columns as $key => $value) {
             $new_columns[$key] = $value;
             if ( $key == 'cb' ){
-                $new_columns['visual'] = 'Visuel';
+                $new_columns['thumb'] = 'Visuel';
             }
         }
         return $new_columns;
@@ -154,13 +153,13 @@ add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img_content
 
     function pc_admin_list_column_img_content( $column, $postId ) {
 
-        if ( 'visual' === $column ) {
+        if ( 'thumb' === $column ) {
             
             $img_id = get_post_meta( $postId,'visual-id',true );
             if ( $img_id != '' ) {
                 echo pc_get_img( $img_id, 'share' );
             } else {
-                echo '<img src="'.get_bloginfo('template_directory').'/images/admin-no-thumb.jpg" />';
+                echo '<img src="'.get_bloginfo('template_directory').'/images/admin-no-thumb.png" />';
             }
             
         }
