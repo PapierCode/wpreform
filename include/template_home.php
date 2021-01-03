@@ -17,7 +17,9 @@ add_action( 'pc_home_content', 'pc_display_home_main_title', 20, 1 ); // contenu
 add_action( 'pc_home_content', 'pc_display_main_title_end', 30 ); // layout commun -> templates_layout.php
 
 add_action( 'pc_home_content', 'pc_display_main_content_start', 40 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content', 'pc_display_home_main_content', 50, 1 ); // contenu
+add_action( 'pc_home_content', 'pc_display_home_main_introduction', 50, 1 ); // introduction
+add_action( 'pc_home_content', 'pc_display_home_main_shortcuts', 60, 1 ); // raccourcis
+add_action( 'pc_home_content', 'pc_display_home_main_schema', 99, 1 ); // données structurées
 add_action( 'pc_home_content', 'pc_display_main_content_end', 100 ); // layout commun -> templates_layout.php
 
 add_action( 'pc_home_content_footer', 'pc_display_main_footer_start', 10 ); // layout commun -> templates_layout.php
@@ -33,40 +35,27 @@ add_action( 'pc_home_content_after', 'pc_display_main_end', 10 ); // layout comm
 =            Contenu            =
 ===============================*/
 
-function pc_display_home_main_title( $settings_home ) {
+/*----------  Title  ----------*/
 
-	/*----------  Title  ----------*/
+function pc_display_home_main_title( $settings_home ) {
 	
 	echo '<h1><span>'.$settings_home['content-title'].'</span></h1>';
 
 }
 
 
-function pc_display_home_main_content( $settings_home ) {
+/*----------  Wysiwyg  ----------*/
 
-
-	/*----------  Wysiwyg  ----------*/
+function pc_display_home_main_introduction( $settings_home ) {
 	
 	echo '<div class="editor"><div class="editor-inner">'.pc_wp_wysiwyg( $settings_home['content-txt'],false ).'</div></div>';
-	
 
-	/*----------  Données structurées  ----------*/
-	
-	$home_schema_collection_page = array(
-		'@context' => 'http://schema.org/',
-		'@type'=> 'CollectionPage',
-		'name' => $settings_home['content-title'],
-		'headline' => $settings_home['content-title'],
-		'description' => ( isset( $settings_home['seo-desc'] ) && $settings_home['seo-desc'] != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-txt'],30,'...'),
-		'mainEntity' => array(
-			'@type' => 'ItemList',
-			'itemListElement' => array()
-		),
-		'isPartOf' => pc_get_schema_website()
-	);
+}
 
 
-	/*----------  Pages à la une  ----------*/
+/*----------  Pages à la une  ----------*/
+
+function pc_display_home_main_shortcuts( $settings_home ) {
 	
 	if ( isset($settings_home['content-pages']) && $settings_home['content-pages'] != '' ) {
 
@@ -112,27 +101,51 @@ function pc_display_home_main_content( $settings_home ) {
 					echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';
 				echo '</a></li>';
 
-				// ajout données structurées
-				global $images_project_sizes;
-				$home_schema_collection_page['mainEntity']['itemListElement'][] = array(
-					'@type' => 'ListItem',
-					'name' => $page_title,
-					'url' => $page_url,
-					'image' => array(
-						'@type'		=>'ImageObject',
-						'url' 		=> $page_img_urls[1],
-						'width' 	=> $images_project_sizes['st-500']['width'],
-						'height' 	=> $images_project_sizes['st-500']['height']
-					)
-				);
+				// données structurées
+				add_filter( 'pc_filter_home_schema_collection_page', function ( $home_schema_collection_page ) use ( $page_title, $page_url, $page_img_urls ) {
+					
+					global $images_project_sizes;
+					$home_schema_collection_page['mainEntity']['itemListElement'][] = array(
+						'@type' => 'ListItem',
+						'name' => $page_title,
+						'url' => $page_url,
+						'image' => array(
+							'@type'		=>'ImageObject',
+							'url' 		=> $page_img_urls[1],
+							'width' 	=> $images_project_sizes['st-500']['width'],
+							'height' 	=> $images_project_sizes['st-500']['height']
+						)
+					);
+
+					return $home_schema_collection_page;
+
+				}, 10, 4);
 
 			} // FIN foreach $home_pages
 		echo '</ul>';
 
 	}
 
-	/*----------  Affichage données structurées  ----------*/
+}
+
+
+/*----------  Données structurées  ----------*/
+
+function pc_display_home_main_schema( $settings_home ) {
 	
+	$home_schema_collection_page = array(
+		'@context' => 'http://schema.org/',
+		'@type'=> 'CollectionPage',
+		'name' => $settings_home['content-title'],
+		'headline' => $settings_home['content-title'],
+		'description' => ( isset( $settings_home['seo-desc'] ) && $settings_home['seo-desc'] != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-txt'],30,'...'),
+		'mainEntity' => array(
+			'@type' => 'ItemList',
+			'itemListElement' => array()
+		),
+		'isPartOf' => pc_get_schema_website()
+	);
+
 	$home_schema_collection_page = apply_filters( 'pc_filter_home_schema_collection_page', $home_schema_collection_page );
 	echo '<script type="application/ld+json">'.json_encode($home_schema_collection_page,JSON_UNESCAPED_SLASHES).'</script>';
 
