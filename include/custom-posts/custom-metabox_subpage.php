@@ -89,9 +89,7 @@ function pc_page_content_sup( $post ) {
     if ( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
         if ( !empty( $settings_project['page-content-from'] ) ) {
             echo '<p><strong>Sélectionnez un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</strong></p>';
-        }
-		echo '<p><em><strong>Remarque :</strong> lorsqu\'une page devient sous-page, son adresse (URL) est préfixée avec l\'adresse de la page parent, pour indiquer la hiérarchie.</em></p>';
-		
+        }		
     } else { // si la page courante est une sous-page
         echo '<p><strong>Sélectionnez un contenu spécifique.</strong></p>';
 	}

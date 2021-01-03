@@ -17,12 +17,8 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Aide  ----------*/
 	
-	$metabox_visual_desc = '<p>Sélectionnez le visuel utilisé pour : ';
-	$metabox_visual_desc .= '<br/>- <strong>afficher cette page sous sa forme résumée (liste de sous-pages ou l\'accueil)</strong>, ';
-	$metabox_visual_desc .= '<br/>- <strong>le partage sur les réseaux sociaux</strong>.';
-	$metabox_visual_desc .= '</p>';
-	$metabox_visual_desc .= ' <p><em><strong>Remarque :</strong> la taille minimum conseillée est de 700 x 440 pixels, si un visuel n\'est pas sélectionné, le logo est utilisé pour le résumé et les réseaux sociaux.</em></p>';
-	$metabox_visual_desc .= '</p>';
+	$metabox_visual_desc = '<p>Sélectionnez le visuel pour : <strong>afficher cette page sous sa forme résumée, le référencement et le partage sur les réseaux sociaux</strong>.</p>';
+	$metabox_visual_desc .= '<p><em><strong>Remarque :</strong> Si un visuel n\'est pas sélectionné, le logo est utilisé.</em></p>';
 
 	$metabox_visual_desc = apply_filters( 'pc_filter_metabox_visual_desc', $metabox_visual_desc );
 

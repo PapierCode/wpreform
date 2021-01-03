@@ -87,12 +87,12 @@ function pc_display_specific_content( $post, $post_metas ) {
 			),
 			'isPartOf' => pc_get_schema_article( $post, $post_metas, $sub_pages_ids )
 		);
-		global $post_resum_schema;
 
 		// affichage des résumés de pages
 		foreach ( $sub_pages_ids as $key => $post_id ) {
 			pc_display_post_resum( $post_id, '', 2 );
 			// données structurées
+			global $post_resum_schema;
 			$st_schema['position'] = $key + 1;
 			$sub_pages_schema['mainEntity']['itemListElement'][] = $post_resum_schema;
 		}

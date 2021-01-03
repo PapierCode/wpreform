@@ -16,7 +16,7 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Aide  ----------*/
 	
-	$metabox_resum_desc = '<p><strong>Remplissez ces champs pour afficher cette page sous sa forme résumée</strong> (dans une liste de pages par exemple).</p><p><em><strong>Remarques :</strong> si ces champs ne sont pas saisis, le titre de la page et les premiers mots du contenu sont utilisés.</em></p>';
+	$metabox_resum_desc = '<p><strong>Optimisez le titre et la description de cette page sous sa forme résumée</strong>.</p><p><em><strong>Remarque :</strong> si ces champs ne sont pas saisis, le titre de la page et les premiers mots du contenu sont utilisés.</em></p>';
 
 	$metabox_resum_desc = apply_filters( 'pc_filter_metabox_seo_desc', $metabox_resum_desc );
 

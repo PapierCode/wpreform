@@ -15,7 +15,7 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Aide  ----------*/
 	
-	$metabox_seo_desc = '<p><strong>Optimisez le titre et la description pour les moteurs de recherche et les réseaux sociaux.</strong></p><p><em><strong>Remarques :</strong> Si ces champs ne sont pas saisis, le titre de la page et la description du résumé (encart "Résumé" ci-dessus) sont utilisés</em>.</p>';
+	$metabox_seo_desc = '<p><strong>Optimisez le titre et la description pour les moteurs de recherche et les réseaux sociaux.</strong></p><p><em><strong>Remarque :</strong> Si ces champs ne sont pas saisis, le titre de la page et la description du résumé ou les premiers mots du contenu sont utilisés</em>.</p>';
 
 	$metabox_seo_desc = apply_filters( 'pc_filter_metabox_seo_desc', $metabox_seo_desc );
 
