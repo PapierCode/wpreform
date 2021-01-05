@@ -2,7 +2,7 @@
 
 /**
 *
-* Metabox visuel
+* Metabox image
 *
 **/
 
@@ -45,7 +45,7 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Déclaration  ----------*/
 	
-	$metabox_img_declaration = new PC_Add_Metabox( $metabox_img_for, 'Visuel', 'page-metabox-visual', $metabox_img_fields, 'normal', 'low' );
+	$metabox_img_declaration = new PC_Add_Metabox( $metabox_img_for, 'Image', 'page-metabox-img', $metabox_img_fields, 'normal', 'low' );
 
 
 } // FIN if class_exist()
