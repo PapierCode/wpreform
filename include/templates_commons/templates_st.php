@@ -47,10 +47,10 @@ function pc_get_page_excerpt( $post_id, $post_metas, $seo_for = false ) {
 /*=====  FIN Excerpt Preform   =====*/
 
 /*==============================
-=            Visuel            =
+=            Image            =
 ==============================*/
 
-function pc_get_post_resum_visual_datas( $post_id, $post_metas ) {
+function pc_get_post_resum_img_datas( $post_id, $post_metas ) {
 
 	$img_post = ( isset($post_metas['visual-id']) ) ? get_post( $post_metas['visual-id'][0] ) : null;
 	$img_datas = array();
@@ -76,12 +76,12 @@ function pc_get_post_resum_visual_datas( $post_id, $post_metas ) {
 
 	}
 
-	apply_filters( 'pc_filter_post_resum_img_datas', $img_datas, $post_id );
+	apply_filters( 'pc_filter_post_resum_img_datas', $img_datas, $post_id, $post_metas );
 	return $img_datas;
 
 }
 
-function pc_display_post_resum_img( $post_id, $img_datas ) {
+function pc_display_post_resum_img_tag( $post_id, $img_datas ) {
 
 	$img_tag_srcset = $img_datas['urls'][0].' 400w, '.$img_datas['urls'][1].' 500w, '.$img_datas['urls'][2].' 700w';
 	$img_tag_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 700px, (min-width:760px) 500px';
@@ -94,7 +94,7 @@ function pc_display_post_resum_img( $post_id, $img_datas ) {
 }
 
 
-/*=====  FIN Visuel  =====*/
+/*=====  FIN Image  =====*/
 
 /*=================================
 =            Affichage            =
@@ -102,19 +102,19 @@ function pc_display_post_resum_img( $post_id, $img_datas ) {
 
 function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 
-	// métas
-    $post_metas = get_post_meta($post_id);
+	// post métas
+	$metas = get_post_meta($post_id);
 
 	// titre
-	$title = (isset($post_metas['resum-title'])) ? $post_metas['resum-title'][0] : get_the_title($post_id);
+	$title = (isset($metas['resum-title'])) ? $metas['resum-title'][0] : get_the_title($post_id);
 	// lien
 	$url = get_the_permalink($post_id);
-	// visuel
-	$img_datas = pc_get_post_resum_visual_datas( $post_id, $post_metas );
+	// image
+	$img_datas = pc_get_post_resum_img_datas( $post_id, $metas );
 	// icône +	
 	$ico_more = apply_filters( 'pc_filter_post_resum_ico_more', pc_svg('more-16') );
 	// description
-	$desc = pc_get_page_excerpt( $post_id, $post_metas );
+	$desc = pc_get_page_excerpt( $post_id, $metas );
 	
 
 	/*----------  Données structurées  ----------*/
@@ -143,7 +143,7 @@ function pc_display_post_resum( $post_id, $css = '', $hn = 2 ) {
 		do_action( 'pc_action_post_resum_after_start', $post_id );
 	
 		echo '<figure class="st-figure">';
-			pc_display_post_resum_img( $post_id, $img_datas );
+			pc_display_post_resum_img_tag( $post_id, $img_datas );
 		echo '</figure>';
 
 		echo '<h'.$hn.' class="st-title"><a href="'.$url.'">'.$title.'</a></h'.$hn.'>';	
