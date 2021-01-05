@@ -17,8 +17,8 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Aide  ----------*/
 	
-	$metabox_img_desc = '<p>Sélectionnez le visuel pour : <strong>afficher cette page sous sa forme résumée, le référencement et le partage sur les réseaux sociaux</strong>.</p>';
-	$metabox_img_desc .= '<p><em><strong>Remarque :</strong> Si un visuel n\'est pas sélectionné, le logo est utilisé.</em></p>';
+	$metabox_img_desc = '<p>Sélectionnez une image pour : <strong>afficher cette page sous sa forme résumée, le référencement et le partage sur les réseaux sociaux</strong>.</p>';
+	$metabox_img_desc .= '<p><em><strong>Remarque :</strong> Si une image n\'est pas sélectionnée, le logo est utilisé.</em></p>';
 
 	$metabox_img_desc = apply_filters( 'pc_filter_metabox_img_desc', $metabox_img_desc );
 
@@ -32,7 +32,7 @@ if ( class_exists('PC_Add_metabox') ) {
 			array(
 				'type'      => 'img',
 				'id'        => 'id',
-				'label'     => 'Visuel',
+				'label'     => 'Image',
 				'options'   => array(
 					'btnremove' => true
 				)
