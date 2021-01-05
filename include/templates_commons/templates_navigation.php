@@ -104,6 +104,8 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		}
 
+		$output = apply_filters( 'pc_filter_menu_walker_item_output', $output, $item, $args );
+
 	} // end start_el()
 
 } // end Primary_Walker()
