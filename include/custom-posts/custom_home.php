@@ -60,7 +60,7 @@ function pc_home_pages_line( $css_class, $pages, $current = '', $title = '' ) {
  * 
  */
 
-function pc_home_pages_bdd_to_array( $datas ) {
+function pc_home_shortcuts_bdd_to_array( $datas ) {
 
 	$return = array();
 	if ( $datas != '' ) {
@@ -88,7 +88,7 @@ $settings_home = get_option('home-settings-option');
 // pages à la une sauvegardées
 $home_pages_in_bdd = ( isset($settings_home['content-pages']) && $settings_home['content-pages'] !='' ) ? $settings_home['content-pages'] : '';
 // conversion
-$home_pages = pc_home_pages_bdd_to_array($home_pages_in_bdd);
+$home_pages = pc_home_shortcuts_bdd_to_array($home_pages_in_bdd);
 
 // html à afficher
 $home_pages_fields = '<div class="pc-repeater" data-type="homepages">';
