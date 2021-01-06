@@ -179,8 +179,8 @@ add_filter( 'pc_filter_html_css_class', 'pc_home_html_css_class' );
 		
 	function pc_home_html_css_class( $class ) {
 
-		global $home_shortcuts;
-		if ( is_home() && !empty($home_shortcuts) ) { $class[] = 'is-home-with-shortcuts'; }
+		global $settings_home;
+		if ( is_home() && isset($settings_home['content-pages']) && $settings_home['content-pages'] != '' ) { $class[] = 'is-home-with-shortcuts'; }
 
 		return $class;
 

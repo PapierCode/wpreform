@@ -53,16 +53,16 @@ function pc_display_footer_contact() {
 	/*----------  Logo  ----------*/
 	
 	// datas
-	$logo_datas = array(
+	$img_datas = array(
 		'url' => get_bloginfo('template_directory').'/images/logo-footer.svg',
 		'width' => 100,
 		'height' => 25,
 		'alt' => 'Logo '.$settings_project['coord-name']
 	);
 	// filtre
-	$logo_datas = apply_filters( 'pc_filter_footer_logo', $logo_datas );
+	$img_datas = apply_filters( 'pc_filter_footer_logo_img_datas', $img_datas );
 	// html
-	$logo_img_tag = '<img src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" />';
+	$img_tag = '<img src="'.$img_datas['url'].'" alt="'.$img_datas['alt'].'" width="'.$img_datas['width'].'" height="'.$img_datas['height'].'" loading="lazy" />';
 
 
 	/*----------  Adresse  ----------*/
@@ -92,7 +92,7 @@ function pc_display_footer_contact() {
 	/*----------  Affichage  ----------*/
 
 	// filtres	
-	$dt = apply_filters( 'pc_filter_footer_contact_dt', $logo_img_tag, $logo_datas, $settings_project );
+	$dt = apply_filters( 'pc_filter_footer_contact_dt', $img_tag, $img_datas, $settings_project );
 	$dd = apply_filters( 'pc_filter_footer_contact_dd', $dd, $settings_project );
 
 	echo '<address class="coord"><dl class="coord-list">';

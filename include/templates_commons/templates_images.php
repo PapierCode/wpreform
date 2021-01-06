@@ -104,7 +104,7 @@ add_filter( 'post_gallery', 'pc_gallery_custom', 10, 3 );
 					// affichage
 					$return .= '<li class="wp-gallery-item">';
 					$return .= '<a class="wp-gallery-link" href="'.$large_datas.'" data-gl-caption="'.$caption.'" data-gl-responsive="'.$medium_datas.'" title="Afficher l\'image">';
-					$return .= '<img class="wp-gallery-img" src="'.$thumbnail_datas[0].'" width="'.$thumbnail_datas[1].'" height="'.$thumbnail_datas[2].'" alt="'.$alt.'"/>';
+					$return .= '<img class="wp-gallery-img" src="'.$thumbnail_datas[0].'" width="'.$thumbnail_datas[1].'" height="'.$thumbnail_datas[2].'" alt="'.$alt.'" loading="lazy"/>';
 					$return .= '<span class="wp-gallery-ico">'.pc_svg('zoom').'</span>';
 					$return .= '</a>';
 					$return .= '</li>';

@@ -107,7 +107,7 @@ if ( $popBtnOpen.length > 0 ) {
 	mapLong, 
 	mapZoomDefault = 15,
 	mapZoomCurrent = mapZoomDefault,
-	mapZoomMin = 12,
+	mapZoomMin = 10,
 	mapZoomMax = 18;
 	
 	var pc_pop_close = function() {

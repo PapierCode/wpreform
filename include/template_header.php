@@ -57,18 +57,18 @@ function pc_display_header_logo() {
 
 		echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="Accueil '.$settings_project['coord-name'].'">';
 
-			$logo_datas = array(
+			$img_datas = array(
 				'url' => get_bloginfo('template_directory').'/images/logo.svg',
 				'width' => 150,
 				'height' => 150,
 				'alt' => 'Logo '.$settings_project['coord-name']
 			);
-			$logo_datas = apply_filters( 'pc_filter_header_logo', $logo_datas );
+			$img_datas = apply_filters( 'pc_filter_header_logo_img_datas', $img_datas );
 
-			$logo_img_tag = '<img class="h-logo-img" src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" />';
-			$logo_img_tag = apply_filters( 'pc_filter_logo_img_tag', $logo_img_tag, $logo_datas );
+			$img_tag = '<img class="h-logo-img" src="'.$img_datas['url'].'" alt="'.$img_datas['alt'].'" width="'.$img_datas['width'].'" height="'.$img_datas['height'].'" loading="lazy" />';
+			$img_tag = apply_filters( 'pc_filter_header_logo_img_tag', $img_tag, $img_datas );
 			
-			echo $logo_img_tag;
+			echo $img_tag;
 
 		echo '</a>';
 
