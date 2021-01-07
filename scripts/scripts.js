@@ -197,18 +197,8 @@ if ( $popBtnOpen.length > 0 ) {
 						iconSize: [40,60],
 						iconAnchor: [20,60],
 						className: 'map-marker'
-						});
-
-					// affichage de la map
-					var marker = L.marker([mapLat, mapLong], {icon: mapIcon}).addTo(map);
-
-					// favicon dans marqueur
-					$('.map-marker').css({
-						'background-image':'url('+$head.find('link[rel=icon]').attr('href')+')',
-						'background-position':'5px 5px',
-						'background-repeat':'no-repeat',
-						'background-size':'30px 30px'
 					});
+					var marker = L.marker([mapLat, mapLong], {icon: mapIcon}).addTo(map);
 			
 					// zoom +
 					$mapBtnZoomIn.click(function() {
