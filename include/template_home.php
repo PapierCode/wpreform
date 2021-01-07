@@ -66,12 +66,12 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 		$shortcuts_nb = ( count($home_shortcuts)%2 == 1 ) ? 'home-shortcuts--odd' : 'home-shortcuts--even';
 
 		echo '<ul class="home-shortcuts '.$shortcuts_nb.' reset-list">';
-			foreach ($home_shortcuts as $post_id => $new_title) {
+			foreach ($home_shortcuts as $post_id => $new_post_title) {
 
 				// titre
-				$title = ( $new_title != '' ) ? $new_title : get_the_title( $post_id );
+				$post_title = ( $new_post_title != '' ) ? $new_post_title : get_the_title( $post_id );
 				// lien
-				$url = get_the_permalink( $post_id );
+				$post_url = get_the_permalink( $post_id );
 				
 				// image de la page ou image par défaut
 				$img_id = get_post_meta( $post_id, 'visual-id', true );
@@ -83,12 +83,12 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 						wp_get_attachment_image_src( $img_id, 'st-500' )[0]
 					);
 					$img_datas['alt'] = get_post_meta( $img_id, '_wp_attachment_image_alt', true );
-					$img = apply_filters( 'pc_filter_home_shortcut_img_datas', $img_datas, $post_id );
+					$img_datas = apply_filters( 'pc_filter_home_shortcut_img_datas', $img_datas, $post_id );
 
 				} else {
 
 					$img_datas['urls'] = pc_get_post_resum_img_default_datas();
-					$img_datas['alt'] = $title;
+					$img_datas['alt'] = $post_title;
 
 				}
 
@@ -97,12 +97,12 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 				$img_tag = '<img src="'.$img_datas['urls'][1].'" alt="'.$img_datas['alt'].'" srcset="'.$img_srcset.'" sizes="'.$img_sizes.'" loading="lazy" />';
 
 
-				$img = apply_filters( 'pc_filter_home_shortcut_img_tag', $img_tag, $post_id );
+				$img_tag = apply_filters( 'pc_filter_home_shortcut_img_tag', $img_tag, $post_id );
 
 				// affichage
-				echo '<li class="home-shortcut-item"><a title="'.$title.'" href="'.$url.'" class="home-shortcut-link">';
+				echo '<li class="home-shortcut-item"><a title="'.$post_title.'" href="'.$post_url.'" class="home-shortcut-link">';
 					echo '<span class="home-shortcut-img">'.$img_tag.'</span>';
-					echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($title),40).'</span>';
+					echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($post_title),40).'</span>';
 					echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';
 				echo '</a></li>';
 
@@ -137,10 +137,10 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 		// id des pages mises en avant
 		$home_shortcuts = pc_home_shortcuts_bdd_to_array($settings_home['content-pages']);
 
-		foreach ($home_shortcuts as $post_id => $new_title) {
+		foreach ($home_shortcuts as $post_id => $new_post_title) {
 
 			// titre
-			$title = ( $new_title != '' ) ? $new_title : get_the_title( $post_id );
+			$post_title = ( $new_post_title != '' ) ? $new_post_title : get_the_title( $post_id );
 			// metas
 			$metas = get_post_meta( $post_id );		
 
@@ -153,7 +153,7 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 			
 			$schema_collection_page['mainEntity']['itemListElement'][] = array(
 				'@type' => 'ListItem',
-				'name' => $title,
+				'name' => $post_title,
 				'description' => pc_get_page_excerpt( $post_id, $metas ),
 				'url' => get_the_permalink($post_id),
 				'image' => array(

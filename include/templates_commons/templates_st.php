@@ -62,7 +62,7 @@ function pc_get_post_resum_img_default_datas() {
 		$dir.'/images/st-default-700.jpg'
 	);
 
-	apply_filters( 'pc_filter_post_resum_img_default_datas', $img_datas );
+	$img_datas = apply_filters( 'pc_filter_post_resum_img_default_datas', $img_datas );
 	return $img_datas;
 
 }
