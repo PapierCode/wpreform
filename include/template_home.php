@@ -66,38 +66,43 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 		$shortcuts_nb = ( count($home_shortcuts)%2 == 1 ) ? 'home-shortcuts--odd' : 'home-shortcuts--even';
 
 		echo '<ul class="home-shortcuts '.$shortcuts_nb.' reset-list">';
-			foreach ($home_shortcuts as $post_id => $post_new_title) {
+			foreach ($home_shortcuts as $post_id => $new_title) {
 
 				// titre
-				$post_title = ( $post_new_title != '' ) ? $post_new_title : get_the_title( $post_id );
+				$title = ( $new_title != '' ) ? $new_title : get_the_title( $post_id );
 				// lien
-				$post_url = get_the_permalink( $post_id );
+				$url = get_the_permalink( $post_id );
 				
-				// image du ou image par défaut
-				$post_img_id = get_post_meta( $post_id, 'visual-id', true );
-				if ( $post_img_id != '' ) {
-					$post_img_urls = array(
-						wp_get_attachment_image_src( $post_img_id, 'st-400' )[0],
-						wp_get_attachment_image_src( $post_img_id, 'st-500' )[0]
+				// image de la page ou image par défaut
+				$img_id = get_post_meta( $post_id, 'visual-id', true );
+
+				if ( $img_id != '' ) {
+
+					$img_datas['urls'] = array(
+						wp_get_attachment_image_src( $img_id, 'st-400' )[0],
+						wp_get_attachment_image_src( $img_id, 'st-500' )[0]
 					);
-					$post_img_alt = get_post_meta( $post_img_id, '_wp_attachment_image_alt', true );			
+					$img_datas['alt'] = get_post_meta( $img_id, '_wp_attachment_image_alt', true );
+					$img = apply_filters( 'pc_filter_home_shortcut_img_datas', $img_datas, $post_id );
+
 				} else {
-					$post_img_urls = array(
-						get_bloginfo( 'template_directory' ).'/images/st-default-400.jpg',
-						get_bloginfo( 'template_directory' ).'/images/st-default-500.jpg'
-					);
-					$post_img_urls = apply_filters( 'pc_filter_img_default_st', $post_img_urls );
-					$post_img_alt = $post_title;
+
+					$img_datas['urls'] = pc_get_post_resum_img_default_datas();
+					$img_datas['alt'] = $title;
+
 				}
-				$post_img_srcset = $post_img_urls[0].' 400w, '.$post_img_urls[1].' 500w';
-				$post_img_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 500px, (min-width:760px) and (max-width:840px) 400px, (min-width:841px) 500px';
-				$post_img = '<img src="'.$post_img_urls[1].'" alt="'.$post_img_alt.'" srcset="'.$post_img_srcset.'" sizes="'.$post_img_sizes.'" loading="lazy" />';
-				$post_img = apply_filters( 'pc_filter_home_shortcut_img', $post_img, $post_id );
+
+				$img_srcset = $img_datas['urls'][0].' 400w, '.$img_datas['urls'][1].' 500w';
+				$img_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 500px, (min-width:760px) and (max-width:840px) 400px, (min-width:841px) 500px';
+				$img_tag = '<img src="'.$img_datas['urls'][1].'" alt="'.$img_datas['alt'].'" srcset="'.$img_srcset.'" sizes="'.$img_sizes.'" loading="lazy" />';
+
+
+				$img = apply_filters( 'pc_filter_home_shortcut_img_tag', $img_tag, $post_id );
 
 				// affichage
-				echo '<li class="home-shortcut-item"><a title="'.$post_title.'" href="'.$post_url.'" class="home-shortcut-link">';
-					echo '<span class="home-shortcut-img">'.$post_img.'</span>';
-					echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($post_title),40).'</span>';
+				echo '<li class="home-shortcut-item"><a title="'.$title.'" href="'.$url.'" class="home-shortcut-link">';
+					echo '<span class="home-shortcut-img">'.$img_tag.'</span>';
+					echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($title),40).'</span>';
 					echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';
 				echo '</a></li>';
 
@@ -132,24 +137,24 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 		// id des pages mises en avant
 		$home_shortcuts = pc_home_shortcuts_bdd_to_array($settings_home['content-pages']);
 
-		foreach ($home_shortcuts as $post_id => $post_new_title) {
+		foreach ($home_shortcuts as $post_id => $new_title) {
 
 			// titre
-			$post_title = ( $post_new_title != '' ) ? $post_new_title : get_the_title( $post_id );
+			$title = ( $new_title != '' ) ? $new_title : get_the_title( $post_id );
 			// metas
-			$post_metas = get_post_meta( $post_id );		
+			$metas = get_post_meta( $post_id );		
 
 			// image du post ou image par défaut
-			if ( isset( $post_metas['visual-id'] ) ) {
-				$img = pc_get_img( $post_metas['visual-id'][0], 'share', 'datas' );
+			if ( isset( $metas['visual-id'] ) ) {
+				$img = pc_get_img( $metas['visual-id'][0], 'share', 'datas' );
 			} else {
 				$img = pc_get_img_default_to_share();
 			}
 			
 			$schema_collection_page['mainEntity']['itemListElement'][] = array(
 				'@type' => 'ListItem',
-				'name' => $post_title,
-				'description' => pc_get_page_excerpt( $post_id, $post_metas ),
+				'name' => $title,
+				'description' => pc_get_page_excerpt( $post_id, $metas ),
 				'url' => get_the_permalink($post_id),
 				'image' => array(
 					'@type'		=>'ImageObject',

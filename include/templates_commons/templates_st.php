@@ -46,9 +46,29 @@ function pc_get_page_excerpt( $post_id, $post_metas, $seo_for = false ) {
 
 /*=====  FIN Excerpt Preform   =====*/
 
-/*==============================
+/*=============================
 =            Image            =
-==============================*/
+=============================*/
+
+/*----------  Défaut  ----------*/
+
+function pc_get_post_resum_img_default_datas() {
+
+	$dir = get_bloginfo('template_directory');
+
+	$img_datas = array(
+		$dir.'/images/st-default-400.jpg',
+		$dir.'/images/st-default-500.jpg',
+		$dir.'/images/st-default-700.jpg'
+	);
+
+	apply_filters( 'pc_filter_post_resum_img_default_datas', $img_datas );
+	return $img_datas;
+
+}
+
+
+/*----------  Données brutes  ----------*/
 
 function pc_get_post_resum_img_datas( $post_id, $post_metas ) {
 
@@ -66,12 +86,7 @@ function pc_get_post_resum_img_datas( $post_id, $post_metas ) {
 
 	} else {
 
-		$dir = get_bloginfo('template_directory');
-		$img_datas['urls'] = array(
-			$dir.'/images/st-default-400.jpg',
-			$dir.'/images/st-default-500.jpg',
-			$dir.'/images/st-default-700.jpg'
-		);
+		$img_datas['urls'] = pc_get_post_resum_img_default_datas();
 		$img_datas['alt'] = '';
 
 	}
@@ -80,6 +95,9 @@ function pc_get_post_resum_img_datas( $post_id, $post_metas ) {
 	return $img_datas;
 
 }
+
+
+/*----------  HTML  ----------*/
 
 function pc_display_post_resum_img_tag( $post_id, $img_datas ) {
 
