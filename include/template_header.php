@@ -84,6 +84,8 @@ function pc_display_header_logo() {
 function pc_display_header_nav() {
 
 	echo '<nav id="header-nav" class="h-nav"><div class="h-nav-inner">';
+		
+		do_action( 'pc_header_nav_inner_before' );
 
 		$nav_args = array(
 			'theme_location'  	=> 'nav-header',
@@ -98,7 +100,7 @@ function pc_display_header_nav() {
 		);
 		wp_nav_menu( $nav_args ); // + include/navigation.php
 		
-		pc_display_social_links( 'social-list--header' );
+		do_action( 'pc_header_nav_inner_after' );
 
 	echo '</div></nav>';
 
@@ -121,6 +123,16 @@ function pc_display_nav_overlay() {
 	echo '<button type="button" title="Fermer le menu" class="btn-overlay reset-btn js-h-nav" aria-hidden="true" tabindex="-1"><span class="visually-hidden">Fermer le menu</span></button>';
 
 }
+
+/*----------  Réseaux sociaux  ----------*/
+
+add_action( 'pc_header_nav_inner_after', 'pc_display_header_social', 10);
+
+	function pc_display_header_social() {
+
+		pc_display_social_links( 'social-list--header' );
+
+	}
 
 
 /*=====  FIN Contenu des hooks  =====*/
