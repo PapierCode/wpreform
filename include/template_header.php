@@ -55,6 +55,8 @@ function pc_display_header_logo() {
 
 	echo '<div class="h-logo">';
 
+		do_action( 'pc_header_logo_inner_before' );
+
 		echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="Accueil '.$settings_project['coord-name'].'">';
 
 			$img_datas = array(
@@ -72,7 +74,7 @@ function pc_display_header_logo() {
 
 		echo '</a>';
 
-		echo '<div class="h-nav-btn-box"><button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-h-nav reset-btn" aria-hidden="true" tabindex="-1"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="h-nav-btn-txt">Menu</span></button></div>';
+		do_action( 'pc_header_logo_inner_after' );
 
 	echo '</div>';
 
@@ -114,6 +116,17 @@ function pc_display_header_end() {
 	echo '</div></header>';
 
 }
+
+
+/*----------  Bouton menu  ----------*/
+
+add_action( 'pc_header_logo_inner_after', 'pc_display_button_nav', 10 );
+
+	function pc_display_button_nav() {
+
+		echo '<div class="h-nav-btn-box"><button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-h-nav reset-btn" aria-hidden="true" tabindex="-1"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="h-nav-btn-txt">Menu</span></button></div>';
+
+	}
 
 
 /*----------  Overlay navigation  ----------*/
