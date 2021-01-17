@@ -115,12 +115,10 @@ function pc_display_footer_contact() {
 
 function pc_display_footer_nav() {
 
-	global $settings_project;
-
 	echo '<nav id="footer-nav" class="f-nav">';
 	echo '<ul class="f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1 reset-list">';
 	
-		echo '<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; '.$settings_project['coord-name'].'</li>';
+		do_action( 'pc_footer_nav_list_inner_before' );
 		
 		$nav_footer_config = array(
 			'theme_location'  	=> 'nav-footer',
@@ -133,11 +131,23 @@ function pc_display_footer_nav() {
 			'walker'          	=> new Pc_Walker_Nav_Menu()
 		);
 		wp_nav_menu( $nav_footer_config );
+
+		do_action( 'pc_footer_nav_list_inner_after' );
 		
 	echo '</ul>';
 	echo '</nav>';
 
 }
+
+add_action ( 'pc_footer_nav_list_inner_before', 'pc_footer_display_copyright' );
+
+	function pc_footer_display_copyright() {
+
+		global $settings_project;
+	
+		echo '<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; '.$settings_project['coord-name'].'</li>';
+
+	}
 
 
 /*----------  Fin du pied de page  ----------*/
