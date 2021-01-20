@@ -130,8 +130,8 @@ function pc_page_content_sup( $post ) {
     
     if( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
 
-        // les pages qui sont ou peuvent être sous-page
-        $all_subpages = get_posts(array(
+		// les pages qui sont ou peuvent être sous-page
+		$all_subpages_args = array(
             'post_type' => 'page',
             'post_status' => 'publish',
             'posts_per_page' => -1,
@@ -144,7 +144,9 @@ function pc_page_content_sup( $post ) {
                     'compare' => 'NOT EXISTS',
                 )
             ),
-        ));
+		);
+		$all_subpages_args = apply_filters( 'pc_filter_subpages_list_args', $all_subpages_args, $post );
+        $all_subpages = get_posts( $all_subpages_args );
         // liste des sous-pages sauvegardées
         $subpages_saved = get_post_meta( $post->ID, 'content-subpages', true );
         $subpages_saved_array = explode( ',', $subpages_saved );

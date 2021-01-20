@@ -139,7 +139,7 @@ function pc_display_footer_nav() {
 
 }
 
-add_action ( 'pc_footer_nav_list_inner_before', 'pc_footer_display_copyright', 10 );
+add_action( 'pc_footer_nav_list_inner_before', 'pc_footer_display_copyright', 10 );
 
 	function pc_footer_display_copyright() {
 
