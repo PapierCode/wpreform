@@ -27,29 +27,38 @@ const terser		= require( 'gulp-terser' ); // minification js
 =            Tâche JS            =
 ================================*/
 
-jshint_src = [
+js_src = [
 	'scripts/jquery-gallery.js',
 	'scripts/scripts.js'
 ],
 
-js_global_src = [
-	'scripts/vendor/jquery-3.4.1.min.js'
-].concat(jshint_src);
+js_src_all = [
+	'scripts/jquery-3.4.1.min.js'
+].concat(js_src);
 
 
 /*----------  Fonctions  ----------*/
 
 function js_hint() {
 
-	return src( jshint_src )
+	return src( js_src )
         .pipe(jshint())
         .pipe(jshint.reporter( 'default' ));
 
 }
 
+function js_jquery() {
+
+    return src( js_src_all )
+        .pipe(concat( 'scripts.jquery.min.js' ))
+        .pipe(terser())
+        .pipe(dest( 'scripts/' ));
+
+}
+
 function js() {
 
-    return src( js_global_src )
+    return src( js_src )
         .pipe(concat( 'scripts.min.js' ))
         .pipe(terser())
         .pipe(dest( 'scripts/' ));
@@ -64,7 +73,7 @@ function js() {
 ==================================*/
 
 exports.watch = function() {
-	watch( ['scripts/**/*.js', '!scripts/scripts.min.js'], series(js_hint,js) )
+	watch( [ 'scripts/**/*.js', '!scripts/scripts.min.js', '!scripts/scripts.jquery.min.js' ], series(js_hint,js_jquery,js)  )
 };
 
 

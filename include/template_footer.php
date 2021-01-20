@@ -190,13 +190,16 @@ function pc_display_js_footer() {
 	/*----------  Sprite to JS  ----------*/
 	
 	$sprite_to_js_array = array('arrow','cross');
-	apply_filters( 'pc_filter_sprite_to_svg', $sprite_to_js_array );
+	apply_filters( 'pc_filter_sprite_to_js', $sprite_to_js_array );
 	pc_sprite_to_js( $sprite_to_js_array ); 
 	
 
 	/*----------  JS global  ----------*/
+
+	$js_src = get_bloginfo('template_directory').'/scripts/scripts.jquery.min.js';
+	$js_src = apply_filters( 'pc_filter_js_version', $js_src );
 	
-	echo '<script src="'.get_bloginfo('template_directory').'/scripts/scripts.min.js"></script>';
+	echo '<script src="'.$js_src.'"></script>';
 
 }
 
