@@ -12,7 +12,7 @@ var rem = function( size, base ) {
 
 /*=====  FIN Tools  ======*/
 
-$(document).ready(function(){
+jQuery(document).ready(function($){
 
 /*=================================
 =            variables            =

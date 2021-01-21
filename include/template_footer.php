@@ -194,12 +194,16 @@ function pc_display_js_footer() {
 	pc_sprite_to_js( $sprite_to_js_array ); 
 	
 
-	/*----------  JS global  ----------*/
+	/*----------  Fichiers JS  ----------*/
 
-	$js_src = get_bloginfo('template_directory').'/scripts/scripts.jquery.min.js';
-	$js_src = apply_filters( 'pc_filter_js_version', $js_src );
+	$js_files = array(
+		'wpreform' => get_bloginfo('template_directory').'/scripts/scripts.jquery.min.js'
+	);
+	$js_files = apply_filters( 'pc_filter_js_files', $js_files );
 	
-	echo '<script src="'.$js_src.'"></script>';
+	foreach ( $js_files as $id => $url ) {
+		echo '<script src="'.$url.'"></script>';
+	}
 
 }
 
