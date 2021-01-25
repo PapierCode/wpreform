@@ -21,7 +21,12 @@ jQuery(document).ready(function($){
 var $win 			= $(window),
 	$html 			= $('html'),
 	$body 			= $('body'),
-	$head 			= $('head');
+	$head 			= $('head'),
+	$header 		= $('.header'),
+	$fs_img			= $('.fs-img'),
+	$main_header 	= $('.main-header'),
+
+	win_h, win_w, header_h, win_w_old = 0;
 	
 
 /*=====  End of variables  ======*/
@@ -31,10 +36,30 @@ var $win 			= $(window),
 ==================================*/
 
 // fonction executée au chargement de la page et à chaque modification de taille de la fenêtre
-/* function win_resize() {
+function win_resize() {
 
 	// 768px
 	if (window.matchMedia('(min-width: 48em)').matches) {
+
+		/*----------  Fullscreen  ----------*/	
+
+		if ( $html.hasClass('is-fullscreen') ) {
+	
+			win_w = $win.width();
+	
+			if ( win_w != win_w_old ) {
+
+				win_h = $win.height();
+				header_h = $header.outerHeight();
+
+				$main_header.css( 'height', rem( win_h - header_h ) );
+				$fs_img.css( 'height', rem( win_h ) );
+
+				win_w_old = win_w;
+
+			}
+	
+		}
 
 	} else {
 
@@ -44,7 +69,7 @@ var $win 			= $(window),
 
 win_resize();
 
-$win.resize( win_resize ); * /
+$win.resize( win_resize );
 
 
 /*=====  End of Responsive  ======*/
@@ -58,6 +83,16 @@ $win.resize( win_resize ); * /
 $('.js-h-nav').click(function() {
 	$html.toggleClass('h-nav-is-open');
 });
+
+/*----------  Btn fullscreen  ----------*/
+
+if ( $html.hasClass('is-fullscreen')) {
+
+	$('.fs-more-btn').click(function() {
+		$('html, body').animate({ scrollTop:win_h }, 500);
+	});
+
+}
 
 
 /*=====  End of navigation  ======*/

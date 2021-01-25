@@ -114,9 +114,8 @@ $home_pages_fields .= '</div>';
 =            Champs            =
 ==============================*/
 
-/*----------  Sections et champs communs aux thèmes  ----------*/
+/*----------  Textes  ----------*/
 
-global $settings_home_fields;
 $settings_home_fields = array(
     array(
         'title'     => 'Présentation',
@@ -150,29 +149,89 @@ $settings_home_fields = array(
                 'display'   => $home_pages_fields
             )
         )
-	),
-    array(
-        'title'     => 'Référencement (SEO) & réseaux sociaux',
-        'desc'      => '<p><strong>Optimisez le titre et le résumé pour les moteurs de recherche et les réseaux sociaux.</strong> <br/><em>Si ces champs ne sont pas saisis, le titre de la page et les premiers mots du texte de présentation sont utilisés.</em></p>',
-        'id'        => 'seo',
-        'prefix'    => 'seo',
-        'fields'    => array(
-            array(
-                'type'      => 'text',
-                'label_for' => 'title',
-                'label'     => 'Titre',
-                'attr'      => 'class="pc-counter" data-counter-max="'.$texts_lengths['seo-title'].'"',
-                'css'       => 'width:100%'
-            ),
-            array(
-                'type'      => 'textarea',
-                'label_for' => 'desc',
-                'label'     => 'Description',
-                'attr'      => 'class="pc-counter" data-counter-max="'.$texts_lengths['seo-desc'].'"',
-                'css'       => 'width:100%'
-            )
-        )
-    )
+	)    
+);
+
+
+/*----------  Image associée pleine page  ----------*/
+
+$settings_home_fields[] = array(
+	'title'     => 'Image associée',
+	'desc'		=> '<p>Sélectionnez l\'image associée à cette page pour : <strong> le référencement et le partage sur les réseaux sociaux</strong>.</p><p><em><strong>Remarques :</strong> Si une image n\'est pas sélectionnée, le logo est utilisé.</em></p>',
+	'id'        => 'visual',
+	'prefix'    => 'visual',
+	'fields'    => array(
+		array(
+			'type'      => 'img',
+			'label_for' => 'id',
+			'label'     => 'Image',
+			'options'	=> array( 'btnremove' => true )
+		)
+	)
+);
+
+
+if ( isset($settings_pc['wpreform-fullscreen']) ) {
+
+	$settings_home_fields[1]['desc'] = '<p>Sélectionnez l\'image associée à cette page pour : <strong>s\'afficher en pleine page (si activé), le référencement et le partage sur les réseaux sociaux</strong>.</p><p><em><strong>Remarques :</strong> Si une image n\'est pas sélectionnée, il n\'y a pas d\'image en pleine page et le logo est utilisé pour le référencement et le partage sur les réseaux sociaux. Pour un affichage pleine page, la taille minimum conseillée est de 2000 x 1500 pixels.</em></p>';
+
+	$settings_home_fields[1]['fields'] = array_merge( 
+		$settings_home_fields[1]['fields'], 
+		array(
+			array(
+				'type'      => 'checkbox',
+				'label_for' => 'fullscreen',
+				'label'     => 'Afficher en pleine page'
+			),
+			array(
+				'type'      => 'radio',
+				'label_for' => 'title-h',
+				'label'     => 'Position horizontale du titre',
+				'options'	=> array( 
+					'Gauche' => 'left',
+					'Centre' => 'center',
+					'Droite' => 'right'
+				)
+			),
+			array(
+				'type'      => 'radio',
+				'label_for' => 'title-v',
+				'label'     => 'Position verticale du titre',
+				'options'	=> array( 
+					'Haut' => 'top',
+					'Centre' => 'center',
+					'Bas' => 'bottom'
+				)
+			)
+		)
+	);
+
+}
+
+
+/*----------  SEO  ----------*/
+
+$settings_home_fields[] = array(
+	'title'     => 'Référencement (SEO) & réseaux sociaux',
+	'desc'      => '<p><strong>Optimisez le titre et le résumé pour les moteurs de recherche et les réseaux sociaux.</strong> </p><p><em><strong>Remarque :</strong> Si ces champs ne sont pas saisis, le titre de la page et les premiers mots du texte de présentation sont utilisés.</em></p>',
+	'id'        => 'seo',
+	'prefix'    => 'seo',
+	'fields'    => array(
+		array(
+			'type'      => 'text',
+			'label_for' => 'title',
+			'label'     => 'Titre',
+			'attr'      => 'class="pc-counter" data-counter-max="'.$texts_lengths['seo-title'].'"',
+			'css'       => 'width:100%'
+		),
+		array(
+			'type'      => 'textarea',
+			'label_for' => 'desc',
+			'label'     => 'Description',
+			'attr'      => 'class="pc-counter" data-counter-max="'.$texts_lengths['seo-desc'].'"',
+			'css'       => 'width:100%'
+		)
+	)
 );
 
 

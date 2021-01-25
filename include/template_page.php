@@ -94,14 +94,14 @@ function pc_display_specific_content( $post, $post_metas ) {
 
 			// affichage des résumés de pages
 			foreach ( $sub_pages_ids as $key => $post_id ) {
-				pc_display_post_resum( $post_id, '', 2 );
+				pc_display_post_resum( $post_id, 'st--subpage', 2 );
 				// données structurées
 				global $post_resum_schema;
-				$st_schema['position'] = $key + 1;
+				$post_resum_schema['position'] = $key + 1;
 				$sub_pages_schema['mainEntity']['itemListElement'][] = $post_resum_schema;
 			}
 
-			do_action( 'pc_st_list_fake', count($sub_pages_ids), '' );
+			pc_display_fake_post_resum( count($sub_pages_ids), 'st--subpage' );
 
 			// affichage des données structurées
 			echo '<script type="application/ld+json">'.json_encode( $sub_pages_schema, JSON_UNESCAPED_SLASHES ).'</script>';

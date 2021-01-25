@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * Fonctions pour les tempaltes : images & galeries
+ * Fonctions pour les templates : images & galeries
  * 
  ** Tailles
  ** Galerie d'images (wysiwyg)
@@ -43,6 +43,19 @@ $images_project_sizes = array(
 	'gl-l'		=> array( 'width'=>1200, 'height'=>1200, 'crop'=>false )
 	
 );
+
+if ( isset( $settings_pc['wpreform-fullscreen'] ) ) {
+
+	$images_project_sizes = array_merge(
+		$images_project_sizes,
+		array(
+			'fs-s' => array( 'width'=>600, 'height'=>1000, 'crop'=>true ),
+			'fs-m' => array( 'width'=>1000, 'height'=>900, 'crop'=>true ),
+			'fs-l' => array( 'width'=>1600, 'height'=>880, 'crop'=>true )
+		)
+	);
+
+}
 
 $images_project_sizes = apply_filters( 'pc_filter_add_img_sizes', $images_project_sizes );
 

@@ -6,6 +6,7 @@
  ** Excerpt WP
  ** Excerpt Preform
  ** Affichage
+ ** Fake version
  * 
  */
 
@@ -127,7 +128,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	$post_title = (isset($post_metas['resum-title'])) ? $post_metas['resum-title'][0] : get_the_title($post_id);
 	// lien
 	$post_url = get_the_permalink($post_id);
-	// image
+	// image datas
 	$post_img_datas = pc_get_post_resum_img_datas( $post_id, $post_metas );
 	// icône +	
 	$ico_more = apply_filters( 'pc_filter_post_resum_ico_more', pc_svg('more-16') );
@@ -180,3 +181,32 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 
 
 /*=====  FIN Affichage  =====*/
+
+/*====================================
+=            Fake version            =
+====================================*/
+
+function pc_display_fake_post_resum( $nb, $css = '' ) {
+
+	$nb_fake_st = 0;	
+
+	switch ( $nb ) {	
+		case 1:	
+		case 4:	
+			$nb_fake_st = 2;	
+			break;	
+		case 2:	
+		case 3:	
+		case 5:	
+			$nb_fake_st = 1;	
+			break;	
+	}	
+
+	for ($i=0; $i < $nb_fake_st; $i++) { 	
+		echo '<div class="st st--fake '.$css.'" aria-hidden="true"></div>';	
+	}	
+
+}
+
+
+/*=====  FIN Fake version  =====*/

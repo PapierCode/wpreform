@@ -46,13 +46,13 @@ function pc_display_main_title_end() {
 
 function pc_display_main_content_start() {
 
-	echo '<div class="main-content">';
+	echo '<div class="main-content"><div class="main-content-inner">';
 
 }
 
 function pc_display_main_content_end() {
 
-	echo '</div>';
+	echo '</div></div>';
 
 }
 

@@ -51,7 +51,7 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Déclaration  ----------*/
 	
-	$metabox_resum_declaration = new PC_Add_Metabox( $metabox_resum_for, 'Résumé', 'page-metabox-resum', $metabox_resum_fields, 'normal', 'low' );
+	$metabox_resum_declaration = new PC_Add_Metabox( $metabox_resum_for, 'Résumé', 'page-metabox-resum', $metabox_resum_fields, 'normal', 'high' );
 
 
 } // FIN if class_exist();

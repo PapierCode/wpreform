@@ -38,10 +38,10 @@ $current_user_role = ( is_user_logged_in() ) ? wp_get_current_user()->roles[0] :
 /*----------  Custom posts & métaboxes  ----------*/
 
 // Metaboxes
+include 'include/custom-posts/custom-metabox_subpage.php';
 include 'include/custom-posts/custom-metabox_img.php';
 include 'include/custom-posts/custom-metabox_resum.php';
 include 'include/custom-posts/custom-metabox_seo-social.php';
-include 'include/custom-posts/custom-metabox_subpage.php';
 
 // accueil
 include 'include/custom-posts/custom_home.php';
@@ -65,6 +65,8 @@ include 'include/templates_commons/templates_layout.php';
 include 'include/templates_commons/templates_st.php';
 // contenu de l'entête (head)
 include 'include/templates_commons/templates_head.php';
+// image pleine page
+include 'include/templates_commons/templates_fullscreen.php';
 
 
 /*----------  Templates : spécifiques  ----------*/

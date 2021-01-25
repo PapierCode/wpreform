@@ -17,18 +17,19 @@
 
 function pc_get_html_css_class() {
 
-	$class = array();
-
 	// type de page
-	if ( is_home() ) { $class[] = 'is-home'; }
-	else if ( is_page() ) {	$class[] = 'is-page'; }
-	else if ( is_404() ) { $class[] = 'is-404'; }
+	if ( is_home() ) { $css_classes[] = 'is-home'; }
+	else if ( is_page() ) {	$css_classes[] = 'is-page'; }
+	else if ( is_404() ) { $css_classes[] = 'is-404'; }
+
+	// fullscreen
+	$css_classes = pc_fullscreen_edit_html_css_class( $css_classes );
 
 	// pour modifier
-	$class = apply_filters( 'pc_filter_html_css_class', $class );
+	$css_classes = apply_filters( 'pc_filter_html_css_class', $css_classes );
 
 	// retour
-	return implode( ' ', $class );
+	return implode( ' ', $css_classes );
 
 }
 

@@ -65,43 +65,25 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 		// pour les CSS, pair ou impair ?
 		$shortcuts_nb = ( count($home_shortcuts)%2 == 1 ) ? 'home-shortcuts--odd' : 'home-shortcuts--even';
 
-		echo '<ul class="home-shortcuts '.$shortcuts_nb.' reset-list">';
+		echo '<div class="home-shortcuts">';
+		echo '<ul class="home-shortcuts-list '.$shortcuts_nb.' reset-list">';
 			foreach ($home_shortcuts as $post_id => $new_post_title) {
+
+				// post métas
+				$post_metas = get_post_meta( $post_id );
 
 				// titre
 				$post_title = ( $new_post_title != '' ) ? $new_post_title : get_the_title( $post_id );
 				// lien
-				$post_url = get_the_permalink( $post_id );
-				
-				// image de la page ou image par défaut
-				$img_id = get_post_meta( $post_id, 'visual-id', true );
-
-				if ( $img_id != '' ) {
-
-					$img_datas['urls'] = array(
-						wp_get_attachment_image_src( $img_id, 'st-400' )[0],
-						wp_get_attachment_image_src( $img_id, 'st-500' )[0]
-					);
-					$img_datas['alt'] = get_post_meta( $img_id, '_wp_attachment_image_alt', true );
-					$img_datas = apply_filters( 'pc_filter_home_shortcut_img_datas', $img_datas, $post_id );
-
-				} else {
-
-					$img_datas['urls'] = pc_get_post_resum_img_default_datas();
-					$img_datas['alt'] = $post_title;
-
-				}
-
-				$img_srcset = $img_datas['urls'][0].' 400w, '.$img_datas['urls'][1].' 500w';
-				$img_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 500px, (min-width:760px) and (max-width:840px) 400px, (min-width:841px) 500px';
-				$img_tag = '<img src="'.$img_datas['urls'][1].'" alt="'.$img_datas['alt'].'" srcset="'.$img_srcset.'" sizes="'.$img_sizes.'" loading="lazy" />';
-
-
-				$img_tag = apply_filters( 'pc_filter_home_shortcut_img_tag', $img_tag, $post_id );
+				$post_url = get_the_permalink( $post_id );				
+				// image datas
+				$post_img_datas = pc_get_post_resum_img_datas( $post_id, $post_metas );
 
 				// affichage
 				echo '<li class="home-shortcut-item"><a title="'.$post_title.'" href="'.$post_url.'" class="home-shortcut-link">';
-					echo '<span class="home-shortcut-img">'.$img_tag.'</span>';
+					echo '<span class="home-shortcut-img">';
+						pc_display_post_resum_img_tag( $post_id, $post_img_datas );
+					echo '</span>';
 					echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($post_title),40).'</span>';
 					echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';
 				echo '</a></li>';
@@ -109,6 +91,7 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 
 			} // FIN foreach $home_shortcuts
 		echo '</ul>';
+		echo '</div>';
 
 	}
 
@@ -175,21 +158,3 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 
 
 /*=====  FIN Contenu  =====*/
-
-/*==========================================================
-=            Classes CSS en fonction du contenu            =
-==========================================================*/
-
-add_filter( 'pc_filter_html_css_class', 'pc_home_html_css_class' );
-		
-	function pc_home_html_css_class( $class ) {
-
-		global $settings_home;
-		if ( is_home() && isset($settings_home['content-pages']) && $settings_home['content-pages'] != '' ) { $class[] = 'is-home-with-shortcuts'; }
-
-		return $class;
-
-	}
-
-
-/*=====  FIN Classes CSS en fonction du contenu  =====*/

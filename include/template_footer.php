@@ -119,6 +119,11 @@ function pc_display_footer_nav() {
 	echo '<ul class="f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1 reset-list">';
 	
 		do_action( 'pc_footer_nav_list_inner_before' );
+
+		$display_copyright = apply_filters( 'pc_filter_footer_display_copyright', false );
+		if ( $display_copyright ) {
+			echo '<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; '.$settings_project['coord-name'].'</li>';
+		}
 		
 		$nav_footer_config = array(
 			'theme_location'  	=> 'nav-footer',
@@ -138,16 +143,6 @@ function pc_display_footer_nav() {
 	echo '</nav>';
 
 }
-
-add_action( 'pc_footer_nav_list_inner_before', 'pc_footer_display_copyright', 10 );
-
-	function pc_footer_display_copyright() {
-
-		global $settings_project;
-	
-		echo '<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; '.$settings_project['coord-name'].'</li>';
-
-	}
 
 
 /*----------  Fin du pied de page  ----------*/
@@ -197,7 +192,7 @@ function pc_display_js_footer() {
 	/*----------  Fichiers JS  ----------*/
 
 	$js_files = array(
-		'wpreform' => get_bloginfo('template_directory').'/scripts/scripts.jquery.min.js'
+		'wpreform' => get_bloginfo('template_directory').'/scripts/scripts-jquery.min.js'
 	);
 	$js_files = apply_filters( 'pc_filter_js_files', $js_files );
 	
