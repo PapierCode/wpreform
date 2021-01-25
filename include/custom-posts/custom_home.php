@@ -118,21 +118,21 @@ $home_pages_fields .= '</div>';
 
 $settings_home_fields = array(
     array(
-        'title'     => 'Présentation',
+        'title'     => 'Contenu',
         'id'        => 'content',
         'prefix'    => 'content',
         'fields'    => array(
             array(
                 'type'      => 'text',
                 'label_for' => 'title',
-                'label'     => 'Titre de la page',
+                'label'     => 'Titre',
                 'css'       => 'width:100%',
                 'required'  => true
             ),
             array(
                 'type'      => 'wysiwyg',
                 'label_for' => 'txt',
-                'label'     => 'Texte de présentation',
+                'label'     => 'Introduction',
                 'options'   => array(
                     'media_buttons' => false,
                     'textarea_rows' => 10,
