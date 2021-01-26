@@ -17,6 +17,8 @@
 
 function pc_get_html_css_class() {
 
+	$css_classes = array();
+
 	// type de page
 	if ( is_home() ) { $css_classes[] = 'is-home'; }
 	else if ( is_page() ) {	$css_classes[] = 'is-page'; }
