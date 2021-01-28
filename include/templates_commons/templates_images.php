@@ -91,7 +91,7 @@ add_filter( 'image_resize_dimensions', 'pc_image_resize_crop_upscale', 10, 6 );
  
 add_filter( 'post_gallery', 'pc_gallery_custom', 10, 3 );
 
-	function pc_gallery_custom( $output = '', $atts, $instance ) {
+	function pc_gallery_custom( $output, $atts, $instance ) {
 
 		// liste des images
 		$img_id_list = explode( ',' , $atts['ids'] );

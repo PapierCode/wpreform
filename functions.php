@@ -27,7 +27,9 @@ $texts_lengths = apply_filters( 'pc_filter_texts_lengths', $texts_lengths );
 /*----------  Configuration projet (client)  ----------*/
 
 include 'include/settings_project.php';
-$settings_project = apply_filters( 'pc_filter_settings_project', get_option('project-settings-option') );
+$settings_project = get_option('project-settings-option');
+$settings_project['page-content-from'] = array();
+$settings_project = apply_filters( 'pc_filter_settings_project', $settings_project );
 
 
 /*----------  Rôle utilisateur connecté  ----------*/
