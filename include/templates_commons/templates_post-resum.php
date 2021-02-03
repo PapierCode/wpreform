@@ -163,7 +163,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	
 	echo '<article class="st '.$post_css.'"><div class="st-inner">';
 
-		if ( 'inner' == $post_link_position ) { echo '<a href="'.$post_url.'">'; }
+		if ( 'inner' == $post_link_position ) { echo '<a href="'.$post_url.'" class="st-link">'; }
 
 			// filtre
 			do_action( 'pc_action_post_resum_after_start', $post_id );
@@ -174,7 +174,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 
 			echo '<h'.$post_title_level.' class="st-title">';
 				if ( 'title' == $post_link_position ) {
-					echo '<a href="'.$post_url.'">'.$post_title.'</a>';
+					echo '<a href="'.$post_url.'" class="st-link">'.$post_title.'</a>';
 				} else {
 					echo $post_title;
 				}
