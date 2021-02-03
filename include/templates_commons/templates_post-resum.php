@@ -153,27 +153,42 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 		)
 	);
 
+	/*----------  Position lien  ----------*/
+
+	// title || inner
+	$post_link_position = apply_filters( 'pc_filter_post_resum_link_postion', 'title' );	
+	
 
 	/*----------  Affichage  ----------*/
 	
 	echo '<article class="st '.$post_css.'"><div class="st-inner">';
 
-		// filtre
-		do_action( 'pc_action_post_resum_after_start', $post_id );
-	
-		echo '<figure class="st-figure">';
-			pc_display_post_resum_img_tag( $post_id, $post_img_datas );
-		echo '</figure>';
+		if ( 'inner' == $post_link_position ) { echo '<a href="'.$post_url.'">'; }
 
-		echo '<h'.$post_title_level.' class="st-title"><a href="'.$post_url.'">'.$post_title.'</a></h'.$post_title_level.'>';	
-
-		// filtre	
-		do_action( 'pc_action_post_resum_after_title', $post_id );
+			// filtre
+			do_action( 'pc_action_post_resum_after_start', $post_id );
 		
-		echo '<p class="st-desc">'.$post_desc.'... <span>'.$ico_more.'</span></p>';
-	
-		// filtre
-		do_action( 'pc_action_post_resum_before_end', $post_id );
+			echo '<figure class="st-figure">';
+				pc_display_post_resum_img_tag( $post_id, $post_img_datas );
+			echo '</figure>';
+
+			echo '<h'.$post_title_level.' class="st-title">';
+				if ( 'title' == $post_link_position ) {
+					echo '<a href="'.$post_url.'">'.$post_title.'</a>';
+				} else {
+					echo $post_title;
+				}
+			echo '</h'.$post_title_level.'>';	
+
+			// filtre	
+			do_action( 'pc_action_post_resum_after_title', $post_id );
+			
+			echo '<p class="st-desc">'.$post_desc.'... <span>'.$ico_more.'</span></p>';
+		
+			// filtre
+			do_action( 'pc_action_post_resum_before_end', $post_id );
+
+		if ( 'inner' == $post_link_position ) { echo '</a>'; }
 	
 	echo '</div></article>';
 	

@@ -64,7 +64,7 @@ include 'include/templates_commons/templates_social.php';
 // layout global
 include 'include/templates_commons/templates_layout.php';
 // article résumé
-include 'include/templates_commons/templates_st.php';
+include 'include/templates_commons/templates_post-resum.php';
 // contenu de l'entête (head)
 include 'include/templates_commons/templates_head.php';
 // image pleine page
