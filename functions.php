@@ -98,6 +98,12 @@ include 'include/custom-admin/custom-admin.php';
 // include 'include/search.php';
 
 
+/*----------  Nouveau site  ----------*/
+
+include 'include/theme-setup/theme-setup.php';
+
+
+
 /*----------  Expérimentations  ----------*/
 
 // include 'include/_temp.php'

@@ -1,32 +1,11 @@
 <?php
 /**
 *
-** Création des menus
 ** Customisation menu 
 ** Item parent actif si page enfatn affichée
 *
 **/
 
-
-/*==========================================
-=            Création des menus            =
-==========================================*/
-
-add_action( 'init', 'pc_register_nav_menus' );
-
-	function pc_register_nav_menus() {
-
-		register_nav_menus(
-			array(
-				'nav-header'	=> 'Entête',
-				'nav-footer'	=> 'Pied de page'
-			)
-		);
-
-	}
-
-
-/*=====  End of Création des menus  ======*/
 
 /*==========================================
 =            Customisation menu            =
