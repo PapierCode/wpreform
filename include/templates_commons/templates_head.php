@@ -130,9 +130,9 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 
 			/*----------  Affichage métas  ----------*/
 
-			echo '<title>'.$meta_title.'</title>'.PHP_EOL;
+			echo '<title>'.$meta_title.'</title>';
 			
-			$post_metasDatas = array(
+			$head_metas_datas = array(
 				array( 'name',	'description', $meta_description ),
 				array( 'property', 'og:url', $url ),
 				array( 'property', 'og:type', 'article' ),
@@ -148,8 +148,8 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 				array( 'name', 'twitter:image', $img_to_share )
 			);
 			
-			foreach ( $post_metasDatas as $meta ) {
-				echo '<meta '.$meta[0].'="'.$meta[1].'" content="'.$meta[2].'" />'.PHP_EOL;
+			foreach ( $head_metas_datas as $meta ) {
+				echo '<meta '.$meta[0].'="'.$meta[1].'" content="'.$meta[2].'" />';
 			}
 
 

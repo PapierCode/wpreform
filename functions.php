@@ -98,9 +98,13 @@ include 'include/custom-admin/custom-admin.php';
 // include 'include/search.php';
 
 
-/*----------  Nouveau site  ----------*/
+/*----------  Setup thème  ----------*/
 
-include 'include/theme-setup/theme-setup.php';
+// $is_fresh_site = get_option('fresh_site');
+// if ( $is_fresh_site ) {
+// 	include 'include/theme-setup/theme-setup_pages.php';
+// }
+// include 'include/theme-setup/theme-setup.php';
 
 
 

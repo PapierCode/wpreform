@@ -1,17 +1,11 @@
 <!doctype html>
-
 <html class="<?= pc_get_html_css_class();  ?>" lang="fr">
-
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-
 	<?php wp_head(); ?>
-
 </head>
-
 <body>
-
 	<ul class="skip-nav no-print"><?php
 
 		if( !is_home() ) { 
@@ -30,7 +24,6 @@
 		}
 		
 	?></ul>
-
 	<?php
 
 	do_action( 'pc_body_start' );

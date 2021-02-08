@@ -27,14 +27,13 @@ add_action( 'after_setup_theme', 'pc_preform_after_setup_theme', );
 		=            Création des contenus            =
 		=============================================*/
 
-		/*
-		if ( get_option('fresh_site') ) {
+		global $is_fresh_site;
+		if ( $is_fresh_site ) {
 
 			// location => id
 			$nav_ids = array();
 
-
-			// menus
+			/*----------  Menus  ----------*/			
 
 			foreach ( $nav_locations as $location => $name ) {
 			
@@ -53,9 +52,8 @@ add_action( 'after_setup_theme', 'pc_preform_after_setup_theme', );
 			}
 			
 
-			// pages
+			/*----------  Pages  ----------*/		
 
-			include get_template_directory().'\include\theme-setup\theme-setup_pages.php';
 			global $theme_setup_pages;
 
 			foreach ( $theme_setup_pages as $args ) {
@@ -82,7 +80,7 @@ add_action( 'after_setup_theme', 'pc_preform_after_setup_theme', );
 			
 
 		} // FIN if get_option('fresh_site')
-		*/		
+			
 		
 		/*=====  FIN Création des contenus  =====*/
 
