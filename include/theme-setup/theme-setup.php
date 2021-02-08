@@ -5,6 +5,7 @@
  * 
  */
 
+
 add_action( 'after_setup_theme', 'pc_preform_after_setup_theme', );
 
 	function pc_preform_after_setup_theme() {
