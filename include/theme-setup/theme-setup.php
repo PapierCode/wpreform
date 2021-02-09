@@ -14,10 +14,10 @@ add_action( 'after_setup_theme', 'pc_preform_after_setup_theme', );
 		=            Emplacements de navigations            =
 		===================================================*/
 		
-		$nav_locations = array( 
+		$nav_locations = apply_filters( 'pc_filter_nav_locations', array( 
 			'nav-header' => 'Entête',
 			'nav-footer' => 'Pied de page'
-		);
+		) );
 
 		register_nav_menus( $nav_locations );		
 		
