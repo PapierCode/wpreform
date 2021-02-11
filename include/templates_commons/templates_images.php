@@ -14,21 +14,13 @@
 =            Tailles            =
 ===============================*/
 
-// add_action( 'after_switch_theme', 'pc_define_default_img_sizes' );
+/*----------  Suppression  ----------*/
 
-// function pc_define_default_img_sizes() {
+remove_image_size('1536x1536');
+remove_image_size('2048x2048');
 
-//     update_option( 'thumbnail_crop', 0 );
-//     update_option( 'thumbnail_size_h', 150 );
-//     update_option( 'thumbnail_size_w', 150 );
-//     update_option( 'medium_size_h', 150 );
-//     update_option( 'medium_size_w', 150 );
-//     update_option( 'medium_large_size_h', 150 );
-//     update_option( 'medium_large_size_w', 150 );
-//     update_option( 'large_size_h', 150 );
-//     update_option( 'large_size_w', 150 );
 
-// }
+/*----------  Ajouts  ----------*/
     
 $images_project_sizes = array(
 	
@@ -63,7 +55,9 @@ foreach ( $images_project_sizes as $size => $datas ) {
     add_image_size( $size, $datas['width'], $datas['height'], $datas['crop'] );
 }
 
-// si l'image recadrée est trop petite, faut tirer dessus
+
+/*----------  Recadrage forcé  ----------*/
+
 add_filter( 'image_resize_dimensions', 'pc_image_resize_crop_upscale', 10, 6 );
 
     function pc_image_resize_crop_upscale( $default, $orig_w, $orig_h, $new_w, $new_h, $crop ){
