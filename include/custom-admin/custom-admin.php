@@ -107,9 +107,10 @@ add_filter( 'display_post_states', 'pc_display_page_states', 99, 2 );
 
                 // contenu supplémentaire
                 $content_from = get_post_meta( $post->ID, 'content-from', true );
-                foreach ( $settings_project['page-content-from'] as $id => $datas ) {
-                    if ( $content_from == $id ) { $states[] = $datas[0]; }
-                }
+
+				foreach ( $settings_project['page-content-from'] as $id => $datas ) {
+					if ( $content_from == $id ) { $states[] = $datas[0]; }
+				}
 
 			}
 		
@@ -151,11 +152,11 @@ add_filter( 'manage_page_posts_columns', 'pc_admin_list_column_img' );
 
 add_action( 'manage_page_posts_custom_column', 'pc_admin_list_column_img_content', 10, 2);
 
-    function pc_admin_list_column_img_content( $column, $postId ) {
+    function pc_admin_list_column_img_content( $column, $post_id ) {
 
         if ( 'thumb' === $column ) {
             
-            $img_id = get_post_meta( $postId,'visual-id',true );
+            $img_id = get_post_meta( $post_id,'visual-id',true );
             if ( $img_id != '' ) {
                 echo pc_get_img( $img_id, 'share' );
             } else {

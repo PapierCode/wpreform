@@ -101,8 +101,6 @@ function pc_display_specific_content( $post, $post_metas ) {
 				$sub_pages_schema['mainEntity']['itemListElement'][] = $post_resum_schema;
 			}
 
-			pc_display_fake_post_resum( count($sub_pages_ids), 'st--subpage' );
-
 			// affichage des données structurées
 			echo '<script type="application/ld+json">'.json_encode( $sub_pages_schema, JSON_UNESCAPED_SLASHES ).'</script>';
 
