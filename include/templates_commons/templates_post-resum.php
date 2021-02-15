@@ -122,7 +122,7 @@ function pc_display_post_resum_img_tag( $post_id, $post_img_datas ) {
 =            Affichage            =
 =================================*/
 
-function get_post_resum_link_tag_start( $class, $href, $title ) {
+function pc_get_post_resum_link_tag_start( $class, $href, $title ) {
 
 	return '<a href="'.$href.'" class="'.$class.'" title="Lire la suite de l\'article '.$title.'">';
 
@@ -167,7 +167,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	
 	echo '<article class="st '.$post_css.'"><div class="st-inner">';
 
-		if ( 'global' == $post_link_position ) { echo get_post_resum_link_tag_start( 'st-link', $post_link, $post_title ); }
+		if ( 'global' == $post_link_position ) { echo pc_get_post_resum_link_tag_start( 'st-link', $post_link, $post_title ); }
 
 			// filtre
 			do_action( 'pc_action_post_resum_after_start', $post_id );
@@ -178,7 +178,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 
 			echo '<h'.$post_title_level.' class="st-title">';
 				if ( 'multiple' == $post_link_position ) {
-					echo get_post_resum_link_tag_start( 'st-title-link', $post_link, $post_title ).$post_title.'</a>';
+					echo pc_get_post_resum_link_tag_start( 'st-title-link', $post_link, $post_title ).$post_title.'</a>';
 				} else {
 					echo $post_title;
 				}
@@ -192,7 +192,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 			echo '</p>';
 			
 			if ( 'multiple' == $post_link_position ) {
-				echo get_post_resum_link_tag_start( 'st-read-more', $post_link, $post_title ).'<span class="st-read-more-ico">'.$post_ico_more.'</span> <span class="st-read-more-txt">Lire la suite</span><span class="visually-hidden"> de l\'article '.$post_title.'</span></a>';
+				echo pc_get_post_resum_link_tag_start( 'st-read-more', $post_link, $post_title ).'<span class="st-read-more-ico">'.$post_ico_more.'</span> <span class="st-read-more-txt">Lire la suite</span><span class="visually-hidden"> de l\'article '.$post_title.'</span></a>';
 			} else {
 				echo '<span class="st-ico">'.$post_ico_more.'</span>';
 			}
