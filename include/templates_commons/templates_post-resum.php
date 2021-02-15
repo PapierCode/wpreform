@@ -189,7 +189,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 			
 			echo '<p class="st-desc">'.$post_desc.' ';
 				if ( 'multiple' == $post_link_position ) {
-					echo '<span>'.$post_link_tag_start.$ico_more.'</span><span class="visually-hidden">Lire la suite</span></a>';
+					echo $post_link_tag_start.'<span>'.$ico_more.'</span><span class="visually-hidden">Lire la suite</span></a>';
 				} else {
 					echo '<span>'.$ico_more.'</span>';
 				}	
