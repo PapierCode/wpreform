@@ -27,13 +27,15 @@ add_filter( 'excerpt_more', function() { return ''; }, 999 );
 
 function pc_get_page_excerpt( $post_id, $post_metas, $seo_for = false ) {
 
+	global $texts_lengths;
+
 	if ( $seo_for && isset( $post_metas['seo-desc'] ) && $post_metas['seo-desc'][0] != '' ) {
 
-		$post_excerpt = $post_metas['seo-desc'][0];
+		$post_excerpt = pc_words_limit( $post_metas['seo-desc'][0], $texts_lengths['resum-desc'] );
 
 	} else if ( isset( $post_metas['resum-desc'] ) && $post_metas['resum-desc'][0] != '' ) {
 
-		$post_excerpt = $post_metas['resum-desc'][0];
+		$post_excerpt = pc_words_limit( $post_metas['resum-desc'][0], $texts_lengths['resum-desc'] );
 
 	} else {
 
@@ -127,7 +129,9 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	// titre
 	$post_title = (isset($post_metas['resum-title'])) ? $post_metas['resum-title'][0] : get_the_title($post_id);
 	// lien
-	$post_url = get_the_permalink($post_id);
+	$post_link = get_the_permalink($post_id);
+	$post_link_tag_start = '<a href="'.$post_link.'" title="Lire la suite de l\'article '.$post_title.'">';
+	$post_link_position = apply_filters( 'pc_filter_post_resum_link_postion', 'multiple' ); // multiple || global	
 	// image datas
 	$post_img_datas = pc_get_post_resum_img_datas( $post_id, $post_metas );
 	// icône +	
@@ -144,7 +148,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 		'@type' => 'ListItem',
 		'name' => $post_title,
 		'description' => $post_desc,
-		'url' => $post_url,
+		'url' => $post_link,
 		'image' => array(
 			'@type'		=>'ImageObject',
 			'url' 		=> $post_img_datas['urls'][2],
@@ -153,28 +157,28 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 		)
 	);
 
-	/*----------  Position lien  ----------*/
-
-	// title || inner
-	$post_link_position = apply_filters( 'pc_filter_post_resum_link_postion', 'title' );	
-	
-
 	/*----------  Affichage  ----------*/
 	
 	echo '<article class="st '.$post_css.'"><div class="st-inner">';
 
-		if ( 'inner' == $post_link_position ) { echo '<a href="'.$post_url.'" class="st-link">'; }
+		if ( 'global' == $post_link_position ) { echo $post_link_tag_start; }
 
 			// filtre
 			do_action( 'pc_action_post_resum_after_start', $post_id );
 		
 			echo '<figure class="st-figure">';
-				pc_display_post_resum_img_tag( $post_id, $post_img_datas );
+				if ( 'multiple' == $post_link_position ) {
+					echo $post_link_tag_start;
+						pc_display_post_resum_img_tag( $post_id, $post_img_datas );
+					echo '</a>';
+				} else {
+					pc_display_post_resum_img_tag( $post_id, $post_img_datas );
+				}				
 			echo '</figure>';
 
 			echo '<h'.$post_title_level.' class="st-title">';
-				if ( 'title' == $post_link_position ) {
-					echo '<a href="'.$post_url.'" class="st-link">'.$post_title.'</a>';
+				if ( 'multiple' == $post_link_position ) {
+					echo $post_link_tag_start.$post_title.'</a>';
 				} else {
 					echo $post_title;
 				}
@@ -183,12 +187,18 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 			// filtre	
 			do_action( 'pc_action_post_resum_after_title', $post_id );
 			
-			echo '<p class="st-desc">'.$post_desc.'... <span>'.$ico_more.'</span></p>';
+			echo '<p class="st-desc">'.$post_desc.' ';
+				if ( 'multiple' == $post_link_position ) {
+					echo '<span>'.$post_link_tag_start.$ico_more.'</span><span class="visually-hidden">Lire la suite</span></a>';
+				} else {
+					echo '<span>'.$ico_more.'</span>';
+				}	
+			echo '</p>';
 		
 			// filtre
 			do_action( 'pc_action_post_resum_before_end', $post_id );
 
-		if ( 'inner' == $post_link_position ) { echo '</a>'; }
+		if ( 'global' == $post_link_position ) { echo '</a>'; }
 	
 	echo '</div></article>';
 	
