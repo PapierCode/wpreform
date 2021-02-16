@@ -21,6 +21,7 @@ add_action( 'pc_page_wysiwyg_before', 'pc_display_main_content_start', 10 ); // 
 add_action( 'pc_page_wysiwyg_after', 'pc_display_st_list_start', 20, 2 ); // début container st
 add_action( 'pc_page_wysiwyg_after', 'pc_display_specific_content', 30, 2 ); // contenu supplémentaire
 add_action( 'pc_page_wysiwyg_after', 'pc_display_st_list_end', 40, 2 ); // fin container st
+add_action( 'pc_page_wysiwyg_after', 'pc_display_sub_pages_schema_collection_page', 50, 2 ); // données structurées
 add_action( 'pc_page_wysiwyg_after', 'pc_display_main_content_end', 100 ); // layout commun -> templates_layout.php
 
 add_action( 'pc_page_content_footer', 'pc_display_main_footer_start', 10 ); // layout commun -> templates_layout.php
@@ -79,30 +80,12 @@ function pc_display_specific_content( $post, $post_metas ) {
 
 		} else if ( isset($post_metas['content-subpages']) ) {
 
-			// liste
-			$sub_pages_ids = explode( ',', $post_metas['content-subpages'][0] );
-			// données structurées
-			$sub_pages_schema = array(
-				'@context' => 'http://schema.org/',
-				'@type'=> 'CollectionPage',
-				'mainEntity' => array(
-					'@type' => 'ItemList',
-					'itemListElement' => array()
-				),
-				'isPartOf' => pc_get_schema_article( $post, $post_metas, $sub_pages_ids )
-			);
-
 			// affichage des résumés de pages
+			$sub_pages_ids = explode( ',', $post_metas['content-subpages'][0] );
+			
 			foreach ( $sub_pages_ids as $key => $post_id ) {
 				pc_display_post_resum( $post_id, 'st--subpage', 2 );
-				// données structurées
-				global $post_resum_schema;
-				$post_resum_schema['position'] = $key + 1;
-				$sub_pages_schema['mainEntity']['itemListElement'][] = $post_resum_schema;
 			}
-
-			// affichage des données structurées
-			echo '<script type="application/ld+json">'.json_encode( $sub_pages_schema, JSON_UNESCAPED_SLASHES ).'</script>';
 
 		}
 
@@ -113,7 +96,38 @@ function pc_display_specific_content( $post, $post_metas ) {
 function pc_display_st_list_end( $post, $post_metas ) {
 
 	if ( !post_password_required() && isset( $post_metas['content-subpages'] ) ) {
+		
 		echo '</div>';
+
+	}
+
+}
+
+function pc_display_sub_pages_schema_collection_page( $post, $post_metas ) {
+
+	if ( !post_password_required() && isset( $post_metas['content-subpages'] ) ) {
+
+		// liste
+		$sub_pages_ids = explode( ',', $post_metas['content-subpages'][0] );
+		// global
+		$sub_pages_schema = array(
+			'@context' => 'http://schema.org/',
+			'@type'=> 'CollectionPage',
+			'mainEntity' => array(
+				'@type' => 'ItemList',
+				'itemListElement' => array()
+			),
+			'isPartOf' => pc_get_schema_article( $post, $post_metas, $sub_pages_ids )
+		);
+		// ajout articles
+		foreach ( $sub_pages_ids as $key => $post_id ) {
+			global $post_resum_schema;
+			$post_resum_schema['position'] = $key + 1;
+			$sub_pages_schema['mainEntity']['itemListElement'][] = $post_resum_schema;
+		}
+		// affichage
+		echo '<script type="application/ld+json">'.json_encode( $sub_pages_schema, JSON_UNESCAPED_SLASHES ).'</script>';
+
 	}
 
 }

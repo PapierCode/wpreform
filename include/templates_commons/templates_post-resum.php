@@ -192,7 +192,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 			echo '</p>';
 			
 			if ( 'multiple' == $post_link_position ) {
-				echo pc_get_post_resum_link_tag_start( 'st-read-more', $post_link, $post_title ).'<span class="st-read-more-ico">'.$post_ico_more.'</span> <span class="st-read-more-txt">Lire la suite</span><span class="visually-hidden"> de l\'article '.$post_title.'</span></a>';
+				echo pc_get_post_resum_link_tag_start( 'st-read-more button', $post_link, $post_title ).'<span class="st-read-more-ico">'.$post_ico_more.'</span> <span class="st-read-more-txt">Lire la suite</span><span class="visually-hidden"> de l\'article '.$post_title.'</span></a>';
 			} else {
 				echo '<span class="st-ico">'.$post_ico_more.'</span>';
 			}
