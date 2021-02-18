@@ -42,6 +42,35 @@ function pc_get_html_css_class() {
 =            Metas SEO & social, CSS inline            =
 ======================================================*/
 
+function pc_get_post_seo_metas( $post_seo_metas, $post_id, $post_metas ) {
+
+	// titre
+	if ( isset( $post_metas['seo-title'] ) && '' != $post_metas['seo-title'][0] ) {
+		
+		$post_seo_metas['title'] = $post_metas['seo-title'][0];
+
+	} else if ( isset( $post_metas['resum-title'] ) && '' != $post_metas['resum-title'][0] ) {
+
+		$post_seo_metas['title'] = $post_metas['resum-title'][0];
+
+	} else {
+
+		$post_seo_metas['title'] = get_the_title($post_id);
+
+	}
+
+	// description
+	$post_seo_metas['description'] = pc_get_page_excerpt( $post_id, $post_metas, true );
+
+	// visuel
+	if ( isset( $post_metas['visual-id'] ) && is_object( get_post( $post_metas['visual-id'][0] ) ) ) {
+		$post_seo_metas['img'] = wp_get_attachment_image_src($datas['visual-id'][0],'share')[0];
+	}
+
+	return $post_seo_metas;
+
+}
+
 add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 
 	function pc_metas_seo_and_social() {
@@ -51,63 +80,58 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 		global $texts_lengths; // limites de textes
 
 		// réutilisable
-		global $meta_title, $meta_description, $img_to_share;
+		global $seo_metas;
 
 		// url de la page en cours
 		$url = 'https://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
 		
 		// défaut
-		$img_to_share		= pc_get_img_default_to_share()[0];
-		$meta_title 		= $settings_project['coord-name'];
-		$meta_description 	= $settings_project['micro-desc'];
+		$seo_metas = array(
+			'title' => $settings_project['coord-name'],
+			'description' => $settings_project['micro-desc'],
+			'img' => pc_get_img_default_to_share()[0]
+		);
 		
-		$post_metas		 	= '';
-		$css_custom 		= '';
+		$css_custom = '';
 
 
 		/*============================================
 		=            Accueil / Page / 404            =
 		============================================*/
 
-			if ( is_home() ) {
+		if ( is_home() ) {
 
-				// contenu home
-				$post_metas = get_option('home-settings-option');
+			// contenu home
+			$home_metas = get_option('home-settings-option');
 
-				// titre
-				$meta_title = ( isset( $post_metas['seo-title'] ) && $post_metas['seo-title'] != '' ) ? $post_metas['seo-title'] : $post_metas['content-title'];
+			// titre
+			$seo_metas['title'] = ( isset( $home_metas['seo-title'] ) && $home_metas['seo-title'] != '' ) ? $home_metas['seo-title'] : $home_metas['content-title'];
 
-				// description
-				$meta_description = ( isset( $post_metas['seo-desc'] ) && $post_metas['seo-desc'] != '' ) ? $post_metas['seo-desc'] : wp_trim_words( $post_metas['content-txt'], $texts_lengths['excerpt'], '...' );
+			// description
+			$seo_metas['description'] = ( isset( $home_metas['seo-desc'] ) && $home_metas['seo-desc'] != '' ) ? $home_metas['seo-desc'] : wp_trim_words( $home_metas['content-txt'], $texts_lengths['excerpt'], '...' );
 
-				// visuel
-				if ( isset($datas['visual-id']) && $datas['visual-id'] != '' ) {
-					$img_to_share = wp_get_attachment_image_src($datas['visual-id'],'share')[0];
-				}
-
-			} elseif ( is_page() ) {
-
-				$post_id = get_the_id();
-				$post_metas = get_post_meta( $post_id );
-
-				// titre
-				$meta_title = ( isset( $post_metas['seo-title'] ) ) ? $post_metas['seo-title'][0] : get_the_title($post_id);
-
-				// description
-				$meta_description = pc_get_page_excerpt( $post_id, $post_metas, true );
-
-				// visuel
-				if ( isset( $datas['visual-id'] ) ) {
-					$img_to_share = wp_get_attachment_image_src($datas['visual-id'][0],'share')[0];
-				}
-
-			} elseif ( is_404() ) {
-
-				// metas title & description
-				$meta_title = 'Page non trouvée - '.$settings_project['coord-name'];
-				$meta_description = 'Désolé, cette page n\'existe pas ou a été supprimée.';
-				
+			// visuel
+			if ( isset( $home_metas['visual-id'] ) && $home_metas['visual-id'] != '' && is_object( get_post( $home_metas['visual-id'] ) ) ) {
+				$seo_metas['img'] = wp_get_attachment_image_src($home_metas['visual-id'],'share')[0];
 			}
+
+
+		} elseif ( is_page() ) {
+
+			$post_id = get_the_id();
+			$post_metas = get_post_meta( $post_id );
+
+			// metas title & description
+			$seo_metas = pc_get_post_seo_metas( $seo_metas, $post_id, $post_metas );
+
+
+		} elseif ( is_404() ) {
+
+			// metas title & description
+			$seo_metas['title'] = 'Page non trouvée - '.$settings_project['coord-name'];
+			$seo_metas['description'] = 'Désolé, cette page n\'existe pas ou a été supprimée.';
+			
+		}
 
 
 		/*=====  FIN Accueil / Page / 404  =====*/
@@ -116,10 +140,8 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 		=            Filtres            =
 		===============================*/
 			
-			$meta_title = apply_filters( 'pc_filter_meta_title', $meta_title, $post_metas );
-			$meta_description = apply_filters( 'pc_filter_meta_description', $meta_description, $post_metas );
-			$img_to_share = apply_filters( 'pc_filter_img_to_share', $img_to_share, $post_metas );
-			$css_custom = apply_filters( 'pc_filter_css_custom', $css_custom, $post_metas );
+		$seo_metas = apply_filters( 'pc_filter_seo_metas', $seo_metas );
+		$css_custom = apply_filters( 'pc_filter_css_custom', $css_custom );
 		
 		
 		/*=====  FIN Filtres  =====*/
@@ -130,22 +152,22 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 
 			/*----------  Affichage métas  ----------*/
 
-			echo '<title>'.$meta_title.'</title>';
+			echo '<title>'.$seo_metas['title'].'</title>';
 			
 			$head_metas_datas = array(
-				array( 'name',	'description', $meta_description ),
+				array( 'name',	'description', $seo_metas['description'] ),
 				array( 'property', 'og:url', $url ),
 				array( 'property', 'og:type', 'article' ),
-				array( 'property', 'og:title', $meta_title ),
-				array( 'property', 'og:description', $meta_description ),
-				array( 'property', 'og:image', $img_to_share ),
+				array( 'property', 'og:title',$seo_metas['title'] ),
+				array( 'property', 'og:description', $seo_metas['description'] ),
+				array( 'property', 'og:image', $seo_metas['img'] ),
 				array( 'property', 'og:image:width', $images_project_sizes['share']['width'] ),
 				array( 'property', 'og:image:height', $images_project_sizes['share']['height'] ),
 				array( 'name', 'twitter:card', 'summary' ),
 				array( 'name', 'twitter:url', $url ),
-				array( 'name', 'twitter:title', $meta_title ),
-				array( 'name', 'twitter:description', $meta_description ),
-				array( 'name', 'twitter:image', $img_to_share )
+				array( 'name', 'twitter:title', $seo_metas['title'] ),
+				array( 'name', 'twitter:description', $seo_metas['description'] ),
+				array( 'name', 'twitter:image', $seo_metas['img'] )
 			);
 			
 			foreach ( $head_metas_datas as $meta ) {

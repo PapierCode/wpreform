@@ -31,7 +31,7 @@ function pc_get_page_excerpt( $post_id, $post_metas, $seo_for = false ) {
 
 	if ( $seo_for && isset( $post_metas['seo-desc'] ) && $post_metas['seo-desc'][0] != '' ) {
 
-		$post_excerpt = pc_words_limit( $post_metas['seo-desc'][0], $texts_lengths['resum-desc'] );
+		$post_excerpt = pc_words_limit( $post_metas['seo-desc'][0], $texts_lengths['seo-desc'] );
 
 	} else if ( isset( $post_metas['resum-desc'] ) && $post_metas['resum-desc'][0] != '' ) {
 

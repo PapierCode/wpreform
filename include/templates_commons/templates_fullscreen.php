@@ -135,9 +135,9 @@ add_action( 'pc_page_content_before', 'pc_fullscreen_add_btn_scroll_to_content',
 =            CSS inline            =
 ==================================*/
 
-add_filter( 'pc_filter_css_custom', 'pc_fullscreen_add_inline_css', 10, 2 );
+add_filter( 'pc_filter_css_custom', 'pc_fullscreen_add_inline_css', 10 );
 
-	function pc_fullscreen_add_inline_css( $css_custom, $post_metas ) {
+	function pc_fullscreen_add_inline_css( $css_custom ) {
 
 		global $is_fullscreen;
 

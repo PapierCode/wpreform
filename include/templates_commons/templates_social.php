@@ -47,7 +47,7 @@ function pc_display_social_links( $css_class ) {
 function pc_display_share_links() {
 
     $share_url = 'https://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-    global $meta_title, $meta_description; // cf. pc_metas_seo_and_social()
+    global $seo_metas; // cf. pc_metas_seo_and_social()
 
     ?>
 
@@ -67,7 +67,7 @@ function pc_display_share_links() {
                 </a>
             </li>
             <li class="social-item">
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= urlencode($share_url); ?>&title=<?= str_replace(' ', '%20', $meta_title); ?>&summary=<?= str_replace(' ', '%20', $meta_description); ?>" target="_blank" class="social-link social-link--linkedin" rel="nofollow noreferrer" title="Partager sur LinkedIn (nouvelle fenêtre)">
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= urlencode($share_url); ?>&title=<?= str_replace(' ', '%20', $seo_metas['title']); ?>&summary=<?= str_replace(' ', '%20', $seo_metas['description']); ?>" target="_blank" class="social-link social-link--linkedin" rel="nofollow noreferrer" title="Partager sur LinkedIn (nouvelle fenêtre)">
                 <span class="visually-hidden">LinkedIn</span>
                 <?php echo pc_svg('linkedin'); ?>
                 </a>
