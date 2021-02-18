@@ -64,7 +64,7 @@ function pc_get_post_seo_metas( $post_seo_metas, $post_id, $post_metas ) {
 
 	// visuel
 	if ( isset( $post_metas['visual-id'] ) && is_object( get_post( $post_metas['visual-id'][0] ) ) ) {
-		$post_seo_metas['img'] = wp_get_attachment_image_src($datas['visual-id'][0],'share')[0];
+		$post_seo_metas['img'] = wp_get_attachment_image_src($post_metas['visual-id'][0],'share')[0];
 	}
 
 	return $post_seo_metas;
