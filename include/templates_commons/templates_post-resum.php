@@ -85,13 +85,11 @@ function pc_get_post_resum_img_datas( $post_id, $post_metas ) {
 			wp_get_attachment_image_src( $img_post->ID,'st-400' )[0],
 			wp_get_attachment_image_src( $img_post->ID,'st-500' )[0],
 			wp_get_attachment_image_src( $img_post->ID,'st-700' )[0]
-		);
-		$post_img_datas['alt'] = get_post_meta( $img_post->ID, '_wp_attachment_image_alt', true );	
+		);	
 
 	} else {
 
 		$post_img_datas['urls'] = pc_get_post_resum_img_default_datas();
-		$post_img_datas['alt'] = '';
 
 	}
 
@@ -108,7 +106,7 @@ function pc_display_post_resum_img_tag( $post_id, $post_img_datas ) {
 	$post_img_tag_srcset = $post_img_datas['urls'][0].' 400w, '.$post_img_datas['urls'][1].' 500w, '.$post_img_datas['urls'][2].' 700w';
 	$post_img_tag_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 700px, (min-width:760px) 500px';
 
-	$post_img_tag = '<img src="'.$post_img_datas['urls'][2].'" alt="'.$post_img_datas['alt'].'" srcset="'.$post_img_tag_srcset.'" sizes="'.$post_img_tag_sizes.'" loading="lazy" />';
+	$post_img_tag = '<img src="'.$post_img_datas['urls'][2].'" alt="" srcset="'.$post_img_tag_srcset.'" sizes="'.$post_img_tag_sizes.'" loading="lazy" />';
 
 	$post_img_tag = apply_filters( 'pc_filter_post_resum_img_tag', $post_img_tag, $post_id );
 	echo $post_img_tag;
@@ -165,16 +163,16 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 
 	/*----------  Affichage  ----------*/
 	
-	echo '<article class="st '.$post_css.'"><div class="st-inner">';
+	echo '<li class="st '.$post_css.'"><article class="st-inner">';
 
 		if ( 'global' == $post_link_position ) { echo pc_get_post_resum_link_tag_start( 'st-link', $post_link, $post_title ); }
 
 			// filtre
 			do_action( 'pc_action_post_resum_after_start', $post_id );
 		
-			echo '<figure class="st-figure">';
+			echo '<div class="st-figure">';
 				pc_display_post_resum_img_tag( $post_id, $post_img_datas );				
-			echo '</figure>';
+			echo '</div>';
 
 			echo '<h'.$post_title_level.' class="st-title">';
 				if ( 'multiple' == $post_link_position ) {
@@ -202,7 +200,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 
 		if ( 'global' == $post_link_position ) { echo '</a>'; }
 	
-	echo '</div></article>';
+	echo '</article></li>';
 	
 };
 

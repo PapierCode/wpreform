@@ -59,7 +59,7 @@ function pc_display_schema_post( $post, $post_metas ) {
 function pc_display_st_list_start( $post, $post_metas ) {
 
 	if ( !post_password_required() && isset( $post_metas['content-subpages'] ) ) {
-		echo '<div class="st-list">';
+		echo '<ul class="st-list reset-list">';
 	}
 
 }
@@ -97,7 +97,7 @@ function pc_display_st_list_end( $post, $post_metas ) {
 
 	if ( !post_password_required() && isset( $post_metas['content-subpages'] ) ) {
 		
-		echo '</div>';
+		echo '</ul>';
 
 	}
 
