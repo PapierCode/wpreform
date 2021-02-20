@@ -21,21 +21,17 @@ add_action( 'wp', 'pc_fullscreen_init' );
 
 		if ( isset($settings_pc['wpreform-fullscreen']) ) {
 
-			if ( is_home() || is_singular() ) {
+			if ( is_home() ) {
 
-				if ( is_home() ) {
+				global $settings_home;
+				$is_fullscreen = $settings_home;
 
-					global $settings_home;
-					$is_fullscreen = $settings_home;
+			} else if ( is_singular() ) {
 
-				} else if ( is_singular() ) {
-
-					$post_id = get_the_id();
-					$is_fullscreen = get_post_meta( $post_id );
-					foreach ($is_fullscreen as $key => $value) {
-						$is_fullscreen[$key] = implode('', $is_fullscreen[$key] );
-					}
-
+				$post_id = get_the_ID();
+				$is_fullscreen = get_post_meta( $post_id );
+				foreach ($is_fullscreen as $key => $value) {
+					$is_fullscreen[$key] = implode('', $is_fullscreen[$key] );
 				}
 
 			}
@@ -88,9 +84,9 @@ function pc_fullscreen_edit_html_css_class( $css_classes ) {
 =            Ajout container            =
 =======================================*/
 
-add_action( 'pc_body_start', 'pc_fullscreen_add_img_container', 20 );
+add_action( 'pc_body_start', 'pc_fullscreen_display_img_container', 20 );
 
-	function pc_fullscreen_add_img_container() {
+	function pc_fullscreen_display_img_container() {
 
 		global $is_fullscreen;
 
@@ -109,10 +105,10 @@ add_action( 'pc_body_start', 'pc_fullscreen_add_img_container', 20 );
 =            Bouton d'accès au contenu            =
 =================================================*/
 
-add_action( 'pc_home_content', 'pc_fullscreen_add_btn_scroll_to_content', 25 );
-add_action( 'pc_page_content_before', 'pc_fullscreen_add_btn_scroll_to_content', 35 ); 
+add_action( 'pc_home_content', 'pc_fullscreen_display_btn_scroll_to_content', 25 );
+add_action( 'pc_page_content_before', 'pc_fullscreen_display_btn_scroll_to_content', 35 ); 
 
-	function pc_fullscreen_add_btn_scroll_to_content() {
+	function pc_fullscreen_display_btn_scroll_to_content() {
 
 		global $is_fullscreen;
 		
@@ -135,9 +131,9 @@ add_action( 'pc_page_content_before', 'pc_fullscreen_add_btn_scroll_to_content',
 =            CSS inline            =
 ==================================*/
 
-add_filter( 'pc_filter_css_custom', 'pc_fullscreen_add_inline_css', 10 );
+add_filter( 'pc_filter_css_custom', 'pc_fullscreen_display_inline_css', 10 );
 
-	function pc_fullscreen_add_inline_css( $css_custom ) {
+	function pc_fullscreen_display_inline_css( $css_custom ) {
 
 		global $is_fullscreen;
 

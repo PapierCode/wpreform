@@ -3,9 +3,9 @@
  * 
  */
 
-/*================================================
-=            Post title & description            =
-================================================*/
+/*==================================================
+=            Post : title & description            =
+==================================================*/
 
 function pc_get_post_seo_title( $post_id, $post_metas ) {
 
@@ -52,11 +52,11 @@ function pc_get_post_seo_description( $post_id, $post_metas ) {
 }
 
 
-/*=====  FIN Post title & description  =====*/
+/*=====  FIN Post : title & description  =====*/
 
-/*====================================================
-=            Taxonomy title & description            =
-====================================================*/
+/*======================================================
+=            Taxonomy : title & description            =
+======================================================*/
 
 function pc_get_tax_seo_title( $tax_id, $tax_name, $tax_metas ) {
 
@@ -103,11 +103,13 @@ function pc_get_tax_seo_description( $tax_id, $tax_metas ) {
 }
 
 
-/*=====  FIN Taxonomy title & description  =====*/
+/*=====  FIN Taxonomy : title & description  =====*/
 
 /*=================================
 =            Métas SEO            =
 =================================*/
+
+/*----------  Post  ----------*/
 
 function pc_get_post_seo_metas( $seo_metas, $post_id, $post_metas ) {
 
@@ -128,6 +130,8 @@ function pc_get_post_seo_metas( $seo_metas, $post_id, $post_metas ) {
 	return $seo_metas;
 
 }
+
+/*----------  Taxonomy  ----------*/
 
 function pc_get_tax_seo_metas( $seo_metas, $tax_id, $tax_name, $tax_metas ) {
 

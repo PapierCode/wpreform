@@ -5,7 +5,6 @@
 *
 ** Classe CSS sur la balise HTML
 ** Metas SEO & social, CSS inline
-** CSS d'impression
 ** Favicon
 ** Statistiques
 *
@@ -38,13 +37,13 @@ function pc_get_html_css_class() {
 
 /*=====  FIN Classe CSS sur la balise HTML  =====*/
 
-/*======================================================
-=            Metas SEO & social, CSS inline            =
-======================================================*/
+/*==========================================
+=            Metas SEO & social            =
+==========================================*/
 
-add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
+add_action( 'wp_head', 'pc_diplay_metas_seo_and_social', 5 );
 
-	function pc_metas_seo_and_social() {
+	function pc_diplay_metas_seo_and_social() {
 
 		global $images_project_sizes; // tailles d'images déclarées
 		global $settings_project; // config projet
@@ -62,8 +61,6 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 			'description' => $settings_project['micro-desc'],
 			'img' => pc_get_img_default_to_share()[0]
 		);
-		
-		$css_custom = '';
 
 
 		/*============================================
@@ -89,7 +86,7 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 
 		} elseif ( is_page() ) {
 
-			$post_id = get_the_id();
+			$post_id = get_the_ID();
 			$post_metas = get_post_meta( $post_id );
 
 			// metas title & description
@@ -107,47 +104,45 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 
 		/*=====  FIN Accueil / Page / 404  =====*/
 
-		/*===============================
-		=            Filtres            =
-		===============================*/
+		/*==============================
+		=            Filtre            =
+		==============================*/
 			
 		$seo_metas = apply_filters( 'pc_filter_seo_metas', $seo_metas );
-		$css_custom = apply_filters( 'pc_filter_css_custom', $css_custom );
 		
 		
-		/*=====  FIN Filtres  =====*/
+		/*=====  FIN Filtre  =====*/
 
 		/*=====================================================
 		=            Affichage métas et CSS inline            =
 		=====================================================*/
 
-			/*----------  Affichage métas  ----------*/
+		/*----------  Affichage métas  ----------*/
 
-			echo '<title>'.$seo_metas['title'].'</title>';
-			
-			$head_metas_datas = array(
-				array( 'name',	'description', $seo_metas['description'] ),
-				array( 'property', 'og:url', $url ),
-				array( 'property', 'og:type', 'article' ),
-				array( 'property', 'og:title',$seo_metas['title'] ),
-				array( 'property', 'og:description', $seo_metas['description'] ),
-				array( 'property', 'og:image', $seo_metas['img'] ),
-				array( 'property', 'og:image:width', $images_project_sizes['share']['width'] ),
-				array( 'property', 'og:image:height', $images_project_sizes['share']['height'] ),
-				array( 'name', 'twitter:card', 'summary' ),
-				array( 'name', 'twitter:url', $url ),
-				array( 'name', 'twitter:title', $seo_metas['title'] ),
-				array( 'name', 'twitter:description', $seo_metas['description'] ),
-				array( 'name', 'twitter:image', $seo_metas['img'] )
-			);
-			
-			foreach ( $head_metas_datas as $meta ) {
-				echo '<meta '.$meta[0].'="'.$meta[1].'" content="'.$meta[2].'" />';
-			}
+		echo '<title>'.$seo_metas['title'].'</title>';
+		
+		$head_metas_datas = array(
+			array( 'name',	'description', $seo_metas['description'] ),
+			array( 'property', 'og:url', $url ),
+			array( 'property', 'og:type', 'article' ),
+			array( 'property', 'og:title',$seo_metas['title'] ),
+			array( 'property', 'og:description', $seo_metas['description'] ),
+			array( 'property', 'og:image', $seo_metas['img'] ),
+			array( 'property', 'og:image:width', $images_project_sizes['share']['width'] ),
+			array( 'property', 'og:image:height', $images_project_sizes['share']['height'] ),
+			array( 'name', 'twitter:card', 'summary' ),
+			array( 'name', 'twitter:url', $url ),
+			array( 'name', 'twitter:title', $seo_metas['title'] ),
+			array( 'name', 'twitter:description', $seo_metas['description'] ),
+			array( 'name', 'twitter:image', $seo_metas['img'] )
+		);
+		
+		foreach ( $head_metas_datas as $meta ) {
+			echo '<meta '.$meta[0].'="'.$meta[1].'" content="'.$meta[2].'" />';
+		}
 
 
-			/*----------  CSS custom  ----------*/
-			if ( $css_custom != '' ) { echo '<style>'.$css_custom.'</style>'; }
+		/*----------  CSS custom  ----------*/
 			
 		
 		/*=====  FIN Affichage métas et CSS inline  =====*/
@@ -155,33 +150,15 @@ add_action( 'wp_head', 'pc_metas_seo_and_social', 5 );
 	};
 
 
-/*=====  FIN Metas SEO & social, CSS inline  =====*/
-
-/*========================================
-=            CSS d'impression            =
-========================================*/
-
-add_action( 'wp_enqueue_scripts', 'pc_enqueue_style', 10 );
-
-    function pc_enqueue_style() {
-
-		/*----------  Print  ----------*/
-    
-		wp_enqueue_style( 'preform-print-style', get_template_directory_uri().'/print.css', null, null, 'print' );
-
-
-	}
-
-
-/*=====  FIN CSS d'impression  =====*/
+/*=====  FIN Metas SEO & social  =====*/
 
 /*===============================
 =            Favicon            =
 ===============================*/
 
-add_action( 'wp_head', 'pc_favicon', 5 );
+add_action( 'wp_head', 'pc_display_favicon', 6 );
 
-	function pc_favicon() {
+	function pc_display_favicon() {
 
 		// défaut
 		$url = get_bloginfo( 'template_directory' ).'/images/favicon.jpg';
@@ -195,13 +172,29 @@ add_action( 'wp_head', 'pc_favicon', 5 );
 
 /*=====  FIN Favicon  =====*/
 
+/*==================================
+=            CSS inline            =
+==================================*/
+
+add_action( 'wp_head', 'pc_display_css_inline', 7 );
+
+	function pc_display_css_inline() {
+		
+		$css_custom = apply_filters( 'pc_filter_css_custom', '' );
+		if ( $css_custom != '' ) { echo '<style>'.$css_custom.'</style>'; }
+
+	};
+
+
+/*=====  FIN CSS inline  =====*/
+
 /*====================================
 =            Statistiques            =
 ====================================*/
 
-add_action( 'wp_head', 'pc_statistics_tracker', 20 );
+add_action( 'wp_head', 'pc_display_statistics_tracker', 20 );
 
-	function pc_statistics_tracker() {
+	function pc_display_statistics_tracker() {
 
 		global $settings_pc;
 

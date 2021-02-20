@@ -48,7 +48,7 @@ function pc_display_home_main_title( $settings_home ) {
 
 function pc_display_home_main_introduction( $settings_home ) {
 	
-	echo '<div class="editor"><div class="editor-inner">'.pc_wp_wysiwyg( $settings_home['content-txt'],false ).'</div></div>';
+	echo pc_wp_wysiwyg( $settings_home['content-txt'] );
 
 }
 
