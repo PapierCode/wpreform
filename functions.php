@@ -59,6 +59,10 @@ include 'include/templates_commons/templates_navigation.php';
 include 'include/templates_commons/templates_editor.php';
 // images & galerie
 include 'include/templates_commons/templates_images.php';
+// métas SEO
+include 'include/templates_commons/templates_seo.php';
+// Données structurées
+include 'include/templates_commons/templates_schemas.php';
 // liens réseaux sociaux & partage
 include 'include/templates_commons/templates_social.php';
 // layout global

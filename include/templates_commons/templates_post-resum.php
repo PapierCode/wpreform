@@ -25,15 +25,11 @@ add_filter( 'excerpt_more', function() { return ''; }, 999 );
 =            Excerpt Preform             =
 ========================================*/
 
-function pc_get_page_excerpt( $post_id, $post_metas, $seo_for = false ) {
+function pc_get_post_resum_excerpt( $post_id, $post_metas, $seo_for = false ) {
 
 	global $texts_lengths;
 
-	if ( $seo_for && isset( $post_metas['seo-desc'] ) && $post_metas['seo-desc'][0] != '' ) {
-
-		$post_excerpt = pc_words_limit( $post_metas['seo-desc'][0], $texts_lengths['seo-desc'] );
-
-	} else if ( isset( $post_metas['resum-desc'] ) && $post_metas['resum-desc'][0] != '' ) {
+	if ( isset( $post_metas['resum-desc'] ) && $post_metas['resum-desc'][0] != '' ) {
 
 		$post_excerpt = pc_words_limit( $post_metas['resum-desc'][0], $texts_lengths['resum-desc'] );
 
@@ -139,7 +135,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	// image datas
 	$post_img_datas = pc_get_post_resum_img_datas( $post_id, $post_metas );
 	// description
-	$post_desc = pc_get_page_excerpt( $post_id, $post_metas );
+	$post_desc = pc_get_post_resum_excerpt( $post_id, $post_metas );
 	// icône +	
 	$post_ico_more = apply_filters( 'pc_filter_post_resum_ico_more', pc_svg('more-16') );
 	

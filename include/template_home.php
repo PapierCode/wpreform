@@ -67,13 +67,13 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 
 		echo '<div class="home-shortcuts">';
 		echo '<ul class="home-shortcuts-list '.$shortcuts_nb.' reset-list">';
-			foreach ($home_shortcuts as $post_id => $new_post_title) {
+			foreach ($home_shortcuts as $post_id => $post_title_alt) {
 
 				// post métas
 				$post_metas = get_post_meta( $post_id );
 
 				// titre
-				$post_title = ( $new_post_title != '' ) ? $new_post_title : get_the_title( $post_id );
+				$post_title = ( $post_title_alt != '' ) ? $post_title_alt : get_the_title( $post_id );
 				// lien
 				$post_url = get_the_permalink( $post_id );				
 				// image datas
@@ -120,30 +120,30 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 		// id des pages mises en avant
 		$home_shortcuts = pc_home_shortcuts_bdd_to_array($settings_home['content-pages']);
 
-		foreach ($home_shortcuts as $post_id => $new_post_title) {
+		foreach ($home_shortcuts as $post_id => $post_title_alt) {
 
 			// titre
-			$post_title = ( $new_post_title != '' ) ? $new_post_title : get_the_title( $post_id );
+			$post_title = ( $post_title_alt != '' ) ? $post_title_alt : get_the_title( $post_id );
 			// metas
-			$metas = get_post_meta( $post_id );		
+			$post_metas = get_post_meta( $post_id );		
 
 			// image du post ou image par défaut
-			if ( isset( $metas['visual-id'] ) ) {
-				$img = pc_get_img( $metas['visual-id'][0], 'share', 'datas' );
+			if ( isset( $post_metas['visual-id'] ) ) {
+				$post_img = pc_get_img( $post_metas['visual-id'][0], 'share', 'datas' );
 			} else {
-				$img = pc_get_img_default_to_share();
+				$post_img = pc_get_img_default_to_share();
 			}
 			
 			$schema_collection_page['mainEntity']['itemListElement'][] = array(
 				'@type' => 'ListItem',
 				'name' => $post_title,
-				'description' => pc_get_page_excerpt( $post_id, $metas ),
+				'description' => pc_get_post_resum_excerpt( $post_id, $post_metas ),
 				'url' => get_the_permalink($post_id),
 				'image' => array(
 					'@type'		=>'ImageObject',
-					'url' 		=> $img[0],
-					'width' 	=> $img[1],
-					'height' 	=> $img[2]
+					'url' 		=> $post_img[0],
+					'width' 	=> $post_img[1],
+					'height' 	=> $post_img[2]
 				)
 			);
 
