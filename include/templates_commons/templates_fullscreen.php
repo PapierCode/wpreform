@@ -145,7 +145,7 @@ add_filter( 'pc_filter_css_custom', 'pc_fullscreen_display_inline_css', 10 );
 				$sizes = array( 
 					array( '', 'fs-s'), 
 					array( 600/$em, 'fs-m'), 
-					array( 1200/$em, 'fs-l')
+					array( 1000/$em, 'fs-l')
 				);
 
 				foreach ($sizes as $size) {
