@@ -2,7 +2,7 @@
 
 /**
 *
-* Paramètres du site
+* Paramètres du projet
 *
 *
 */
@@ -159,7 +159,7 @@ $settings_project_fields = array(
     )
 );
 
-$settings_project_fields = apply_filters( 'pc_filter_settings_project_fields', $settings_project_fields );
+$settings_project_fields = apply_filters( 'pc_filter_settings_project_fields', $settings_project_fields, $pages_list );
 
 
 /*----------  Création  ----------*/
