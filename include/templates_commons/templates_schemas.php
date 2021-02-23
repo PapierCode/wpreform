@@ -1,4 +1,4 @@
- 	<?php
+<?php
 /**
  * 
  * Fonctions données structurée (schema.org)
