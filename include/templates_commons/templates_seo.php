@@ -43,7 +43,7 @@ function pc_get_post_seo_description( $post_id, $post_metas ) {
 
 	} else {
 
-		$post_seo_description = get_the_excerpt( $post_id ).'...';
+		$post_seo_description = get_the_excerpt( $post_id );
 		
 	}
 	

@@ -15,7 +15,7 @@
 ==================================*/
 
 add_filter( 'excerpt_length', function() use ( $texts_lengths ) { return $texts_lengths['excerpt']; }, 999 );
-add_filter( 'excerpt_more', function() { return ''; }, 999 );
+add_filter( 'excerpt_more', function() { return '&hellip;'; }, 999 );
 
 
 /*=====  FIN Excerpt WP  =====*/
@@ -35,7 +35,7 @@ function pc_get_post_resum_excerpt( $post_id, $post_metas, $seo_for = false ) {
 
 	} else {
 
-		$post_excerpt = get_the_excerpt( $post_id ).'...';
+		$post_excerpt = get_the_excerpt( $post_id );
 		
 	}
 	
