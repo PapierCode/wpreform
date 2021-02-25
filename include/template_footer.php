@@ -125,7 +125,7 @@ function pc_display_footer_nav() {
 			echo '<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; '.$settings_project['coord-name'].'</li>';
 		}
 		
-		$nav_footer_config = array(
+		$nav_footer_config = apply_filters( 'pc_filter_footer_nav_args', array(
 			'theme_location'  	=> 'nav-footer',
 			'nav_prefix'		=> array('f-nav','f-p-nav'),
 			'items_wrap'      	=> '%3$s',
@@ -134,7 +134,7 @@ function pc_display_footer_nav() {
 			'container'       	=> '',
 			'fallback_cb'     	=> false,
 			'walker'          	=> new Pc_Walker_Nav_Menu()
-		);
+		) );
 		wp_nav_menu( $nav_footer_config );
 
 		do_action( 'pc_footer_nav_list_inner_after' );

@@ -89,7 +89,7 @@ function pc_display_header_nav() {
 		
 		do_action( 'pc_header_nav_inner_before' );
 
-		$nav_args = array(
+		$nav_args = apply_filters( 'pc_filter_header_nav_args', array(
 			'theme_location'  	=> 'nav-header',
 			'nav_prefix'		=> array('h-nav', 'h-p-nav'), // custom
 			'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1 reset-list',
@@ -99,7 +99,8 @@ function pc_display_header_nav() {
 			'item_spacing'		=> 'discard',
 			'fallback_cb'     	=> false,
 			'walker'          	=> new Pc_Walker_Nav_Menu()
-		);
+		) );
+
 		wp_nav_menu( $nav_args ); // + include/navigation.php
 		
 		do_action( 'pc_header_nav_inner_after' );

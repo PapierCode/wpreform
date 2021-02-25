@@ -20,7 +20,7 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$display_depth = ($depth + 2);
 		// css
 		$class_names = 'reset-list';
-		foreach ($args->nav_prefix as $prefix) {
+		foreach ( $args->nav_prefix as $prefix ) {
 			$class_names .= ' '.$prefix.'-list '.$prefix.'-list--l'.$display_depth;
 		}
 		// 
@@ -29,7 +29,7 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 	} // end start_lvl()
 
 	// création des li tous level
-	function start_el(  &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
 		// parceque...
 		$display_depth = ( $depth + 1);
@@ -37,29 +37,34 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$li_class_name = '';
 		$link_class_name = '';
 		$span_class_name = '';
-		foreach ($args->nav_prefix as $prefix) {
+		foreach ( $args->nav_prefix as $prefix ) {
 			$li_class_name .= $prefix.'-item '.$prefix.'-item--l'.$display_depth.' ';
 			$link_class_name .= $prefix.'-link '.$prefix.'-link--l'.$display_depth.' ';
 			$span_class_name .= $prefix.'-link-inner '.$prefix.'-link-inner--l'.$display_depth.' ';
 		}
 		
 		// supprime tous les classes sauf celles précisées dans le tableau
-		$clean_classes = is_array($item->classes) ? array_intersect($item->classes, array('current-menu-item','menu-item-has-children','current-menu-parent')) : '';
+		$clean_classes = is_array( $item->classes ) ? array_intersect( $item->classes, array( 'current-menu-item','menu-item-has-children','current-menu-parent' ) ) : '';
 		// remplace les classes restantes
 		$new_classes = array(
 			'current-menu-item' => 'is-active',
 			'menu-item-has-children' => 'is-parent',
 			'current-menu-parent' => 'is-active'
 		);
-		$clean_classes = str_replace(array_keys($new_classes), $new_classes, $clean_classes);
+		$clean_classes = str_replace( array_keys( $new_classes ), $new_classes, $clean_classes );
 		// array to string + classes ajoutées depuis l'admin
-		$li_class_name .= esc_attr( implode(' ', $clean_classes )).' '.$item->classes[0];
+		$li_class_name .= esc_attr( implode( ' ', $clean_classes ) ).' '.$item->classes[0];
+		
+		// filtres classes
+		$li_class_name = apply_filters( 'pc_filter_nav_menu_li_css_classes', $li_class_name, $args );
+		$link_class_name = apply_filters( 'pc_filter_nav_menu_link_css_classes', $link_class_name, $args );
+		$span_class_name = apply_filters( 'pc_filter_nav_menu_span_css_classes', $span_class_name, $args );
 
 		// construction du li
 		$output .= '<li class="'.$li_class_name.'">';
 
 		// si c'est un item parent
-		if ( in_array('is-parent', $clean_classes) ) {
+		if ( in_array( 'is-parent', $clean_classes ) ) {
 			// pas de lien mais un bouton
 			$output .= '<button type="button" class="'.$link_class_name.'reset-btn">';
 			$output .= '<span class="'.$span_class_name.'">'.$item->title.'</span>';
@@ -70,9 +75,9 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 			// construction du <a>
 			$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : ' title="' . $item->title . '"';
-			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-			$attributes .= ! empty( $item->xfn ) ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-			$attributes .= ! empty( $item->url ) ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) .'"' : '';
+			$attributes .= ! empty( $item->xfn ) ? ' rel="'    . esc_attr( $item->xfn ) .'"' : '';
+			$attributes .= ! empty( $item->url ) ? ' href="'   . esc_attr( $item->url ) .'"' : '';
 			$attributes .= ' class="'.$link_class_name.'"';
 			$attributes .= ( in_array('is-active', $clean_classes) ) ? ' aria-current="page"' : '';
 
