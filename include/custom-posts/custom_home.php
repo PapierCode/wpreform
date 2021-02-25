@@ -27,7 +27,7 @@ if ( class_exists('PC_Add_Admin_Page') ) {
  * 
  */
 
-function pc_home_pages_line( $css_class, $pages, $current = '', $title = '' ) {
+function pc_get_home_shortcut_repeater_line( $css_class, $pages, $current = '', $title = '' ) {
 
 	$return = '<div class="'.$css_class.'">';
 	$return .= '<select><option value=""></option>';
@@ -60,7 +60,7 @@ function pc_home_pages_line( $css_class, $pages, $current = '', $title = '' ) {
  * 
  */
 
-function pc_home_shortcuts_bdd_to_array( $datas ) {
+function pc_get_home_shortcuts_bdd_to_array( $datas ) {
 
 	$return = array();
 	if ( $datas != '' ) {
@@ -88,13 +88,13 @@ $settings_home = get_option('home-settings-option');
 // pages à la une sauvegardées
 $home_pages_in_bdd = ( isset($settings_home['content-pages']) && $settings_home['content-pages'] !='' ) ? $settings_home['content-pages'] : '';
 // conversion
-$home_pages = pc_home_shortcuts_bdd_to_array($home_pages_in_bdd);
+$home_pages = pc_get_home_shortcuts_bdd_to_array($home_pages_in_bdd);
 
 // html à afficher
 $home_pages_fields = '<div class="pc-repeater" data-type="homepages">';
 	// une ligne par page à la une
 	foreach ($home_pages as $id => $title) {
-		$home_pages_fields .= pc_home_pages_line( 'pc-repeater-item', $all_pages, $id, $title );
+		$home_pages_fields .= pc_get_home_shortcut_repeater_line( 'pc-repeater-item', $all_pages, $id, $title );
 	}
 $home_pages_fields .= '</div>';
 // c'est ce input qui est sauvegardé !
@@ -103,7 +103,7 @@ $home_pages_fields .= '<input type="hidden" value="'.$home_pages_in_bdd.'" name=
 $home_pages_fields .= '<p><button type="button" class="pc-repeater-btn-more button">Ajouter une page</button></p>';
 // source pour le js
 $home_pages_fields .= '<div style="display:none">';
-	$home_pages_fields .= pc_home_pages_line( 'pc-repeater-item pc-repeater-src', $all_pages );
+	$home_pages_fields .= pc_get_home_shortcut_repeater_line( 'pc-repeater-item pc-repeater-src', $all_pages );
 $home_pages_fields .= '</div>';
 
 
