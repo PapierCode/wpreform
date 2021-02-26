@@ -166,13 +166,13 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 			// filtre
 			do_action( 'pc_action_post_resum_after_start', $post_id );
 		
-			echo '<div class="st-figure">';
+			echo '<div class="st-figure" aria-hidden="true">';
 				pc_display_post_resum_img_tag( $post_id, $post_img_datas );				
 			echo '</div>';
 
 			echo '<h'.$post_title_level.' class="st-title">';
 				if ( 'multiple' == $post_link_position ) {
-					echo pc_get_post_resum_link_tag_start( 'st-title-link', $post_link, $post_title ).$post_title.'</a>';
+					echo pc_get_post_resum_link_tag_start( 'st-link', $post_link, $post_title ).$post_title.'</a>';
 				} else {
 					echo $post_title;
 				}
@@ -181,12 +181,14 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 			// filtre	
 			do_action( 'pc_action_post_resum_after_title', $post_id );
 			
-			echo '<p class="st-desc">'.$post_desc.' ';
-				if ( 'global' == $post_link_position ) { echo '<span class="st-desc-ico">'.$post_ico_more.'</span>';	}	
+			echo '<p class="st-desc">'.$post_desc;
+				$st_desc_ico_more_display = apply_filters( 'pc_st_desc_ico_more_display', true );
+				if ( $st_desc_ico_more_display ) { echo ' <span class="st-desc-ico">'.$post_ico_more.'</span>';	}	
 			echo '</p>';
 			
-			if ( 'multiple' == $post_link_position ) {
-				echo pc_get_post_resum_link_tag_start( 'st-read-more button', $post_link, $post_title ).'<span class="st-read-more-ico">'.$post_ico_more.'</span> <span class="st-read-more-txt">Lire la suite</span><span class="visually-hidden"> de l\'article '.$post_title.'</span></a>';
+			$st_read_more_display = apply_filters( 'pc_st_read_more_display', false );
+			if ( $st_read_more_display ) {
+				echo '<div class="st-read-more" aria-hidden="true"><span class="st-read-more-ico">'.$post_ico_more.'</span> <span class="st-read-more-txt">Lire la suite</span></a></div>';
 			}
 		
 			// filtre

@@ -60,7 +60,7 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 	if ( isset($settings_home['content-pages']) && $settings_home['content-pages'] != '' ) {
 
 		// id des pages mises en avant
-		$home_shortcuts = pc_home_shortcuts_bdd_to_array($settings_home['content-pages']);
+		$home_shortcuts = pc_get_home_shortcuts_bdd_to_array($settings_home['content-pages']);
 
 		// pour les CSS, pair ou impair ?
 		$shortcuts_nb = ( count($home_shortcuts)%2 == 1 ) ? 'home-shortcuts--odd' : 'home-shortcuts--even';
@@ -118,7 +118,7 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 	if ( isset($settings_home['content-pages']) && $settings_home['content-pages'] != '' ) {
 
 		// id des pages mises en avant
-		$home_shortcuts = pc_home_shortcuts_bdd_to_array($settings_home['content-pages']);
+		$home_shortcuts = pc_get_home_shortcuts_bdd_to_array($settings_home['content-pages']);
 
 		foreach ($home_shortcuts as $post_id => $post_title_alt) {
 
