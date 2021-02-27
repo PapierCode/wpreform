@@ -72,35 +72,33 @@ function pc_display_social_links( $css_class ) {
 function pc_display_share_links() {
 
     $share_url = 'https://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+	$share_title = apply_filters( 'pc_filter_share_links_title', 'Partage&nbsp;:' );
+
     global $seo_metas; // cf. pc_metas_seo_and_social()
 
-    ?>
+	$share_links = apply_filters( 'pc_filter_share_links', array(
+		'Facebook' => 'https://www.facebook.com/sharer/sharer.php?u='.urlencode($share_url),
+		'Twitter' => 'http://twitter.com/intent/tweet?url='.urlencode($share_url),
+		'LinkedIn' => 'https://www.linkedin.com/shareArticle?mini=true&url='.urlencode($share_url).'&title='.str_replace(' ', '%20', $seo_metas['title']).'&summary='.str_replace(' ', '%20', $seo_metas['description'])
+	) );
 
-    <div class="social-share no-print">
-        <p class="social-share-title">Partage&nbsp;: </p>
-        <ul class="social-list social-list--share reset-list">
-            <li class="social-item">
-                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= urlencode($share_url); ?>" target="_blank" class="social-link social-link--facebook" rel="nofollow noreferrer" title="Partager sur Facebook (nouvelle fenêtre)">
-                    <span class="visually-hidden">Facebook</span>
-                    <?php echo pc_svg('facebook'); ?>
-                </a>
-            </li>
-            <li class="social-item">
-                <a href="http://twitter.com/intent/tweet?url=<?= urlencode($share_url); ?>" target="_blank" class="social-link social-link--twitter" rel="nofollow noreferrer" title="Partager sur Twitter (nouvelle fenêtre)">
-                    <span class="visually-hidden">Twitter</span>
-                    <?php echo pc_svg('twitter'); ?>
-                </a>
-            </li>
-            <li class="social-item">
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= urlencode($share_url); ?>&title=<?= str_replace(' ', '%20', $seo_metas['title']); ?>&summary=<?= str_replace(' ', '%20', $seo_metas['description']); ?>" target="_blank" class="social-link social-link--linkedin" rel="nofollow noreferrer" title="Partager sur LinkedIn (nouvelle fenêtre)">
-                <span class="visually-hidden">LinkedIn</span>
-                <?php echo pc_svg('linkedin'); ?>
-                </a>
-            </li>
-        </ul>
-    </div>
+	echo '<div class="social-share no-print">';
+		do_action( 'pc_social_share_after_start' );
+		echo '<p class="social-share-title">'.$share_title.'</p>';
+		echo '<ul class="social-list social-list--share reset-list">';
+			foreach ($share_links as $name => $href) {
+				echo '<li class="social-item">';
+					echo '<a href="'.$href.'" target="_blank" class="social-link social-link--'.strtolower($name).'" rel="nofollow noreferrer" title="Partager sur '.$name.' (nouvelle fenêtre)">';
+						echo '<span class="visually-hidden">'.$name.'</span>';
+						echo pc_svg( strtolower($name) );
+					echo '</a>';
+				echo '</li>';
+			}
+		echo '</ul>';
+		do_action( 'pc_social_share_before_end' );
+	echo '</div>';
 
-<?php }
+}
 
 
 /*=====  FIN Partage  =====*/

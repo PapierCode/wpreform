@@ -164,7 +164,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 		if ( 'global' == $post_link_position ) { echo pc_get_post_resum_link_tag_start( 'st-link', $post_link, $post_title ); }
 
 			// filtre
-			do_action( 'pc_action_post_resum_after_start', $post_id );
+			do_action( 'pc_post_resum_after_start', $post_id );
 		
 			echo '<div class="st-figure" aria-hidden="true">';
 				pc_display_post_resum_img_tag( $post_id, $post_img_datas );				
@@ -179,7 +179,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 			echo '</h'.$post_title_level.'>';	
 
 			// filtre	
-			do_action( 'pc_action_post_resum_after_title', $post_id );
+			do_action( 'pc_post_resum_after_title', $post_id );
 			
 			echo '<p class="st-desc">'.$post_desc;
 				$st_desc_ico_more_display = apply_filters( 'pc_st_desc_ico_more_display', true );
@@ -192,7 +192,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 			}
 		
 			// filtre
-			do_action( 'pc_action_post_resum_before_end', $post_id );
+			do_action( 'pc_post_resum_before_end', $post_id );
 
 		if ( 'global' == $post_link_position ) { echo '</a>'; }
 	

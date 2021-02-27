@@ -54,25 +54,25 @@ include 'include/custom-posts/custom_home.php';
 // sprite SVG
 include 'images/sprite.php';
 // navigation
-include 'include/templates_commons/templates_navigation.php';
+include 'include/templates-parts/templates_navigation.php';
 // wysiwyg par défaut
-include 'include/templates_commons/templates_editor.php';
+include 'include/templates-parts/templates_editor.php';
 // images & galerie
-include 'include/templates_commons/templates_images.php';
+include 'include/templates-parts/templates_images.php';
 // métas SEO
-include 'include/templates_commons/templates_seo.php';
+include 'include/templates-parts/templates_seo.php';
 // Données structurées
-include 'include/templates_commons/templates_schemas.php';
+include 'include/templates-parts/templates_schemas.php';
 // liens réseaux sociaux & partage
-include 'include/templates_commons/templates_social.php';
+include 'include/templates-parts/templates_social.php';
 // layout global
-include 'include/templates_commons/templates_layout.php';
+include 'include/templates-parts/templates_layout.php';
 // article résumé
-include 'include/templates_commons/templates_post-resum.php';
+include 'include/templates-parts/templates_post-resum.php';
 // contenu de l'entête (head)
-include 'include/templates_commons/templates_head.php';
+include 'include/templates-parts/templates_head.php';
 // image pleine page
-include 'include/templates_commons/templates_fullscreen.php';
+include 'include/templates-parts/templates_fullscreen.php';
 
 
 /*----------  Templates : spécifiques  ----------*/
