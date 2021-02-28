@@ -67,10 +67,6 @@ function pc_fullscreen_edit_html_css_class( $css_classes ) {
 		$css_classes[] = ( isset( $is_fullscreen['visual-title-h'] ) ) ? $css_prefix.'h-'.$is_fullscreen['visual-title-h'] : $css_prefix.'h-center';
 		$css_classes[] = ( isset( $is_fullscreen['visual-title-v'] ) ) ? $css_prefix.'v-'.$is_fullscreen['visual-title-v'] : $css_prefix.'v-center';
 
-	} else {
-
-		$css_classes[] = 'is-classic';
-
 	}
 
 	return $css_classes;
