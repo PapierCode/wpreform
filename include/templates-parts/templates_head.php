@@ -58,7 +58,7 @@ add_action( 'wp_head', 'pc_diplay_metas_seo_and_social', 5 );
 		// défaut
 		$seo_metas = array(
 			'title' => $settings_project['coord-name'],
-			'description' => $settings_project['micro-desc'],
+			'description' => $settings_project['seo-desc'],
 			'img' => pc_get_img_default_to_share()[0]
 		);
 

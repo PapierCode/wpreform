@@ -63,6 +63,13 @@ $settings_project_fields = array(
                 'required'  => true
             ),
             array(
+                'type'      => 'text',
+                'label_for' => 'country',
+                'label'     => 'Pays',
+                'css'       => 'width:100%;',
+                'required'  => true
+            ),
+            array(
                 'type'      => 'number',
                 'label_for' => 'lat',
                 'label'     => 'Latitude',
@@ -97,8 +104,8 @@ $settings_project_fields = array(
     ),
     array(
         'title'     => 'Optimisation référencement (SEO)',
-        'id'        => 'micro',
-        'prefix'    => 'micro',
+        'id'        => 'seo',
+        'prefix'    => 'seo',
         'fields'    => array(
             array(
                 'type'      => 'text',
@@ -107,6 +114,28 @@ $settings_project_fields = array(
                 'css'       => 'width:100%',
                 'required'  => true,
                 'desc'      => 'Votre activité en quelques mots.'
+            ),
+            array(
+                'type'      => 'text',
+                'label_for' => 'author-first-name',
+                'label'     => 'Auteur : prénom',
+                'css'       => 'width:100%',
+				'desc'		=> 'Utilisé si votre prénom n\'est pas renseigné dans votre profil.',
+                'required'  => true
+            ),
+            array(
+                'type'      => 'text',
+                'label_for' => 'author-last-name',
+                'label'     => 'Auteur : nom',
+                'css'       => 'width:100%',
+				'desc'		=> 'Utilisé si votre nom n\'est pas renseigné dans votre profil.',
+                'required'  => true
+            ),	
+            array(
+                'type'      => 'checkbox',
+                'label_for' => 'author-default',
+                'label'     => 'Auteur par défaut',
+				'desc'		=> 'Associe l\'auteur ci-dessus à tous les contenus.'
             ),
         )
     ),

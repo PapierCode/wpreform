@@ -67,7 +67,7 @@ function pc_display_footer_contact() {
 
 	/*----------  Adresse  ----------*/
 	
-	$address = $settings_project['coord-address'].' <br/>'.$settings_project['coord-postal-code'].' '.$settings_project['coord-city'];
+	$address = $settings_project['coord-address'].' <br/>'.$settings_project['coord-postal-code'].' '.$settings_project['coord-city'].', '.$settings_project['coord-country'];
 	if ( $settings_project['coord-lat'] != '' && $settings_project['coord-long'] != '' ) {
 		$address .= '<br aria-hidden="true"/><button class="reset-btn btn-display-pop no-print" data-cible="map" data-lat="'.$settings_project['coord-lat'].'" data-long="'.$settings_project['coord-long'].'" aria-hidden="true">Afficher la carte</button>';
 	}
@@ -79,7 +79,7 @@ function pc_display_footer_contact() {
 
 	/*----------  Téléphone  ----------*/
 	
-	$phone = '<a href="tel:'.pc_phone($settings_project['coord-phone-1']).'">'.$settings_project['coord-phone-1'].'</a>';
+	$phone = '<a href="tel:'.pc_phone($settings_project['coord-phone-1']).'">'.pc_phone($settings_project['coord-phone-1'],false).'</a>';
 	if ( $settings_project['coord-phone-2'] != '' ) {
 		$phone .= '<br/><span class="coord-sep"> - </span><a href="tel:'.pc_phone($settings_project['coord-phone-2']).'">'.$settings_project['coord-phone-2'].'</a>';
 	}

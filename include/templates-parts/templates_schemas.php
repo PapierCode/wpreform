@@ -21,15 +21,23 @@ function pc_get_schema_client_type() {
 
 /*=====  FIN Client type  =====*/
 
-
 /*==============================
 =            Author            =
 ==============================*/
 
 function pc_get_schema_author( $author_id ) {
 	
+	global $settings_project;
+
 	$author_first_name = get_the_author_meta( 'first_name', $author_id );
 	$author_last_name = get_the_author_meta( 'last_name', $author_id );
+
+	if ( isset( $settings_project['seo-author-default'] ) || '' == $author_first_name ) {
+		$author_first_name = $settings_project['seo-author-first-name'];
+	}
+	if ( isset( $settings_project['seo-author-default'] ) || '' == $author_last_name ) {
+		$author_last_name = $settings_project['seo-author-last-name'];
+	}
 
 	$author = array(
 		'@type' => 'Person',
@@ -134,7 +142,7 @@ function pc_get_schema_website( ) {
 		'@type' => 'WebSite',
 		'url' => get_site_url(),
 		'name' => $settings_project['coord-name'],
-		'description' => $settings_project['micro-desc'],
+		'description' => $settings_project['seo-desc'],
 		'publisher'	=> pc_get_schema_publisher()
 	);
 	$website = apply_filters( 'pc_filter_schema_website', $website );
@@ -177,7 +185,7 @@ function pc_display_schema_local_business() {
 				'addressLocality' => $settings_project['coord-city'],
 				'addressRegion' => 'FR'
 			),
-			'description' => $settings_project['micro-desc'],
+			'description' => $settings_project['seo-desc'],
 			'name' => $settings_project['coord-name'],
 			'image' => array(
 				'@type' => 'ImageObject',
