@@ -81,7 +81,7 @@ function pc_display_footer_contact() {
 	
 	$phone = '<a href="tel:'.pc_phone($settings_project['coord-phone-1']).'">'.pc_phone($settings_project['coord-phone-1'],false).'</a>';
 	if ( $settings_project['coord-phone-2'] != '' ) {
-		$phone .= '<br/><span class="coord-sep"> - </span><a href="tel:'.pc_phone($settings_project['coord-phone-2']).'">'.$settings_project['coord-phone-2'].'</a>';
+		$phone .= '<br/><span class="coord-sep"> / </span><a href="tel:'.pc_phone($settings_project['coord-phone-2']).'">'.pc_phone($settings_project['coord-phone-2'],false).'</a>';
 	}
 	$dd['list']['phone'] = array(
 		'ico' => 'phone',
