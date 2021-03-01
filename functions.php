@@ -15,11 +15,11 @@
 global $settings_pc; // défini dans le plugin [PC] Custom WP 
 
 $texts_lengths = array(
-	'excerpt' => 20,
-	'resum-title' => 40,
-	'resum-desc' => 150,
-	'seo-title' => 70,
-	'seo-desc' => 200
+	'excerpt' => 100, // mots
+	'resum-title' => 40, // signes
+	'resum-desc' => 150, // signes
+	'seo-title' => 70, // signes
+	'seo-desc' => 200 // signes
 );
 $texts_lengths = apply_filters( 'pc_filter_texts_lengths', $texts_lengths );
 

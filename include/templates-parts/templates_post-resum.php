@@ -25,21 +25,13 @@ add_filter( 'excerpt_more', function() { return '&hellip;'; }, 999 );
 =            Excerpt Preform             =
 ========================================*/
 
-function pc_get_post_resum_excerpt( $post_id, $post_metas, $seo_for = false ) {
+function pc_get_post_resum_excerpt( $post_id, $post_metas ) {
 
 	global $texts_lengths;
 
-	if ( isset( $post_metas['resum-desc'] ) && $post_metas['resum-desc'][0] != '' ) {
-
-		$post_excerpt = pc_words_limit( $post_metas['resum-desc'][0], $texts_lengths['resum-desc'] );
-
-	} else {
-
-		$post_excerpt = get_the_excerpt( $post_id );
-		
-	}
+	$post_excerpt = ( isset( $post_metas['resum-desc'] ) ) ? $post_metas['resum-desc'][0] : get_the_excerpt( $post_id );
 	
-	return $post_excerpt;
+	return pc_words_limit( $post_excerpt, $texts_lengths['resum-desc'] ) ;
 
 }
 
@@ -135,9 +127,8 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	// image datas
 	$post_img_datas = pc_get_post_resum_img_datas( $post_id, $post_metas );
 	// description
-	$post_desc = pc_get_post_resum_excerpt( $post_id, $post_metas );
-	// icône +	
-	$post_ico_more = apply_filters( 'pc_filter_post_resum_ico_more', pc_svg('more-16') );
+	$post_desc = pc_get_post_resum_excerpt( $post_id, $post_metas );	
+	
 	
 
 	/*----------  Données structurées  ----------*/
@@ -181,10 +172,14 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 			// filtre	
 			do_action( 'pc_post_resum_after_title', $post_id );
 			
-			echo '<p class="st-desc">'.$post_desc;
-				$st_desc_ico_more_display = apply_filters( 'pc_st_desc_ico_more_display', true );
-				if ( $st_desc_ico_more_display ) { echo ' <span class="st-desc-ico">'.$post_ico_more.'</span>';	}	
-			echo '</p>';
+			if ( '' != $post_desc ) {
+				echo '<p class="st-desc">';
+					echo $post_desc;
+					$post_ico_more = apply_filters( 'pc_filter_post_resum_ico_more', pc_svg('more-16') );
+					$st_desc_ico_more_display = apply_filters( 'pc_st_desc_ico_more_display', true );
+					if ( $st_desc_ico_more_display ) { echo ' <span class="st-desc-ico">'.$post_ico_more.'</span>';	}	
+				echo '</p>';
+			}
 			
 			$st_read_more_display = apply_filters( 'pc_st_read_more_display', false );
 			if ( $st_read_more_display ) {

@@ -35,11 +35,11 @@ function pc_get_post_seo_description( $post_id, $post_metas ) {
 
 	if ( isset( $post_metas['seo-desc'] ) ) {
 
-		$post_seo_description = pc_words_limit( $post_metas['seo-desc'][0], $texts_lengths['seo-desc'] );
+		$post_seo_description = $post_metas['seo-desc'][0];
 
 	} else if ( isset( $post_metas['resum-desc'] ) ) {
 
-		$post_seo_description = pc_words_limit( $post_metas['resum-desc'][0], $texts_lengths['seo-desc'] );
+		$post_seo_description = $post_metas['resum-desc'][0];
 
 	} else {
 
@@ -47,7 +47,7 @@ function pc_get_post_seo_description( $post_id, $post_metas ) {
 		
 	}
 	
-	return $post_seo_description;
+	return pc_words_limit( $post_seo_description, $texts_lengths['seo-desc'] );
 
 }
 
@@ -86,19 +86,23 @@ function pc_get_tax_seo_description( $tax_id, $tax_metas ) {
 
 	if ( isset( $tax_metas['seo-desc'] ) ) {
 
-		$tax_seo_description = pc_words_limit( $tax_metas['seo-desc'][0], $texts_lengths['seo-desc'] );
+		$tax_seo_description = $tax_metas['seo-desc'][0];
 
 	} else if ( isset( $tax_metas['resum-desc'] ) ) {
 
-		$tax_seo_description = pc_words_limit( $tax_metas['resum-desc'][0], $texts_lengths['seo-desc'] );
+		$tax_seo_description = $tax_metas['resum-desc'][0];
 
 	} else if ( isset( $tax_metas['content-desc'] ) ) {
 
-		$tax_seo_description = pc_words_limit( $tax_metas['content-desc'][0], $texts_lengths['seo-desc'] );
+		$tax_seo_description = wp_strip_all_tags( $tax_metas['content-desc'][0] );
+		
+	} else {
+
+		$tax_seo_description = '';
 		
 	}
 	
-	return $tax_seo_description;
+	return pc_words_limit( $tax_seo_description, $texts_lengths['seo-desc'] );
 
 }
 
