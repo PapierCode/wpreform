@@ -122,6 +122,7 @@ function pc_display_footer_nav() {
 
 		$display_copyright = apply_filters( 'pc_filter_footer_display_copyright', false );
 		if ( $display_copyright ) {
+			global $settings_project;
 			echo '<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; '.$settings_project['coord-name'].'</li>';
 		}
 		
