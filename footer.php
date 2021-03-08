@@ -1,15 +1,10 @@
 <?php
 
-do_action( 'pc_footer_start' );
-	
-	do_action( 'pc_footer_content' );
-
-do_action( 'pc_footer_end' );
-
-do_action( 'pc_body_end' );
+do_action( 'pc_footer' );
 
 wp_footer(); 
-do_action( 'pc_wp_footer' ); ?>
 
-</body>
-</html>
+do_action( 'pc_wp_footer' );
+
+echo '</body>';
+echo '</html>';

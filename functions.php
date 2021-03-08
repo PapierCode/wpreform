@@ -114,7 +114,7 @@ include 'include/theme-setup/theme-setup.php';
 
 /*----------  Expérimentations  ----------*/
 
-// include 'include/_temp.php'
+// include 'include/_temp.php';
 
 
 /*----------  Debug  ----------*/

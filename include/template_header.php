@@ -12,15 +12,18 @@
 =            Hooks            =
 =============================*/
 
-add_action( 'pc_body_start', 'pc_display_body_inner_start', 10 );
+add_action( 'pc_header', 'pc_display_skip_nav', 10 );
+add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 
-add_action( 'pc_header_start', 'pc_display_header_start', 10 );
+	add_action( 'pc_header', 'pc_display_header_start', 30 );
 
-add_action( 'pc_header_logo', 'pc_display_header_logo', 10 );
-add_action( 'pc_header_nav', 'pc_display_header_nav', 10 );
+		add_action( 'pc_header', 'pc_display_header_logo', 40 );
+		add_action( 'pc_header', 'pc_display_nav_button_open_close', 50 );
+		add_action( 'pc_header', 'pc_display_header_nav', 60 );
 
-add_action( 'pc_header_end', 'pc_display_header_end', 10 );
-add_action( 'pc_header_end', 'pc_display_nav_overlay', 20 );
+	add_action( 'pc_header', 'pc_display_header_end', 70 );
+
+	add_action( 'pc_header', 'pc_display_nav_overlay', 80 );
 
 
 /*=====  FIN Hooks  =====*/
@@ -28,6 +31,26 @@ add_action( 'pc_header_end', 'pc_display_nav_overlay', 20 );
 /*=========================================
 =            Contenu des hooks            =
 =========================================*/
+
+/*----------  Accès direct  ----------*/
+
+function pc_display_skip_nav() {
+	
+	$skip_nav_list = apply_filters( 'pc_filter_skip_nav', array(
+		'#header-nav' => array( 'Navigation principale', 'Accès direct à la navigation principale' ),
+		'#main' => array( 'Contenu de la page', 'Accès direct au contenu' ),
+		'#footer-nav' => array( 'Navigation du pied de page', 'Accès direct à la navigation du pied de page' )
+	) );
+	
+	echo '<ul class="skip-nav no-print">';
+		if( !is_home() ) { echo '<li><a href="'.get_bloginfo('url').'" title="Retour à la page d\'accueil">Accueil</a></li>'; }
+		foreach ( $skip_nav_list as $anchor => $texts ) {
+			echo '<li><a href="'.$anchor.'" title="'.$texts[1].'">'.$texts[0].'</a></li>';
+		}
+	echo '</ul>';
+
+}
+
 
 /*----------  Début du container body  ----------*/
 
@@ -55,8 +78,6 @@ function pc_display_header_logo() {
 
 	echo '<div class="h-logo">';
 
-		do_action( 'pc_header_logo_inner_before' );
-
 		echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="Accueil '.$settings_project['coord-name'].'">';
 
 			$img_datas = array(
@@ -74,9 +95,16 @@ function pc_display_header_logo() {
 
 		echo '</a>';
 
-		do_action( 'pc_header_logo_inner_after' );
-
 	echo '</div>';
+
+}
+
+
+/*----------  Bouton menu  ----------*/
+
+function pc_display_nav_button_open_close() {
+
+	echo '<div class="h-nav-btn-box"><button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-h-nav reset-btn" aria-hidden="true" tabindex="-1"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="h-nav-btn-txt">Menu</span></button></div>';
 
 }
 
@@ -119,17 +147,6 @@ function pc_display_header_end() {
 }
 
 
-/*----------  Bouton menu  ----------*/
-
-add_action( 'pc_header_logo_inner_after', 'pc_display_button_nav', 10 );
-
-	function pc_display_button_nav() {
-
-		echo '<div class="h-nav-btn-box"><button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-h-nav reset-btn" aria-hidden="true" tabindex="-1"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="h-nav-btn-txt">Menu</span></button></div>';
-
-	}
-
-
 /*----------  Overlay navigation  ----------*/
 
 function pc_display_nav_overlay() {
@@ -140,7 +157,7 @@ function pc_display_nav_overlay() {
 
 /*----------  Réseaux sociaux  ----------*/
 
-add_action( 'pc_header_nav_inner_after', 'pc_display_header_social', 10);
+add_action( 'pc_header_nav_inner_after', 'pc_display_header_social', 10 );
 
 	function pc_display_header_social() {
 

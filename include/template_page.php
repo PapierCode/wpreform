@@ -11,46 +11,31 @@
 =============================*/
 
 add_action( 'pc_page_content_before', 'pc_display_main_start', 10 ); // layout commun -> templates_layout.php
-add_action( 'pc_page_content_before', 'pc_display_schema_post', 20, 2 ); // données structurées
 
 add_action( 'pc_page_content_before', 'pc_display_main_title_start', 20 ); // layout commun -> templates_layout.php
 add_action( 'pc_page_content_before', 'pc_display_main_title', 30, 1 ); // layout commun -> templates_layout.php
-add_action( 'pc_page_content_before', 'pc_display_main_title_end', 100 ); // layout commun -> templates_layout.php
+add_action( 'pc_page_content_before', 'pc_display_main_title_end', 40 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_page_wysiwyg_before', 'pc_display_main_content_start', 10 ); // layout commun -> templates_layout.php
-add_action( 'pc_page_wysiwyg_after', 'pc_display_st_list_start', 20, 2 ); // début container st
-add_action( 'pc_page_wysiwyg_after', 'pc_display_specific_content', 30, 2 ); // contenu supplémentaire
-add_action( 'pc_page_wysiwyg_after', 'pc_display_st_list_end', 40, 2 ); // fin container st
-add_action( 'pc_page_wysiwyg_after', 'pc_display_sub_pages_schema_collection_page', 50, 2 ); // données structurées
-add_action( 'pc_page_wysiwyg_after', 'pc_display_main_content_end', 100 ); // layout commun -> templates_layout.php
+add_action( 'pc_page_content_before', 'pc_display_main_content_start', 50 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_page_content_footer', 'pc_display_main_footer_start', 10 ); // layout commun -> templates_layout.php
-add_action( 'pc_page_content_footer', 'pc_display_subpage_backlink', 20, 1 ); // lien retour
-add_action( 'pc_page_content_footer', 'pc_display_share_links', 30 ); // layout commun -> templates_layout.php
-add_action( 'pc_page_content_footer', 'pc_display_main_footer_end', 100 ); // layout commun -> templates_layout.php
+add_action( 'pc_page_content_after', 'pc_display_st_list_start', 10, 2 ); // début container st
+add_action( 'pc_page_content_after', 'pc_display_specific_content', 20, 2 ); // contenu supplémentaire
+add_action( 'pc_page_content_after', 'pc_display_st_list_end', 30, 2 ); // fin container st
 
-add_action( 'pc_page_content_after', 'pc_display_main_end', 100 ); // layout commun -> templates_layout.php
+add_action( 'pc_page_content_after', 'pc_display_main_content_end', 40 ); // layout commun -> templates_layout.php
+
+add_action( 'pc_page_content_after', 'pc_display_main_footer_start', 50 ); // layout commun -> templates_layout.php
+add_action( 'pc_page_content_after', 'pc_display_subpage_backlink', 60, 1 ); // lien retour
+add_action( 'pc_page_content_after', 'pc_display_share_links', 70 ); // layout commun -> templates_layout.php
+add_action( 'pc_page_content_after', 'pc_display_main_footer_end', 80 ); // layout commun -> templates_layout.php
+
+add_action( 'pc_page_content_after', 'pc_display_schema_post', 90, 2 ); // données structurées
+add_action( 'pc_page_content_after', 'pc_display_sub_pages_schema_collection_page', 100, 2 ); // données structurées
+
+add_action( 'pc_page_content_after', 'pc_display_main_end', 110 ); // layout commun -> templates_layout.php
 
 
 /*=====  FIN Hooks  =====*/
-
-/*===========================================
-=            Données structurées            =
-===========================================*/
-
-function pc_display_schema_post( $post, $post_metas ) {
-
-	$schema = pc_get_schema_article( $post, $post_metas, true );
-	$schema = apply_filters( 'pc_filter_schema_post', $schema, $post, $post_metas );
-
-	if ( !post_password_required() ) {
-		echo '<script type="application/ld+json">'.json_encode($schema,JSON_UNESCAPED_SLASHES).'</script>';
-	}
-
-}
-
-
-/*=====  FIN Données structurées  =====*/
 
 /*===============================================
 =            Contenu supplémentaire             =
@@ -103,6 +88,41 @@ function pc_display_st_list_end( $post, $post_metas ) {
 
 }
 
+
+/*=====  FIN Contenu supplémentaire   =====*/
+
+/*==============================================
+=            Sous-page, lien retour            =
+==============================================*/
+
+function pc_display_subpage_backlink( $post ) {
+
+    if ( $post->post_type == 'page' && $post->post_parent > 0 ) {
+
+        echo '<nav class="main-footer-nav"><a href="'.get_the_permalink($post->post_parent).'" class="button" title="'.get_the_title($post->post_parent).'">'.pc_svg('arrow').'<span>Retour</span></a></nav>';
+
+    }
+
+}
+
+
+/*=====  FIN Sous-page, lien retour  =====*/
+
+/*===========================================
+=            Données structurées            =
+===========================================*/
+
+function pc_display_schema_post( $post, $post_metas ) {
+
+	$schema = pc_get_schema_article( $post, $post_metas, true );
+	$schema = apply_filters( 'pc_filter_schema_post', $schema, $post, $post_metas );
+
+	if ( !post_password_required() ) {
+		echo '<script type="application/ld+json">'.json_encode($schema,JSON_UNESCAPED_SLASHES).'</script>';
+	}
+
+}
+
 function pc_display_sub_pages_schema_collection_page( $post, $post_metas ) {
 
 	if ( !post_password_required() && isset( $post_metas['content-subpages'] ) ) {
@@ -133,21 +153,4 @@ function pc_display_sub_pages_schema_collection_page( $post, $post_metas ) {
 }
 
 
-/*=====  FIN Contenu supplémentaire   =====*/
-
-/*==============================================
-=            Sous-page, lien retour            =
-==============================================*/
-
-function pc_display_subpage_backlink( $post ) {
-
-    if ( $post->post_type == 'page' && $post->post_parent > 0 ) {
-
-        echo '<nav class="main-footer-nav"><a href="'.get_the_permalink($post->post_parent).'" class="button" title="'.get_the_title($post->post_parent).'">'.pc_svg('arrow').'<span>Retour</span></a></nav>';
-
-    }
-
-}
-
-
-/*=====  FIN Sous-page, lien retour  =====*/
+/*=====  FIN Données structurées  =====*/

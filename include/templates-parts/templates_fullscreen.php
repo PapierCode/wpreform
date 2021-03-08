@@ -80,7 +80,7 @@ function pc_fullscreen_edit_html_css_class( $css_classes ) {
 =            Ajout container            =
 =======================================*/
 
-add_action( 'pc_body_start', 'pc_fullscreen_display_img_container', 20 );
+add_action( 'pc_header', 'pc_fullscreen_display_img_container', 20 );
 
 	function pc_fullscreen_display_img_container() {
 

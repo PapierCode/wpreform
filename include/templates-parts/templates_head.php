@@ -41,9 +41,9 @@ function pc_get_html_css_class() {
 =            Metas SEO & social            =
 ==========================================*/
 
-add_action( 'wp_head', 'pc_diplay_metas_seo_and_social', 5 );
+add_action( 'wp_head', 'pc_display_metas_seo_and_social', 5 );
 
-	function pc_diplay_metas_seo_and_social() {
+	function pc_display_metas_seo_and_social() {
 
 		global $images_project_sizes; // tailles d'images déclarées
 		global $settings_project; // config projet
@@ -73,13 +73,13 @@ add_action( 'wp_head', 'pc_diplay_metas_seo_and_social', 5 );
 			$home_metas = get_option('home-settings-option');
 
 			// titre
-			$seo_metas['title'] = ( isset( $home_metas['seo-title'] ) && $home_metas['seo-title'] != '' ) ? $home_metas['seo-title'] : $home_metas['content-title'];
+			$seo_metas['title'] = ( isset( $home_metas['seo-title'] ) && '' != $home_metas['seo-title'] ) ? $home_metas['seo-title'] : $home_metas['content-title'];
 
 			// description
-			$seo_metas['description'] = ( isset( $home_metas['seo-desc'] ) && $home_metas['seo-desc'] != '' ) ? $home_metas['seo-desc'] : wp_trim_words( $home_metas['content-txt'], $texts_lengths['excerpt'], '...' );
+			$seo_metas['description'] = ( isset( $home_metas['seo-desc'] ) && '' != $home_metas['seo-desc'] ) ? $home_metas['seo-desc'] : wp_trim_words( $home_metas['content-txt'], $texts_lengths['excerpt'], '...' );
 
 			// visuel
-			if ( isset( $home_metas['visual-id'] ) && $home_metas['visual-id'] != '' && is_object( get_post( $home_metas['visual-id'] ) ) ) {
+			if ( isset( $home_metas['visual-id'] ) && '' != $home_metas['visual-id'] && is_object( get_post( $home_metas['visual-id'] ) ) ) {
 				$seo_metas['img'] = wp_get_attachment_image_src($home_metas['visual-id'],'share')[0];
 			}
 
@@ -113,11 +113,9 @@ add_action( 'wp_head', 'pc_diplay_metas_seo_and_social', 5 );
 		
 		/*=====  FIN Filtre  =====*/
 
-		/*=====================================================
-		=            Affichage métas et CSS inline            =
-		=====================================================*/
-
-		/*----------  Affichage métas  ----------*/
+		/*=================================
+		=            Affichage            =
+		=================================*/
 
 		echo '<title>'.$seo_metas['title'].'</title>';
 		
@@ -140,12 +138,9 @@ add_action( 'wp_head', 'pc_diplay_metas_seo_and_social', 5 );
 		foreach ( $head_metas_datas as $meta ) {
 			echo '<meta '.$meta[0].'="'.$meta[1].'" content="'.$meta[2].'" />';
 		}
-
-
-		/*----------  CSS custom  ----------*/
 			
 		
-		/*=====  FIN Affichage métas et CSS inline  =====*/
+		/*=====  FIN Affichage  =====*/
 
 	};
 
@@ -181,7 +176,7 @@ add_action( 'wp_head', 'pc_display_css_inline', 7 );
 	function pc_display_css_inline() {
 		
 		$css_custom = apply_filters( 'pc_filter_css_custom', '' );
-		if ( $css_custom != '' ) { echo '<style>'.$css_custom.'</style>'; }
+		if ( '' != $css_custom ) { echo '<style>'.$css_custom.'</style>'; }
 
 	};
 
@@ -198,7 +193,7 @@ add_action( 'wp_head', 'pc_display_statistics_tracker', 20 );
 
 		global $settings_pc;
 
-		if ( isset($settings_pc['matomo-analytics-code']) && $settings_pc['matomo-analytics-code'] != '' ) {
+		if ( isset($settings_pc['matomo-analytics-code']) && '' != $settings_pc['matomo-analytics-code'] ) {
 
 			pc_display_tag_matomo( $settings_pc['matomo-analytics-code'] );
 

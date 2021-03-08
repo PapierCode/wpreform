@@ -11,8 +11,7 @@
 
 function pc_get_schema_client_type() {
 
-	$type = 'Organization';
-	$type = apply_filters( 'pc_filter_schema_client_type', $type );
+	$type = apply_filters( 'pc_filter_schema_client_type', 'Organization' );
 
 	return $type;
 
@@ -250,7 +249,7 @@ function pc_get_schema_article( $post, $post_metas, $context = false ) {
 		'url' => $post_url.'#main',
 		'datePublished' => get_the_date( 'c', $post_id ),
 		'dateModified' => get_the_modified_date( 'c', $post_id ),
-		'headline' => get_the_title( $post_id ),
+		'headline' => pc_get_post_seo_title( $post_id, $post_metas ),
 		'description' => pc_get_post_seo_description( $post->ID, $post_metas ),
 		'mainEntityOfPage'	=> $post_url,
 		'image' => array(

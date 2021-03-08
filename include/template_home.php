@@ -77,7 +77,7 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 				// lien
 				$post_url = get_the_permalink( $post_id );				
 				// image datas
-				$post_img_datas = pc_get_post_resum_img_datas( $post_id, $post_metas );
+				$post_img_datas = pc_get_post_resum_img_urls( $post_id, $post_metas );
 
 				// affichage
 				echo '<li class="home-shortcut-item"><a title="'.$post_title.'" href="'.$post_url.'" class="home-shortcut-link">';

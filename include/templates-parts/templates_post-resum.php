@@ -42,59 +42,43 @@ function pc_get_post_resum_excerpt( $post_id, $post_metas ) {
 =            Image            =
 =============================*/
 
-/*----------  Défaut  ----------*/
+/*----------  Fichiers  ----------*/
 
-function pc_get_post_resum_img_default_datas() {
+function pc_get_post_resum_img_urls( $post_id, $post_metas ) {
 
 	$template_directory = get_bloginfo('template_directory');
-
-	$post_img_datas = array(
+	$post_img_urls = apply_filters( 'pc_filter_post_resum_img_default_datas', array(
 		$template_directory.'/images/st-default-400.jpg',
 		$template_directory.'/images/st-default-500.jpg',
 		$template_directory.'/images/st-default-700.jpg'
-	);
-
-	$post_img_datas = apply_filters( 'pc_filter_post_resum_img_default_datas', $post_img_datas );
-	return $post_img_datas;
-
-}
-
-
-/*----------  Données brutes  ----------*/
-
-function pc_get_post_resum_img_datas( $post_id, $post_metas ) {
+	) );
 
 	$img_post = ( isset($post_metas['visual-id']) ) ? get_post( $post_metas['visual-id'][0] ) : null;
-	$post_img_datas = array();
 
 	if ( is_object( $img_post ) ) {
 
-		$post_img_datas['urls'] = array(
+		$post_img_urls = array(
 			wp_get_attachment_image_src( $img_post->ID,'st-400' )[0],
 			wp_get_attachment_image_src( $img_post->ID,'st-500' )[0],
 			wp_get_attachment_image_src( $img_post->ID,'st-700' )[0]
 		);	
 
-	} else {
-
-		$post_img_datas['urls'] = pc_get_post_resum_img_default_datas();
-
 	}
 
-	apply_filters( 'pc_filter_post_resum_img_datas', $post_img_datas, $post_id, $post_metas );
-	return $post_img_datas;
+	apply_filters( 'pc_filter_post_resum_img_datas', $post_img_urls, $post_id, $post_metas );
+	return $post_img_urls;
 
 }
 
 
 /*----------  HTML  ----------*/
 
-function pc_display_post_resum_img_tag( $post_id, $post_img_datas ) {
+function pc_display_post_resum_img_tag( $post_id, $post_img_urls ) {
 
-	$post_img_tag_srcset = $post_img_datas['urls'][0].' 400w, '.$post_img_datas['urls'][1].' 500w, '.$post_img_datas['urls'][2].' 700w';
+	$post_img_tag_srcset = $post_img_urls[0].' 400w, '.$post_img_urls[1].' 500w, '.$post_img_urls[2].' 700w';
 	$post_img_tag_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 700px, (min-width:760px) 500px';
 
-	$post_img_tag = '<img src="'.$post_img_datas['urls'][2].'" alt="" srcset="'.$post_img_tag_srcset.'" sizes="'.$post_img_tag_sizes.'" loading="lazy" />';
+	$post_img_tag = '<img src="'.$post_img_urls[2].'" alt="" srcset="'.$post_img_tag_srcset.'" sizes="'.$post_img_tag_sizes.'" loading="lazy" />';
 
 	$post_img_tag = apply_filters( 'pc_filter_post_resum_img_tag', $post_img_tag, $post_id );
 	echo $post_img_tag;
@@ -108,12 +92,6 @@ function pc_display_post_resum_img_tag( $post_id, $post_img_datas ) {
 =            Affichage            =
 =================================*/
 
-function pc_get_post_resum_link_tag_start( $class, $href, $title ) {
-
-	return '<a href="'.$href.'" class="'.$class.'" title="Lire la suite de l\'article '.$title.'">';
-
-}
-
 function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 ) {
 
 	// post métas
@@ -123,9 +101,10 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	$post_title = (isset($post_metas['resum-title'])) ? $post_metas['resum-title'][0] : get_the_title($post_id);
 	// lien
 	$post_link = get_the_permalink($post_id);
-	$post_link_position = apply_filters( 'pc_filter_post_resum_link_postion', 'multiple' ); // multiple || global	
+	$link_tag_start = '<a href="'.$post_link.'" class="st-link" title="Lire la suite de l\'article '.$post_title.'">';
+	$post_link_position = apply_filters( 'pc_filter_post_resum_link_position', 'multiple' ); // multiple || global	
 	// image datas
-	$post_img_datas = pc_get_post_resum_img_datas( $post_id, $post_metas );
+	$post_img_urls = pc_get_post_resum_img_urls( $post_id, $post_metas );
 	// description
 	$post_desc = pc_get_post_resum_excerpt( $post_id, $post_metas );	
 	
@@ -142,7 +121,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 		'url' => $post_link,
 		'image' => array(
 			'@type'		=>'ImageObject',
-			'url' 		=> $post_img_datas['urls'][2],
+			'url' 		=> $post_img_urls[2],
 			'width' 	=> $images_project_sizes['st-700']['width'],
 			'height' 	=> $images_project_sizes['st-700']['height']
 		)
@@ -152,18 +131,18 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	
 	echo '<li class="st '.$post_css.'"><article class="st-inner">';
 
-		if ( 'global' == $post_link_position ) { echo pc_get_post_resum_link_tag_start( 'st-link', $post_link, $post_title ); }
+		if ( 'global' == $post_link_position ) { echo $link_tag_start; }
 
 			// filtre
 			do_action( 'pc_post_resum_after_start', $post_id );
 		
 			echo '<div class="st-figure" aria-hidden="true">';
-				pc_display_post_resum_img_tag( $post_id, $post_img_datas );				
+				pc_display_post_resum_img_tag( $post_id, $post_img_urls );				
 			echo '</div>';
 
 			echo '<h'.$post_title_level.' class="st-title">';
 				if ( 'multiple' == $post_link_position ) {
-					echo pc_get_post_resum_link_tag_start( 'st-link', $post_link, $post_title ).$post_title.'</a>';
+					echo $link_tag_start.$post_title.'</a>';
 				} else {
 					echo $post_title;
 				}

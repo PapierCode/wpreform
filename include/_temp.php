@@ -1,5 +1,100 @@
 <?php
 
+class PC_Post {
+
+	private $_post_id;
+	private $_post_metas;
+
+	public function __construct ( $post_id ) {
+
+		$this->_post_id = $post_id;
+		$this->_post_metas = get_post_meta( $post_id );
+
+	}
+
+	public function get_metas() {
+
+		return $this->_post_metas;
+
+	}
+
+	function get_post_seo_title() {
+
+		$post_metas = $this->_post_metas;
+
+		// titre
+		if ( isset( $post_metas['seo-title'] ) ) {
+			
+			$post_seo_title = $post_metas['seo-title'][0];
+	
+		} else if ( isset( $post_metas['resum-title'] ) ) {
+	
+			$post_seo_title = $post_metas['resum-title'][0];
+	
+		} else {
+	
+			$post_seo_title = get_the_title( $this->_post_id );
+	
+		}
+		
+		global $settings_project;
+		return $post_seo_title.' - '.$settings_project['coord-name'];
+	
+	}
+	
+	function get_post_seo_description() {
+
+		$post_metas = $this->_post_metas;
+	
+		if ( isset( $post_metas['seo-desc'] ) ) {
+	
+			$post_seo_description = $post_metas['seo-desc'][0];
+	
+		} else if ( isset( $post_metas['resum-desc'] ) ) {
+	
+			$post_seo_description = $post_metas['resum-desc'][0];
+	
+		} else {
+	
+			$post_seo_description = get_the_excerpt( $this->_post_id );
+			
+		}
+		
+		if ( '' != $post_seo_description ) {
+	
+			global $texts_lengths;
+			return pc_words_limit( $post_seo_description, $texts_lengths['seo-desc'] );
+
+		} else { 
+
+			global $settings_project;
+			return $settings_project['seo-desc'];
+		
+		}
+	
+	}
+
+}
+
+//add_action( 'wp', 'pc_test_class' );
+
+	function pc_test_class() {
+
+		if ( class_exists( 'PC_post' ) ) {
+
+			$posts_types = apply_filters( 'pc_filter_post_types', array( 'page' ) );
+
+			if ( is_singular( $posts_types ) ) {
+
+				global $pc_post;
+				$pc_post = new PC_Post( get_the_ID() );
+
+			}
+
+		}
+
+	}
+
 // masquer les sous pages dans la gestion des menus ?
 // add_filter( 'nav_menu_items_page_recent', 'pc_test', 10, 3 );
 // add_filter( 'nav_menu_items_page', 'pc_test', 10, 3 );

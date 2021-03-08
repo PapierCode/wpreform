@@ -13,12 +13,12 @@
 =            Hooks            =
 =============================*/
 
-add_action( 'pc_footer_start', 'pc_display_footer_start', 10 );
-add_action( 'pc_footer_content', 'pc_display_footer_contact', 10 );
-add_action( 'pc_footer_content', 'pc_display_footer_nav', 20 );
-add_action( 'pc_footer_end', 'pc_display_footer_end', 10 );
+add_action( 'pc_footer', 'pc_display_footer_start', 10 );
+add_action( 'pc_footer', 'pc_display_footer_contact', 20 );
+add_action( 'pc_footer', 'pc_display_footer_nav', 30 );
+add_action( 'pc_footer', 'pc_display_footer_end', 40 );
 
-add_action( 'pc_body_end', 'pc_display_body_inner_end', 10 );
+add_action( 'pc_footer', 'pc_display_body_inner_end', 50 );
 
 add_action( 'pc_wp_footer', 'pc_display_pop_container', 10 );
 add_action( 'pc_wp_footer', 'pc_display_js_footer', 20 );
@@ -60,7 +60,7 @@ function pc_display_footer_contact() {
 		'alt' => 'Logo '.$settings_project['coord-name']
 	);
 	// filtre
-	$img_datas = apply_filters( 'pc_filter_footer_logo_img_datas', $img_datas );
+	$img_datas = apply_filters( 'pc_filter_footer_logo_img_datas', $img_datas, $settings_project );
 	// html
 	$img_tag = '<img src="'.$img_datas['url'].'" alt="'.$img_datas['alt'].'" width="'.$img_datas['width'].'" height="'.$img_datas['height'].'" loading="lazy" />';
 
@@ -126,7 +126,7 @@ function pc_display_footer_nav() {
 			echo '<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; '.$settings_project['coord-name'].'</li>';
 		}
 		
-		$nav_footer_config = apply_filters( 'pc_filter_footer_nav_args', array(
+		$nav_footer_args = apply_filters( 'pc_filter_footer_nav_args', array(
 			'theme_location'  	=> 'nav-footer',
 			'nav_prefix'		=> array('f-nav','f-p-nav'),
 			'items_wrap'      	=> '%3$s',
@@ -136,7 +136,7 @@ function pc_display_footer_nav() {
 			'fallback_cb'     	=> false,
 			'walker'          	=> new Pc_Walker_Nav_Menu()
 		) );
-		wp_nav_menu( $nav_footer_config );
+		wp_nav_menu( $nav_footer_args );
 
 		do_action( 'pc_footer_nav_list_inner_after' );
 		
@@ -185,17 +185,15 @@ function pc_display_js_footer() {
 
 	/*----------  Sprite to JS  ----------*/
 	
-	$sprite_to_js_array = array('arrow','cross');
-	apply_filters( 'pc_filter_sprite_to_js', $sprite_to_js_array );
+	$sprite_to_js_array = apply_filters( 'pc_filter_sprite_to_js', array('arrow','cross') );
 	pc_sprite_to_js( $sprite_to_js_array ); 
 	
 
 	/*----------  Fichiers JS  ----------*/
 
-	$js_files = array(
+	$js_files = apply_filters( 'pc_filter_js_files', array(
 		'wpreform' => get_bloginfo('template_directory').'/scripts/scripts-jquery.min.js'
-	);
-	$js_files = apply_filters( 'pc_filter_js_files', $js_files );
+	) );
 	
 	foreach ( $js_files as $id => $url ) {
 		echo '<script src="'.$url.'"></script>';
