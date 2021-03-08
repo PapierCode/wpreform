@@ -37,6 +37,7 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$li_class_name = '';
 		$link_class_name = '';
 		$span_class_name = '';
+
 		foreach ( $args->nav_prefix as $prefix ) {
 			$li_class_name .= $prefix.'-item '.$prefix.'-item--l'.$display_depth.' ';
 			$link_class_name .= $prefix.'-link '.$prefix.'-link--l'.$display_depth.' ';
@@ -52,14 +53,14 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 			'current-menu-parent' => 'is-active'
 		);
 		$clean_classes = str_replace( array_keys( $new_classes ), $new_classes, $clean_classes );
-		// array to string + classes ajoutées depuis l'admin
-		$li_class_name .= esc_attr( implode( ' ', $clean_classes ) ).' '.$item->classes[0];
 		
 		// filtres classes
 		$li_class_name = apply_filters( 'pc_filter_nav_menu_li_css_classes', $li_class_name, $args );
 		$link_class_name = apply_filters( 'pc_filter_nav_menu_link_css_classes', $link_class_name, $args );
 		$span_class_name = apply_filters( 'pc_filter_nav_menu_span_css_classes', $span_class_name, $args );
 
+		// array to string + classes ajoutées depuis l'admin
+		$li_class_name .= esc_attr( implode( ' ', $clean_classes ) ).' '.$item->classes[0];
 		// construction du li
 		$output .= '<li class="'.$li_class_name.'">';
 
