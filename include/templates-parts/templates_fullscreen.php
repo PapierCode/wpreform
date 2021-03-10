@@ -10,14 +10,11 @@
 =            Init            =
 ============================*/
  
-add_action( 'wp', 'pc_fullscreen_init' );
+add_action( 'wp', 'pc_fullscreen_init', 10 );
 
 	function pc_fullscreen_init() {
 
-		global $settings_pc;
-		
-		global $is_fullscreen;
-		$is_fullscreen = array();
+		global $settings_pc, $is_fullscreen;
 
 		if ( isset($settings_pc['wpreform-fullscreen']) ) {
 
@@ -41,7 +38,26 @@ add_action( 'wp', 'pc_fullscreen_init' );
 		$img_post = ( isset( $is_fullscreen['visual-id'] ) && '' != $is_fullscreen['visual-id'] ) ? get_post( $is_fullscreen['visual-id'] ) : null;
 
 		if ( !isset( $is_fullscreen['visual-fullscreen'] ) || !is_object( $img_post ) ) { 
+			
 			$is_fullscreen = array();
+
+		} else {
+
+			add_filter( 'pc_filter_html_css_class', 'pc_fullscreen_edit_html_css_class', 10, 2 );
+
+			function pc_fullscreen_edit_html_css_class( $css_classes ) {
+
+				global $is_fullscreen;
+				$css_prefix = 'h1-pos-';
+		 
+				$css_classes[] = 'is-fullscreen';
+				$css_classes[] = ( isset( $is_fullscreen['visual-title-h'] ) ) ? $css_prefix.'h-'.$is_fullscreen['visual-title-h'] : $css_prefix.'h-center';
+				$css_classes[] = ( isset( $is_fullscreen['visual-title-v'] ) ) ? $css_prefix.'v-'.$is_fullscreen['visual-title-v'] : $css_prefix.'v-center';
+
+				return $css_classes;
+
+			}
+
 		}
 
 	}
@@ -49,38 +65,11 @@ add_action( 'wp', 'pc_fullscreen_init' );
 	
 /*=====  FIN Init  =====*/
 
-/*======================================================
-=            Classes CSS sur la balise HTML            =
-======================================================*/
-
-function pc_fullscreen_edit_html_css_class( $css_classes ) {
-	
-	global $is_fullscreen;
-
-	if ( !empty( $is_fullscreen ) ) {
-
-		$is_fullscreen = apply_filters( 'pc_filter_fullscreen_html_css_class', $is_fullscreen );
-
-		$css_prefix = 'h1-pos-';
-		
-		$css_classes[] = 'is-fullscreen';
-		$css_classes[] = ( isset( $is_fullscreen['visual-title-h'] ) ) ? $css_prefix.'h-'.$is_fullscreen['visual-title-h'] : $css_prefix.'h-center';
-		$css_classes[] = ( isset( $is_fullscreen['visual-title-v'] ) ) ? $css_prefix.'v-'.$is_fullscreen['visual-title-v'] : $css_prefix.'v-center';
-
-	}
-
-	return $css_classes;
-
-}
-	
-	
-/*=====  FIN Classes CSS sur la balise HTML  =====*/
-
 /*=======================================
 =            Ajout container            =
 =======================================*/
 
-add_action( 'pc_header', 'pc_fullscreen_display_img_container', 20 );
+add_action( 'pc_header', 'pc_fullscreen_display_img_container', 15 );
 
 	function pc_fullscreen_display_img_container() {
 
@@ -127,9 +116,9 @@ add_action( 'pc_page_content_before', 'pc_fullscreen_display_btn_scroll_to_conte
 =            CSS inline            =
 ==================================*/
 
-add_filter( 'pc_filter_css_custom', 'pc_fullscreen_display_inline_css', 10 );
+add_filter( 'pc_filter_css_inline', 'pc_fullscreen_edit_css_inline', 10 );
 
-	function pc_fullscreen_display_inline_css( $css_custom ) {
+	function pc_fullscreen_edit_css_inline( $css_inline ) {
 
 		global $is_fullscreen;
 
@@ -146,9 +135,9 @@ add_filter( 'pc_filter_css_custom', 'pc_fullscreen_display_inline_css', 10 );
 
 				foreach ($sizes as $size) {
 
-					if ( $size[0] != '' ) { $css_custom .= '@media(min-width:'.$size[0].'em){'; }
-					$css_custom .= '.fs-img{background-image:url("'.wp_get_attachment_image_src( $is_fullscreen['visual-id'], $size[1] )[0].'")}';
-					if ( $size[0] != '' ) { $css_custom .= '}'; }
+					if ( $size[0] != '' ) { $css_inline .= '@media(min-width:'.$size[0].'em){'; }
+					$css_inline .= '.fs-img{background-image:url("'.wp_get_attachment_image_src( $is_fullscreen['visual-id'], $size[1] )[0].'")}';
+					if ( $size[0] != '' ) { $css_inline .= '}'; }
 
 				}
 				
@@ -156,7 +145,7 @@ add_filter( 'pc_filter_css_custom', 'pc_fullscreen_display_inline_css', 10 );
 
 		}
 
-		return $css_custom;
+		return $css_inline;
 
 	}
 

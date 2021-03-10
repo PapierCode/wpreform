@@ -135,7 +135,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 
 		if ( 'global' == $post_link_position ) { echo $post_link_tag_start; }
 
-			// filtre
+			// hook
 			do_action( 'pc_post_resum_after_start', $post_id );
 		
 			echo '<div class="st-figure" aria-hidden="true">';
@@ -150,7 +150,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 				}
 			echo '</h'.$post_title_level.'>';	
 
-			// filtre	
+			// hook	
 			do_action( 'pc_post_resum_after_title', $post_id );
 			
 			if ( '' != $post_desc ) {
@@ -166,7 +166,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 				echo '<div class="st-read-more" aria-hidden="true"><span class="st-read-more-ico">'.$st_ico_more.'</span> <span class="st-read-more-txt">Lire la suite</span></a></div>';
 			}
 		
-			// filtre
+			// hook
 			do_action( 'pc_post_resum_before_end', $post_id );
 
 		if ( 'global' == $post_link_position ) { echo '</a>'; }

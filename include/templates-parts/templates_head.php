@@ -23,9 +23,6 @@ function pc_get_html_css_class() {
 	else if ( is_page() ) {	$css_classes[] = 'is-page'; }
 	else if ( is_404() ) { $css_classes[] = 'is-404'; }
 
-	// fullscreen
-	$css_classes = pc_fullscreen_edit_html_css_class( $css_classes );
-
 	// pour modifier
 	$css_classes = apply_filters( 'pc_filter_html_css_class', $css_classes );
 
@@ -175,8 +172,8 @@ add_action( 'wp_head', 'pc_display_css_inline', 7 );
 
 	function pc_display_css_inline() {
 		
-		$css_custom = apply_filters( 'pc_filter_css_custom', '' );
-		if ( '' != $css_custom ) { echo '<style>'.$css_custom.'</style>'; }
+		$css_inline = apply_filters( 'pc_filter_css_inline', '' );
+		if ( '' != $css_inline ) { echo '<style>'.$css_inline.'</style>'; }
 
 	};
 
