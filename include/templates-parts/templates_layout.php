@@ -61,13 +61,13 @@ function pc_display_main_content_end() {
 
 function pc_display_main_footer_start() {
 
-    echo '<footer class="main-footer"><div class="main-footer-inner">';
+    echo '<footer class="main-footer"><nav class="main-footer-inner">';
 
 }
 
 function pc_display_main_footer_end() {
 
-    echo '</div></footer>';
+    echo '</nav></footer>';
 
 }
 

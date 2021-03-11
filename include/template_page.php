@@ -99,7 +99,7 @@ function pc_display_subpage_backlink( $post ) {
 
     if ( $post->post_type == 'page' && $post->post_parent > 0 ) {
 
-        echo '<nav class="main-footer-nav"><a href="'.get_the_permalink($post->post_parent).'" class="button" title="'.get_the_title($post->post_parent).'">'.pc_svg('arrow').'<span>Retour</span></a></nav>';
+        echo '<a href="'.get_the_permalink($post->post_parent).'" class="previous button" title="'.get_the_title($post->post_parent).'">'.pc_svg('arrow').'<span>Retour</span></a>';
 
     }
 
