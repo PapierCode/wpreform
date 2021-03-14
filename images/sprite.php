@@ -6,7 +6,7 @@ $sprite = array(
 
 	'cross' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M20 2.9l-2.9-2.9-7.1 7.1-7.1-7.1-2.9 2.9 7.1 7.1-7.1 7.1 2.9 2.9 7.1-7.1 7.1 7.1 2.9-2.9-7.1-7.1z"/></svg>',
 
-	'more-16' => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="6" width="4" height="16"/><rect y="6" width="16" height="4"/></svg>',
+	'more' => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect x="6" width="4" height="16"/><rect y="6" width="16" height="4"/></svg>',
 
 	'msg' => '<svg xmlns="http://www.w3.org/2000/svg" width="4" height="19" viewBox="0 0 4 19"><rect y="15" width="4" height="4"/><rect width="4" height="12"/></svg>',
 
