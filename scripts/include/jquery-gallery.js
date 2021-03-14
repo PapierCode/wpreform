@@ -78,7 +78,7 @@
 
             $glMain,                            // gallery main container, return an object
             $glHeader,                          // gallery header, return an object
-            $glSlides,                       // gallery moving container, return an object
+            $glSlides,                       	// gallery moving container, return an object
             $allSlide,                          // slides list, return an object
             $slidePrev,                         // active slide before gallery move, return an object
             $slideActive,                       // current active slide, return an object
@@ -204,13 +204,11 @@
                 $btnNav = $('.gl-btn-nav').on('mouseup', function() { $(this).blur(); });
                 $btnPrev = $('.gl-btn-nav--prev').on('click', function(){ prevImg(); });
 				$btnNext = $('.gl-btn-nav--next').on('click', function(){ nextImg(); });
-				
-				$glHeader.append('<button class="gl-btn gl-btn-close reset-btn '+plugin.settings.btnCloseClass+'">'+plugin.settings.btnCloseInner+'</button>');
-
-				
-				$btnClose = $('.gl-btn-close').on('click', function(){ galleryHide(); });
 
             }
+				
+			$glHeader.append('<button class="gl-btn gl-btn-close reset-btn '+plugin.settings.btnCloseClass+'">'+plugin.settings.btnCloseInner+'</button>');
+			$btnClose = $('.gl-btn-close').on('click', function(){ galleryHide(); });
 
 
             /*----------  add loader  ----------*/
