@@ -10,23 +10,23 @@
 =            Hooks            =
 =============================*/
 
-add_action( 'pc_home_content_before', 'pc_display_main_start', 10 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_main_start', 10 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_home_content', 'pc_display_main_title_start', 10 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content', 'pc_display_home_main_title', 20, 1 ); // contenu
-add_action( 'pc_home_content', 'pc_display_main_title_end', 30 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_main_title_start', 20 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_home_main_title', 30 ); // contenu
+add_action( 'pc_home_content', 'pc_display_main_title_end', 40 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_home_content', 'pc_display_main_content_start', 40 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content', 'pc_display_home_main_introduction', 50, 1 ); // introduction
-add_action( 'pc_home_content', 'pc_display_home_main_shortcuts', 60, 1 ); // raccourcis
-add_action( 'pc_home_content', 'pc_display_home_schema_collection_page', 99, 1 ); // données structurées
-add_action( 'pc_home_content', 'pc_display_main_content_end', 100 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_main_content_start', 50 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_home_main_introduction', 60, 1 ); // introduction
+add_action( 'pc_home_content', 'pc_display_home_main_shortcuts', 70, 1 ); // raccourcis
+add_action( 'pc_home_content', 'pc_display_home_schema_collection_page', 80, 1 ); // données structurées
+add_action( 'pc_home_content', 'pc_display_main_content_end', 90 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_home_content_footer', 'pc_display_main_footer_start', 10 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content_footer', 'pc_display_share_links', 20 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content_footer', 'pc_display_main_footer_end', 100 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_main_footer_start', 100 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_share_links', 110 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_main_footer_end', 120 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_home_content_after', 'pc_display_main_end', 10 ); // layout commun -> templates_layout.php
+add_action( 'pc_home_content', 'pc_display_main_end', 130 ); // layout commun -> templates_layout.php
 
 
 /*=====  FIN Hooks  =====*/
