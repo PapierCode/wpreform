@@ -221,7 +221,8 @@ if ( $popBtnOpen.length > 0 ) {
 						scrollWheelZoom : false,
 						tap : false
 					}).setView([mapLat, mapLong], mapZoomDefault);
-					L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGFwaWVyY29kZSIsImEiOiJjaWoxem42NHUwMDZidjBtNWVienk2YnRwIn0.6CFJqIA2nRlML7EWwZBisA', {
+
+					L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGFwaWVyY29kZSIsImEiOiJja203a3E5N3kweXplMnhuNjBuOTV2bmQ1In0.UtKowadsitAGdxDUpMv5aA', {
 						id: 'mapbox/streets-v11',
 						tileSize: 512,
 						zoomOffset: -1

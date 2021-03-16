@@ -33,7 +33,7 @@ js_src = [
 ],
 
 js_src_all = [
-	'scripts/include/jquery-3.4.1.min.js'
+	'scripts/include/jquery-3.6.0.min.js'
 ].concat(js_src);
 
 
