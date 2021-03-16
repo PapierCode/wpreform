@@ -23,19 +23,13 @@ function pc_display_main_end() {
 
 /*----------  Header & title  ----------*/
 
-function pc_display_main_title_start() {
+function pc_display_main_header_start() {
 
 	echo '<header class="main-header"><div class="main-header-inner">';
 
 }
 
-function pc_display_main_title( $post ) {
-	
-	echo '<h1><span>'.get_the_title( $post->ID ).'</span></h1>';
-
-}
-
-function pc_display_main_title_end() {
+function pc_display_main_header_end() {
 	
 	echo '</div></header>';
 

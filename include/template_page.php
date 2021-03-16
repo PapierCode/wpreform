@@ -3,6 +3,13 @@
  * 
  * Template page
  * 
+ ** Hooks
+ ** Titre
+ ** Wysiwyg
+ ** Sous-pages & contenu spécifique
+ ** Sous-pages, lien retour
+ ** Données structurées
+ * 
  */
 
 
@@ -10,46 +17,65 @@
 =            Hooks            =
 =============================*/
 
-add_action( 'pc_page_content_before', 'pc_display_main_start', 10 ); // layout commun -> templates_layout.php
+// maint start
+add_action( 'pc_action_page_main_start', 'pc_display_main_start', 10 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_page_content_before', 'pc_display_main_title_start', 20 ); // layout commun -> templates_layout.php
-add_action( 'pc_page_content_before', 'pc_display_main_title', 30, 1 ); // layout commun -> templates_layout.php
-add_action( 'pc_page_content_before', 'pc_display_main_title_end', 40 ); // layout commun -> templates_layout.php
+	// header
+	add_action( 'pc_action_page_main_header', 'pc_display_main_header_start', 10 ); // layout commun -> templates_layout.php
+		add_action( 'pc_action_page_main_header', 'pc_display_page_main_title', 20 ); // titre
+	add_action( 'pc_action_page_main_header', 'pc_display_main_header_end', 100 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_page_content_before', 'pc_display_main_content_start', 50 ); // layout commun -> templates_layout.php
+	// content
+	add_action( 'pc_action_page_main_content', 'pc_display_main_content_start', 10 ); // layout commun -> templates_layout.php
+		add_action( 'pc_action_page_main_content', 'pc_display_page_wysiwyg', 20, 2 ); // éditeur
+		add_action( 'pc_action_page_main_content', 'pc_display_page_specific_content', 30, 2 ); // contenu supplémentaire
+		add_action( 'pc_action_page_main_content', 'pc_display_page_schema_article', 80, 2 ); // données structurées
+		add_action( 'pc_action_page_main_content', 'pc_display_page_schema_collection_page', 90, 2 ); // données structurées
+	add_action( 'pc_action_page_main_content', 'pc_display_main_content_end', 100 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_page_content_after', 'pc_display_st_list_start', 10, 2 ); // début container st
-add_action( 'pc_page_content_after', 'pc_display_specific_content', 20, 2 ); // contenu supplémentaire
-add_action( 'pc_page_content_after', 'pc_display_st_list_end', 30, 2 ); // fin container st
+	// footer
+	add_action( 'pc_action_page_main_footer', 'pc_display_main_footer_start', 10 ); // layout commun -> templates_layout.php
+		add_action( 'pc_action_page_main_footer', 'pc_display_page_backlink', 20 ); // lien retour
+		add_action( 'pc_action_page_main_footer', 'pc_display_share_links', 90 ); // layout commun -> templates_layout.php
+	add_action( 'pc_action_page_main_footer', 'pc_display_main_footer_end', 100 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_page_content_after', 'pc_display_main_content_end', 40 ); // layout commun -> templates_layout.php
-
-add_action( 'pc_page_content_after', 'pc_display_main_footer_start', 50 ); // layout commun -> templates_layout.php
-add_action( 'pc_page_content_after', 'pc_display_subpage_backlink', 60, 1 ); // lien retour
-add_action( 'pc_page_content_after', 'pc_display_share_links', 70 ); // layout commun -> templates_layout.php
-add_action( 'pc_page_content_after', 'pc_display_main_footer_end', 80 ); // layout commun -> templates_layout.php
-
-add_action( 'pc_page_content_after', 'pc_display_schema_post', 90, 2 ); // données structurées
-add_action( 'pc_page_content_after', 'pc_display_sub_pages_schema_collection_page', 100, 2 ); // données structurées
-
-add_action( 'pc_page_content_after', 'pc_display_main_end', 110 ); // layout commun -> templates_layout.php
+// main end
+add_action( 'pc_action_page_main_end', 'pc_display_main_end', 10 ); // layout commun -> templates_layout.php
 
 
 /*=====  FIN Hooks  =====*/
 
-/*===============================================
-=            Contenu supplémentaire             =
-===============================================*/
+/*=============================
+=            Titre            =
+=============================*/
 
-function pc_display_st_list_start( $post, $post_metas ) {
-
-	if ( !post_password_required() && isset( $post_metas['content-subpages'] ) ) {
-		echo '<ul class="st-list reset-list">';
-	}
+function pc_display_page_main_title() {
+	
+	echo '<h1><span>'.get_the_title().'</span></h1>';
 
 }
 
-function pc_display_specific_content( $post, $post_metas ) {
+
+/*=====  FIN Titre  =====*/
+
+/*===============================
+=            Wysiwyg            =
+===============================*/
+
+function pc_display_page_wysiwyg( $post, $post_metas  ) {
+
+	if ( $post->post_content != '' ) { the_content(); }
+
+}
+
+
+/*=====  FIN Wysiwyg  =====*/
+
+/*========================================================
+=            Sous-pages & contenu spécifique             =
+========================================================*/
+
+function pc_display_page_specific_content( $post, $post_metas ) {
 
 	if ( !post_password_required() ) {
 
@@ -68,9 +94,13 @@ function pc_display_specific_content( $post, $post_metas ) {
 			// affichage des résumés de pages
 			$sub_pages_ids = explode( ',', $post_metas['content-subpages'][0] );
 			
+			echo apply_filters( 'pc_filter_st_list_start', '<ul class="st-list reset-list">' );
+
 			foreach ( $sub_pages_ids as $key => $post_id ) {
 				pc_display_post_resum( $post_id, 'st--subpage', 2 );
 			}
+
+			echo apply_filters( 'pc_filter_st_list_end', '</ul>' );
 
 		}
 
@@ -78,24 +108,14 @@ function pc_display_specific_content( $post, $post_metas ) {
 
 }
 
-function pc_display_st_list_end( $post, $post_metas ) {
 
-	if ( !post_password_required() && isset( $post_metas['content-subpages'] ) ) {
-		
-		echo '</ul>';
-
-	}
-
-}
-
-
-/*=====  FIN Contenu supplémentaire   =====*/
+/*=====  FIN Sous-pages & contenu spécifique   =====*/
 
 /*==============================================
 =            Sous-page, lien retour            =
 ==============================================*/
 
-function pc_display_subpage_backlink( $post ) {
+function pc_display_page_backlink( $post ) {
 
     if ( $post->post_type == 'page' && $post->post_parent > 0 ) {
 
@@ -112,18 +132,18 @@ function pc_display_subpage_backlink( $post ) {
 =            Données structurées            =
 ===========================================*/
 
-function pc_display_schema_post( $post, $post_metas ) {
-
-	$schema = pc_get_schema_article( $post, $post_metas, true );
-	$schema = apply_filters( 'pc_filter_schema_post', $schema, $post, $post_metas );
+function pc_display_page_schema_article( $post, $post_metas ) {
 
 	if ( !post_password_required() ) {
+
+		$schema = pc_get_schema_article( $post, $post_metas, true );
 		echo '<script type="application/ld+json">'.json_encode($schema,JSON_UNESCAPED_SLASHES).'</script>';
+
 	}
 
 }
 
-function pc_display_sub_pages_schema_collection_page( $post, $post_metas ) {
+function pc_display_page_schema_collection_page( $post, $post_metas ) {
 
 	if ( !post_password_required() && isset( $post_metas['content-subpages'] ) ) {
 

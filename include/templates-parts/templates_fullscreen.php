@@ -90,8 +90,8 @@ add_action( 'pc_header', 'pc_fullscreen_display_img_container', 15 );
 =            Bouton d'accès au contenu            =
 =================================================*/
 
-add_action( 'pc_home_content', 'pc_fullscreen_display_btn_scroll_to_content', 35 );
-add_action( 'pc_page_content_before', 'pc_fullscreen_display_btn_scroll_to_content', 35 ); 
+add_action( 'pc_action_home_header', 'pc_fullscreen_display_btn_scroll_to_content', 30 );
+add_action( 'pc_action_page_header', 'pc_fullscreen_display_btn_scroll_to_content', 30 ); 
 
 	function pc_fullscreen_display_btn_scroll_to_content() {
 

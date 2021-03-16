@@ -81,7 +81,7 @@ add_action( 'wp_head', 'pc_display_metas_seo_and_social', 5 );
 			}
 
 
-		} elseif ( is_page() ) {
+		} elseif ( is_singular() ) {
 
 			$post_id = get_the_ID();
 			$post_metas = get_post_meta( $post_id );
@@ -184,9 +184,9 @@ add_action( 'wp_head', 'pc_display_css_inline', 7 );
 =            Statistiques            =
 ====================================*/
 
-add_action( 'wp_head', 'pc_display_statistics_tracker', 20 );
+add_action( 'wp_head', 'pc_display_matomo_tracker', 20 );
 
-	function pc_display_statistics_tracker() {
+	function pc_display_matomo_tracker() {
 
 		global $settings_pc;
 

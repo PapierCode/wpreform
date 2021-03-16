@@ -13,10 +13,12 @@
 =            Hooks            =
 =============================*/
 
-add_action( 'pc_footer', 'pc_display_footer_start', 10 );
-add_action( 'pc_footer', 'pc_display_footer_contact', 20 );
-add_action( 'pc_footer', 'pc_display_footer_nav', 30 );
-add_action( 'pc_footer', 'pc_display_footer_end', 40 );
+	add_action( 'pc_footer', 'pc_display_footer_start', 10 );
+
+		add_action( 'pc_footer', 'pc_display_footer_contact', 20 );
+		add_action( 'pc_footer', 'pc_display_footer_nav', 30 );
+		
+	add_action( 'pc_footer', 'pc_display_footer_end', 40 );
 
 add_action( 'pc_footer', 'pc_display_body_inner_end', 50 );
 

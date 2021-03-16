@@ -13,6 +13,7 @@
 =============================*/
 
 add_action( 'pc_header', 'pc_display_skip_nav', 10 );
+
 add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 
 	add_action( 'pc_header', 'pc_display_header_start', 30 );

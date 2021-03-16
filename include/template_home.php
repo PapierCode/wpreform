@@ -3,6 +3,11 @@
  * 
  * Template accueil
  * 
+ ** Titre
+ ** Wysiwyg
+ ** Raccourcis
+ ** Données structurées
+ * 
  */
 
 
@@ -10,32 +15,35 @@
 =            Hooks            =
 =============================*/
 
-add_action( 'pc_home_content', 'pc_display_main_start', 10 ); // layout commun -> templates_layout.php
+// main start
+add_action( 'pc_action_home_main_start', 'pc_display_main_start', 10 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_home_content', 'pc_display_main_title_start', 20 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content', 'pc_display_home_main_title', 30 ); // contenu
-add_action( 'pc_home_content', 'pc_display_main_title_end', 40 ); // layout commun -> templates_layout.php
+	// header
+	add_action( 'pc_action_home_main_header', 'pc_display_main_header_start', 10 ); // layout commun -> templates_layout.php
+		add_action( 'pc_action_home_main_header', 'pc_display_home_main_title', 20 ); // titre
+	add_action( 'pc_action_home_main_header', 'pc_display_main_header_end', 100 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_home_content', 'pc_display_main_content_start', 50 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content', 'pc_display_home_main_introduction', 60, 1 ); // introduction
-add_action( 'pc_home_content', 'pc_display_home_main_shortcuts', 70, 1 ); // raccourcis
-add_action( 'pc_home_content', 'pc_display_home_schema_collection_page', 80, 1 ); // données structurées
-add_action( 'pc_home_content', 'pc_display_main_content_end', 90 ); // layout commun -> templates_layout.php
+	// content
+	add_action( 'pc_action_home_main_content', 'pc_display_main_content_start', 10 ); // layout commun -> templates_layout.php
+		add_action( 'pc_action_home_main_content', 'pc_display_home_wysiwyg', 20, 1 ); // introduction
+		add_action( 'pc_action_home_main_content', 'pc_display_home_shortcuts', 30, 1 ); // raccourcis
+		add_action( 'pc_action_home_main_content', 'pc_display_home_schema_collection_page', 90, 1 ); // données structurées
+	add_action( 'pc_action_home_main_content', 'pc_display_main_content_end', 100 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_home_content', 'pc_display_main_footer_start', 100 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content', 'pc_display_share_links', 110 ); // layout commun -> templates_layout.php
-add_action( 'pc_home_content', 'pc_display_main_footer_end', 120 ); // layout commun -> templates_layout.php
+	// footer
+	add_action( 'pc_action_home_main_footer', 'pc_display_main_footer_start', 10 ); // layout commun -> templates_layout.php
+		add_action( 'pc_action_home_main_footer', 'pc_display_share_links', 90 ); // layout commun -> templates_layout.php
+	add_action( 'pc_action_home_main_footer', 'pc_display_main_footer_end', 100 ); // layout commun -> templates_layout.php
 
-add_action( 'pc_home_content', 'pc_display_main_end', 130 ); // layout commun -> templates_layout.php
+// main end
+add_action( 'pc_action_home_main_end', 'pc_display_main_end', 10 ); // layout commun -> templates_layout.php
 
 
-/*=====  FIN Hooks  =====*/
-
-/*===============================
-=            Contenu            =
-===============================*/
-
-/*----------  Title  ----------*/
+/*=====  FIN Hooks  =====*/ 
+ 
+/*=============================
+=            Titre            =
+=============================*/
 
 function pc_display_home_main_title( $settings_home ) {
 	
@@ -43,19 +51,26 @@ function pc_display_home_main_title( $settings_home ) {
 
 }
 
+/*=====  FIN Titre  =====*/
 
-/*----------  Wysiwyg  ----------*/
+/*===============================
+=            Wysiwyg            =
+===============================*/
 
-function pc_display_home_main_introduction( $settings_home ) {
+function pc_display_home_wysiwyg( $settings_home ) {
 	
 	echo pc_wp_wysiwyg( $settings_home['content-txt'] );
 
 }
 
 
-/*----------  Pages à la une  ----------*/
+/*=====  FIN Wysiwyg  =====*/
 
-function pc_display_home_main_shortcuts( $settings_home ) {
+/*==================================
+=            Raccourcis            =
+==================================*/
+
+function pc_display_home_shortcuts( $settings_home ) {
 	
 	if ( isset($settings_home['content-pages']) && $settings_home['content-pages'] != '' ) {
 
@@ -98,7 +113,11 @@ function pc_display_home_main_shortcuts( $settings_home ) {
 }
 
 
-/*----------  Données structurées  ----------*/
+/*=====  FIN Raccourcis  =====*/
+
+/*===========================================
+=            Données structurées            =
+===========================================*/
 
 function pc_display_home_schema_collection_page( $settings_home ) {
 	
@@ -157,4 +176,4 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 }
 
 
-/*=====  FIN Contenu  =====*/
+/*=====  FIN Données structurées  =====*/
