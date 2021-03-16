@@ -97,7 +97,7 @@ function pc_display_home_shortcuts( $settings_home ) {
 				// affichage
 				echo '<li class="home-shortcut-item"><a title="'.$post_title.'" href="'.$post_url.'" class="home-shortcut-link">';
 					echo '<span class="home-shortcut-img">';
-						pc_display_post_resum_img_tag( $post_id, $post_img_datas );
+						pc_display_post_resum_img_tag( $post_img_datas, $post_id );
 					echo '</span>';
 					echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($post_title),40).'</span>';
 					echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';
