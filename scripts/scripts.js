@@ -35,7 +35,7 @@ var $win 			= $(window),
 =            Responsive            =
 ==================================*/
 
-// fonction executée au chargement de la page et à chaque modification de taille de la fenêtre
+// fonction executée au chargement de la page et à chaque modification de largeur de la fenêtre
 function win_resize() {
 
 	// 768px
@@ -267,37 +267,5 @@ if ( $popBtnOpen.length > 0 ) {
 
 
 /*=====  FIN Popup  =====*/
-
-/*=======================================
-=            Message cookies            =
-=======================================*/
-
-// cookie es-tu là ?
-/* if (getCookie('cookies') === '') {
-
-	// création du message
-	$('body').prepend('<p class="cookies-msg is-hidden no-print">En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de <strong>cookies</strong>, <a href="'+cguUrl+'" title="Conditions générales d\'utilisation" class="cookies-msg-link" rel="nofollow">en savoir plus</a>. <button type="button" class="button cookies-msg-btn">J\'accepte</button></p>');
-
-	var $cookiesMsg = $('.cookies-msg');
-
-	// apparition du message
-	$cookiesMsg.removeClass('is-hidden');
-
-	// btn de validation des cookies
-	$('.btn-alert-cookie').click(function() {
-
-		// création du cookie, valable un an
-		setCookie('cookies', 'accepted', 365);
-		// disparition du message
-		$cookiesMsg.addClass('is-hidden');
-		// suppression du message
-		setTimeout(function(){ $cookiesMsg.remove(); }, 500); // durée à reporter en css
-
-	});
-
-} */
-
-
-/*=====  FIN Message cookies  ======*/
 
 }); // end $(document).ready()

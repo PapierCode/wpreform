@@ -69,7 +69,7 @@ add_action( 'wp', 'pc_fullscreen_init', 10 );
 =            Ajout container            =
 =======================================*/
 
-add_action( 'pc_header', 'pc_fullscreen_display_img_container', 15 );
+add_action( 'pc_header', 'pc_fullscreen_display_img_container', 25 );
 
 	function pc_fullscreen_display_img_container() {
 
