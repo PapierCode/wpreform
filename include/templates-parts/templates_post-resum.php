@@ -10,6 +10,7 @@
  * 
  */
 
+
 /*==================================
 =            Excerpt WP            =
 ==================================*/
@@ -20,23 +21,37 @@ add_filter( 'excerpt_more', function() { return ''; }, 999 );
 
 /*=====  FIN Excerpt WP  =====*/
 
+/*=============================
+=            Titre            =
+=============================*/
 
-/*========================================
-=            Excerpt Preform             =
-========================================*/
+function pc_get_post_resum_title( $post_id, $post_metas ) {
 
-function pc_get_post_resum_excerpt( $post_id, $post_metas ) {
+	$post_resum_title = ( isset( $post_metas['resum-title'] ) ) ? $post_metas['resum-title'][0] : get_the_title($post_id);
 
 	global $texts_lengths;
-
-	$post_excerpt = ( isset( $post_metas['resum-desc'] ) ) ? $post_metas['resum-desc'][0] : get_the_excerpt( $post_id );
-	
-	return pc_words_limit( $post_excerpt, $texts_lengths['resum-desc'] ) ;
+	return pc_words_limit( $post_resum_title, $texts_lengths['resum-title'] );
 
 }
 
 
-/*=====  FIN Excerpt Preform   =====*/
+/*=====  FIN Titre  =====*/
+
+/*====================================
+=            Description             =
+====================================*/
+
+function pc_get_post_resum_description( $post_id, $post_metas ) {
+
+	$post_excerpt = ( isset( $post_metas['resum-desc'] ) ) ? $post_metas['resum-desc'][0] : get_the_excerpt( $post_id );
+
+	global $texts_lengths;
+	return pc_words_limit( $post_excerpt, $texts_lengths['resum-desc'] );
+
+}
+
+
+/*=====  FIN Description   =====*/
 
 /*=============================
 =            Image            =
@@ -109,7 +124,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	$post_metas = get_post_meta($post_id);
 
 	// titre
-	$post_title = (isset($post_metas['resum-title'])) ? $post_metas['resum-title'][0] : get_the_title($post_id);
+	$post_title = pc_get_post_resum_title( $post_id, $post_metas );
 	// lien
 	$post_link = get_the_permalink($post_id);
 	$post_link_tag_start = '<a href="'.$post_link.'" class="st-link" title="Lire la suite de l\'article '.$post_title.'">';
@@ -117,7 +132,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	// image datas
 	$img_datas = pc_get_post_resum_img_datas( $post_id, $post_title, $post_metas );
 	// description
-	$post_desc = pc_get_post_resum_excerpt( $post_id, $post_metas );
+	$post_desc = pc_get_post_resum_description( $post_id, $post_metas );
 	// icône
 	$st_ico_more = apply_filters( 'pc_filter_st_ico_more', pc_svg('more') );	
 	

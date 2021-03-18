@@ -141,8 +141,6 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 
 		foreach ($home_shortcuts as $post_id => $post_title_alt) {
 
-			// titre
-			$post_title = ( $post_title_alt != '' ) ? $post_title_alt : get_the_title( $post_id );
 			// metas
 			$post_metas = get_post_meta( $post_id );		
 
@@ -155,8 +153,8 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 			
 			$schema_collection_page['mainEntity']['itemListElement'][] = array(
 				'@type' => 'ListItem',
-				'name' => $post_title,
-				'description' => pc_get_post_resum_excerpt( $post_id, $post_metas ),
+				'name' => pc_get_post_seo_title( $post_id, $post_metas ),
+				'description' => pc_get_post_seo_description( $post_id, $post_metas ),
 				'url' => get_the_permalink($post_id),
 				'image' => array(
 					'@type'		=>'ImageObject',

@@ -14,13 +14,9 @@ function pc_get_post_seo_title( $post_id, $post_metas ) {
 		
 		$post_seo_title = $post_metas['seo-title'][0];
 
-	} else if ( isset( $post_metas['resum-title'] ) ) {
-
-		$post_seo_title = $post_metas['resum-title'][0];
-
 	} else {
 
-		$post_seo_title = get_the_title($post_id);
+		$post_seo_title = pc_get_post_resum_title( $post_id, $post_metas );
 
 	}
 	
@@ -30,23 +26,17 @@ function pc_get_post_seo_title( $post_id, $post_metas ) {
 
 function pc_get_post_seo_description( $post_id, $post_metas ) {
 
-	global $texts_lengths;
-	$post_seo_description = false;
-
 	if ( isset( $post_metas['seo-desc'] ) ) {
 
 		$post_seo_description = $post_metas['seo-desc'][0];
 
-	} else if ( isset( $post_metas['resum-desc'] ) ) {
-
-		$post_seo_description = $post_metas['resum-desc'][0];
-
 	} else {
 
-		$post_seo_description = get_the_excerpt( $post_id );
-		
+		$post_seo_description = pc_get_post_resum_description( $post_id, $post_metas );
+
 	}
 	
+	global $texts_lengths;
 	return pc_words_limit( $post_seo_description, $texts_lengths['seo-desc'] );
 
 }
@@ -122,7 +112,7 @@ function pc_get_post_seo_metas( $seo_metas, $post_id, $post_metas ) {
 
 	// description
 	$seo_description = pc_get_post_seo_description( $post_id, $post_metas );
-	if ( $seo_description ) {
+	if ( '' != $seo_description ) {
 		$seo_metas['description'] = $seo_description;
 	}
 
