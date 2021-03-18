@@ -83,11 +83,20 @@ add_action( 'wp_head', 'pc_display_metas_seo_and_social', 5 );
 
 		} elseif ( is_singular() ) {
 
-			$post_id = get_the_ID();
-			$post_metas = get_post_meta( $post_id );
+			global $post;
+			$post_metas = get_post_meta( $post->ID );
 
 			// metas title & description
-			$seo_metas = pc_get_post_seo_metas( $seo_metas, $post_id, $post_metas );
+			$seo_metas = pc_get_post_seo_metas( $seo_metas, $post, $post_metas );
+
+
+		} elseif ( is_tax() ) {
+
+			$term = get_queried_object();
+			$term_metas = get_term_meta( $term->term_id );
+
+			// metas title & description
+			$seo_metas = pc_get_tax_seo_metas( $seo_metas, $term, $term_metas );
 
 
 		} elseif ( is_404() ) {

@@ -121,12 +121,14 @@ function pc_display_home_shortcuts( $settings_home ) {
 
 function pc_display_home_schema_collection_page( $settings_home ) {
 	
+	global $texts_lengths;
+
 	$schema_collection_page = array(
 		'@context' => 'http://schema.org/',
 		'@type'=> 'CollectionPage',
 		'name' => $settings_home['content-title'],
 		'headline' => $settings_home['content-title'],
-		'description' => ( isset( $settings_home['seo-desc'] ) && $settings_home['seo-desc'] != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-txt'],30,'...'),
+		'description' => ( isset( $settings_home['seo-desc'] ) && $settings_home['seo-desc'] != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-txt'],$texts_lengths['excerpt'],'...'),
 		'mainEntity' => array(
 			'@type' => 'ItemList',
 			'itemListElement' => array()
@@ -141,7 +143,7 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 
 		foreach ($home_shortcuts as $post_id => $post_title_alt) {
 
-			// metas
+			$post = get_post( $post_id );
 			$post_metas = get_post_meta( $post_id );		
 
 			// image du post ou image par défaut
@@ -153,8 +155,8 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 			
 			$schema_collection_page['mainEntity']['itemListElement'][] = array(
 				'@type' => 'ListItem',
-				'name' => pc_get_post_seo_title( $post_id, $post_metas ),
-				'description' => pc_get_post_seo_description( $post_id, $post_metas ),
+				'name' => pc_get_post_seo_title( $post, $post_metas ),
+				'description' => pc_get_post_seo_description( $post, $post_metas ),
 				'url' => get_the_permalink($post_id),
 				'image' => array(
 					'@type'		=>'ImageObject',

@@ -173,7 +173,7 @@ $settings_home_fields[] = array(
 
 if ( isset($settings_pc['wpreform-fullscreen']) ) {
 
-	$settings_home_fields[1]['desc'] = '<p>Sélectionnez l\'image associée à cette page pour : <strong>s\'afficher en pleine page (si activé), le référencement et le partage sur les réseaux sociaux</strong>.</p><p><em><strong>Remarques :</strong> Si une image n\'est pas sélectionnée, il n\'y a pas d\'image en pleine page et le logo est utilisé pour le référencement et le partage sur les réseaux sociaux. Pour un affichage pleine page, la taille minimum conseillée est de 2000 x 1500 pixels.</em></p>';
+	$settings_home_fields[1]['desc'] = '<p>Sélectionnez l\'image associée à cette page pour : <strong>s\'afficher en pleine page (si activé ci-dessous), le référencement et le partage sur les réseaux sociaux</strong>.</p><p><em><strong>Remarques :</strong> Si une image n\'est pas sélectionnée, il n\'y a pas d\'image en pleine page et le logo est utilisé pour le référencement et le partage sur les réseaux sociaux. Pour un affichage pleine page, la taille minimum conseillée est de 2000 x 1500 pixels.</em></p>';
 
 	$settings_home_fields[1]['fields'] = array_merge( 
 		$settings_home_fields[1]['fields'], 

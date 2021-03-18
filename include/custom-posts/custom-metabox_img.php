@@ -20,7 +20,7 @@ if ( class_exists('PC_Add_metabox') ) {
 	$metabox_img_desc = '<p>Sélectionnez l\'image associée à cette page pour : <strong>afficher la page sous sa forme résumée, le référencement et le partage sur les réseaux sociaux</strong>.</p><p><em><strong>Remarque :</strong> Si une image n\'est pas sélectionnée, le logo est utilisé.</em></p>';
 
 	if ( isset($settings_pc['wpreform-fullscreen']) ) {
-		$metabox_img_desc = '<p>Sélectionnez l\'image associée à cette page pour : <strong>la page sous sa forme résumée, afficher l\'image en pleine page (si activé), le référencement et le partage sur les réseaux sociaux</strong>.<p><em><strong>Remarques :</strong> Si une image n\'est pas sélectionnée, il n\'y a pas d\'image en pleine page et le logo est utilisé pour le référencement et le partage sur les réseaux sociaux. Pour un affichage pleine page, la taille minimum conseillée est de 2000 x 1500 pixels.</em></p>';
+		$metabox_img_desc = '<p>Sélectionnez l\'image associée à cette page pour : <strong>la page sous sa forme résumée, afficher l\'image en pleine page (si activé ci-dessous), le référencement et le partage sur les réseaux sociaux</strong>.<p><em><strong>Remarques :</strong> si une image n\'est pas sélectionnée, il n\'y a pas d\'image en pleine page et le logo est utilisé pour le référencement et le partage sur les réseaux sociaux. Pour un affichage pleine page, la taille minimum conseillée est de 2000 x 1500 pixels.</em></p>';
 	}
 
 	$metabox_img_desc = apply_filters( 'pc_filter_metabox_img_desc', $metabox_img_desc );

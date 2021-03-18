@@ -16,7 +16,7 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Aide  ----------*/
 	
-	$metabox_resum_desc = '<p><strong>Optimisez le titre et la description de cette page sous sa forme résumée</strong>.</p><p><em><strong>Remarque :</strong> si ces champs ne sont pas saisis, le titre de la page et les premiers mots du contenu sont utilisés.</em></p>';
+	$metabox_resum_desc = '<p><strong>Optimisez le titre et la description de cette page sous sa forme résumée</strong>.</p><p><em><strong>Remarque :</strong> si ce titre n\'est pas saisi, le titre de la page est utilisé, si cette description n\'est pas saisie, les premiers mots du contenu sont utilisés, sinon il n\'a pas de description affichée.</em></p>';
 
 	$metabox_resum_desc = apply_filters( 'pc_filter_metabox_seo_desc', $metabox_resum_desc );
 
