@@ -17,19 +17,17 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Aide  ----------*/
 	
-	$metabox_img_desc = '<p>Sélectionnez l\'image associée à cette page pour : <strong>afficher la page sous sa forme résumée, le référencement et le partage sur les réseaux sociaux</strong>.</p><p><em><strong>Remarque :</strong> Si une image n\'est pas sélectionnée, le logo est utilisé.</em></p>';
+	$metabox_img_desc = '<p><strong>Sélectionnez l\'image associée à cette page pour : afficher cette page sous sa forme résumée, optimiser le référencement et le partage sur les réseaux sociaux</strong>.</p><p><em><strong>Remarque :</strong> Si une image n\'est pas sélectionnée, le logo est utilisé.</em></p>';
 
 	if ( isset($settings_pc['wpreform-fullscreen']) ) {
-		$metabox_img_desc = '<p>Sélectionnez l\'image associée à cette page pour : <strong>la page sous sa forme résumée, afficher l\'image en pleine page (si activé ci-dessous), le référencement et le partage sur les réseaux sociaux</strong>.<p><em><strong>Remarques :</strong> si une image n\'est pas sélectionnée, il n\'y a pas d\'image en pleine page et le logo est utilisé pour le référencement et le partage sur les réseaux sociaux. Pour un affichage pleine page, la taille minimum conseillée est de 2000 x 1500 pixels.</em></p>';
+		$metabox_img_desc = '<p><strong>Sélectionnez l\'image associée à cette page pour : afficher la page sous sa forme résumée ; afficher cette image en plein écran dans l\'entête de la page (si activé ci-dessous) ; optimiser le référencement (SEO) et le partage sur les réseaux sociaux</strong>.<p><em><strong>Remarques :</strong> si une image n\'est pas sélectionnée, il n\'y a pas d\'image en plein écran et le logo est utilisé pour le référencement et le partage sur les réseaux sociaux. Pour un affichage pleine page, la taille minimum conseillée est de 2000 x 1500 pixels.</em></p>';
 	}
-
-	$metabox_img_desc = apply_filters( 'pc_filter_metabox_img_desc', $metabox_img_desc );
 
 
 	/*----------  Paramètres du champ  ----------*/
 	
 	$metabox_img_fields = array(
-		'desc'          => $metabox_img_desc,
+		'desc'          => apply_filters( 'pc_filter_metabox_img_desc', $metabox_img_desc ),
 		'prefix'        => 'visual',
 		'fields'        => array(
 			array(
@@ -51,7 +49,7 @@ if ( class_exists('PC_Add_metabox') ) {
 				array(
 					'type'      => 'checkbox',
 					'id' 		=> 'fullscreen',
-					'label'     => 'Afficher en pleine page'
+					'label'     => 'Afficher en plein écran'
 				),
 				array(
 					'type'      => 'radio',
