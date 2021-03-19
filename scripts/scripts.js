@@ -38,30 +38,23 @@ var $win 			= $(window),
 // fonction executée au chargement de la page et à chaque modification de largeur de la fenêtre
 function win_resize() {
 
-	// 768px
-	if (window.matchMedia('(min-width: 48em)').matches) {
+	/*----------  Fullscreen  ----------*/	
 
-		/*----------  Fullscreen  ----------*/	
+	if ( $html.hasClass('is-fullscreen') ) {
 
-		if ( $html.hasClass('is-fullscreen') ) {
-	
-			win_w = $win.width();
-	
-			if ( win_w != win_w_old ) {
+		win_w = $win.width();
 
-				win_h = $win.height();
-				header_h = $header.outerHeight();
+		if ( win_w != win_w_old ) {
 
-				$main_header.css( 'height', rem( win_h - header_h ) );
-				$fs_img.css( 'height', rem( win_h ) );
+			win_h = $win.height();
+			header_h = $header.outerHeight();
 
-				win_w_old = win_w;
+			$main_header.css( 'height', rem( win_h - header_h ) );
+			$fs_img.css( 'height', rem( win_h ) );
 
-			}
-	
+			win_w_old = win_w;
+
 		}
-
-	} else {
 
 	}
 
