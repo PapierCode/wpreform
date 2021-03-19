@@ -147,11 +147,6 @@ function pc_display_page_schema_collection_page( $post, $post_metas ) {
 
 	if ( !post_password_required() && isset( $post_metas['content-subpages'] ) ) {
 
-		
-
-		global $pc_post;
-		pc_var($pc_post->get_post_seo_description());
-
 		// liste
 		$sub_pages_ids = explode( ',', $post_metas['content-subpages'][0] );
 		// global

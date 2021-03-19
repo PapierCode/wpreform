@@ -109,16 +109,3 @@ if ( $is_fresh_site ) {
 	include 'include/theme-setup/theme-setup_pages.php';
 }
 include 'include/theme-setup/theme-setup.php';
-
-
-
-/*----------  Expérimentations  ----------*/
-
-// include 'include/_temp.php';
-
-
-/*----------  Debug  ----------*/
-
-// affiche les fonctions attachées à un hook
-// pc_var(count($wp_filter[ 'pc_home_content' ]->callbacks));
-// pc_var($wp_filter[ 'pc_home_content' ]);
