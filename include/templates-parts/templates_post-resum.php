@@ -134,7 +134,7 @@ function pc_display_post_resum( $post_id, $post_css = '', $post_title_level = 2 
 	// description
 	$post_desc = pc_get_post_resum_description( $post_id, $post_metas );
 	// icône
-	$st_ico_more = apply_filters( 'pc_filter_st_ico_more', pc_svg('more') );	
+	$st_ico_more = apply_filters( 'pc_filter_st_ico_more', pc_svg('arrow') );	
 	
 	
 
