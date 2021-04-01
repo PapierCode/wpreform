@@ -1,17 +1,17 @@
 <?php
 
-$settings_home = get_option('home-settings-option');
+global $pc_home;
 
 get_header();
 
-do_action( 'pc_action_home_main_start', $settings_home );
+do_action( 'pc_action_home_main_start', $pc_home );
 
-	do_action( 'pc_action_home_main_header', $settings_home );
+	do_action( 'pc_action_home_main_header', $pc_home );
 	
-	do_action( 'pc_action_home_main_content', $settings_home );
+	do_action( 'pc_action_home_main_content', $pc_home );
 
-	do_action( 'pc_action_home_main_footer', $settings_home );
+	do_action( 'pc_action_home_main_footer', $pc_home );
 
-do_action( 'pc_action_home_main_end', $settings_home );
+do_action( 'pc_action_home_main_end', $pc_home );
 
 get_footer();

@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* Metaboxe page : contenu supplémentaire ou sous-pages
+* Communs templates : contenu supplémentaire ou sous-pages
 *
 *
 */
@@ -18,7 +18,7 @@ add_action( 'admin_init', function() {
     add_meta_box(
         'page-content-sup',
         $box_content_more_title,
-        'pc_page_content_sup',
+        'pc_page_metabox_content_sup',
         array('page'),
         'normal',
         'high'
@@ -46,7 +46,7 @@ add_action( 'admin_init', function() {
  * 	
  */
 
-function pc_repeater_subpage_line( $css_class, $subpages, $current = '', $saved = array() ) {
+function pc_get_subpage_repeater_line( $css_class, $subpages, $current = '', $saved = array() ) {
 
 	$return = '<div class="'.$css_class.'">';
 	
@@ -77,7 +77,7 @@ function pc_repeater_subpage_line( $css_class, $subpages, $current = '', $saved 
 =            Contenu de la metaboxe            =
 ==============================================*/
 
-function pc_page_content_sup( $post ) {
+function pc_page_metabox_content_sup( $post ) {
 
 	global $settings_project;  // cf. functions.php
 
@@ -104,16 +104,16 @@ function pc_page_content_sup( $post ) {
     if ( !empty( $settings_project['page-content-from'] ) ) {
 	
 		// les types de contenu
-		$metabox_select_content_from = $settings_project['page-content-from'];
+		$content_from = $settings_project['page-content-from'];
 		// filtre (par exemple pour supprimer un type déjà sélectionné)
-		$metabox_select_content_from = apply_filters( 'pc_filter_metabox_select_content_from', $metabox_select_content_from, $post );
+		$content_from = apply_filters( 'pc_filter_page_metabox_select_content_from', $content_from, $post );
         // en bdd
         $content_from_saved = get_post_meta( $post->ID, 'content-from', true );
 
         // affichage
         echo '<tr><th><label for="content-from">Contenu spécifique</label></th><td>';
             echo '<select id="content-from" name="content-from"><option value=""></option>';
-            foreach ( $metabox_select_content_from as $slug => $datas ) {
+            foreach ( $content_from as $slug => $datas ) {
                 echo '<option value="'.$slug.'" '.selected($content_from_saved,$slug,false).'>'.$datas[0].'</option>';
             }
             echo '</select>';
@@ -131,7 +131,7 @@ function pc_page_content_sup( $post ) {
     if( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
 
 		// les pages qui sont ou peuvent être sous-page
-		$all_subpages_args = array(
+		$subpages_args = array(
             'post_type' => 'page',
             'post_status' => 'publish',
             'posts_per_page' => -1,
@@ -145,8 +145,8 @@ function pc_page_content_sup( $post ) {
                 )
             ),
 		);
-		$all_subpages_args = apply_filters( 'pc_filter_subpages_list_args', $all_subpages_args, $post );
-        $all_subpages = get_posts( $all_subpages_args );
+		$subpages_args = apply_filters( 'pc_filter_page_metabox_subpages_args', $subpages_args, $post );
+        $subpages = get_posts( $subpages_args );
         // liste des sous-pages sauvegardées
         $subpages_saved = get_post_meta( $post->ID, 'content-subpages', true );
         $subpages_saved_array = explode( ',', $subpages_saved );
@@ -155,7 +155,7 @@ function pc_page_content_sup( $post ) {
         echo '<tr><th><label>Sous-pages</label></th><td>';
             echo '<div class="pc-repeater" data-type="subpage">';
 				foreach ( $subpages_saved_array as $id ) {
-					echo pc_repeater_subpage_line( 'pc-repeater-item', $all_subpages, $id, $subpages_saved_array );
+					echo pc_get_subpage_repeater_line( 'pc-repeater-item', $subpages, $id, $subpages_saved_array );
 				}
             echo '</div>';
             // c'est ce input qui est sauvegardé !
@@ -166,7 +166,7 @@ function pc_page_content_sup( $post ) {
 
         // source pour le js
         echo '<tr style="display:none"><td colspan="2">';
-            echo pc_repeater_subpage_line( 'pc-repeater-item pc-repeater-src', $all_subpages );
+            echo pc_get_subpage_repeater_line( 'pc-repeater-item pc-repeater-src', $subpages );
         echo '</td></tr>';
 
     } // FIN if $post->post_parent < 1
@@ -186,9 +186,9 @@ function pc_page_content_sup( $post ) {
 =            Sauvegarde            =
 ==================================*/
 
-add_action( 'save_post', 'pc_sub_page_save' );
+add_action( 'save_post', 'pc_page_metabox_content_sup_save' );
 
-	function pc_sub_page_save( $post_id ) {
+	function pc_page_metabox_content_sup_save( $post_id ) {
 
 		// check input hidden de vérification
 		if ( isset($_POST['nonce-page-content-from']) && wp_verify_nonce( $_POST['nonce-page-content-from'], basename( __FILE__ ) ) ) {

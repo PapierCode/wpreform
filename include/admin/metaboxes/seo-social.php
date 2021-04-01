@@ -2,7 +2,7 @@
 
 /**
 *
-* Metabox SEO & Résaux sociaux
+* Communs templates : SEO & Résaux sociaux
 *
 **/
 
@@ -48,7 +48,7 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Déclaration  ----------*/
 	
-	$metabox_seo_declaration = new PC_Add_Metabox( $metabox_seo_for, 'Référencement (SEO) & Réseaux sociaux', 
+	$register_metabox_seo = new PC_Add_Metabox( $metabox_seo_for, 'Référencement (SEO) & Réseaux sociaux', 
 	'page-metabox-seo', $metabox_seo_fields, 'normal', 'high' );
 
 

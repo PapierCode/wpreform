@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * Afficher une image en pleine page
+ * Communs templates : image en pleine page
  * 
  */
 
@@ -10,7 +10,7 @@
 =            Init            =
 ============================*/
  
-add_action( 'wp', 'pc_fullscreen_init', 10 );
+add_action( 'wp', 'pc_fullscreen_init', 100 );
 
 	function pc_fullscreen_init() {
 
@@ -25,11 +25,8 @@ add_action( 'wp', 'pc_fullscreen_init', 10 );
 
 			} else if ( is_singular() ) {
 
-				$post_id = get_the_ID();
-				$is_fullscreen = get_post_meta( $post_id );
-				foreach ($is_fullscreen as $key => $value) {
-					$is_fullscreen[$key] = implode('', $is_fullscreen[$key] );
-				}
+				global $pc_post;
+				$is_fullscreen = $pc_post->metas;
 
 			}
 
@@ -43,9 +40,9 @@ add_action( 'wp', 'pc_fullscreen_init', 10 );
 
 		} else {
 
-			add_filter( 'pc_filter_html_css_class', 'pc_fullscreen_edit_html_css_class', 10, 2 );
+			add_filter( 'pc_filter_html_css_class', 'pc_edit_fullscreen_html_css_class', 10, 2 );
 
-			function pc_fullscreen_edit_html_css_class( $css_classes ) {
+			function pc_edit_fullscreen_html_css_class( $css_classes ) {
 
 				global $is_fullscreen;
 				$css_prefix = 'h1-pos-';
@@ -69,9 +66,9 @@ add_action( 'wp', 'pc_fullscreen_init', 10 );
 =            Ajout container            =
 =======================================*/
 
-add_action( 'pc_header', 'pc_fullscreen_display_img_container', 25 );
+add_action( 'pc_header', 'pc_display_fullscreen_image_container', 25 );
 
-	function pc_fullscreen_display_img_container() {
+	function pc_display_fullscreen_image_container() {
 
 		global $is_fullscreen;
 
@@ -90,10 +87,10 @@ add_action( 'pc_header', 'pc_fullscreen_display_img_container', 25 );
 =            Bouton d'accès au contenu            =
 =================================================*/
 
-add_action( 'pc_action_home_main_header', 'pc_fullscreen_display_btn_scroll_to_content', 30 );
-add_action( 'pc_action_page_main_header', 'pc_fullscreen_display_btn_scroll_to_content', 30 ); 
+add_action( 'pc_action_home_main_header', 'pc_display_fullscreen_btn_scroll_to_content', 30 );
+add_action( 'pc_action_page_main_header', 'pc_display_fullscreen_btn_scroll_to_content', 30 ); 
 
-	function pc_fullscreen_display_btn_scroll_to_content() {
+	function pc_display_fullscreen_btn_scroll_to_content() {
 
 		global $is_fullscreen;
 		
@@ -116,9 +113,9 @@ add_action( 'pc_action_page_main_header', 'pc_fullscreen_display_btn_scroll_to_c
 =            CSS inline            =
 ==================================*/
 
-add_filter( 'pc_filter_css_inline', 'pc_fullscreen_edit_css_inline', 10 );
+add_filter( 'pc_filter_css_inline', 'pc_edit_fullscreen_css_inline', 10 );
 
-	function pc_fullscreen_edit_css_inline( $css_inline ) {
+	function pc_edit_fullscreen_css_inline( $css_inline ) {
 
 		global $is_fullscreen;
 

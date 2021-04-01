@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * Template accueil
+ * Template : accueil
  * 
  ** Titre
  ** Wysiwyg
@@ -25,8 +25,8 @@ add_action( 'pc_action_home_main_start', 'pc_display_main_start', 10 ); // layou
 
 	// content
 	add_action( 'pc_action_home_main_content', 'pc_display_main_content_start', 10 ); // layout commun -> templates_layout.php
-		add_action( 'pc_action_home_main_content', 'pc_display_home_wysiwyg', 20, 1 ); // introduction
-		add_action( 'pc_action_home_main_content', 'pc_display_home_shortcuts', 30, 1 ); // raccourcis
+		add_action( 'pc_action_home_main_content', 'pc_display_home_wysiwyg', 20 ); // introduction
+		add_action( 'pc_action_home_main_content', 'pc_display_home_shortcuts', 30 ); // raccourcis
 		add_action( 'pc_action_home_main_content', 'pc_display_home_schema_collection_page', 90, 1 ); // données structurées
 	add_action( 'pc_action_home_main_content', 'pc_display_main_content_end', 100 ); // layout commun -> templates_layout.php
 
@@ -45,9 +45,10 @@ add_action( 'pc_action_home_main_end', 'pc_display_main_end', 10 ); // layout co
 =            Titre            =
 =============================*/
 
-function pc_display_home_main_title( $settings_home ) {
+function pc_display_home_main_title( $pc_home ) {
 	
-	echo '<h1><span>'.$settings_home['content-title'].'</span></h1>';
+	$metas = $pc_home->metas;
+	echo '<h1><span>'.$metas['content-title'].'</span></h1>';
 
 }
 
@@ -57,9 +58,12 @@ function pc_display_home_main_title( $settings_home ) {
 =            Wysiwyg            =
 ===============================*/
 
-function pc_display_home_wysiwyg( $settings_home ) {
+function pc_display_home_wysiwyg( $pc_home ) {
 	
-	echo pc_wp_wysiwyg( $settings_home['content-txt'] );
+	$metas = $pc_home->metas;
+	if ( '' != $metas['content-txt'] ) {
+		echo pc_wp_wysiwyg( $metas['content-txt'] );
+	}
 
 }
 
@@ -70,12 +74,14 @@ function pc_display_home_wysiwyg( $settings_home ) {
 =            Raccourcis            =
 ==================================*/
 
-function pc_display_home_shortcuts( $settings_home ) {
+function pc_display_home_shortcuts( $pc_home ) {
+
+	$metas = $pc_home->metas;
 	
-	if ( isset($settings_home['content-pages']) && $settings_home['content-pages'] != '' ) {
+	if ( isset($metas['content-pages']) && $metas['content-pages'] != '' ) {
 
 		// id des pages mises en avant
-		$home_shortcuts = pc_get_home_shortcuts_bdd_to_array($settings_home['content-pages']);
+		$home_shortcuts = pc_convert_home_shortcuts_bdd_to_array($metas['content-pages']);
 
 		// pour les CSS, pair ou impair ?
 		$shortcuts_nb = ( count($home_shortcuts)%2 == 1 ) ? 'home-shortcuts--odd' : 'home-shortcuts--even';
@@ -84,20 +90,13 @@ function pc_display_home_shortcuts( $settings_home ) {
 		echo '<ul class="home-shortcuts-list '.$shortcuts_nb.' reset-list">';
 			foreach ($home_shortcuts as $post_id => $post_title_alt) {
 
-				// post métas
-				$post_metas = get_post_meta( $post_id );
-
-				// titre
-				$post_title = ( $post_title_alt != '' ) ? $post_title_alt : get_the_title( $post_id );
-				// lien
-				$post_url = get_the_permalink( $post_id );				
-				// image datas
-				$post_img_datas = pc_get_post_resum_img_datas( $post_id, $post_title, $post_metas );
+				$post = new PC_post( get_post( $post_id ) );
+				$post_title = ( '' != $post_title_alt ) ? $post_title_alt : $post->title;
 
 				// affichage
-				echo '<li class="home-shortcut-item"><a title="'.$post_title.'" href="'.$post_url.'" class="home-shortcut-link">';
+				echo '<li class="home-shortcut-item"><a title="'.$post_title.'" href="'.$post->permalink.'" class="home-shortcut-link">';
 					echo '<span class="home-shortcut-img">';
-						pc_display_post_resum_img_tag( $post_img_datas, $post_id );
+						$post->display_card_image();
 					echo '</span>';
 					echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($post_title),40).'</span>';
 					echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';
@@ -119,16 +118,17 @@ function pc_display_home_shortcuts( $settings_home ) {
 =            Données structurées            =
 ===========================================*/
 
-function pc_display_home_schema_collection_page( $settings_home ) {
+function pc_display_home_schema_collection_page( $pc_home ) {
 	
 	global $texts_lengths;
+	$metas = $pc_home->metas;
 
 	$schema_collection_page = array(
 		'@context' => 'http://schema.org/',
 		'@type'=> 'CollectionPage',
-		'name' => $settings_home['content-title'],
-		'headline' => $settings_home['content-title'],
-		'description' => ( isset( $settings_home['seo-desc'] ) && $settings_home['seo-desc'] != '' ) ? $settings_home['seo-desc'] : wp_trim_words($settings_home['content-txt'],$texts_lengths['excerpt'],'...'),
+		'name' => $pc_home->get_seo_meta_title(),
+		'headline' => $pc_home->get_seo_meta_title(),
+		'description' => $pc_home->get_seo_meta_description(),
 		'mainEntity' => array(
 			'@type' => 'ItemList',
 			'itemListElement' => array()
@@ -136,35 +136,19 @@ function pc_display_home_schema_collection_page( $settings_home ) {
 		'isPartOf' => pc_get_schema_website()
 	);
 
-	if ( isset($settings_home['content-pages']) && $settings_home['content-pages'] != '' ) {
+	if ( isset($metas['content-pages']) && $metas['content-pages'] != '' ) {
 
 		// id des pages mises en avant
-		$home_shortcuts = pc_get_home_shortcuts_bdd_to_array($settings_home['content-pages']);
+		$home_shortcuts = pc_convert_home_shortcuts_bdd_to_array($metas['content-pages']);
+		// compteur position itemListElement
+		$list_item_key = 1;
 
 		foreach ($home_shortcuts as $post_id => $post_title_alt) {
 
-			$post = get_post( $post_id );
-			$post_metas = get_post_meta( $post_id );		
-
-			// image du post ou image par défaut
-			if ( isset( $post_metas['visual-id'] ) ) {
-				$post_img = pc_get_img( $post_metas['visual-id'][0], 'share', 'datas' );
-			} else {
-				$post_img = pc_get_img_default_to_share();
-			}
+			$pc_post = new PC_post( get_post( $post_id ) );
 			
-			$schema_collection_page['mainEntity']['itemListElement'][] = array(
-				'@type' => 'ListItem',
-				'name' => pc_get_post_seo_title( $post, $post_metas ),
-				'description' => pc_get_post_seo_description( $post, $post_metas ),
-				'url' => get_the_permalink($post_id),
-				'image' => array(
-					'@type'		=>'ImageObject',
-					'url' 		=> $post_img[0],
-					'width' 	=> $post_img[1],
-					'height' 	=> $post_img[2]
-				)
-			);
+			$schema_collection_page['mainEntity']['itemListElement'][] = $pc_post->get_schema_list_item( $list_item_key );
+			$list_item_key++;
 
 		}
 

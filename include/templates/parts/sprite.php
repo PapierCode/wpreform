@@ -1,4 +1,9 @@
 <?php
+/**
+ * 
+ * Communs templates : icônes
+ * 
+ */
 
 $sprite = array(
 

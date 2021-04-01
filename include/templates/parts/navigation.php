@@ -1,6 +1,8 @@
 <?php
 /**
 *
+* Communs templates : navigation
+*
 ** Customisation menu 
 ** Item parent actif si page enfatn affichée
 *

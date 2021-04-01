@@ -2,7 +2,7 @@
 
 /**
 *
-* Paramètres du projet
+* Page d'administration : paramètres du project
 *
 *
 */
@@ -193,9 +193,9 @@ $settings_project_fields = apply_filters( 'pc_filter_settings_project_fields', $
 
 /*----------  Création  ----------*/
 
-$settings_project_declaration = new PC_Add_Admin_Page(
+$register_settings_project = new PC_Add_Admin_Page(
     'Paramètres du site',
-	'',
+	'', // niveau 1
     'Paramètres',
     'project-settings',
     $settings_project_fields,

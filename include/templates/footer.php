@@ -1,7 +1,7 @@
 <?php 
 /**
  * 
- * Template header
+ * Template : header
  * 
  ** Hooks
  ** Footer structure & contenu
@@ -55,16 +55,16 @@ function pc_display_footer_contact() {
 	/*----------  Logo  ----------*/
 	
 	// datas
-	$img_datas = array(
+	$logo_datas = array(
 		'url' => get_bloginfo('template_directory').'/images/logo-footer.svg',
 		'width' => 100,
 		'height' => 25,
 		'alt' => 'Logo '.$settings_project['coord-name']
 	);
 	// filtre
-	$img_datas = apply_filters( 'pc_filter_footer_logo_img_datas', $img_datas, $settings_project );
+	$logo_datas = apply_filters( 'pc_filter_footer_logo_datas', $logo_datas, $settings_project );
 	// html
-	$img_tag = '<img src="'.$img_datas['url'].'" alt="'.$img_datas['alt'].'" width="'.$img_datas['width'].'" height="'.$img_datas['height'].'" loading="lazy" />';
+	$logo_tag = '<img src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy" />';
 
 
 	/*----------  Adresse  ----------*/
@@ -94,7 +94,7 @@ function pc_display_footer_contact() {
 	/*----------  Affichage  ----------*/
 
 	// filtres	
-	$dt = apply_filters( 'pc_filter_footer_contact_dt', $img_tag, $img_datas, $settings_project );
+	$dt = apply_filters( 'pc_filter_footer_contact_dt', $logo_tag, $logo_datas, $settings_project );
 	$dd = apply_filters( 'pc_filter_footer_contact_dd', $dd, $settings_project );
 
 	echo '<address class="coord"><dl class="coord-list">';
@@ -120,9 +120,9 @@ function pc_display_footer_nav() {
 	echo '<nav id="footer-nav" class="f-nav">';
 	echo '<ul class="f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1 reset-list">';
 	
-		do_action( 'pc_footer_nav_list_inner_before' );
+		do_action( 'pc_footer_nav_items_before' );
 
-		$display_copyright = apply_filters( 'pc_filter_footer_display_copyright', false );
+		$display_copyright = apply_filters( 'pc_filter_footer_copyright_display', false );
 		if ( $display_copyright ) {
 			global $settings_project;
 			echo '<li class="f-nav-item f-nav-item--l1 f-p-nav-item f-p-nav-item--l1">&copy; '.$settings_project['coord-name'].'</li>';
@@ -140,7 +140,7 @@ function pc_display_footer_nav() {
 		) );
 		wp_nav_menu( $nav_footer_args );
 
-		do_action( 'pc_footer_nav_list_inner_after' );
+		do_action( 'pc_footer_nav_items_after' );
 		
 	echo '</ul>';
 	echo '</nav>';

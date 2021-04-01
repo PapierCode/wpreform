@@ -2,7 +2,7 @@
 
 /**
 *
-* Metabox Résumé
+* Métaboxe : résumé d'article
 *
 **/
 
@@ -10,19 +10,19 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Associé à  ----------*/
 	
-	$metabox_resum_for = array( 'page' );
-	$metabox_resum_for = apply_filters( 'pc_filter_metabox_resum_for', $metabox_resum_for );
+	$metabox_card_for = array( 'page' );
+	$metabox_card_for = apply_filters( 'pc_filter_metabox_card_for', $metabox_card_for );
 
 
 	/*----------  Aide  ----------*/
 	
-	$metabox_resum_desc = '<p><strong>Optimisez le titre et la description de cette page pour sa forme résumée</strong>.</p><p><em><strong>Remarques :</strong> si ce titre n\'est pas saisi, le titre de la page est utilisé. Si cette description n\'est pas saisie, les premiers mots du contenu sont utilisés.</em></p>';
+	$metabox_card_desc = '<p><strong>Optimisez le titre et la description de cette page pour sa forme résumée</strong>.</p><p><em><strong>Remarques :</strong> si ce titre n\'est pas saisi, le titre de la page est utilisé. Si cette description n\'est pas saisie, les premiers mots du contenu sont utilisés.</em></p>';
 
 
 	/*----------  Paramètres des champs  ----------*/
 
-	$metabox_resum_fields = array(
-		'desc'          => apply_filters( 'pc_filter_metabox_resum_desc', $metabox_resum_desc ),
+	$metabox_card_fields = array(
+		'desc'          => apply_filters( 'pc_filter_metabox_card_desc', $metabox_card_desc ),
 		'prefix'        => 'resum',
 		'fields'        => array(
 			array(
@@ -44,12 +44,12 @@ if ( class_exists('PC_Add_metabox') ) {
 		)
 	);
 
-	$metabox_resum_fields = apply_filters( 'pc_filter_metabox_resum_fields', $metabox_resum_fields );
+	$metabox_card_fields = apply_filters( 'pc_filter_metabox_card_fields', $metabox_card_fields );
 	
 
 	/*----------  Déclaration  ----------*/
 	
-	$metabox_resum_declaration = new PC_Add_Metabox( $metabox_resum_for, 'Résumé', 'page-metabox-resum', $metabox_resum_fields, 'normal', 'high' );
+	$register_metabox_card = new PC_Add_Metabox( $metabox_card_for, 'Résumé', 'page-metabox-card', $metabox_card_fields, 'normal', 'high' );
 
 
 } // FIN if class_exist();

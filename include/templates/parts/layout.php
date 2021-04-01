@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * Fonctions pour les templates : structure globale
+ * Communs templates : structure globale
  *  
  */
 

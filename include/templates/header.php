@@ -1,7 +1,7 @@
 <?php 
 /**
  * 
- * Template header
+ * Template : header
  * 
  ** Hooks
  ** Contenu des hooks
@@ -81,18 +81,18 @@ function pc_display_header_logo() {
 
 		echo '<a href="'.get_bloginfo('url').'" class="h-logo-link" title="Accueil '.$settings_project['coord-name'].'">';
 
-			$img_datas = array(
+			$logo_datas = array(
 				'url' => get_bloginfo('template_directory').'/images/logo.svg',
 				'width' => 150,
 				'height' => 150,
 				'alt' => 'Logo '.$settings_project['coord-name']
 			);
-			$img_datas = apply_filters( 'pc_filter_header_logo_img_datas', $img_datas );
+			$logo_datas = apply_filters( 'pc_filter_header_logo_img_datas', $logo_datas );
 
-			$img_tag = '<img class="h-logo-img" src="'.$img_datas['url'].'" alt="'.$img_datas['alt'].'" width="'.$img_datas['width'].'" height="'.$img_datas['height'].'" loading="lazy" />';
-			$img_tag = apply_filters( 'pc_filter_header_logo_img_tag', $img_tag, $img_datas );
+			$logo_tag = '<img class="h-logo-img" src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy" />';
+			$logo_tag = apply_filters( 'pc_filter_header_logo_img_tag', $logo_tag, $logo_datas );
 			
-			echo $img_tag;
+			echo $logo_tag;
 
 		echo '</a>';
 
@@ -116,9 +116,9 @@ function pc_display_header_nav() {
 
 	echo '<nav id="header-nav" class="h-nav"><div class="h-nav-inner">';
 		
-		do_action( 'pc_header_nav_inner_before' );
+		do_action( 'pc_header_nav_list_before' );
 
-		$nav_args = apply_filters( 'pc_filter_header_nav_args', array(
+		$nav_args = apply_filters( 'pc_filter_header_nav_list_args', array(
 			'theme_location'  	=> 'nav-header',
 			'nav_prefix'		=> array('h-nav', 'h-p-nav'), // custom
 			'menu_class'      	=> 'h-nav-list h-nav-list--l1 h-p-nav-list h-p-nav-list--l1 reset-list',
@@ -132,7 +132,7 @@ function pc_display_header_nav() {
 
 		wp_nav_menu( $nav_args ); // + include/navigation.php
 		
-		do_action( 'pc_header_nav_inner_after' );
+		do_action( 'pc_header_nav_list_after' );
 
 	echo '</div></nav>';
 
@@ -158,7 +158,7 @@ function pc_display_nav_overlay() {
 
 /*----------  Réseaux sociaux  ----------*/
 
-add_action( 'pc_header_nav_inner_after', 'pc_display_header_social', 10 );
+add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
 
 	function pc_display_header_social() {
 

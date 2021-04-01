@@ -1,7 +1,7 @@
 <?php 
 /**
  * 
- * Template 404
+ * Template : 404
  * 
  */
 

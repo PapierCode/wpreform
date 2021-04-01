@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * Customisation de la recherche
+ * Communs templates : recherche
  * 
  */
 
