@@ -10,6 +10,13 @@
 **/
 
 
+/*----------  Classes  ----------*/
+
+include 'include/classes/class-pc-post.php';
+include 'include/classes/class-pc-term.php';
+include 'include/classes/class-pc-home.php';
+
+
 /*----------  Configuration projet (agence)  ----------*/
 
 global $settings_pc; // défini dans le plugin [PC] Custom WP 
@@ -24,68 +31,20 @@ $texts_lengths = array(
 $texts_lengths = apply_filters( 'pc_filter_texts_lengths', $texts_lengths );
 
 
-/*----------  Configuration projet (client)  ----------*/
-
-include 'include/settings.php';
-$settings_project = get_option('project-settings-option');
-$settings_project['page-content-from'] = array();
-$settings_project = apply_filters( 'pc_filter_settings_project', $settings_project );
-
-
 /*----------  Rôle utilisateur connecté  ----------*/
 
 $current_user_role = ( is_user_logged_in() ) ? wp_get_current_user()->roles[0] : '';
 
 
-/*----------  Classes  ----------*/
-
-include 'include/classes/class-pc-post.php';
-include 'include/classes/class-pc-term.php';
-include 'include/classes/class-pc-home.php';
-
-
 /*----------  Administration  ----------*/
 
-// généralités
 include 'include/admin/admin.php';
 
 
-/*----------  Templates : communs  ----------*/
+/*----------  Templates  ----------*/
 
-// sprite SVG
-include 'include/templates/parts/sprite.php';
-// navigation
-include 'include/templates/parts/navigation.php';
-// wysiwyg par défaut
-include 'include/templates/parts/editor.php';
-// images & galerie
-include 'include/templates/parts/images.php';
-// Données structurées
-include 'include/templates/parts/schemas.php';
-// liens réseaux sociaux & partage
-include 'include/templates/parts/social.php';
-// layout global
-include 'include/templates/parts/layout.php';
-// contenu de l'entête (head)
-include 'include/templates/parts/head.php';
-// image pleine page
-include 'include/templates/parts/fullscreen.php';
-// recherche
-include 'include/templates/parts/search.php';
+include 'include/templates/templates.php';
 
-
-/*----------  Templates : spécifiques  ----------*/
-
-// entête (header)
-include 'include/templates/header.php';
-// Pied de page (footer)
-include 'include/templates/footer.php';
-// page
-include 'include/templates/page.php';
-// 404
-include 'include/templates/404.php';
-// accueil
-include 'include/templates/home.php';
 
 
 /*----------  Init  ----------*/

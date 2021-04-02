@@ -20,14 +20,26 @@
 // block editor... work not in progress !
 // include 'include/block-editor/block-editor.php';
 
-// Metaboxes
-include 'metaboxes/page-content-sup.php';
-include 'metaboxes/image.php';
-include 'metaboxes/card.php';
-include 'metaboxes/seo-social.php';
 
-// accueil
-include 'home/home.php';
+/*----------  Configuration projet (client)  ----------*/
+
+include 'settings/settings_project.php';
+$settings_project = get_option('project-settings-option');
+$settings_project['page-content-from'] = array();
+$settings_project = apply_filters( 'pc_filter_settings_project', $settings_project );
+
+
+/*----------  Métaboxes  ----------*/
+
+include 'metaboxes/metabox_page-content-sup.php';
+include 'metaboxes/metabox_image.php';
+include 'metaboxes/metabox_card.php';
+include 'metaboxes/metabox_seo-social.php';
+
+
+/*----------  Accueil  ----------*/
+
+include 'settings/settings_home.php';
 
 
 /*=====  FIN Include  =====*/

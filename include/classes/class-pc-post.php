@@ -192,7 +192,7 @@ class PC_Post {
 		$description = $this->get_card_description();
 
 		// filtres call to action
-		$ico_more = apply_filters( 'pc_filter_card_ico_more', pc_svg('more'), $this );	
+		$ico_more = apply_filters( 'pc_filter_card_ico_more', pc_svg('arrow'), $this );	
 		$ico_more_display = apply_filters( 'pc_filter_card_ico_more_display', true, $this );
 		$read_more_display = apply_filters( 'pc_filter_card_read_more_display', false, $this );
 		
