@@ -77,6 +77,12 @@ $('.js-h-nav').click(function() {
 	$html.toggleClass('h-nav-is-open');
 });
 
+$('.h-nav').click(function(event) {
+	if ( $( event.target ).is('.h-nav *') ) { return; }
+	$html.removeClass('h-nav-is-open');
+});
+
+
 /*----------  Btn fullscreen  ----------*/
 
 if ( $html.hasClass('is-fullscreen')) {

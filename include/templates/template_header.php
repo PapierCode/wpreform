@@ -152,7 +152,9 @@ function pc_display_header_end() {
 
 function pc_display_nav_overlay() {
 
-	echo '<button type="button" title="Fermer le menu" class="btn-overlay reset-btn js-h-nav" aria-hidden="true" tabindex="-1"><span class="visually-hidden">Fermer le menu</span></button>';
+	if ( apply_filters( 'pc_filter_nav_overlay_display', false ) ) {
+		echo '<button type="button" title="Fermer le menu" class="btn-overlay reset-btn js-h-nav" aria-hidden="true" tabindex="-1"><span class="visually-hidden">Fermer le menu</span></button>';
+	}
 
 }
 
