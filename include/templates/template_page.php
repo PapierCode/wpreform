@@ -66,8 +66,7 @@ function pc_display_page_wysiwyg( $pc_post ) {
 	if ( '' != $pc_post->content ) { the_content(); }
 
 	// schéma Article
-	$display_json = apply_filters( 'pc_filter_page_schema_article_display', true, $pc_post );
-	if ( $display_json ) {
+	if ( apply_filters( 'pc_filter_page_schema_article_display', true, $pc_post ) ) {
 		echo '<script type="application/ld+json">';
 			echo json_encode( $pc_post->get_schema_article(), JSON_UNESCAPED_SLASHES );
 		echo '</script>';

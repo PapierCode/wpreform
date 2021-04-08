@@ -163,6 +163,7 @@ class PC_Post {
 		$attr_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 700px, (min-width:760px) 500px';
 	
 		$tag = '<img src="'.$thumbnail_datas['urls'][1].'" alt="'.$thumbnail_datas['alt'].'" srcset="'.$attr_srcset.'" sizes="'.$attr_sizes.'" loading="lazy" width="'.$images_sizes['st-500']['width'].'" height="'.$images_sizes['st-500']['height'].'" />';
+		$tag = apply_filters( 'pc_filter_card_image', $tag, $this );
 		
 		echo $tag;
 	
