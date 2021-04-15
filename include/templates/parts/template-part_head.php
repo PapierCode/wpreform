@@ -79,9 +79,7 @@ add_action( 'wp_head', 'pc_display_metas_seo_and_social', 5 );
 			global $settings_project;
 			$metas = apply_filters( 'pc_filter_404_seo_metas', array(
 				'title' => 'Page non trouvée - '.$settings_project['coord-name'],
-				'description' => 'Cette page n\'existe pas ou a été supprimée.',
-				'image' => pc_get_default_image_to_share(),
-				'permalink' => 'https://'.$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]
+				'description' => 'Cette page n\'existe pas ou a été supprimée.'
 			) );
 			
 		}
@@ -140,11 +138,7 @@ add_action( 'wp_head', 'pc_display_favicon', 6 );
 
 	function pc_display_favicon() {
 
-		// défaut
-		$url = get_bloginfo( 'template_directory' ).'/images/favicon.jpg';
-		// pour modifier
-		$url = apply_filters( 'pc_filter_favicon_url', $url );
-		// affichage
+		$url = apply_filters( 'pc_filter_favicon_url', get_bloginfo( 'template_directory' ).'/images/favicon.jpg' );
 		echo '<link rel="icon" type="image/jpg" href="'.$url.'" />';
 
 	};

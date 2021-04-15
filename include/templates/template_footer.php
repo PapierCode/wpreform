@@ -186,7 +186,7 @@ function pc_display_js_footer() {
 
 	/*----------  Sprite to JS  ----------*/
 	
-	$sprite_to_js_array = apply_filters( 'pc_filter_sprite_to_js', array('arrow','cross') );
+	$sprite_to_js_array = apply_filters( 'pc_filter_sprite_to_js', array('arrow','cross','more','less') );
 	pc_sprite_to_js( $sprite_to_js_array ); 
 	
 

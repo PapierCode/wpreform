@@ -18,27 +18,27 @@
 =============================*/
 
 // maint start
-add_action( 'pc_action_page_main_start', 'pc_display_main_start', 10 ); // layout commun -> templates_layout.php
+add_action( 'pc_action_page_main_start', 'pc_display_main_start', 10 ); // template-part_layout.php
 
 	// header
-	add_action( 'pc_action_page_main_header', 'pc_display_main_header_start', 10 ); // layout commun -> templates_layout.php
+	add_action( 'pc_action_page_main_header', 'pc_display_main_header_start', 10 ); // template-part_layout.php
 		add_action( 'pc_action_page_main_header', 'pc_display_page_main_title', 20 ); // titre
-	add_action( 'pc_action_page_main_header', 'pc_display_main_header_end', 100 ); // layout commun -> templates_layout.php
+	add_action( 'pc_action_page_main_header', 'pc_display_main_header_end', 100 ); // template-part_layout.php
 
 	// content
-	add_action( 'pc_action_page_main_content', 'pc_display_main_content_start', 10 ); // layout commun -> templates_layout.php
+	add_action( 'pc_action_page_main_content', 'pc_display_main_content_start', 10 ); // template-part_layout.php
 		add_action( 'pc_action_page_main_content', 'pc_display_page_wysiwyg', 20 ); // éditeur
 		add_action( 'pc_action_page_main_content', 'pc_display_page_specific_content', 30 ); // contenu supplémentaire
-	add_action( 'pc_action_page_main_content', 'pc_display_main_content_end', 100 ); // layout commun -> templates_layout.php
+	add_action( 'pc_action_page_main_content', 'pc_display_main_content_end', 100 ); // template-part_layout.php
 
 	// footer
-	add_action( 'pc_action_page_main_footer', 'pc_display_main_footer_start', 10 ); // layout commun -> templates_layout.php
+	add_action( 'pc_action_page_main_footer', 'pc_display_main_footer_start', 10 ); // template-part_layout.php
 		add_action( 'pc_action_page_main_footer', 'pc_display_sub_page_backlink', 20 ); // lien retour
-		add_action( 'pc_action_page_main_footer', 'pc_display_share_links', 90 ); // layout commun -> templates_layout.php
-	add_action( 'pc_action_page_main_footer', 'pc_display_main_footer_end', 100 ); // layout commun -> templates_layout.php
+		add_action( 'pc_action_page_main_footer', 'pc_display_share_links', 90 ); // template-part_layout.php
+	add_action( 'pc_action_page_main_footer', 'pc_display_main_footer_end', 100 ); // template-part_layout.php
 
 // main end
-add_action( 'pc_action_page_main_end', 'pc_display_main_end', 10 ); // layout commun -> templates_layout.php
+add_action( 'pc_action_page_main_end', 'pc_display_main_end', 10 ); // template-part_layout.php
 
 
 /*=====  FIN Hooks  =====*/

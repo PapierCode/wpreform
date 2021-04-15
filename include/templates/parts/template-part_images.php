@@ -110,8 +110,6 @@ function pc_get_default_image_to_share() {
 		$images_sizes['share']['height']
 	) );
 
-	return $img_datas;
-
 }
 
 function pc_get_default_card_image() {
