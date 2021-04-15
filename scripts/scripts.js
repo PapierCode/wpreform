@@ -162,7 +162,7 @@ if ( $popBtnOpen.length > 0 ) {
 		if ( $this.data('cible') == 'map' ) {
 
 			// ajout  container map et contrôles
-			$pop.addClass('pop--map').append('<div id="map" class="pop-inner map"></div><div class="pop-controls"><button type="button" class="pop-btn-hide button" title="Fermer" data-cible="map">'+sprite.cross+'</button><button type="button" class="map-btn-zoom map-btn-zoom--in button">zoom +</button><button type="button" class="map-btn-zoom map-btn-zoom--out button">zoom -</button></div>');
+			$pop.addClass('pop--map').append('<div id="map" class="pop-inner map"></div><div class="pop-controls"><button type="button" class="map-btn-zoom map-btn-zoom--in button">'+sprite.more+'</button><button type="button" class="map-btn-zoom map-btn-zoom--out button">'+sprite.less+'</button><button type="button" class="pop-btn-hide button" title="Fermer" data-cible="map">'+sprite.cross+'</button></div>');
 			// coordonnées GPS
 			var mapLat = $this.data('lat'),
 			mapLong = $this.data('long'),
