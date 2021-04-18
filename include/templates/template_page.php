@@ -49,7 +49,7 @@ add_action( 'pc_action_page_main_end', 'pc_display_main_end', 10 ); // template-
 
 function pc_display_page_main_title( $pc_post ) {
 	
-	echo '<h1><span>'.$pc_post->title.'</span></h1>';
+	echo '<h1><span>'.get_the_title().'</span></h1>';
 
 }
 
