@@ -196,7 +196,7 @@ add_action( 'admin_init', 'pc_tinymce_css' );
 
 	function pc_tinymce_css() {
 
-		add_editor_style( get_bloginfo( 'template_directory').'/include/custom-admin/custom-admin.css' );
+		add_editor_style( get_bloginfo( 'template_directory').'/include/admin/admin.css' );
 
 	}
 
