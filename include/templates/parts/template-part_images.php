@@ -114,12 +114,12 @@ function pc_get_default_image_to_share() {
 
 function pc_get_default_card_image() {
 
-	$template_directory = get_bloginfo('template_directory');
+	$directory = get_bloginfo('template_directory');
 
 	return apply_filters( 'pc_filter_default_card_image', array(
-		$template_directory.'/images/st-default-400.jpg',
-		$template_directory.'/images/st-default-500.jpg',
-		$template_directory.'/images/st-default-700.jpg'
+		$directory.'/images/st-default-400.jpg',
+		$directory.'/images/st-default-500.jpg',
+		$directory.'/images/st-default-700.jpg'
 	) );
 
 }

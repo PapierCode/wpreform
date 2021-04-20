@@ -61,7 +61,7 @@ class PC_Term {
 	 * 
 	 * [RESUMÉ] Titre
 	 * 
-	 * @return string Méta resum-title | titre du post | '(sans titre)'
+	 * @return string Méta resum-title | nom du term
 	 * 
 	 */
 	public function get_card_title() {
