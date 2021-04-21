@@ -162,7 +162,7 @@ function pc_display_sub_page_backlink( $pc_post ) {
 
     if ( $pc_post->parent > 0 ) {
 
-        echo '<a href="'.get_the_permalink($pc_post->parent).'" class="main-footer-prev button" title="'.$pc_post->title.'">'.pc_svg('arrow').'<span>Retour</span></a>';
+        echo '<div class="main-footer-prev"><a href="'.get_the_permalink($pc_post->parent).'" class="button" title="'.get_the_title($pc_post->parent).'">'.pc_svg('arrow').'<span>Retour</span></a></div>';
 
     }
 
