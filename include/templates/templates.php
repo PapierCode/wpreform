@@ -2,20 +2,20 @@
 
 /*----------  Communs  ----------*/
 
-// sprite SVG
-include 'parts/template-part_sprite.php';
+// images
+include 'parts/template-part_images.php';
 // navigation
 include 'parts/template-part_navigation.php';
 // wysiwyg par défaut
 include 'parts/template-part_editor.php';
-// images & galerie
-include 'parts/template-part_images.php';
 // Données structurées
 include 'parts/template-part_schemas.php';
 // liens réseaux sociaux & partage
 include 'parts/template-part_social.php';
 // layout global
 include 'parts/template-part_layout.php';
+// fil d'ariane
+include 'parts/template-part_breadcrumb.php';
 // contenu de l'entête (head)
 include 'parts/template-part_head.php';
 // image pleine page

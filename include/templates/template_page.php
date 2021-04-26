@@ -22,7 +22,8 @@ add_action( 'pc_action_page_main_start', 'pc_display_main_start', 10 ); // templ
 
 	// header
 	add_action( 'pc_action_page_main_header', 'pc_display_main_header_start', 10 ); // template-part_layout.php
-		add_action( 'pc_action_page_main_header', 'pc_display_page_main_title', 20 ); // titre
+		//add_action( 'pc_action_page_main_header', 'pc_display_breadcrumb', 20 ); // breadcrumb
+		add_action( 'pc_action_page_main_header', 'pc_display_page_main_title', 30 ); // titre
 	add_action( 'pc_action_page_main_header', 'pc_display_main_header_end', 100 ); // template-part_layout.php
 
 	// content
