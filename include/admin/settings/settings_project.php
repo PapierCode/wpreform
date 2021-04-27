@@ -170,21 +170,6 @@ $settings_project_fields = array(
                 'css'       => 'width:100%'
             )
         )
-    ),
-    array(
-		'title'     => 'Conditions Générales d\'Utilisation',
-		'desc'		=> '<p>Indiquez la page des Conditions Générales d\'Utilisation pour que certains modules puissent y faire référence.</p>',
-        'id'        => 'cgu',
-        'prefix'    => 'cgu',
-        'fields'    => array(
-            array(
-                'type'      => 'select',
-                'label_for' => 'page',
-                'label'     => 'Page des CGU',
-                'options'   => $pages_list,
-                'required'  => true
-            )
-        )
     )
 );
 

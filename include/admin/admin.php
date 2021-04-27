@@ -127,12 +127,6 @@ function pc_edit_page_states( $states, $post ) {
 
 			global $settings_project; // cf. functions.php
 
-			switch ( $post->ID ) {
-				case $settings_project['cgu-page']:
-					$states[] = 'Conditions générales d\'utilisation';
-					break;
-			}
-
 			// contenu supplémentaire
 			$content_from = get_post_meta( $post->ID, 'content-from', true );
 
@@ -147,6 +141,7 @@ function pc_edit_page_states( $states, $post ) {
 	return $states;
 
 }
+
 
 /*----------  Colonnes  ----------*/
 
@@ -184,6 +179,34 @@ function pc_page_manage_posts_custom_column( $column, $post_id ) {
 	}
 
 }
+
+/*----------  Page CGU pour les éditeurs  ----------*/
+
+add_action( 'admin_init', 'pc_editor_can_edit_privacy_page' );
+
+	function pc_editor_can_edit_privacy_page() {
+
+		global $current_user_role;
+		if ( 'editor' == $current_user_role ) {
+			add_action( 'map_meta_cap', 'pc_editor_meta_cap_for_privacy_page', 10, 4 );
+		}
+		
+	}
+
+	function pc_editor_meta_cap_for_privacy_page( $caps, $cap, $user_id, $args ) {
+
+		// modifier
+		if ( 'manage_privacy_options' === $cap ) {
+			$caps = array_diff( $caps, ['manage_options'] );
+		}
+		
+		// supprimer
+		if ( 'delete_post' == $cap && get_option( 'wp_page_for_privacy_policy' ) == $args[0] ) {
+			$caps[] = 'do_not_allow';
+		}
+
+		return $caps;
+	}
 
 
 /*=====  FIN Pages  =====*/
