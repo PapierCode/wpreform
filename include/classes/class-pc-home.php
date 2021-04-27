@@ -2,11 +2,12 @@
 
 class PC_Home {
 
-	public $title;		// string
-	public $permalink;	// string
-	public $metas;		// array
+	public $title;			// string
+	public $permalink;		// string
+	public $metas;			// array
 
-	public $has_image;
+	public $has_image;		// bool
+	public $is_fullscreen;	// bool
 	
 
 	/*=================================
@@ -21,6 +22,9 @@ class PC_Home {
 
 		// test image associée
 		$this->has_image = ( isset( $this->metas['visual-id'] ) && '' != $this->metas['visual-id'] && is_object( get_post( $this->metas['visual-id'] ) ) ) ? true : false;
+
+		// test fullscreen
+		$this->is_fullscreen = ( $this->has_image && isset( $this->metas['visual-fullscreen'] ) ) ? true : false;
 
 	}
  

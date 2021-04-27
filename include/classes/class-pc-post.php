@@ -2,19 +2,20 @@
 
 class PC_Post {
 
-	public $wp_post;	// objet
+	public $wp_post;		// objet
 
-	public $id;			// int
-	public $type;		// string
-	public $author;		// int
-	public $parent;		// int
-	public $title;		// string
-	public $content;	// string
+	public $id;				// int
+	public $type;			// string
+	public $author;			// int
+	public $parent;			// int
+	public $title;			// string
+	public $content;		// string
 
-	public $permalink;	// string
-	public $metas;		// array
+	public $permalink;		// string
+	public $metas;			// array
 	
-	public $has_image;	// bool
+	public $has_image;		// bool
+	public $is_fullscreen;	// bool
 
 
 	/*=================================
@@ -45,6 +46,9 @@ class PC_Post {
 		// test image associée
 		$this->use_woo_product_image(); // si le post est un produit WooCommerce
 		$this->has_image = ( isset( $this->metas['visual-id'] ) && is_object( get_post( $this->metas['visual-id'] ) ) ) ? true : false;
+		
+		// test fullscreen
+		$this->is_fullscreen = ( $this->has_image && isset( $this->metas['visual-fullscreen'] ) ) ? true : false;
 
 	}
 
