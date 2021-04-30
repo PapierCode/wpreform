@@ -16,12 +16,19 @@
 
 function pc_get_html_css_class() {
 
+	global $settings_pc;
 	$css_classes = array();
 
 	// type de page
 	if ( is_home() ) { $css_classes[] = 'is-home'; }
 	else if ( is_page() ) {	$css_classes[] = 'is-page'; }
+	else if ( is_search() ) { $css_classes[] = 'is-search'; }
 	else if ( is_404() ) { $css_classes[] = 'is-404'; }
+
+	// recherche
+	if ( isset( $settings_pc['wpreform-search']) ) { $css_classes[] = 'has-search'; }
+	// breadcrumb
+	if ( isset( $settings_pc['wpreform-breadcrumb']) ) { $css_classes[] = 'has-breadcrumb'; }
 
 	// pour modifier
 	$css_classes = apply_filters( 'pc_filter_html_css_class', $css_classes );
@@ -79,7 +86,9 @@ add_action( 'wp_head', 'pc_display_metas_seo_and_social', 5 );
 			global $settings_project;
 			$metas = apply_filters( 'pc_filter_404_seo_metas', array(
 				'title' => 'Page non trouvée - '.$settings_project['coord-name'],
-				'description' => 'Cette page n\'existe pas ou a été supprimée.'
+				'description' => 'Cette page n\'existe pas ou a été supprimée.',
+				'image' => $metas['image'],
+				'permalink' => $metas['permalink']
 			) );
 			
 		}

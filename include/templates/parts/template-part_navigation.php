@@ -63,6 +63,7 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		// array to string + classes ajoutées depuis l'admin
 		$li_class_name .= esc_attr( implode( ' ', $clean_classes ) ).' '.$item->classes[0];
+		
 		// construction du li
 		$output .= '<li class="'.$li_class_name.'">';
 
