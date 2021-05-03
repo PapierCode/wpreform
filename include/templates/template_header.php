@@ -4,9 +4,14 @@
  * Template : header
  * 
  ** Hooks
- ** Contenu des hooks
+ ** Layout
+ ** Logo
+ ** Navigation
+ ** Tools
+ ** Recherche
  * 
  */
+
 
 /*=============================
 =            Hooks            =
@@ -21,28 +26,35 @@ add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 		add_action( 'pc_header', 'pc_display_header_logo', 40 );
 		add_action( 'pc_header', 'pc_display_nav_button_open_close', 50 );
 		add_action( 'pc_header', 'pc_display_header_nav', 60 );
+		add_action( 'pc_header', 'pc_display_header_tools', 60 );
 
 	add_action( 'pc_header', 'pc_display_header_end', 70 );
 
 	add_action( 'pc_header', 'pc_display_nav_overlay', 80 );
+	add_action( 'pc_header', 'pc_display_header_form_search', 90 );
 
 
 /*=====  FIN Hooks  =====*/
 
-/*=========================================
-=            Contenu des hooks            =
-=========================================*/
-
-/*----------  Accès direct  ----------*/
+/*=====================================
+=            Accès directs            =
+=====================================*/
 
 function pc_display_skip_nav() {
 	
-	$skip_nav_list = apply_filters( 'pc_filter_skip_nav', array(
+	$skip_nav_list = array(
 		'#header-nav' => array( 'Navigation principale', 'Accès direct à la navigation principale' ),
 		'#main' => array( 'Contenu de la page', 'Accès direct au contenu' ),
 		'#footer-nav' => array( 'Navigation du pied de page', 'Accès direct à la navigation du pied de page' )
-	) );
-	
+	);
+
+	global $settings_pc;
+	if ( isset( $settings_pc['wpreform-search']) ) {
+		$skip_nav_list['#form-search'] = array( 'Recherche', 'Accès direct au formulaire de recherche' );
+	}
+
+	$skip_nav_list = apply_filters( 'pc_filter_skip_nav', $skip_nav_list );
+
 	echo '<ul class="skip-nav no-print">';
 		if( !is_home() ) { echo '<li><a href="'.get_bloginfo('url').'" title="Retour à la page d\'accueil">Accueil</a></li>'; }
 		foreach ( $skip_nav_list as $anchor => $texts ) {
@@ -53,25 +65,32 @@ function pc_display_skip_nav() {
 }
 
 
-/*----------  Début du container body  ----------*/
+/*=====  FIN Accès directs  =====*/
 
-function pc_display_body_inner_start() {
-
-	echo '<div class="body-inner">';
-
-}
-
+/*==============================
+=            Layout            =
+==============================*/
 
 /*----------  Début de l'entête  ----------*/
 
 function pc_display_header_start() {
 
-	echo '<header class="header"><div class="header-inner">';
+	echo apply_filters( 'pc_filter_header_start', '<header class="header"><div class="header-inner">' );
+
+}
+
+function pc_display_header_end() {
+
+	echo apply_filters( 'pc_filter_header_end', '</div></header>' );
 
 }
 
 
-/*----------  Logo  ----------*/
+/*=====  FIN Layout  =====*/
+
+/*============================
+=            Logo            =
+============================*/
 
 function pc_display_header_logo() {
 	
@@ -101,11 +120,17 @@ function pc_display_header_logo() {
 }
 
 
+/*=====  FIN Logo  =====*/
+
+/*==================================
+=            Navigation            =
+==================================*/
+
 /*----------  Bouton menu  ----------*/
 
 function pc_display_nav_button_open_close() {
 
-	echo '<div class="h-nav-btn-box"><button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-h-nav reset-btn" aria-hidden="true" tabindex="-1"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="h-nav-btn-txt">Menu</span></button></div>';
+	echo '<div class="h-nav-btn-box no-print"><button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-button-h-nav reset-btn" aria-hidden="true" tabindex="-1"><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span><span class="h-nav-btn-txt">Menu</span></button></div>';
 
 }
 
@@ -114,7 +139,7 @@ function pc_display_nav_button_open_close() {
 
 function pc_display_header_nav() {
 
-	echo '<nav id="header-nav" class="h-nav"><div class="h-nav-inner">';
+	echo '<nav id="header-nav" class="h-nav js-overlay-h-nav"><div class="h-nav-inner">';
 		
 		do_action( 'pc_header_nav_list_before' );
 
@@ -138,26 +163,6 @@ function pc_display_header_nav() {
 
 }
 
-
-/*----------  Fin de l'entête  ----------*/
-
-function pc_display_header_end() {
-
-	echo '</div></header>';
-
-}
-
-
-/*----------  Overlay navigation  ----------*/
-
-function pc_display_nav_overlay() {
-
-	if ( apply_filters( 'pc_filter_nav_overlay_display', false ) ) {
-		echo '<button type="button" title="Fermer le menu" class="btn-overlay reset-btn js-h-nav" aria-hidden="true" tabindex="-1"><span class="visually-hidden">Fermer le menu</span></button>';
-	}
-
-}
-
 /*----------  Réseaux sociaux  ----------*/
 
 add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
@@ -169,4 +174,63 @@ add_action( 'pc_header_nav_list_after', 'pc_display_header_social', 10 );
 	}
 
 
-/*=====  FIN Contenu des hooks  =====*/
+/*----------  Overlay navigation  ----------*/
+
+function pc_display_nav_overlay() {
+
+	if ( apply_filters( 'pc_filter_nav_overlay_display', false ) ) {
+		echo '<button type="button" title="Fermer le menu" class="btn-overlay reset-btn js-button-h-nav no-print" aria-hidden="true" tabindex="-1"><span class="visually-hidden">Fermer le menu</span></button>';
+	}
+
+}
+
+
+/*=====  FIN Navigation  =====*/
+
+/*=============================
+=            Tools            =
+=============================*/
+
+function pc_display_header_tools() {
+
+	echo '<nav class="h-tools"><div class="h-tools-inner"><ul class="h-tools-list reset-list">';
+
+		$items = apply_filters( 'pc_filter_header_tools', array(
+			'search' => array(
+				'attrs' => 'aria-hidden="true"',
+				'html' => '<button type="button" title="Ouvrir/fermer la recherche" class="reset-btn js-button-search h-tools-link" data-target="form-search-box" aria-hidden="true"><span class="h-tools-txt">Recherche</span><span class="h-tools-ico">'.pc_svg( 'zoom' ).'</span></button>'
+			)
+		));
+
+		foreach ( $items as $id => $args ) {
+			echo '<li class="h-tools-item h-tools-item--'.$id.'" '.$args['attrs'].'>'.$args['html'].'</li>';
+		}
+
+	echo '</ul></div></nav>';
+
+}
+
+
+/*=====  FIN Tools  =====*/
+
+/*=================================
+=            Recherche            =
+=================================*/
+
+function pc_display_header_form_search() {
+
+	global $settings_pc;
+	if ( isset( $settings_pc['wpreform-search']) ) {
+	
+		$search_display = ( is_search() ) ? '' : 'is-hidden';
+
+		echo '<div class="form-search-box no-print '.$search_display.'"><div class="form-search-box-inner">';
+			pc_display_form_search();
+		echo '</div></div>';
+
+	}
+
+}
+
+
+/*=====  FIN Recherche  =====*/
