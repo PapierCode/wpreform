@@ -22,7 +22,6 @@
 
 add_action( 'pc_footer', 'pc_display_body_inner_end', 50 );
 
-add_action( 'pc_wp_footer', 'pc_display_pop_container', 10 );
 add_action( 'pc_wp_footer', 'pc_display_js_footer', 20 );
 
 
@@ -36,7 +35,7 @@ add_action( 'pc_wp_footer', 'pc_display_js_footer', 20 );
 
 function pc_display_footer_start() {
 
-	echo '<footer class="footer"><div class="footer-inner">';
+	echo apply_filters( 'pc_filter_footer_start', '<footer class="footer"><div class="footer-inner">' );
 
 }
 
@@ -71,7 +70,7 @@ function pc_display_footer_contact() {
 	
 	$address = $settings_project['coord-address'].' <br/>'.$settings_project['coord-postal-code'].' '.$settings_project['coord-city'].', '.$settings_project['coord-country'];
 	if ( $settings_project['coord-lat'] != '' && $settings_project['coord-long'] != '' ) {
-		$address .= '<br aria-hidden="true"/><button class="reset-btn btn-display-pop no-print" data-cible="map" data-lat="'.$settings_project['coord-lat'].'" data-long="'.$settings_project['coord-long'].'" aria-hidden="true">Afficher la carte</button>';
+		$address .= '<br aria-hidden="true" class="no-print"/><button class="reset-btn js-button-map no-print" data-lat="'.$settings_project['coord-lat'].'" data-long="'.$settings_project['coord-long'].'" aria-hidden="true">Afficher la carte</button>';
 	}
 	$dd['list']['addr'] = array(
 		'ico' => 'map',
@@ -151,7 +150,7 @@ function pc_display_footer_nav() {
 
 function pc_display_footer_end() {
 
-	echo '</div></footer>';
+	echo apply_filters( 'pc_filter_footer_end', '</div></footer>' );
 
 }
 
@@ -161,24 +160,6 @@ function pc_display_footer_end() {
 /*=============================================
 =            Fin du container body            =
 =============================================*/
-
-/*----------  Fin body inner  ----------*/
-
-function pc_display_body_inner_end() {
-
-	echo '</div>';
-
-}
-
-
-/*----------  Container pop-up  ----------*/
-
-function pc_display_pop_container() {
-
-	echo '<div class="pop no-print" aria-hidden="true"></div>';
-
-}
-
 
 /*----------  Javascript  ----------*/
 

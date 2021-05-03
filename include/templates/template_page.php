@@ -5,6 +5,7 @@
  * 
  ** Hooks
  ** Titre
+ ** Fil d'ariane
  ** Wysiwyg
  ** Sous-pages & contenu spécifique
  ** Sous-pages, lien retour
@@ -17,18 +18,18 @@
 =            Hooks            =
 =============================*/
 
-// maint start
+// main start
 add_action( 'pc_action_page_main_start', 'pc_display_main_start', 10 ); // template-part_layout.php
 
 	// header
 	add_action( 'pc_action_page_main_header', 'pc_display_main_header_start', 10 ); // template-part_layout.php
-		add_action( 'pc_action_page_main_header', 'pc_display_page_header_breadcrumb', 20 ); // breadcrumb
-		add_action( 'pc_action_page_main_header', 'pc_display_page_main_title', 30 ); // titre
+		add_action( 'pc_action_page_main_header', 'pc_display_header_breadcrumb', 20 ); // breadcrumb
+		add_action( 'pc_action_page_main_header', 'pc_display_main_title', 30 ); // titre
 	add_action( 'pc_action_page_main_header', 'pc_display_main_header_end', 100 ); // template-part_layout.php
 
 	// content
 	add_action( 'pc_action_page_main_content', 'pc_display_main_content_start', 10 ); // template-part_layout.php
-		add_action( 'pc_action_page_main_content', 'pc_display_page_main_breadcrumb', 20 ); // breadcrumb
+		add_action( 'pc_action_page_main_content', 'pc_display_main_breadcrumb', 20 ); // breadcrumb
 		add_action( 'pc_action_page_main_content', 'pc_display_page_wysiwyg', 30 ); // éditeur
 		add_action( 'pc_action_page_main_content', 'pc_display_page_specific_content', 40 ); // contenu supplémentaire
 	add_action( 'pc_action_page_main_content', 'pc_display_main_content_end', 100 ); // template-part_layout.php
@@ -36,7 +37,7 @@ add_action( 'pc_action_page_main_start', 'pc_display_main_start', 10 ); // templ
 	// footer
 	add_action( 'pc_action_page_main_footer', 'pc_display_main_footer_start', 10 ); // template-part_layout.php
 		add_action( 'pc_action_page_main_footer', 'pc_display_sub_page_backlink', 20 ); // lien retour
-		add_action( 'pc_action_page_main_footer', 'pc_display_share_links', 90 ); // template-part_layout.php
+		add_action( 'pc_action_page_main_footer', 'pc_display_share_links', 90 ); // liens de partage
 	add_action( 'pc_action_page_main_footer', 'pc_display_main_footer_end', 100 ); // template-part_layout.php
 
 // main end
@@ -45,40 +46,19 @@ add_action( 'pc_action_page_main_end', 'pc_display_main_end', 10 ); // template-
 
 /*=====  FIN Hooks  =====*/
 
-/*=============================
-=            Titre            =
-=============================*/
-
-function pc_display_page_main_title( $pc_post ) {
-	
-	echo '<h1><span>'.get_the_title().'</span></h1>';
-
-}
-
-
-/*=====  FIN Titre  =====*/
-
 /*====================================
 =            Fil d'ariane            =
 ====================================*/
 
-function pc_display_page_header_breadcrumb( $pc_post ) {
+function pc_display_header_breadcrumb( $pc_post ) {
 
-	if ( !$pc_post->is_fullscreen ) {
-
-		pc_display_breadcrumb();
-
-	}
+	if ( !$pc_post->is_fullscreen ) { pc_display_breadcrumb(); }
 
 }
 
-function pc_display_page_main_breadcrumb( $pc_post ) {
+function pc_display_main_breadcrumb( $pc_post ) {
 
-	if ( $pc_post->is_fullscreen ) {
-
-		pc_display_breadcrumb();
-
-	}
+	if ( $pc_post->is_fullscreen ) { pc_display_breadcrumb(); }
 
 }
 
@@ -112,7 +92,7 @@ function pc_display_page_wysiwyg( $pc_post ) {
 
 function pc_display_page_specific_content( $pc_post ) {
 
-	if ( !post_password_required() ) {
+	if ( is_page() && !post_password_required() ) {
 
 		$metas = $pc_post->metas;
 
@@ -189,7 +169,7 @@ function pc_display_page_specific_content( $pc_post ) {
 
 function pc_display_sub_page_backlink( $pc_post ) {
 
-    if ( $pc_post->parent > 0 ) {
+    if ( is_page() && $pc_post->parent > 0 ) {
 
         echo '<div class="main-footer-prev"><a href="'.get_the_permalink($pc_post->parent).'" class="button" title="'.get_the_title($pc_post->parent).'">'.pc_svg('arrow').'<span>Retour</span></a></div>';
 

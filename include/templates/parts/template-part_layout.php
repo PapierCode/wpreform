@@ -2,51 +2,82 @@
 /**
  * 
  * Communs templates : structure globale
+ * 
+ ** Hooks
+ ** Body inner
+ ** Main
  *  
  */
 
 
-/*----------  Main  ----------*/
+/*==================================
+=            Body inner            =
+==================================*/
+
+function pc_display_body_inner_start() {
+
+	echo apply_filters( 'pc_filter_body_inner_start', '<div class="body-inner">' );
+
+}
+
+function pc_display_body_inner_end() {
+
+	echo apply_filters( 'pc_filter_body_inner_end', '</div>' );
+
+}
+
+
+/*=====  FIN Body inner  =====*/
+
+/*============================
+=            Main            =
+============================*/
 
 function pc_display_main_start() {
 
-    echo '<main id="main" class="main"><div class="main-inner">';
+    echo apply_filters( 'pc_filter_main_start', '<main id="main" class="main"><div class="main-inner">' );
 
 }
 
 function pc_display_main_end() {
 
-    echo '</div></main>';
+    echo apply_filters( 'pc_filter_main_end', '</div></main>');
 
 }
 
 
-/*----------  Header & title  ----------*/
+/*----------  Header  ----------*/
 
 function pc_display_main_header_start() {
 
-	echo '<header class="main-header"><div class="main-header-inner">';
+	echo apply_filters( 'pc_filter_main_header_start', '<header class="main-header"><div class="main-header-inner">' );
+
+}
+
+function pc_display_main_title() {
+	
+	echo '<h1><span>'.get_the_title().'</span></h1>';
 
 }
 
 function pc_display_main_header_end() {
 	
-	echo '</div></header>';
+	echo apply_filters( 'pc_filter_main_header_end', '</div></header>' );
 
 }
 
 
-/*----------  Main content  ----------*/
+/*----------  Content  ----------*/
 
 function pc_display_main_content_start() {
 
-	echo '<div class="main-content"><div class="main-content-inner">';
+	echo apply_filters( 'pc_filter_main_content_start', '<div class="main-content"><div class="main-content-inner">' );
 
 }
 
 function pc_display_main_content_end() {
 
-	echo '</div></div>';
+	echo apply_filters( 'pc_filter_main_content_end', '</div></div>');
 
 }
 
@@ -55,13 +86,15 @@ function pc_display_main_content_end() {
 
 function pc_display_main_footer_start() {
 
-    echo '<footer class="main-footer"><nav class="main-footer-inner">';
+    echo apply_filters( 'pc_filter_main_footer_start', '<footer class="main-footer"><nav class="main-footer-inner">' );
 
 }
 
 function pc_display_main_footer_end() {
 
-    echo '</nav></footer>';
+    echo apply_filters( 'pc_filter_main_footer_end', '</nav></footer>' );
 
 }
 
+
+/*=====  FIN Main  =====*/

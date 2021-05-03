@@ -91,7 +91,7 @@ function pc_display_breadcrumb() {
 
 		/*----------  Affichage  ----------*/
 		
-		echo '<nav class="breadcrumb" aria-label="breadcrumbs"><ol class="breadcrumb-list reset-list">';
+		echo '<nav class="breadcrumb no-print" aria-label="breadcrumbs"><ol class="breadcrumb-list reset-list">';
 
 			foreach ( $links as $key => $link ) {
 

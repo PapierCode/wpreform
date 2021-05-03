@@ -164,9 +164,9 @@ class PC_Post {
 		$thumbnail_datas = $this->get_card_image_datas();
 	
 		$attr_srcset = $thumbnail_datas['urls'][0].' 400w, '.$thumbnail_datas['urls'][1].' 500w, '.$thumbnail_datas['urls'][2].' 700w';
-		$attr_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:759px) 700px, (min-width:760px) 500px';
+		$attr_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, (min-width:701px) 500px';
 	
-		$tag = '<img src="'.$thumbnail_datas['urls'][1].'" alt="'.$thumbnail_datas['alt'].'" srcset="'.$attr_srcset.'" sizes="'.$attr_sizes.'" loading="lazy" width="'.$images_sizes['st-500']['width'].'" height="'.$images_sizes['st-500']['height'].'" />';
+		$tag = '<img src="'.$thumbnail_datas['urls'][2].'" alt="'.$thumbnail_datas['alt'].'" srcset="'.$attr_srcset.'" sizes="'.$attr_sizes.'" loading="lazy" width="'.$images_sizes['st-700']['width'].'" height="'.$images_sizes['st-700']['height'].'" />';
 		$tag = apply_filters( 'pc_filter_card_image', $tag, $this );
 		
 		echo $tag;
