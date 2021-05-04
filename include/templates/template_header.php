@@ -21,6 +21,8 @@ add_action( 'pc_header', 'pc_display_skip_nav', 10 );
 
 add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 
+	add_action( 'pc_header', 'pc_display_header_form_search', 25 );
+
 	add_action( 'pc_header', 'pc_display_header_start', 30 );
 
 		add_action( 'pc_header', 'pc_display_header_logo', 40 );
@@ -31,7 +33,6 @@ add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 	add_action( 'pc_header', 'pc_display_header_end', 70 );
 
 	add_action( 'pc_header', 'pc_display_nav_overlay', 80 );
-	add_action( 'pc_header', 'pc_display_header_form_search', 90 );
 
 
 /*=====  FIN Hooks  =====*/
@@ -198,7 +199,7 @@ function pc_display_header_tools() {
 		$items = apply_filters( 'pc_filter_header_tools', array(
 			'search' => array(
 				'attrs' => 'aria-hidden="true"',
-				'html' => '<button type="button" title="Ouvrir/fermer la recherche" class="reset-btn js-button-search h-tools-link" data-target="form-search-box" aria-hidden="true"><span class="h-tools-txt">Recherche</span><span class="h-tools-ico">'.pc_svg( 'zoom' ).'</span></button>'
+				'html' => '<button type="button" title="Ouvrir/fermer la recherche" class="reset-btn js-button-search h-tools-link" aria-hidden="true"><span class="h-tools-txt">Recherche</span><span class="h-tools-ico">'.pc_svg( 'zoom' ).'</span></button>'
 			)
 		));
 
@@ -221,10 +222,8 @@ function pc_display_header_form_search() {
 
 	global $settings_pc;
 	if ( isset( $settings_pc['wpreform-search']) ) {
-	
-		$search_display = ( is_search() ) ? '' : 'is-hidden';
 
-		echo '<div class="form-search-box no-print '.$search_display.'"><div class="form-search-box-inner">';
+		echo '<div class="form-search-box no-print"><div class="form-search-box-inner">';
 			pc_display_form_search();
 		echo '</div></div>';
 

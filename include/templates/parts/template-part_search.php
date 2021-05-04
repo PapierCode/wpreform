@@ -6,6 +6,23 @@
  */
 
 
+/*==================================
+=            Formulaire            =
+==================================*/
+
+function pc_display_form_search() {
+
+		echo '<form id="form-search" class="form-search mw" method="get" action="'.get_bloginfo('url').'">';
+			echo '<label class="form-search-label" for="form-search-input">Mots-clés</label>';
+			echo '<input type="text" class="form-search-input" name="s" id="form-search-input" value="'.esc_html( get_search_query() ).'" placeholder="Mots-clés" required>';
+			echo '<button type="submit" class="form-search-submit reset-btn button" title="Rechercher">'.pc_svg('zoom').'<span class="visually-hidden">Rechercher</span>'.'</button>';
+		echo '</form>';
+
+}
+
+
+/*=====  FIN Formulaire  =====*/
+
 /*=======================================================================
 =            Indexation des customs fields pour la recherche            =
 =======================================================================*/
@@ -20,7 +37,7 @@
 
 /**
  *
- *  Join posts and postmeta tables
+ * Join posts and postmeta tables
  *
  * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_join
  * 

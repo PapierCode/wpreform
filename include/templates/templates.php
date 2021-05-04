@@ -32,6 +32,8 @@ include 'template_header.php';
 include 'template_footer.php';
 // page
 include 'template_page.php';
+// recherche
+include 'template_search.php';
 // 404
 include 'template_404.php';
 // accueil

@@ -32,12 +32,23 @@ var $html = $('html'),
 /*----------  btn open/close  ----------*/
 
 $('.js-button-h-nav').click(function() {
+	
 	$html.toggleClass('h-nav-is-open');
+	
+	if ( $html.hasClass('search-is-open') ) {
+
+		$html.removeClass('search-is-open');
+		$search_form.find('input,button').attr('tabindex','-1');
+
+	}
+	
 });
 
 $('.js-overlay-h-nav').click(function(event) {
+
 	if ( $( event.target ).is('.h-nav *') ) { return; }
 	$html.removeClass('h-nav-is-open');
+
 });
 
 
@@ -47,30 +58,29 @@ $('.js-overlay-h-nav').click(function(event) {
 =            Toggle open/close            =
 =========================================*/
 
-$('.js-button-search').click(function() {
-	
-	var target = $(this).data('target');
+if ( $html.hasClass('has-search') ) {
 
-	if ( $('.'+target).hasClass('is-hidden') ) {
+	var $search_form = $('.form-search-box');
+	$search_form.find('input,button').attr('tabindex','-1');
 
-		$('.'+target).removeClass('is-hidden');
+	$('.js-button-search').click(function() {
 
-		if ( target == 'form-search-box' ) {
-			$('.'+target).find('input,button').removeAttr('tabindex');
-			$('.'+target).find('input').focus();
+		if ( $html.hasClass('search-is-open') ) {
+
+			$html.removeClass('search-is-open');
+			$search_form.find('input,button').attr('tabindex','-1');
+
+		} else {
+
+			$html.addClass('search-is-open');
+			$search_form.find('input,button').removeAttr('tabindex');
+			$search_form.find('input').focus();
+
 		}
 
-	} else {
+	});
 
-		$('.'+target).addClass('is-hidden');
-		
-		if ( target == 'form-search-box' ) {
-			$('.'+target).find('input,button').attr('tabindex','-1');
-		}
-
-	}
-
-});
+}
 
 
 /*=====  FIN Toggle open/close  =====*/

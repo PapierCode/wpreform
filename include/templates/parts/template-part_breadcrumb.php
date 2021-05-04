@@ -83,6 +83,18 @@ function pc_display_breadcrumb() {
 
 		}
 
+
+		/*----------  Recherche  ----------*/
+		
+		if ( is_search() ) {
+
+			$links[] = array(
+				'name' => 'Recherche',
+				'permalink' => ''
+			); 
+
+		}
+
 		
 		/*----------  Séparateur  ----------*/
 		
