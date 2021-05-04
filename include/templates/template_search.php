@@ -47,9 +47,7 @@ function pc_display_search_results() {
 	$txt = ( $count > 1 ) ? 'résultats' : 'résultat';
 
 	$pages_count = ceil( $count / get_option( 'posts_per_page' ) );
-	if ( $pages_count > 1 ) {
-		$pages_count_txt = ' sur <strong>'.$pages_count.' pages</strong>';
-	}
+	$pages_count_txt = ( $pages_count > 1 ) ? ' sur <strong>'.$pages_count.' pages</strong>' : '';
 
 	$types = apply_filters( 'pc_filter_search_results_type', array(
 		'page' => 'Page'
