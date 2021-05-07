@@ -100,7 +100,7 @@ add_action( 'pc_action_page_main_header', 'pc_display_fullscreen_btn_scroll_to_c
 			$ico = apply_filters( 'pc_filter_btn_scroll_to_content_ico', pc_svg('arrow') );
 
 			echo '<div class="fs-more">';
-			echo '<button type="button" class="fs-more-btn js-button-fullscreen button" aria-hidden="true">'.$ico.'</button>';
+			echo '<button type="button" class="fs-more-btn js-button-fullscreen button" aria-hidden="true"><span class="ico">'.$ico.'</span></button>';
 			echo '</div>';
 
 		}

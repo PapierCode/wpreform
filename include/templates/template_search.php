@@ -56,19 +56,21 @@ function pc_display_search_results() {
 	pc_display_form_search();
 	echo '<p class="s-results-infos"><strong>'.$count.'</strong> '.$txt.$pages_count_txt.'.</p>';
 
-	echo '<dl class="s-results-list">';
+	echo '<ol class="s-results-list reset-list">';
 
 	foreach ( $wp_query->posts as $post ) {
 		
 		$pc_post = new PC_Post( $post );
 		$tag = ( array_key_exists( $pc_post->type, $types ) ) ? $types[$pc_post->type] : '';
 
-		echo '<dt class="s-results-item-title s-result-item-title--'.$pc_post->type.'">'.$pc_post->get_card_title().' <span>'.$tag.'</span></dt>';
-		echo '<dd class="s-results-item-desc">'.$pc_post->get_card_description().'&nbsp;<a class="st-desc-ico" href="'.$pc_post->permalink.'" title="Lire la suite">'.pc_svg('arrow').'</a></dd>';
+		echo '<li class="s-results-item s-results-item--'.$pc_post->type.'">';
+			echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite">'.$pc_post->get_card_title().' <span>'.$tag.'</span></a></h2>';
+			echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'&nbsp;<span class="st-desc-ico">'.pc_svg('arrow').'</span></p>';
+		echo '</li>';
 
 	}
 	
-	echo '</dl>';
+	echo '</ol>';
 
 }
 

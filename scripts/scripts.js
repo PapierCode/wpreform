@@ -151,7 +151,7 @@ if ( $js_button_map.length > 0 ) {
 		var $this = $(this);
 
 		// ajout  container map et contrôles
-		$map.append('<div id="map" class="map-inner"></div><div class="map-controls"><button type="button" class="map-btn-zoom map-btn-zoom--in button">'+sprite.more+'</button><button type="button" class="map-btn-zoom map-btn-zoom--out button">'+sprite.less+'</button><button type="button" class="map-btn-hide button" title="Fermer" data-cible="map">'+sprite.cross+'</button></div>');
+		$map.append('<div id="map" class="map-inner"></div><div class="map-controls"><button type="button" class="map-btn-zoom map-btn-zoom--in button"><span class="ico">'+sprite.more+'</span></button><button type="button" class="map-btn-zoom map-btn-zoom--out button">'+sprite.less+'</button><button type="button" class="map-btn-hide button" title="Fermer" data-cible="map"><span class="ico">'+sprite.cross+'</span></button></div>');
 		// coordonnées GPS
 		var mapLat = $this.data('lat'),
 		mapLong = $this.data('long'),
