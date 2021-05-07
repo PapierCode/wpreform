@@ -194,20 +194,29 @@ function pc_display_nav_overlay() {
 
 function pc_display_header_tools() {
 
-	echo '<nav class="h-tools"><div class="h-tools-inner"><ul class="h-tools-list reset-list">';
+	$items = array();
 
-		$items = apply_filters( 'pc_filter_header_tools', array(
-			'search' => array(
-				'attrs' => 'aria-hidden="true"',
-				'html' => '<button type="button" title="Ouvrir/fermer la recherche" class="reset-btn js-button-search h-tools-link" aria-hidden="true"><span class="txt">Recherche</span><span class="ico">'.pc_svg( 'zoom' ).'</span></button>'
-			)
-		));
+	global $settings_pc;
+	if ( isset( $settings_pc['wpreform-search']) ) {
+		$items['search'] = array(
+			'attrs' => 'aria-hidden="true"',
+			'html' => '<button type="button" title="Ouvrir/fermer la recherche" class="reset-btn js-button-search h-tools-link" aria-hidden="true"><span class="txt">Recherche</span><span class="ico">'.pc_svg( 'zoom' ).'</span></button>'
+		);
+	}
 
-		foreach ( $items as $id => $args ) {
-			echo '<li class="h-tools-item h-tools-item--'.$id.'" '.$args['attrs'].'>'.$args['html'].'</li>';
-		}
+	$items = apply_filters( 'pc_filter_header_tools', $items );
 
-	echo '</ul></div></nav>';
+	if ( count( $items ) > 0 ) {
+
+		echo '<nav class="h-tools"><div class="h-tools-inner"><ul class="h-tools-list reset-list">';
+
+			foreach ( $items as $id => $args ) {
+				echo '<li class="h-tools-item h-tools-item--'.$id.'" '.$args['attrs'].'>'.$args['html'].'</li>';
+			}
+
+		echo '</ul></div></nav>';
+
+	}
 
 }
 
