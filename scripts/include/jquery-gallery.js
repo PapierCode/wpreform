@@ -69,7 +69,7 @@
         var $element    = $(element),           // jQuery version of DOM element, return an object
             $body       = $('body'),            // page body, return an object
 
-            $itemLinks  = $element.find('a'),   // link list in element, return an object
+            $itemLinks,  						// link list in element, return an object
             imgUrls     = [],                   // images's urls, return array
             imgCaptions = [],                   // images's captions, return array
             imgNb,                              // number of images, return number
@@ -112,8 +112,12 @@
             // click on a thumbnail
             $element.on('click', 'a', function(event) {
 
+				// if elements are added dynamically 
+				$itemLinks = $element.find('a');
+
                 // remove default action
                 event.preventDefault();
+
                 // save all urls to an array
                 // save all caption to an array
                 // save img current index
@@ -131,6 +135,7 @@
                     }
                     currentImg = imgUrls.indexOf($(this).attr('href'));
                 }
+
                 // numbers of images
                 imgNb = imgUrls.length;
                 // add gallery
