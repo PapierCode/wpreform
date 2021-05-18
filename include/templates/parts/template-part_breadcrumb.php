@@ -109,11 +109,13 @@ function pc_display_breadcrumb() {
 
 				if ( $key == ( count($links) - 1 ) ) {
 
-					echo '<li class="breadcrumb-item">'.$link['name'].'</li>';
+					echo '<li class="breadcrumb-item">'.$separator.'<span>'.$link['name'].'</span></li>';
 
 				} else {
 
-					echo '<li class="breadcrumb-item"><a href="'.$link['permalink'].'">'.$link['name'].'</a>'.$separator.'</li>';
+					echo '<li class="breadcrumb-item">';
+					if ( $key > 0 ) { echo $separator; }
+					echo '<a href="'.$link['permalink'].'">'.$link['name'].'</a></li>';
 				
 				}
 			}

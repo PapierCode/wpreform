@@ -21,12 +21,12 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		// parceque...
 		$display_depth = ($depth + 2);
 		// css
-		$class_names = 'reset-list';
+		$class_names = '';
 		foreach ( $args->nav_prefix as $prefix ) {
 			$class_names .= ' '.$prefix.'-list '.$prefix.'-list--l'.$display_depth;
 		}
 		// 
-		$output .= '<ul class="' . $class_names . '">';
+		$output = '<ul class="' . $class_names . ' reset-list">';
 
 	} // end start_lvl()
 
@@ -39,7 +39,6 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$li_class_name = '';
 		$link_class_name = '';
 		$span_class_name = '';
-
 		foreach ( $args->nav_prefix as $prefix ) {
 			$li_class_name .= $prefix.'-item '.$prefix.'-item--l'.$display_depth.' ';
 			$link_class_name .= $prefix.'-link '.$prefix.'-link--l'.$display_depth.' ';
