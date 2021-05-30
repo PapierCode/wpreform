@@ -174,7 +174,7 @@ function pc_display_js_footer() {
 	/*----------  Fichiers JS  ----------*/
 
 	$js_files = apply_filters( 'pc_filter_js_files', array(
-		'wpreform' => get_bloginfo('template_directory').'/scripts/scripts-jquery.min.js'
+		'wpreform' => get_bloginfo('template_directory').'/scripts/pc-preform-jquery.min.js'
 	) );
 	
 	foreach ( $js_files as $id => $url ) {

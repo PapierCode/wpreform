@@ -29,7 +29,7 @@ const terser		= require( 'gulp-terser' ); // minification js
 
 js_src = [
 	'scripts/include/jquery-gallery.js',
-	'scripts/scripts.js'
+	'scripts/pc-preform.js'
 ],
 
 js_src_all = [
@@ -50,7 +50,7 @@ function js_hint() {
 function js_jquery() {
 
     return src( js_src_all )
-        .pipe(concat( 'scripts-jquery.min.js' ))
+        .pipe(concat( 'pc-preform-jquery.min.js' ))
         .pipe(terser())
         .pipe(dest( 'scripts/' ));
 
@@ -59,7 +59,7 @@ function js_jquery() {
 function js() {
 
     return src( js_src )
-        .pipe(concat( 'scripts.min.js' ))
+        .pipe(concat( 'pc-preform.min.js' ))
         .pipe(terser())
         .pipe(dest( 'scripts/' ));
 
@@ -73,7 +73,7 @@ function js() {
 ==================================*/
 
 exports.watch = function() {
-	watch( [ 'scripts/**/*.js', '!scripts/scripts.min.js', '!scripts/scripts-jquery.min.js' ], series(js_hint,js_jquery,js)  )
+	watch( [ 'scripts/**/*.js', '!scripts/pc-preform.min.js', '!scripts/pc-preform-jquery.min.js' ], series(js_hint,js_jquery,js)  )
 };
 
 
