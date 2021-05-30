@@ -338,6 +338,43 @@ class PC_Term {
 	
 	/*=====  FIN SEO & Social  =====*/
 
+	/*===========================================
+	=            Données structurées            =
+	===========================================*/
+	
+	/**
+	 * 
+	 * [SCHÉMA] ListItem
+	 * 
+	 * @param	int		$position	Position dans la liste
+	 * 
+	 * @return	array	Pour conversion JSON
+	 * 
+	 */
+	public function get_schema_list_item( $position ) {
+
+		$image_to_share = $this->get_seo_meta_image_datas();	
+
+		$schema = array(
+			'@type' => 'ListItem',
+			'name' => $this->get_seo_meta_title(),
+			'description' => $this->get_seo_meta_description(),
+			'url' => $this->permalink,
+			'position' => $position,
+			'image' => array(
+				'@type'		=>'ImageObject',
+				'url' 		=> $image_to_share[0],
+				'width' 	=> $image_to_share[1],
+				'height' 	=> $image_to_share[2]
+			)
+		);
+
+		return $schema;
+
+	}
+	
+	
+	/*=====  FIN Données structurées  =====*/
 
 }
 
