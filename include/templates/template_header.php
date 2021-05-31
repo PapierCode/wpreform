@@ -198,9 +198,10 @@ function pc_display_header_tools() {
 
 	global $settings_pc;
 	if ( isset( $settings_pc['wpreform-search']) ) {
+		$search_ico = apply_filters( 'pc_filter_header_tools_search_icon', pc_svg( 'zoom' ) );
 		$items['search'] = array(
 			'attrs' => 'aria-hidden="true"',
-			'html' => '<button type="button" title="Ouvrir/fermer la recherche" class="reset-btn js-button-search h-tools-link" aria-hidden="true"><span class="txt">Recherche</span><span class="ico">'.pc_svg( 'zoom' ).'</span></button>'
+			'html' => '<button type="button" title="Ouvrir/fermer la recherche" class="reset-btn js-button-search h-tools-link" aria-hidden="true"><span class="txt">Recherche</span><span class="ico">'.$search_ico.'</span></button>'
 		);
 	}
 
