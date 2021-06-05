@@ -95,6 +95,11 @@ function pc_display_breadcrumb() {
 
 		}
 
+		
+		/*----------  Séparateur  ----------*/
+		
+		$separator = apply_filters( 'pc_filter_breadcrumb_ico', '<span class="breadcrumb-ico" aria-hidden="true">'.pc_svg('arrow').'</span>' );
+
 
 		/*----------  Affichage  ----------*/
 		
@@ -102,10 +107,15 @@ function pc_display_breadcrumb() {
 
 			foreach ( $links as $key => $link ) {
 
-				echo '<li class="breadcrumb-item">';
-				echo apply_filters( 'pc_filter_breadcrumb_ico', '<span class="breadcrumb-ico" aria-hidden="true">'.pc_svg('arrow').'</span>' );
-				echo '<a href="'.$link['permalink'].'">'.$link['name'].'</a></li>';
+				if ( $key == ( count($links) - 1 ) ) {
+
+					echo '<li class="breadcrumb-item">'.$separator.'<span>'.$link['name'].'</span></li>';
+
+				} else {
+
+					echo '<li class="breadcrumb-item">'.$separator.'<a href="'.$link['permalink'].'">'.$link['name'].'</a></li>';
 				
+				}
 			}
 
 		echo '</ol></nav>';
