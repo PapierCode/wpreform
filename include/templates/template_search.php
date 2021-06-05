@@ -49,6 +49,8 @@ function pc_display_search_results() {
 	$pages_count = ceil( $count / get_option( 'posts_per_page' ) );
 	$pages_count_txt = ( $pages_count > 1 ) ? ' sur <strong>'.$pages_count.' pages</strong>' : '';
 
+	$ico = apply_filters( 'pc_filter_search_result_ico', pc_svg('arrow') );
+
 	$types = apply_filters( 'pc_filter_search_results_type', array(
 		'page' => 'Page'
 	) );
@@ -67,7 +69,7 @@ function pc_display_search_results() {
 
 		echo '<li class="s-results-item s-results-item--'.$pc_post->type.$css_has_image.'">';
 			echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite"><span>'.$pc_post->get_card_title().'</span> '.$tag.'</a></h2>';
-			echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'&nbsp;<span class="st-desc-ico">'.pc_svg('arrow').'</span></p>';			
+			echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'&nbsp;<span class="st-desc-ico">'.$ico.'</span></p>';			
 			if ( $pc_post->has_image ) {
 				echo '<figure class="s-results-item-img"><img src="'.wp_get_attachment_image_src( $metas['visual-id'], 'gl-th' )[0].'" alt="'.$pc_post->get_card_title().'" width="200" height="200" /><figure>';
 			}
