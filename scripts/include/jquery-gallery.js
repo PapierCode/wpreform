@@ -113,7 +113,7 @@
             $element.on('click', 'a', function(event) {
 
 				// if elements are added dynamically 
-				$itemLinks = $element.find('a');
+				$itemLinks = $element.find('li:not(.gallery-not-in) a');
 
                 // remove default action
                 event.preventDefault();
@@ -303,6 +303,9 @@
             setTimeout(function(){ $glMain.remove(); }, plugin.settings.closingDuration);
             // remove key events
             $body.removeClass('gl-active').off('keydown',onKeyDown);
+			// reset datas
+			imgUrls = [];
+			imgCaptions = [];
 
         }; // end galleryHide()
 
