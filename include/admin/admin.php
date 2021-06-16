@@ -120,7 +120,7 @@ add_filter( 'display_post_states', 'pc_edit_page_states', 99, 2 );
 
 function pc_edit_page_states( $states, $post ) {
 
-	if ( !is_customize_preview() ) {
+	if ( is_admin() && !is_customize_preview() ) {
 
 		$current_screen = get_current_screen();
 		if ( $current_screen->id == 'edit-page') {
