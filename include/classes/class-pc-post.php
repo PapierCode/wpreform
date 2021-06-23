@@ -94,6 +94,7 @@ class PC_Post {
 
 		$metas = $this->metas;
 		$title = ( isset( $metas['resum-title'] ) ) ? $metas['resum-title'] : $this->title;
+		$title = apply_filters( 'pc_filter_card_title', $title, $this );
 
 		global $texts_lengths;
 		return pc_words_limit( $title, $texts_lengths['resum-title'] );
@@ -111,6 +112,7 @@ class PC_Post {
 
 		$metas = $this->metas;
 		$description = ( isset( $metas['resum-desc'] ) ) ? $metas['resum-desc'] : get_the_excerpt( $this->id );
+		$description = apply_filters( 'pc_filter_card_description', $description, $this );
 	
 		global $texts_lengths;
 		return pc_words_limit( $description, $texts_lengths['resum-desc'] );
