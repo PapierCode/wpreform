@@ -483,8 +483,15 @@ class PC_Post {
 	 */
 	private function use_woo_product_image() {
 
-		if ( 'product' == $this->type && isset( $this->metas['_thumbnail_id'] ) ) {
+		if ( in_array( $this->type, array('product','product_variation') ) && isset( $this->metas['_thumbnail_id'] ) ) {
+
 			$this->metas['visual-id'] = $this->metas['_thumbnail_id'];
+
+		} else if ( 'product_variation' == $this->type && !isset( $this->metas['_thumbnail_id'] ) ) {
+
+			$parent_image_id = get_post_meta( $this->parent, '_thumbnail_id', true );
+			if ( $parent_image_id && '' != $parent_image_id ) { $this->metas['visual-id'] = $parent_image_id; }
+
 		}
 
 	}
