@@ -185,7 +185,7 @@ $register_settings_project = new PC_Add_Admin_Page(
     'project-settings',
     $settings_project_fields,
     'editor',
-    61,
+    62,
     'dashicons-clipboard',
     'pc_sanitize_settings_project'
 );

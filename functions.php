@@ -35,6 +35,17 @@ $texts_lengths = apply_filters( 'pc_filter_texts_lengths', $texts_lengths );
 
 $current_user_role = ( is_user_logged_in() ) ? wp_get_current_user()->roles[0] : '';
 
+add_filter( 'admin_body_class', 'pc_edit_admin_body_class' );
+
+	function pc_edit_admin_body_class( $classes ) {
+
+		global $current_user_role;
+		$classes .= ' role_'.$current_user_role;
+
+		return $classes;
+
+	}
+
 
 /*----------  Administration  ----------*/
 
