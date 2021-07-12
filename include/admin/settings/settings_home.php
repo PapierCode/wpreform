@@ -40,7 +40,7 @@ function pc_get_home_shortcut_repeater_line( $css_class, $pages, $current = '', 
 		// titre
 		$return .= '<input type="text"value="'.$title.'" style="vertical-align:middle;width:260px" maxlength="40"/>';
 		// effacer la ligne
-		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-no"></span>';
+		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-trash"></span>';
 		// supprimer la ligne
 		$return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
 

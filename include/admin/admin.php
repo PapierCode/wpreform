@@ -187,7 +187,7 @@ add_action( 'admin_init', 'pc_editor_can_edit_privacy_page' );
 	function pc_editor_can_edit_privacy_page() {
 
 		global $current_user_role;
-		if ( 'editor' == $current_user_role ) {
+		if ( 'editor' == $current_user_role || 'shop_manager' == $current_user_role ) {
 			add_action( 'map_meta_cap', 'pc_editor_meta_cap_for_privacy_page', 10, 4 );
 		}
 		

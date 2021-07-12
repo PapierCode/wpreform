@@ -60,7 +60,7 @@ function pc_get_subpage_repeater_line( $css_class, $subpages, $current = '', $sa
 		$return .= '</select>';
 
 		// effacer la ligne
-		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-no"></span>';
+		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-trash"></span>';
 		// déplacer la ligne
 		$return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
 	
