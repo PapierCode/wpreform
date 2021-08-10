@@ -17,9 +17,6 @@
 =            Include            =
 ===============================*/
 
-// block editor... work not in progress !
-// include 'include/block-editor/block-editor.php';
-
 
 /*----------  Configuration projet (client)  ----------*/
 
@@ -145,7 +142,7 @@ function pc_edit_page_states( $states, $post ) {
 
 /*----------  Colonnes  ----------*/
 
-add_filter( 'manage_page_posts_columns', 'pc_page_edit_manage_posts_columns' );
+add_filter( 'manage_pages_columns', 'pc_page_edit_manage_posts_columns' );
 
     function pc_page_edit_manage_posts_columns( $columns ) {
 
@@ -163,13 +160,13 @@ add_filter( 'manage_page_posts_columns', 'pc_page_edit_manage_posts_columns' );
 
     }
 
-add_action( 'manage_page_posts_custom_column', 'pc_page_manage_posts_custom_column', 10, 2);
+add_action( 'manage_pages_custom_column', 'pc_page_manage_posts_custom_column', 10, 2);
 
-function pc_page_manage_posts_custom_column( $column, $post_id ) {
+function pc_page_manage_posts_custom_column( $column_name, $post_id ) {
 
-	if ( 'thumb' === $column ) {
+	if ( 'thumb' === $column_name ) {
 		
-		$img_id = get_post_meta( $post_id,'visual-id',true );
+		$img_id = get_post_meta( $post_id, 'visual-id', true );
 		if ( $img_id != '' ) {
 			echo pc_get_img( $img_id, 'share' );
 		} else {
@@ -182,30 +179,61 @@ function pc_page_manage_posts_custom_column( $column, $post_id ) {
 
 /*----------  Page CGU pour les éditeurs  ----------*/
 
-add_action( 'admin_init', 'pc_editor_can_edit_privacy_page' );
+add_filter( 'map_meta_cap', 'pc_cgu_map_meta_cap', 10, 4 );
 
-	function pc_editor_can_edit_privacy_page() {
+	function pc_cgu_map_meta_cap( $caps, $cap, $user_id, $args ) {
 
 		global $current_user_role;
+
 		if ( 'editor' == $current_user_role || 'shop_manager' == $current_user_role ) {
-			add_action( 'map_meta_cap', 'pc_editor_meta_cap_for_privacy_page', 10, 4 );
-		}
-		
-	}
 
-	function pc_editor_meta_cap_for_privacy_page( $caps, $cap, $user_id, $args ) {
+			// modifier oui
+			if ( 'manage_privacy_options' === $cap ) {
+				$caps = array_diff( $caps, ['manage_options'] );
+			}
 
-		// modifier
-		if ( 'manage_privacy_options' === $cap ) {
-			$caps = array_diff( $caps, ['manage_options'] );
-		}
-		
-		// supprimer
-		if ( 'delete_post' == $cap && get_option( 'wp_page_for_privacy_policy' ) == $args[0] ) {
-			$caps[] = 'do_not_allow';
+			// supprimer non
+			if ( 'delete_post' == $cap && $args[0] == get_option( 'wp_page_for_privacy_policy' ) ) {
+				$caps[] = 'do_not_allow';
+			}
+
 		}
 
 		return $caps;
+	}
+
+add_filter( 'wp_insert_post_data', 'pc_cgu_status', 10, 2 );
+
+	function pc_cgu_status( $data, $postarr ) {
+		
+		// force le status des CGU
+		if ( 'page' == $data['post_type'] && get_option( 'wp_page_for_privacy_policy' ) == $postarr['ID'] ) {
+			$data['post_status'] = 'publish';
+			$data['post_password'] = '';
+		}
+
+		return $data;
+		
+	}
+
+add_filter( 'wp_list_table_show_post_checkbox', 'pc_cgu_checkbox', 10, 2 );
+
+	function pc_cgu_checkbox( $show, $post ) {
+
+		global $current_user_role;
+
+		if ( 'editor' == $current_user_role || 'shop_manager' == $current_user_role ) {
+
+			if ( $post->ID == get_option( 'wp_page_for_privacy_policy' ) ) {
+
+				$show = false;
+
+			}
+
+		}
+
+		return $show;
+
 	}
 
 
