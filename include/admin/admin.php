@@ -179,6 +179,7 @@ function pc_page_manage_posts_custom_column( $column_name, $post_id ) {
 
 /*----------  Page CGU pour les éditeurs  ----------*/
 
+// modifiable mais pas supprimable
 add_filter( 'map_meta_cap', 'pc_cgu_map_meta_cap', 10, 4 );
 
 	function pc_cgu_map_meta_cap( $caps, $cap, $user_id, $args ) {
@@ -191,7 +192,6 @@ add_filter( 'map_meta_cap', 'pc_cgu_map_meta_cap', 10, 4 );
 			if ( 'manage_privacy_options' === $cap ) {
 				$caps = array_diff( $caps, ['manage_options'] );
 			}
-
 			// supprimer non
 			if ( 'delete_post' == $cap && $args[0] == get_option( 'wp_page_for_privacy_policy' ) ) {
 				$caps[] = 'do_not_allow';
@@ -202,11 +202,11 @@ add_filter( 'map_meta_cap', 'pc_cgu_map_meta_cap', 10, 4 );
 		return $caps;
 	}
 
+// toujours publié
 add_filter( 'wp_insert_post_data', 'pc_cgu_status', 10, 2 );
 
 	function pc_cgu_status( $data, $postarr ) {
 		
-		// force le status des CGU
 		if ( 'page' == $data['post_type'] && get_option( 'wp_page_for_privacy_policy' ) == $postarr['ID'] ) {
 			$data['post_status'] = 'publish';
 			$data['post_password'] = '';
@@ -216,6 +216,7 @@ add_filter( 'wp_insert_post_data', 'pc_cgu_status', 10, 2 );
 		
 	}
 
+// ne peut être sélectionner
 add_filter( 'wp_list_table_show_post_checkbox', 'pc_cgu_checkbox', 10, 2 );
 
 	function pc_cgu_checkbox( $show, $post ) {
@@ -223,13 +224,9 @@ add_filter( 'wp_list_table_show_post_checkbox', 'pc_cgu_checkbox', 10, 2 );
 		global $current_user_role;
 
 		if ( 'editor' == $current_user_role || 'shop_manager' == $current_user_role ) {
-
 			if ( $post->ID == get_option( 'wp_page_for_privacy_policy' ) ) {
-
 				$show = false;
-
 			}
-
 		}
 
 		return $show;
