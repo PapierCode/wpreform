@@ -66,10 +66,12 @@ add_filter( 'upload_mimes', 'pc_edit_upload_mimes' );
 
     function pc_edit_upload_mimes( $mimes ) {
 
-        return $mimes = array (
+        return $mimes = apply_filters( 'pc_filter_upload_mimes', array (
             'jpg|jpeg' => 'image/jpeg',
             'pdf' => 'application/pdf'
-        );
+        ));
+
+		return $mimes;
 
     };
 
