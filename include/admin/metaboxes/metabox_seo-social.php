@@ -13,15 +13,17 @@ if ( class_exists('PC_Add_metabox') ) {
 	$metabox_seo_for = array( 'page' );
 	$metabox_seo_for = apply_filters( 'pc_filter_metabox_seo_for', $metabox_seo_for );
 
-	/*----------  Aide  ----------*/
+
+	/*----------  Textes  ----------*/
 	
-	$metabox_seo_desc = '<p><strong>Optimisez le titre et la description pour les moteurs de recherche et les réseaux sociaux.</strong></p><p><em><strong>Remarques :</strong> si ce titre n\'est pas saisi, le titre du résumé est utilisé, sinon le titre de la page. Si cette description n\'est pas saisie, la description du résumé est utilisée, sinon les premiers mots du contenu, sinon la description par défaut (cf. Paramètres)</em></p>';
+	$metabox_seo_title = apply_filters( 'pc_filter_metabox_seo_title', 'Référencement (SEO) & Réseaux sociaux' );
+	$metabox_seo_desc = apply_filters( 'pc_filter_metabox_seo_desc', '<p><strong>Optimisez le titre et la description pour les moteurs de recherche et les réseaux sociaux.</strong></p><p><em><strong>Remarques :</strong> si ce titre n\'est pas saisi, le titre du résumé est utilisé, sinon le titre de la page. Si cette description n\'est pas saisie, la description du résumé est utilisée, sinon les premiers mots du contenu, sinon la description par défaut (cf. Paramètres)</em></p>' );
 
 
 	/*----------  Paramètres des champs  ----------*/
 	
 	$metabox_seo_fields = array(
-		'desc'          => apply_filters( 'pc_filter_metabox_seo_desc', $metabox_seo_desc ),
+		'desc'          => $metabox_seo_desc,
 		'prefix'        => 'seo',
 		'fields'        => array(
 			array(
@@ -48,7 +50,7 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Déclaration  ----------*/
 	
-	$register_metabox_seo = new PC_Add_Metabox( $metabox_seo_for, 'Référencement (SEO) & Réseaux sociaux', 
+	$register_metabox_seo = new PC_Add_Metabox( $metabox_seo_for, $metabox_seo_title, 
 	'page-metabox-seo', $metabox_seo_fields, 'normal', 'high' );
 
 
