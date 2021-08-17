@@ -12,7 +12,12 @@
 
 add_action( 'admin_init', function() {
 
-    global $settings_project;
+	global $post, $settings_project;
+
+	// ne pas afficher
+	$not_in = apply_filters( 'pc_filter_metabox_content_sup_by_id', array( get_option( 'wp_page_for_privacy_policy' ) ) );
+	if ( in_array( $post->ID, $not_in ) ) { return; }
+	// titre
     $box_content_more_title = ( !empty( $settings_project['page-content-from'] ) ) ? 'Contenu supplémentaire' : 'Sous-pages';
 
     add_meta_box(
