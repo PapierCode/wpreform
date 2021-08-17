@@ -10,7 +10,7 @@
 =            Déclaration métaboxe            =
 ============================================*/
 
-add_action( 'admin_init', function() {
+add_action( 'add_meta_boxes', function() {
 
 	global $post, $settings_project;
 
