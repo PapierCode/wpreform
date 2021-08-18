@@ -42,7 +42,7 @@ function pc_display_search_main_title() {
 
 function pc_display_search_results() {
 		
-	global $wp_query;
+	global $wp_query, $settings_pc;
 	$count = $wp_query->found_posts;
 	$txt = ( $count > 1 ) ? 'résultats' : 'résultat';
 
@@ -55,7 +55,7 @@ function pc_display_search_results() {
 		'page' => 'Page'
 	) );
 
-	pc_display_form_search();
+	if ( isset( $settings_pc['wpreform-search']) ) { pc_display_form_search(); }
 	echo '<p class="s-results-infos"><strong>'.$count.'</strong> '.$txt.$pages_count_txt.'.</p>';
 
 	echo '<ol class="s-results-list reset-list">';
