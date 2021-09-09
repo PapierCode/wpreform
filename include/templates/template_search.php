@@ -20,7 +20,7 @@ add_action( 'pc_action_search_main_start', 'pc_display_main_start', 10 ); // tem
 
 	// content
 	add_action( 'pc_action_search_main_content', 'pc_display_main_content_start', 10 ); // template-part_layout.php
-		add_action( 'pc_action_search_main_content', 'pc_display_search_results', 30 ); // résultats
+		add_action( 'pc_action_search_main_content', 'pc_display_search_results', 20 ); // résultats
 	add_action( 'pc_action_search_main_content', 'pc_display_main_content_end', 100 ); // template-part_layout.php
 
 	// footer
