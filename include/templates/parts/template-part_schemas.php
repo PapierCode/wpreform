@@ -160,9 +160,12 @@ function pc_display_schema_local_business() {
 				'url' => $img['0'],
 				"width" => $img['1'],
 				"height" => $img['2']
-			),
-			'telephone' => pc_phone($settings_project['coord-phone-1'])			
+			)		
 		);
+
+		if ( isset( $settings_project['coord-phone-1'] ) && '' != $settings_project['coord-phone-1'] ) {
+			$local_business['telephone'] = pc_phone($settings_project['coord-phone-1']);
+		}
 
 		// price range & geo
 		if ( $type == 'LocalBusiness' ) {
