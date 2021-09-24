@@ -92,16 +92,18 @@ function pc_page_metabox_content_more( $post ) {
     // input hidden de vérification pour la sauvegarde
 	wp_nonce_field( basename( __FILE__ ), 'nonce-page-content-from' );
 
+	// labels, description,... contextualisés
+	if ( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
+		if ( !empty( $settings_project['page-content-from'] ) ) {
+			$metabox_desc = '<p><strong>Affichez, à la fin de la page, un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</strong></p>';
+		}		
+	} else { // si la page courante est une sous-page
+		$metabox_desc = '<p><strong>Affichez, à la fin de la page, un contenu spécifique.</strong></p>';
+	}
+
 	// début mise en page
 	echo '<div class="pc-metabox-help">';
-    if ( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
-        if ( !empty( $settings_project['page-content-from'] ) ) {
-            $metabox_desc = '<p><strong>Sélectionnez un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</strong></p>';
-        }		
-    } else { // si la page courante est une sous-page
-        $metabox_desc = '<p><strong>Sélectionnez un contenu spécifique.</strong></p>';
-	}
-	echo apply_filters( 'pc_filter_page_metabox_content_more_desc', $metabox_desc, $post );
+		echo apply_filters( 'pc_filter_page_metabox_content_more_desc', $metabox_desc, $post );
 	echo '</div>';
     echo '<table class="form-table"><tbody>';
 
