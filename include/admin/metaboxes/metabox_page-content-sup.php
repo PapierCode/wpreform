@@ -10,26 +10,29 @@
 =            Déclaration métaboxe            =
 ============================================*/
 
-add_action( 'add_meta_boxes', function() {
+add_action( 'add_meta_boxes', 'pc_page_add_metabox_content_more', 10, 2 );
 
-	global $post, $settings_project;
+	function pc_page_add_metabox_content_more( $post_type, $post ) {
 
-	// ne pas afficher
-	$not_in = apply_filters( 'pc_filter_metabox_content_sup_by_id', array( get_option( 'wp_page_for_privacy_policy' ) ) );
-	if ( in_array( $post->ID, $not_in ) ) { return; }
-	// titre
-    $box_content_more_title = ( !empty( $settings_project['page-content-from'] ) ) ? 'Contenu supplémentaire' : 'Sous-pages';
+		global $settings_project;
 
-    add_meta_box(
-        'page-content-sup',
-        $box_content_more_title,
-        'pc_page_metabox_content_sup',
-        array('page'),
-        'normal',
-        'high'
-    );
+		// ne pas afficher
+		$not_in = apply_filters( 'pc_filter_metabox_content_more_by_id', array( get_option( 'wp_page_for_privacy_policy' ) ) );
+		if ( in_array( $post->ID, $not_in ) ) { return; }
+		// titre
+		$metabox_title = ( !empty( $settings_project['page-content-from'] ) ) ? 'Contenu supplémentaire' : 'Sous-pages';
+		$metabox_title = apply_filters( 'pc_filter_page_metabox_content_more_title', $metabox_title, $post );
 
-} );
+		add_meta_box(
+			'page-content-sup',
+			$metabox_title,
+			'pc_page_metabox_content_more',
+			array('page'),
+			'normal',
+			'high'
+		);
+
+	}
 
 
 /*=====  FIN Déclaration métaboxe  =====*/
@@ -82,7 +85,7 @@ function pc_get_subpage_repeater_line( $css_class, $subpages, $current = '', $sa
 =            Contenu de la metaboxe            =
 ==============================================*/
 
-function pc_page_metabox_content_sup( $post ) {
+function pc_page_metabox_content_more( $post ) {
 
 	global $settings_project;  // cf. functions.php
 
@@ -93,11 +96,12 @@ function pc_page_metabox_content_sup( $post ) {
 	echo '<div class="pc-metabox-help">';
     if ( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
         if ( !empty( $settings_project['page-content-from'] ) ) {
-            echo '<p><strong>Sélectionnez un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</strong></p>';
+            $metabox_desc = '<p><strong>Sélectionnez un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</strong></p>';
         }		
     } else { // si la page courante est une sous-page
-        echo '<p><strong>Sélectionnez un contenu spécifique.</strong></p>';
+        $metabox_desc = '<p><strong>Sélectionnez un contenu spécifique.</strong></p>';
 	}
+	echo apply_filters( 'pc_filter_page_metabox_content_more_desc', $metabox_desc, $post );
 	echo '</div>';
     echo '<table class="form-table"><tbody>';
 
@@ -132,8 +136,8 @@ function pc_page_metabox_content_sup( $post ) {
     /*=============================================================
     =            Sélection de pages enfants (repeater)            =
     =============================================================*/
-    
-    if( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
+ 
+    if ( apply_filters( 'pc_filter_page_metabox_subpages_enabled', true ) && $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
 
 		// les pages qui sont ou peuvent être sous-page
 		$subpages_args = array(
@@ -191,9 +195,9 @@ function pc_page_metabox_content_sup( $post ) {
 =            Sauvegarde            =
 ==================================*/
 
-add_action( 'save_post', 'pc_page_metabox_content_sup_save' );
+add_action( 'save_post', 'pc_page_metabox_content_more_save' );
 
-	function pc_page_metabox_content_sup_save( $post_id ) {
+	function pc_page_metabox_content_more_save( $post_id ) {
 
 		// check input hidden de vérification
 		if ( isset($_POST['nonce-page-content-from']) && wp_verify_nonce( $_POST['nonce-page-content-from'], basename( __FILE__ ) ) ) {
