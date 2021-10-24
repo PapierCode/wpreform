@@ -35,7 +35,7 @@ function pc_display_body_inner_end() {
 
 function pc_display_main_start() {
 
-    echo apply_filters( 'pc_filter_main_start', '<main id="main" class="main"><div class="main-inner">' );
+    echo apply_filters( 'pc_filter_main_start', '<main id="main" class="main" role="main"><div class="main-inner">' );
 
 }
 
@@ -50,7 +50,7 @@ function pc_display_main_end() {
 
 function pc_display_main_header_start() {
 
-	echo apply_filters( 'pc_filter_main_header_start', '<header class="main-header"><div class="main-header-inner">' );
+	echo apply_filters( 'pc_filter_main_header_start', '<header class="main-header" aria-label="Entête du contenu principal"><div class="main-header-inner">' );
 
 }
 
@@ -86,13 +86,13 @@ function pc_display_main_content_end() {
 
 function pc_display_main_footer_start() {
 
-    echo apply_filters( 'pc_filter_main_footer_start', '<footer class="main-footer"><nav class="main-footer-inner">' );
+    echo apply_filters( 'pc_filter_main_footer_start', '<footer class="main-footer" aria-label="Pied de page du contenu principal"><div class="main-footer-inner">' );
 
 }
 
 function pc_display_main_footer_end() {
 
-    echo apply_filters( 'pc_filter_main_footer_end', '</nav></footer>' );
+    echo apply_filters( 'pc_filter_main_footer_end', '</div></footer>' );
 
 }
 

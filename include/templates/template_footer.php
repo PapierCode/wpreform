@@ -35,7 +35,7 @@ add_action( 'pc_wp_footer', 'pc_display_js_footer', 20 );
 
 function pc_display_footer_start() {
 
-	echo apply_filters( 'pc_filter_footer_start', '<footer class="footer"><div class="footer-inner">' );
+	echo apply_filters( 'pc_filter_footer_start', '<footer class="footer" role="contentinfo"><div class="footer-inner">' );
 
 }
 
@@ -116,7 +116,7 @@ function pc_display_footer_contact() {
 
 function pc_display_footer_nav() {
 
-	echo '<nav id="footer-nav" class="f-nav">';
+	echo '<nav id="footer-nav" class="f-nav" role="navigation" aria-label="Navigation du pied de page">';
 	echo '<ul class="f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1 reset-list">';
 	
 		do_action( 'pc_footer_nav_items_before' );

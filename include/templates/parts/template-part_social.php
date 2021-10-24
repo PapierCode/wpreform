@@ -71,7 +71,7 @@ function pc_display_share_links() {
 	// données liens
 	$share_links = apply_filters( 'pc_filter_share_links', array(
 		'Facebook' => 'https://www.facebook.com/sharer/sharer.php?u='.urlencode($metas['permalink']),
-		'Twitter' => 'http://twitter.com/intent/tweet?url='.urlencode($metas['permalink']),
+		'Twitter' => 'https://twitter.com/intent/tweet?url='.urlencode($metas['permalink']),
 		'LinkedIn' => 'https://www.linkedin.com/shareArticle?mini=true&url='.urlencode($metas['permalink']).'&title='.str_replace(' ', '%20', $metas['title']).'&summary='.str_replace(' ', '%20', $metas['description'])
 	) );
 

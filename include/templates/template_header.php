@@ -44,24 +44,24 @@ add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 function pc_display_skip_nav() {
 	
 	$skip_nav_list = array(
-		'#header-nav' => array( 'Navigation principale', 'Accès direct à la navigation principale' ),
-		'#main' => array( 'Contenu de la page', 'Accès direct au contenu' ),
-		'#footer-nav' => array( 'Navigation du pied de page', 'Accès direct à la navigation du pied de page' )
+		'#header-nav' => 'Navigation principale',
+		'#main' => 'Contenu de la page',
+		'#footer-nav' => 'Navigation du pied de page'
 	);
 
 	global $settings_pc;
 	if ( isset( $settings_pc['wpreform-search']) ) {
-		$skip_nav_list['#form-search'] = array( 'Recherche', 'Accès direct au formulaire de recherche' );
+		$skip_nav_list['#form-search'] = 'Formulaire de recherche';
 	}
 
 	$skip_nav_list = apply_filters( 'pc_filter_skip_nav', $skip_nav_list );
 
-	echo '<ul class="skip-nav no-print">';
-		if( !is_home() ) { echo '<li><a href="'.get_bloginfo('url').'" title="Retour à la page d\'accueil">Accueil</a></li>'; }
-		foreach ( $skip_nav_list as $anchor => $texts ) {
-			echo '<li><a href="'.$anchor.'" title="'.$texts[1].'">'.$texts[0].'</a></li>';
+	echo '<nav class="skip-nav no-print" role="navigation" aria-label="Liens d\'accès rapides"><ul class="skip-nav-list reset-list">';
+		if( !is_home() ) { echo '<li><a href="'.get_bloginfo('url').'">Accueil du site</a></li>'; }
+		foreach ( $skip_nav_list as $anchor => $text ) {
+			echo '<li><a href="'.$anchor.'">'.$text.'</a></li>';
 		}
-	echo '</ul>';
+	echo '</ul></nav>';
 
 }
 
@@ -76,7 +76,7 @@ function pc_display_skip_nav() {
 
 function pc_display_header_start() {
 
-	echo apply_filters( 'pc_filter_header_start', '<header class="header"><div class="header-inner">' );
+	echo apply_filters( 'pc_filter_header_start', '<header class="header" role="banner"><div class="header-inner">' );
 
 }
 
@@ -142,7 +142,7 @@ function pc_display_nav_button_open_close() {
 
 function pc_display_header_nav() {
 
-	echo '<nav id="header-nav" class="h-nav js-overlay-h-nav"><div class="h-nav-inner">';
+	echo '<nav id="header-nav" class="h-nav js-overlay-h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
 		
 		do_action( 'pc_header_nav_list_before' );
 
