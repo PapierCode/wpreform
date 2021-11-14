@@ -22,7 +22,7 @@
 
 add_action( 'pc_footer', 'pc_display_body_inner_end', 50 );
 
-add_action( 'pc_wp_footer', 'pc_display_js_footer', 20 );
+add_action( 'pc_wp_footer', 'pc_display_js_footer', 10 );
 
 
 /*=====  FIN Hooks  =====*/
