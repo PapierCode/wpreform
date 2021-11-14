@@ -21,18 +21,18 @@ add_action( 'pc_header', 'pc_display_skip_nav', 10 );
 
 add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 
-	add_action( 'pc_header', 'pc_display_header_form_search', 25 );
+	add_action( 'pc_header', 'pc_display_header_form_search', 30 );
 
-	add_action( 'pc_header', 'pc_display_header_start', 30 );
+	add_action( 'pc_header', 'pc_display_header_start', 40 );
 
-		add_action( 'pc_header', 'pc_display_header_logo', 40 );
-		add_action( 'pc_header', 'pc_display_nav_button_open_close', 50 );
-		add_action( 'pc_header', 'pc_display_header_nav', 60 );
-		add_action( 'pc_header', 'pc_display_header_tools', 60 );
+		add_action( 'pc_header', 'pc_display_header_logo', 50 );
+		add_action( 'pc_header', 'pc_display_nav_button_open_close', 60 );
+		add_action( 'pc_header', 'pc_display_header_nav', 70 );
+		add_action( 'pc_header', 'pc_display_header_tools', 80 );
 
-	add_action( 'pc_header', 'pc_display_header_end', 70 );
+	add_action( 'pc_header', 'pc_display_header_end', 90 );
 
-	add_action( 'pc_header', 'pc_display_nav_overlay', 80 );
+	add_action( 'pc_header', 'pc_display_nav_overlay', 100 );
 
 
 /*=====  FIN Hooks  =====*/
