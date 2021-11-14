@@ -147,8 +147,11 @@ add_action( 'wp_head', 'pc_display_favicon', 6 );
 
 	function pc_display_favicon() {
 
-		$url = apply_filters( 'pc_filter_favicon_url', get_bloginfo( 'template_directory' ).'/images/favicon.jpg' );
-		echo '<link rel="icon" type="image/jpg" href="'.$url.'" />';
+		$file = apply_filters( 'pc_filter_favicon', array(
+			'type' => 'image/jpg',
+			'url' => get_bloginfo( 'template_directory' ).'/images/favicon.jpg'
+		) );
+		echo '<link rel="icon" type="'.$file['type'].'" href="'.$file['url'].'" />';
 
 	};
 
