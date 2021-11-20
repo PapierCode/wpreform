@@ -15,7 +15,7 @@ function pc_display_form_search() {
 		echo '<form id="form-search" class="form-search mw" method="get" role="search" action="'.get_bloginfo('url').'">';
 			echo '<label class="form-search-label" for="form-search-input">Mots-clés</label>';
 			echo '<input type="text" class="form-search-input" name="s" id="form-search-input" value="'.esc_html( get_search_query() ).'" placeholder="Mots-clés" required>';
-			echo '<button type="submit" class="form-search-submit reset-btn button" aria-label="Valider"><span class="ico">'.pc_svg('zoom').'</span><span class="visually-hidden">Rechercher</span>'.'</button>';
+			echo '<button type="submit" class="form-search-submit reset-btn button" title="Rechercher ces mots-clés"><span class="ico">'.pc_svg('zoom').'</span><span class="visually-hidden">Rechercher</span>'.'</button>';
 		echo '</form>';
 
 }

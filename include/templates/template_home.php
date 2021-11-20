@@ -27,7 +27,7 @@ add_action( 'pc_action_home_main_start', 'pc_display_main_start', 10 ); // templ
 	add_action( 'pc_action_home_main_content', 'pc_display_main_content_start', 10 ); // template-part_layout.php
 		add_action( 'pc_action_home_main_content', 'pc_display_home_wysiwyg', 20 ); // introduction
 		add_action( 'pc_action_home_main_content', 'pc_display_home_shortcuts', 30 ); // raccourcis
-		add_action( 'pc_action_home_main_content', 'pc_display_home_schema_collection_page', 90, 1 ); // données structurées
+		add_action( 'pc_action_home_main_content', 'pc_display_home_schema_collection_page', 90 ); // données structurées
 	add_action( 'pc_action_home_main_content', 'pc_display_main_content_end', 100 ); // template-part_layout.php
 
 	// footer
