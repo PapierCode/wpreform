@@ -107,15 +107,9 @@ function pc_display_breadcrumb() {
 
 			foreach ( $links as $key => $link ) {
 
-				if ( $key == ( count($links) - 1 ) ) {
-
-					echo '<li class="breadcrumb-item">'.$separator.'<span aria-current="page">'.$link['name'].'</span></li>';
-
-				} else {
-
-					echo '<li class="breadcrumb-item">'.$separator.'<a href="'.$link['permalink'].'">'.$link['name'].'</a></li>';
+				$current = ( $key == ( count($links) - 1 ) ) ? ' aria-current="page"' : '';
+				echo '<li class="breadcrumb-item">'.$separator.'<a href="'.$link['permalink'].'"'.$current.'>'.$link['name'].'</a></li>';
 				
-				}
 			}
 
 		echo '</ol></nav>';
