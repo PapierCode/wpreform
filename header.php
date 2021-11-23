@@ -2,7 +2,7 @@
 
 /*----------  Html  ----------*/
 
-echo '<!doctype html><html class="'.pc_get_html_css_class().'" lang="fr">';
+echo '<!doctype html><html class="'.pc_get_html_css_class().'" lang="'.pc_get_html_attr_lang().'">';
 
 
 /*----------  Head  ----------*/

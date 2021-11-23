@@ -3,16 +3,18 @@
 *
 * Communs templates : head
 *
-** Classe CSS sur la balise HTML
+** Attributs balise HTML
 ** Metas SEO & social, CSS inline
 ** Favicon
 ** Statistiques
 *
 **/
 
-/*=====================================================
-=            Classe CSS sur la balise HTML            =
-=====================================================*/
+/*=============================================
+=            Attributs balise HTML            =
+=============================================*/
+
+/*----------  Classes CSS  ----------*/
 
 function pc_get_html_css_class() {
 
@@ -39,7 +41,17 @@ function pc_get_html_css_class() {
 }
 
 
-/*=====  FIN Classe CSS sur la balise HTML  =====*/
+/*----------  Langue  ----------*/
+
+function pc_get_html_attr_lang() {
+
+	return apply_filters( 'pc_filter_html_attr_lang', 'fr' );
+
+}
+
+
+
+/*=====  FIN Attributs balise HTML  =====*/
 
 /*==========================================
 =            Metas SEO & social            =
