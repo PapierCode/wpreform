@@ -177,8 +177,10 @@ function pc_display_js_footer() {
 		'wpreform' => get_bloginfo('template_directory').'/scripts/pc-preform-jquery.min.js'
 	) );
 	
-	foreach ( $js_files as $id => $url ) {
-		echo '<script src="'.$url.'"></script>';
+	if ( !empty( $js_files ) ) { 
+		foreach ( $js_files as $id => $url ) {
+			echo '<script src="'.$url.'"></script>';
+		}
 	}
 
 }
