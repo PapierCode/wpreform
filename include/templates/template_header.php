@@ -98,13 +98,14 @@ function pc_display_header_logo() {
 	global $settings_project;
 
 	echo '<div class="h-logo">';
-
-		$link_datas = apply_filters( 'pc_filter_header_logo_url', array(
-			'href' => get_bloginfo('url'),
-			'title' => 'Page d\'accueil'
-		) );
 		
-		echo '<a href="'.$link_datas['href'].'" class="h-logo-link" title="'.$link_datas['title'].'">';
+		if ( !is_home() ) {
+			$link_datas = apply_filters( 'pc_filter_header_logo_url', array(
+				'href' => get_bloginfo('url'),
+				'title' => 'Page d\'accueil'
+			) );
+			echo '<a href="'.$link_datas['href'].'" class="h-logo-link" title="'.$link_datas['title'].'">';
+		}
 
 			$logo_datas = apply_filters( 'pc_filter_header_logo_img_datas', array(
 				'url' => get_bloginfo('template_directory').'/images/logo.svg',
@@ -118,7 +119,7 @@ function pc_display_header_logo() {
 			
 			echo $logo_tag;
 
-		echo '</a>';
+		if ( !is_home() ) { echo '</a>'; }
 
 	echo '</div>';
 
