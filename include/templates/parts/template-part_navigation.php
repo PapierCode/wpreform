@@ -77,10 +77,10 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		} else {
 
 			// construction du <a>
-			$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : ' title="' . $item->title . '"';
-			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) .'"' : '';
-			$attributes .= ! empty( $item->xfn ) ? ' rel="'    . esc_attr( $item->xfn ) .'"' : '';
-			$attributes .= ! empty( $item->url ) ? ' href="'   . esc_attr( $item->url ) .'"' : '';
+			$attributes  = ! empty( $item->attr_title ) ? ' title="'. esc_attr( $item->attr_title ).'"' : '';
+			$attributes .= ! empty( $item->target ) ? ' target="'. esc_attr( $item->target ).'"' : '';
+			$attributes .= ! empty( $item->xfn ) ? ' rel="'. esc_attr( $item->xfn ).'"' : '';
+			$attributes .= ! empty( $item->url ) ? ' href="'. esc_attr( $item->url ).'"' : '';
 			$attributes .= ' class="'.$link_class_name.'"';
 			$attributes .= ( in_array('is-active', $clean_classes) ) ? ' aria-current="page"' : '';
 
