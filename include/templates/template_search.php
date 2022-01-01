@@ -35,61 +35,74 @@ add_action( 'pc_action_search_main_end', 'pc_display_main_end', 10 ); // templat
 /*=====  FIN Hooks  =====*/
 
 function pc_display_search_main_title() {
+	
+	global $wp_query;
+	$title = ( '' != get_search_query() && $wp_query->found_posts > 0 ) ? 'Résultats de la recherche' : "Recherche";
 
-	echo apply_filters( 'pc_filter_search_main_title', '<h1><span>Recherche</span></h1>' );
+	echo apply_filters( 'pc_filter_search_main_title', '<h1><span>'.$title.'</span></h1>' );
 
 }
 
 function pc_display_search_results() {
-		
-	global $wp_query, $settings_pc;
-	$count = $wp_query->found_posts;
-	$txt = ( $count > 1 ) ? 'résultats' : 'résultat';
 
-	$pages_count = ceil( $count / get_option( 'posts_per_page' ) );
-	$pages_count_txt = ( $pages_count > 1 ) ? ' sur <strong>'.$pages_count.' pages</strong>' : '';
+	global $wp_query;
+	$search_query = get_search_query();
 
-	$ico = apply_filters( 'pc_filter_search_result_ico', pc_svg('arrow') );
+	if ( '' != $search_query ) {
 
-	$types = apply_filters( 'pc_filter_search_results_type', array(
-		'page' => 'Page'
-	) );
+		$ico = apply_filters( 'pc_filter_search_result_ico', pc_svg('arrow') );
+		$types = apply_filters( 'pc_filter_search_results_type', array( 'page' => 'Page' ) );
 
-	if ( isset( $settings_pc['wpreform-search']) ) { pc_display_form_search(); }
-	echo '<p class="s-results-infos"><strong>'.$count.'</strong> '.$txt.$pages_count_txt.'.</p>';
 
-	echo '<ol class="s-results-list reset-list">';
+		/*----------  Affichage  ----------*/
 
-	foreach ( $wp_query->posts as $post ) {
-		
-		$pc_post = new PC_Post( $post );
-		$metas = $pc_post->metas;
-		$tag = ( array_key_exists( $pc_post->type, $types ) ) ? '<span>'.$types[$pc_post->type].'</span>' : '';
-		$css_has_image = ( $pc_post->has_image ) ? ' has-image' : '';
+		echo '<p class="s-results-infos">'.pc_get_search_count_results( $search_query ).'.</p>';		
 
-		echo '<li class="s-results-item s-results-item--'.$pc_post->type.$css_has_image.'">';
-			echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite"><span>'.$pc_post->get_card_title().'</span> '.$tag.'</a></h2>';
-			echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'&nbsp;<span class="st-desc-ico">'.$ico.'</span></p>';			
-			if ( $pc_post->has_image ) {
-				echo '<figure class="s-results-item-img"><img src="'.wp_get_attachment_image_src( $metas['visual-id'], 'gl-th' )[0].'" alt="'.$pc_post->get_card_title().'" width="200" height="200" /><figure>';
+		pc_display_form_search();
+
+		if ( $wp_query->found_posts > 0 ) {
+
+			echo '<ol id="search-results" class="s-results-list reset-list">';
+
+			foreach ( $wp_query->posts as $post ) {
+				
+				$pc_post = new PC_Post( $post );
+				$metas = $pc_post->metas;
+				$tag = ( array_key_exists( $pc_post->type, $types ) ) ? '<span>'.$types[$pc_post->type].'</span>' : '';
+				$css_has_image = ( $pc_post->has_image ) ? ' has-image' : '';
+
+				echo '<li class="s-results-item s-results-item--'.$pc_post->type.$css_has_image.'">';
+					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite"><span>'.$pc_post->get_card_title().'</span> '.$tag.'</a></h2>';
+					echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'&nbsp;<span class="st-desc-ico">'.$ico.'</span></p>';			
+					if ( $pc_post->has_image ) {
+						echo '<figure class="s-results-item-img"><img src="'.wp_get_attachment_image_src( $metas['visual-id'], 'gl-th' )[0].'" alt="'.$pc_post->get_card_title().'" width="200" height="200" /><figure>';
+					}
+				echo '</li>';
+
 			}
-		echo '</li>';
+			
+			echo '</ol>';
 
+		}
+
+	} else {
+
+		pc_display_form_search();
+		
 	}
-	
-	echo '</ol>';
 
 }
 
 function pc_display_search_footer() {
 
 	global $wp_query;
-	$count = $wp_query->found_posts;
 
-	if ( $count > get_option( 'posts_per_page' ) ) {
+	if ( '' != get_search_query() && $wp_query->found_posts > get_option( 'posts_per_page' ) ) {
 		
 		pc_display_main_footer_start();
+
 			pc_get_pager();
+			
 		pc_display_main_footer_end();
 
 	}

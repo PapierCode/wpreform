@@ -21,8 +21,6 @@ add_action( 'pc_header', 'pc_display_skip_nav', 10 );
 
 add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 
-	add_action( 'pc_header', 'pc_display_header_form_search', 30 );
-
 	add_action( 'pc_header', 'pc_display_header_start', 40 );
 
 		add_action( 'pc_header', 'pc_display_header_logo', 50 );
@@ -43,21 +41,32 @@ add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 
 function pc_display_skip_nav() {
 	
-	$skip_nav_list = array(
+	$skip_nav_list = array();
+
+	global $settings_pc;
+	if ( isset( $settings_pc['wpreform-search']) ) {
+		if ( is_search() ) {
+			$skip_nav_list['#form-search'] = 'Formulaire de recherche';
+			global $wp_query;
+			if ( '' != get_search_query() && $wp_query->found_posts > 0 ) {
+				$skip_nav_list['#search-results'] = 'Résultats de recherche';
+			}
+		} else {
+			$skip_nav_list[get_bloginfo('url').'/?s'] = 'Page de recherche';
+		}
+	}
+
+	if( !is_home() ) { $skip_nav_list[get_bloginfo('url')] = 'Page d\'accueil'; }
+	
+	$skip_nav_list = $skip_nav_list + array(
 		'#header-nav' => 'Navigation principale',
 		'#main' => 'Contenu de la page',
 		'#footer-nav' => 'Navigation du pied de page'
 	);
 
-	global $settings_pc;
-	if ( isset( $settings_pc['wpreform-search']) ) {
-		$skip_nav_list['#form-search'] = 'Formulaire de recherche';
-	}
-
 	$skip_nav_list = apply_filters( 'pc_filter_skip_nav', $skip_nav_list );
 
 	echo '<nav class="skip-nav no-print" role="navigation" aria-label="Liens d\'accès rapides"><ul class="skip-nav-list reset-list">';
-		if( !is_home() ) { echo '<li><a href="'.get_bloginfo('url').'">Accueil du site</a></li>'; }
 		foreach ( $skip_nav_list as $anchor => $text ) {
 			echo '<li><a href="'.$anchor.'">'.$text.'</a></li>';
 		}
@@ -205,8 +214,8 @@ function pc_display_header_tools() {
 	if ( isset( $settings_pc['wpreform-search']) ) {
 		$search_ico = apply_filters( 'pc_filter_header_tools_search_icon', pc_svg( 'zoom' ) );
 		$items['search'] = array(
-			'attrs' => 'aria-hidden="true"',
-			'html' => '<button type="button" title="Ouvrir/fermer la recherche" class="reset-btn js-button-search h-tools-link" aria-hidden="true"><span class="txt">Recherche</span><span class="ico">'.$search_ico.'</span></button>'
+			'attrs' => '',
+			'html' => '<a href="'.get_bloginfo('url').'/?s" title="Page de recherche" class="h-tools-link"><span class="txt">Recherche</span><span class="ico">'.$search_ico.'</span></a>'
 		);
 	}
 
@@ -228,23 +237,3 @@ function pc_display_header_tools() {
 
 
 /*=====  FIN Tools  =====*/
-
-/*=================================
-=            Recherche            =
-=================================*/
-
-function pc_display_header_form_search() {
-
-	global $settings_pc;
-	if ( isset( $settings_pc['wpreform-search']) ) {
-
-		echo '<div class="form-search-box no-print"><div class="form-search-box-inner">';
-			pc_display_form_search();
-		echo '</div></div>';
-
-	}
-
-}
-
-
-/*=====  FIN Recherche  =====*/

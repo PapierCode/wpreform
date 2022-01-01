@@ -87,10 +87,22 @@ add_action( 'wp_head', 'pc_display_metas_seo_and_social', 5 );
 			$metas = apply_filters( 'pc_filter_post_seo_metas', $pc_post->get_seo_metas(), $pc_post );
 
 
-		} elseif ( is_tax() ) {
+		} else if ( is_tax() ) {
 
 			global $pc_term;
 			$metas = apply_filters( 'pc_filter_term_seo_metas', $pc_term->get_seo_metas(), $pc_term );
+
+
+		} else if ( is_search() ) {
+
+			$search_query = get_search_query();
+			$search_title = ( '' == $search_query ) ? 'Formulaire de recherche' : pc_get_search_count_results($search_query);
+			$metas = apply_filters( 'pc_filter_search_seo_metas', array(
+				'title' => wp_strip_all_tags( $search_title ).' - '.$settings_project['coord-name'],
+				'description' => '',
+				'image' => $metas['image'],
+				'permalink' => $metas['permalink']
+			) );
 
 
 		} else if ( is_404() ) {
@@ -139,8 +151,10 @@ add_action( 'wp_head', 'pc_display_metas_seo_and_social', 5 );
 			array( 'name', 'twitter:image', $metas['image'][0] )
 		);
 		
-		foreach ( $metas_tag_attributs as $attribut ) {
-			echo '<meta '.$attribut[0].'="'.$attribut[1].'" content="'.$attribut[2].'" />';
+		foreach ( $metas_tag_attributs as $attribut ) {			
+			if ( '' != $attribut[2] ) {
+				echo '<meta '.$attribut[0].'="'.$attribut[1].'" content="'.$attribut[2].'" />';
+			}
 		}
 			
 		
