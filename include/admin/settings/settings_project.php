@@ -149,25 +149,37 @@ $settings_project_fields = array(
                 'type'      => 'url',
                 'label_for' => 'facebook',
                 'label'     => 'Facebook',
-                'css'       => 'width:100%'
+                'css'       => 'width:100%',
+				'options'	=> array(
+					'btnselection' => false
+				)
             ),
             array(
                 'type'      => 'url',
                 'label_for' => 'twitter',
                 'label'     => 'Twitter',
-                'css'       => 'width:100%'
+                'css'       => 'width:100%',
+				'options'	=> array(
+					'btnselection' => false
+				)
             ),
             array(
                 'type'      => 'url',
                 'label_for' => 'instagram',
                 'label'     => 'Instagram',
-                'css'       => 'width:100%'
+                'css'       => 'width:100%',
+				'options'	=> array(
+					'btnselection' => false
+				)
 			),
             array(
                 'type'      => 'url',
                 'label_for' => 'linkedin',
                 'label'     => 'LinkedIn',
-                'css'       => 'width:100%'
+                'css'       => 'width:100%',
+				'options'	=> array(
+					'btnselection' => false
+				)
             )
         )
     )
