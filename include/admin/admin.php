@@ -169,7 +169,7 @@ function pc_page_manage_posts_custom_column( $column_name, $post_id ) {
 	if ( 'thumb' === $column_name ) {
 		
 		$img_id = get_post_meta( $post_id, 'visual-id', true );
-		if ( $img_id != '' ) {
+		if ( '' != $img_id && is_object( get_post( $img_id ) ) ) {
 			echo pc_get_img( $img_id, 'share' );
 		} else {
 			echo '<img src="'.get_bloginfo('template_directory').'/images/admin-no-thumb.png" />';
