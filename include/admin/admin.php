@@ -119,20 +119,15 @@ add_filter( 'display_post_states', 'pc_edit_page_states', 99, 2 );
 
 function pc_edit_page_states( $states, $post ) {
 
-	if ( is_admin() && !is_customize_preview() ) {
+	if ( 'page' == $post->post_type ) {
 
-		$current_screen = get_current_screen();
-		if ( $current_screen->id == 'edit-page') {
+		global $settings_project; // cf. functions.php
 
-			global $settings_project; // cf. functions.php
+		// contenu supplémentaire
+		$content_from = get_post_meta( $post->ID, 'content-from', true );
 
-			// contenu supplémentaire
-			$content_from = get_post_meta( $post->ID, 'content-from', true );
-
-			foreach ( $settings_project['page-content-from'] as $id => $datas ) {
-				if ( $content_from == $id ) { $states[] = $datas[0]; }
-			}
-
+		if ( '' != $content_from ) {
+			$states[] = $settings_project['page-content-from'][$content_from][0];
 		}
 	
 	}
