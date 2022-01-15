@@ -144,6 +144,8 @@ $sprite = array(
 
 	'more' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="20 8 12 8 12 0 8 0 8 8 0 8 0 12 8 12 8 20 12 20 12 12 20 12 20 8"/></svg>',
 
+	'more-s' => '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><polygon points="16 6 10 6 10 0 6 0 6 6 0 6 0 10 6 10 6 16 10 16 10 10 16 10 16 6"/></svg>',
+
 	'less' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect y="8" width="20" height="4"/></svg>',
 
 	'account' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="5.5" r="5.5"/><path d="M10,10A10,10,0,0,0,0,20H20A10,10,0,0,0,10,10Z"/></svg>',
