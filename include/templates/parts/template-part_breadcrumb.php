@@ -101,6 +101,11 @@ function pc_display_breadcrumb() {
 		$separator = apply_filters( 'pc_filter_breadcrumb_ico', '<span class="breadcrumb-ico" aria-hidden="true">'.pc_svg('arrow').'</span>' );
 
 
+		/*----------  Filtre  ----------*/
+		
+		$links = apply_filters( 'pc_filter_breadcrumb_before_display', $links );
+
+
 		/*----------  Affichage  ----------*/
 		
 		echo '<nav class="breadcrumb no-print" role="navigation" aria-label="Fil d\'ariane"><ol class="breadcrumb-list reset-list">';
