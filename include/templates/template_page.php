@@ -72,7 +72,7 @@ function pc_display_main_breadcrumb( $pc_post ) {
 function pc_display_page_wysiwyg( $pc_post ) {
 
 	// contenu
-	if ( '' != $pc_post->content ) { the_content(); }
+	if ( apply_filters( 'pc_filter_page_wysiwyg_display', true, $pc_post ) && '' != $pc_post->content ) { the_content(); }
 
 	// schéma Article
 	if ( apply_filters( 'pc_filter_page_schema_article_display', true, $pc_post ) ) {
