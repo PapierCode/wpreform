@@ -67,7 +67,20 @@ class PC_Term {
 	public function get_card_title() {
 
 		$metas = $this->metas;
-		$title = ( isset( $metas['resum-title'] ) ) ? $metas['resum-title'] : $this->name;
+		
+		if ( isset( $metas['resum-title'] ) ) {
+
+			$title = $metas['resum-title'];
+			
+		} else if ( isset( $metas['content-title'] ) ) {
+
+			$title = $metas['content-title'];
+
+		} else {
+
+			$title = $this->name;
+
+		}
 
 		global $texts_lengths;
 		return pc_words_limit( $title, $texts_lengths['resum-title'] );
@@ -258,7 +271,18 @@ class PC_Term {
 		global $settings_project;
 		$title = ( isset( $metas['seo-title'] ) ) ? $metas['seo-title'] : $this->get_card_title().' - '.$settings_project['coord-name'];
 		
-		return $title;
+		if ( isset( $metas['seo-title'] ) ) {
+			
+			$title = $metas['seo-title'];
+			
+		} else if ( '' != $this->get_card_title() ) {
+
+			$title = $this->get_card_title();
+
+		}
+		
+		global $texts_lengths;
+		return pc_words_limit( $title, $texts_lengths['seo-title'] );
 	
 	}
 
@@ -272,6 +296,7 @@ class PC_Term {
 	public function get_seo_meta_description() {
 
 		$metas = $this->metas;
+
 		if ( isset( $metas['seo-desc'] ) ) {
 			
 			$description = $metas['seo-desc'];

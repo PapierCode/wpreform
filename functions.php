@@ -96,3 +96,4 @@ if ( $is_fresh_site ) {
 	include 'include/theme-setup/theme-setup_pages.php';
 }
 include 'include/theme-setup/theme-setup.php';
+
