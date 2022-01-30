@@ -56,6 +56,10 @@ function pc_display_share_links() {
 		global $pc_post;
 		$metas = $pc_post->get_seo_metas();
 
+	} else if ( is_tax() ) {
+		global $pc_term;		
+		$metas = $pc_term->get_seo_metas();
+
 	} else {
 		global $settings_project;		
 		$metas = array(
