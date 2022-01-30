@@ -36,13 +36,13 @@ function pc_get_search_count_results( $query ) {
 	if ( $posts_count <= $post_per_page ) {
 
 		$txt = ( $posts_count > 1 ) ? 'résultats' : 'résultat';
-		return '<strong>'.$posts_count.' '.$txt.'</strong> pour la recherche de "'.$query.'"';
+		return '<strong>'.$posts_count.' '.$txt.'</strong> pour la recherche de &quot;'.$query.'&quot;';
 
 	} else {
 
 		$pages_count = ceil( $posts_count / get_option( 'posts_per_page' ) );
 		$page_current = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;					
-		return '<strong>Page '.$page_current.' sur '.$pages_count.'</strong> pour <strong>'.$posts_count.' résultats</strong> associés à la recherche de "'.$query.'"';
+		return '<strong>Page '.$page_current.' sur '.$pages_count.'</strong> pour <strong>'.$posts_count.' résultats</strong> associés à la recherche de &quot;'.$query.'&quot;';
 
 	}
 
