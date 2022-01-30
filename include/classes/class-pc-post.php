@@ -59,6 +59,13 @@ class PC_Post {
 	=            Canonical            =
 	=================================*/
 	
+	/**
+	 * 
+	 * [CANONICAL] Méta link canonical
+	 * 
+	 * @return string string url
+	 * 
+	 */
 	public function get_canonical() {
 
 		$canonical = $this->permalink;
@@ -306,7 +313,14 @@ class PC_Post {
 
 		$metas = $this->metas;
 		global $settings_project;
-		$title = ( isset( $metas['seo-title'] ) ) ? $metas['seo-title'] : $this->get_card_title().' - '.$settings_project['coord-name'];
+
+		$title = ( isset( $metas['seo-title'] ) ) ? $metas['seo-title'] : $this->get_card_title();
+
+		if ( 'page' == $this->type && get_query_var( 'paged' ) ) {
+			$title .= ' - Page '.get_query_var( 'paged' );	
+		}
+
+		$title .= ' - '.$settings_project['coord-name'];
 		
 		return $title;
 	
