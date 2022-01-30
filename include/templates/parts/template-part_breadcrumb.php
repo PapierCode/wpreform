@@ -46,6 +46,17 @@ function pc_display_breadcrumb() {
 				'name' => $pc_post->get_card_title(),
 				'permalink' => $pc_post->permalink
 			);
+
+			
+			if ( is_page() && get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
+
+				$links[] = array(
+					'name' => 'Page '.get_query_var( 'paged' ),
+					'permalink' => $pc_post->get_canonical()
+				);
+
+			}
+
 		}
 
 
@@ -64,7 +75,7 @@ function pc_display_breadcrumb() {
 
 					$pc_term_parent = new PC_Term( get_term_by( 'term_taxonomy_id', $term_parent_id ) );
 					array_unshift( $links_term, array(
-						'name' => $pc_term_parent->get_card_title(),
+						'name' => $pc_term_parent->name,
 						'permalink' => $pc_term_parent->permalink
 					));
 
@@ -77,9 +88,18 @@ function pc_display_breadcrumb() {
 			}
 
 			$links[] = array(
-				'name' => $pc_term->get_card_title(),
+				'name' => $pc_term->name,
 				'permalink' => $pc_term->permalink
 			); 
+
+			if ( get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
+
+				$links[] = array(
+					'name' => 'Page '.get_query_var( 'paged' ),
+					'permalink' => $pc_term->permalink.'page/'.get_query_var( 'paged' ).'/'
+				); 
+			}
+
 
 		}
 
@@ -90,8 +110,16 @@ function pc_display_breadcrumb() {
 
 			$links[] = array(
 				'name' => 'Recherche',
-				'permalink' => ''
-			); 
+				'permalink' => home_url().'/?s='.esc_html( get_search_query() )
+			); 		
+
+			if ( get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
+
+				$links[] = array(
+					'name' => 'Page '.get_query_var( 'paged' ),
+					'permalink' => home_url().'/?s='.esc_html( get_search_query() ).'&paged='.get_query_var( 'paged' )
+				); 
+			}
 
 		}
 
@@ -102,8 +130,8 @@ function pc_display_breadcrumb() {
 
 
 		/*----------  Filtre  ----------*/
-		
-		$links = apply_filters( 'pc_filter_breadcrumb_before_display', $links );
+	
+		$links = apply_filters( 'pc_filter_breadcrumb_before_display', $links );	
 
 
 		/*----------  Affichage  ----------*/

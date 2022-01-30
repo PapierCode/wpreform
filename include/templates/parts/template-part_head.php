@@ -134,6 +134,7 @@ add_action( 'wp_head', 'pc_display_metas_seo_and_social', 5 );
 		=================================*/
 
 		echo '<title>'.$metas['title'].'</title>';
+		echo '<link rel="canonical" href="'.$metas['permalink'].'" />';
 		
 		$metas_tag_attributs = array(
 			array( 'name', 'description', $metas['description'] ),

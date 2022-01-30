@@ -13,6 +13,7 @@ class PC_Term {
 	public $count;		// int
 
 	public $permalink;	// string
+	public $canonical;	// string
 	public $metas;		// array
 
 	public $has_image;	// bool
@@ -37,6 +38,10 @@ class PC_Term {
 		$this->childrens	= get_term_children( $wp_term->term_id, $wp_term->taxonomy );
 		// url
 		$this->permalink 	= get_term_link( $wp_term->term_id );
+		$this->canonical = $this->permalink;
+		if ( get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
+			$this->canonical = $this->permalink.'page/'.get_query_var( 'paged' ).'/';
+		}
 
 		// metas
 		$this->metas 		= get_term_meta( $wp_term->term_id );
@@ -354,7 +359,7 @@ class PC_Term {
 		// image
 		$metas['image'] = $this->get_seo_meta_image_datas();
 		// url
-		$metas['permalink'] = $this->permalink;
+		$metas['permalink'] = $this->canonical;
 
 		return $metas;
 
@@ -384,7 +389,7 @@ class PC_Term {
 			'@type' => 'ListItem',
 			'name' => $this->get_seo_meta_title(),
 			'description' => $this->get_seo_meta_description(),
-			'url' => $this->permalink,
+			'url' => $this->canonical,
 			'position' => $position,
 			'image' => array(
 				'@type'		=>'ImageObject',

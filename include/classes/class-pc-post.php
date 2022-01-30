@@ -38,7 +38,7 @@ class PC_Post {
 
 		// métas
 		$this->metas = get_post_meta( $post->ID );
-		// simplifcation tableau métas
+		// simplification tableau métas
 		foreach ( $this->metas as $key => $value) {
 			$this->metas[$key] = implode('', $this->metas[$key] );
 		}
@@ -54,6 +54,27 @@ class PC_Post {
 
 	
 	/*=====  FIN Construct  =====*/
+
+	/*=================================
+	=            Canonical            =
+	=================================*/
+	
+	public function get_canonical() {
+
+		$canonical = $this->permalink;
+
+		if ( 'page' == $this->type && get_query_var( 'paged' ) && get_query_var( 'paged' ) > 1 ) {
+
+			$canonical = $this->permalink.'page/'.get_query_var( 'paged' ).'/';
+
+		}
+
+		return apply_filters( 'pc_filter_post_canonical', $canonical, $this );
+
+	}
+	
+	
+	/*=====  FIN Canonical  =====*/
 
 	/*============================
 	=            Date            =
@@ -192,9 +213,22 @@ class PC_Post {
 	
 		// titre
 		$title = $this->get_card_title();
+
 		// lien
-		$link_tag_start = '<a href="'.$this->permalink.'" class="st-link" title="Lire la suite de : '.$title.'">';
+		$href = $this->permalink;
+		$href_params = apply_filters( 'pc_filter_card_link_params', array(), $this );
+		if ( !empty( $href_params ) ) {
+			$href .= ( false === strpos( $href, '?' ) ) ? '?' : '&';
+			$param_index = 0;
+			foreach ( $href_params as $param => $value ) {
+				if ( $param_index > 0 ) { $href .= '&'; }
+				$href .= $param.'='.$value;
+				$param_index++;
+			}
+		}
+		$link_tag_start = '<a href="'.$href.'" class="st-link" title="Lire la suite de : '.$title.'">';
 		$link_position = apply_filters( 'pc_filter_post_card_link_position', 'title', $this ); // title || st-inner
+
 		// description
 		$description = $this->get_card_description();
 
@@ -346,7 +380,7 @@ class PC_Post {
 		// image
 		$metas['image'] = $this->get_seo_meta_image_datas();
 		// url
-		$metas['permalink'] = $this->permalink;
+		$metas['permalink'] = $this->get_canonical();
 
 		return $metas;
 
@@ -412,12 +446,12 @@ class PC_Post {
 		// données structurées
 		$schema = array(
 			'@type' => 'Article',
-			'url' => $this->permalink,
+			'url' => $this->get_canonical(),
 			'datePublished' => $this->get_date( 'c' ),
 			'dateModified' => $this->get_date( 'c', true ),
 			'headline' => $this->get_seo_meta_title(),
 			'description' => $this->get_seo_meta_description(),
-			'mainEntityOfPage'	=> $this->permalink,
+			'mainEntityOfPage'	=> $this->get_canonical(),
 			'image' => array(
 				'@type'		=>'ImageObject',
 				'url' 		=> $image_to_share[0],
@@ -455,7 +489,7 @@ class PC_Post {
 			'@type' => 'ListItem',
 			'name' => $this->get_seo_meta_title(),
 			'description' => $this->get_seo_meta_description(),
-			'url' => $this->permalink,
+			'url' => $this->get_canonical(),
 			'position' => $position,
 			'image' => array(
 				'@type'		=>'ImageObject',
