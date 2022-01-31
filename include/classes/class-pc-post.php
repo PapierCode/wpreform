@@ -214,7 +214,7 @@ class PC_Post {
 	 * 
 	 */
 
-	public function display_card( $title_level = 2, $classes_css = 'st-inner' ) {
+	public function display_card( $title_level = 2, $classes_css = 'st-inner', $params = array() ) {
 
 		$metas = $this->metas;
 	
@@ -252,14 +252,14 @@ class PC_Post {
 			if ( 'st-inner' == $link_position ) { echo $link_tag_start; }
 	
 				// hook
-				do_action( 'pc_post_card_after_start', $this );
+				do_action( 'pc_post_card_after_start', $this, $params );
 			
 				echo '<figure class="st-figure">';
 					$this->display_card_image();				
 				echo '</figure>';
 
 				// hook	
-				do_action( 'pc_post_card_after_figure', $this );
+				do_action( 'pc_post_card_after_figure', $this, $params );
 	
 				echo '<h'.$title_level.' class="st-title">';
 					if ( 'title' == $link_position ) {
@@ -270,7 +270,7 @@ class PC_Post {
 				echo '</h'.$title_level.'>';	
 	
 				// hook	
-				do_action( 'pc_post_card_after_title', $this );
+				do_action( 'pc_post_card_after_title', $this, $params );
 				
 				if ( '' != $description ) {
 					echo '<p class="st-desc">';
@@ -280,14 +280,14 @@ class PC_Post {
 				}
 
 				// hook
-				do_action( 'pc_post_card_after_desc', $this );
+				do_action( 'pc_post_card_after_desc', $this, $params );
 				
 				if ( $read_more_display ) {
 					echo '<div class="st-read-more" aria-hidden="true"><span class="st-read-more-ico">'.$ico_more.'</span> <span class="st-read-more-txt">Lire la suite</span></a></div>';
 				}
 			
 				// hook
-				do_action( 'pc_post_card_before_end', $this );
+				do_action( 'pc_post_card_before_end', $this, $params );
 	
 			if ( 'st-inner' == $link_position ) { echo '</a>'; }
 		
