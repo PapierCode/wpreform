@@ -58,29 +58,24 @@ $('.js-overlay-h-nav').click(function(event) {
 =            Toggle open/close            =
 =========================================*/
 
-if ( $html.hasClass('has-search') ) {
+$('.js-toggle').click( function() {
+	
+	var $btn = $(this),
+	$target = $('#'+$btn.attr('aria-controls'));
 
-	var $search_form = $('.form-search-box');
-	$search_form.find('input,button').attr('tabindex','-1');
+	if ( !$btn.hasClass('is-open') ) {
+		$target.show( function() {
+			$btn.addClass('is-open').attr('aria-expanded','true');
+			$target.addClass('is-open').removeAttr('aria-hidden');
+		} );
+	} else {
+		$target.hide( function() {
+			$btn.removeClass('is-open').attr('aria-expanded','false');
+			$target.removeClass('is-open').attr('aria-hidden','true');
+		} );
+	}
 
-	$('.js-button-search').click(function() {
-
-		if ( $html.hasClass('search-is-open') ) {
-
-			$html.removeClass('search-is-open');
-			$search_form.find('input,button').attr('tabindex','-1');
-
-		} else {
-
-			$html.addClass('search-is-open');
-			$search_form.find('input,button').removeAttr('tabindex');
-			$search_form.find('input').focus();
-
-		}
-
-	});
-
-}
+} ); // FIN toggle
 
 
 /*=====  FIN Toggle open/close  =====*/
@@ -140,7 +135,7 @@ if ( $js_button_map.length > 0 ) {
 		$body.off('keydown', map_map_escap);
 	};
 
-	var map_map_escap = function() {
+	var map_map_escap = function(event) {
 		if ( event.keyCode == 27 ) { // échap
 			map_map_close();
 		}
@@ -164,7 +159,7 @@ if ( $js_button_map.length > 0 ) {
 		$body.on('keydown', map_map_escap);
 
 		// chargement Leaflet si pas déjà fait
-		if ( !jsMap ) {
+		if ( !jsMap && typeof L === 'undefined' ) {
 
 			jsMap = true;
 

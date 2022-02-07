@@ -42,7 +42,9 @@ js_src_all = [
 function js_hint() {
 
 	return src( js_src )
-        .pipe(jshint())
+        .pipe(jshint({
+			esversion: 6
+		}))
         .pipe(jshint.reporter( 'default' ));
 
 }
