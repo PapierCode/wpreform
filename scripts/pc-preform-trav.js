@@ -18,9 +18,10 @@ jQuery(document).ready(function($){
 =            variables            =
 =================================*/
 
-var $html = $('html'),
-	$body = $('body'),
-	$head = $('head');
+var $win 	= $(window),
+	$html 	= $('html'),
+	$body 	= $('body'),
+	$head 	= $('head');
 	
 
 /*=====  End of variables  ======*/
@@ -223,104 +224,93 @@ if ( $js_button_map.length > 0 ) {
 
 }); // end $(document).ready()
 
-
-/*==================================
-=            Navigation            =
-==================================*/
+/*============================
+=            Test            =
+============================*/
 
 document.addEventListener( 'DOMContentLoaded', function () {
 
-	const html = document.querySelector( 'html' );
-	const headerNav = {
-	
-		skipLink : document.querySelector( '.skip-nav-list a[href="#header-nav"]' ),
-		btnBox : document.querySelector( '.h-nav-btn-box' ),
-		menu : document.querySelector( '.h-nav' ),
-		isOpen : false,
-	
-		getBtnVisibility() {
-			return getComputedStyle(this.btnBox).display == 'none' ? false : true;
-		},
-	
-		update() {
-			if ( this.btnIsVisible ) {
-				this.btn.onclick = (event) => { this.toggle(event); };
-				this.skipLink.setAttribute('href','#header-nav-btn');
-				this.menu.setAttribute('aria-labelledby','#header-nav-btn');
-				this.menu.setAttribute('aria-hidden','true');
-				this.menu.style.visibility = 'hidden';
-				this.menu.onclick = (event) => { this.overlay(event); }; 
-			} else {
-				this.btn.onclick = null; 
-				this.skipLink.setAttribute('href','#header-nav');
-				this.menu.removeAttribute('aria-labelledby');
-				this.menu.removeAttribute('aria-hidden');
-				this.menu.removeAttribute('style');
-				this.menu.onclick = null; 
-				this.menu.ontransitionend = null;
-				html.classList.remove('h-nav-is-open');
-			}
-		},
-	
-		onWinResize() {
-			var btnVisibility = this.getBtnVisibility();
-			if ( this.btnIsVisible != btnVisibility ) {
-				this.btnIsVisible = btnVisibility;
-				this.update();
-			}
-		},
-	
-		toggle(event) {		
-			if ( !this.isOpen ) {
-				this.btn.setAttribute('aria-expanded','true');	
-				this.menu.removeAttribute('aria-hidden');	
-				this.menu.style.visibility = 'visible';				
-				this.menu.ontransitionend = null;
-				html.classList.add('h-nav-is-open');
-				document.addEventListener( 'keydown', this.onKeyDown );
-				this.isOpen = true;
-			} else {
-				if ( null == this.menu.ontransitionend ) {
-					this.menu.ontransitionend = () => {				
-						this.btn.setAttribute('aria-expanded','false');	
-						this.menu.setAttribute('aria-hidden','true');
-						this.menu.style.visibility = 'hidden';
-					};
-				}
-				html.classList.remove('h-nav-is-open');
-				document.removeEventListener( 'keydown', this.onKeyDown );
-				this.isOpen = false;
-			}
-		},
-	
-		overlay(event) {
-			if ( event.target == headerNav.menu ) { headerNav.toggle(); }
-		},
+const html = document.querySelector( 'html' );
+const headerNav = {
 
-		onKeyDown(event) {
-			if ( 'Escape' == event.key ) { headerNav.toggle(); }
-        },
-	
-		init() {
-			this.btn = this.btnBox.firstChild;	
-			this.btnIsVisible = this.getBtnVisibility();
-			if ( this.btnIsVisible ) { this.update(); }
-			
-			// éviter la multiplication de l'événement
-			this.resizeTimer = null;
-			window.addEventListener( 'resize', () => {
-				clearTimeout(this.resizeTimer);
-				this.resizeTimer = setTimeout( () => {
-					this.onWinResize();            
-				}, 250);
-			} );
+	skipLink : document.querySelector( '.skip-nav-list a[href="#header-nav"]' ),
+	btnBox : document.querySelector( '.h-nav-btn-box' ),
+	menu : document.querySelector( '.h-nav' ),
+	isOpen : false,
+
+	getBtnVisibility() {
+		return getComputedStyle(this.btnBox).display == 'none' ? false : true;
+	},
+
+	update() {
+		if ( this.btnIsVisible ) {
+			this.skipLink.setAttribute('href','#header-nav-btn');
+			this.menu.setAttribute('aria-labelledby','#header-nav-btn');
+			this.menu.setAttribute('aria-hidden','true');
+			this.menu.style.display = 'none';
+			this.btn.onclick = (event) => { this.toggle(event); };
+			this.menu.onclick = (event) => { this.overlay(event); }; 
+		} else {
+			this.skipLink.setAttribute('href','#header-nav');
+			this.menu.removeAttribute('aria-labelledby');
+			this.menu.removeAttribute('aria-hidden');
+			this.menu.removeAttribute('style');
+			this.btn.onclick = null; 
+			this.menu.onclick = null; 
 		}
-	
-	};
-	
-	headerNav.init();
-	
+	},
+
+	onWinResize() {
+		var btnVisibility = this.getBtnVisibility();
+		if ( this.btnIsVisible != btnVisibility ) {
+			this.btnIsVisible = btnVisibility;
+			this.update();
+		}
+	},
+
+	toggle(event) {		
+		if ( !this.isOpen ) {
+			this.btn.setAttribute('aria-expanded','true');	
+			this.menu.removeAttribute('aria-hidden');	
+			this.menu.removeAttribute('style');				
+			this.menu.ontransitionend = null;
+			setTimeout( () => { html.classList.add('h-nav-is-open'); }, 10 );	
+			this.isOpen = true;
+		} else {
+			this.menu.ontransitionend = () => {				
+				this.btn.setAttribute('aria-expanded','false');	
+				this.menu.setAttribute('aria-hidden','true');
+				this.menu.style.display = 'none';
+				this.isOpen = false;
+			};
+			html.classList.remove('h-nav-is-open');
+		}
+		console.log(this.menu);
+	},
+
+	overlay(event) {
+		if ( event.target == headerNav.menu ) { headerNav.toggle(); }
+	},
+
+	init() {
+		this.btn = this.btnBox.firstChild;	
+		this.btnIsVisible = this.getBtnVisibility();
+		if ( this.btnIsVisible ) { this.update(); }
+		
+		this.resizeTimer = null;
+		window.addEventListener( 'resize', () => {
+			clearTimeout(this.resizeTimer);
+			this.resizeTimer = setTimeout( () => {
+				this.onWinResize();            
+			}, 250);
+		} );
+	}
+
+};
+
+headerNav.init();
+
 }); // FIN DOMContentLoaded
 
 
-/*=====  FIN Navigation  =====*/
+/*=====  FIN Test  =====*/

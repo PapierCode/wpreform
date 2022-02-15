@@ -145,7 +145,7 @@ function pc_display_header_logo() {
 
 function pc_display_nav_button_open_close() {
 
-	echo '<div class="h-nav-btn-box no-print"><button type="button" title="Ouvrir/fermer le menu" class="h-nav-btn js-button-h-nav reset-btn" aria-hidden="true" tabindex="-1"><span class="txt">Menu</span><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span></button></div>';
+	echo '<div class="h-nav-btn-box no-print"><button type="button" title="Ouvrir/fermer le menu" id="header-nav-btn" class="h-nav-btn reset-btn" aria-controls="header-nav" aria-expanded="false"><span class="txt">Menu</span><span class="h-nav-btn-ico"><span class="h-nav-btn-ico h-nav-btn-ico--inner"></span></span></button></div>';
 
 }
 
@@ -154,7 +154,7 @@ function pc_display_nav_button_open_close() {
 
 function pc_display_header_nav() {
 
-	echo '<nav id="header-nav" class="h-nav js-overlay-h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
+	echo '<nav id="header-nav" class="h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
 		
 		do_action( 'pc_header_nav_list_before' );
 
