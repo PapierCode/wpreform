@@ -62,7 +62,7 @@ function pc_display_home_wysiwyg( $pc_home ) {
 	
 	$metas = $pc_home->metas;
 	if ( '' != $metas['content-txt'] ) {
-		echo pc_wp_wysiwyg( $metas['content-txt'] );
+		echo pc_wp_wysiwyg( $metas['content-txt'], true, array('home-intro') );
 	}
 
 }
