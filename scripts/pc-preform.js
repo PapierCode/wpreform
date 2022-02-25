@@ -40,7 +40,7 @@ $('.js-toggle').click( function() {
 			$target.addClass('is-open').removeAttr('aria-hidden');
 		} );
 	} else {
-		$target.SlideUp( function() {
+		$target.slideUp( function() {
 			$btn.removeClass('is-open').attr('aria-expanded','false');
 			$target.removeClass('is-open').attr('aria-hidden','true');
 		} );
