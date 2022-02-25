@@ -35,12 +35,12 @@ $('.js-toggle').click( function() {
 	$target = $('#'+$btn.attr('aria-controls'));
 
 	if ( !$btn.hasClass('is-open') ) {
-		$target.show( function() {
+		$target.slideDown( function() {
 			$btn.addClass('is-open').attr('aria-expanded','true');
 			$target.addClass('is-open').removeAttr('aria-hidden');
 		} );
 	} else {
-		$target.hide( function() {
+		$target.SlideUp( function() {
 			$btn.removeClass('is-open').attr('aria-expanded','false');
 			$target.removeClass('is-open').attr('aria-hidden','true');
 		} );
