@@ -73,9 +73,13 @@ function pc_display_page_wysiwyg( $pc_post ) {
 
 	// contenu
 	if ( apply_filters( 'pc_filter_page_wysiwyg_display', true, $pc_post ) && '' != $pc_post->content ) {
-		echo '<div class="editor"><div class="editor-inner">';
+
+		$display_container = apply_filters( 'pc_filter_page_wysiwyg_container', true, $pc_post );
+
+		if ( $display_container ) { echo '<div class="editor"><div class="editor-inner">'; }
 			the_content();
-		echo '</div></div>';
+		if ( $display_container ) { echo '</div></div>'; }
+		
 	}
 
 	// schéma Article
