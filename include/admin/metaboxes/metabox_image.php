@@ -27,7 +27,7 @@ if ( class_exists('PC_Add_metabox') ) {
 	/*----------  Paramètres du champ  ----------*/
 	
 	$metabox_image_fields = array(
-		'desc'          => apply_filters( 'pc_filter_metabox_img_desc', $metabox_image_desc ),
+		'desc'          => apply_filters( 'pc_filter_metabox_img_desc', $metabox_image_desc, $metabox_image_for ),
 		'prefix'        => 'visual',
 		'fields'        => array(
 			array(
@@ -75,7 +75,7 @@ if ( class_exists('PC_Add_metabox') ) {
 		);
 	}
 
-	$metabox_image_fields = apply_filters( 'pc_filter_metabox_image_fields', $metabox_image_fields );
+	$metabox_image_fields = apply_filters( 'pc_filter_metabox_image_fields', $metabox_image_fields, $metabox_image_for );
 
 
 	/*----------  Déclaration  ----------*/

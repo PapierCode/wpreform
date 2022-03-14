@@ -22,7 +22,7 @@ if ( class_exists('PC_Add_metabox') ) {
 	/*----------  Paramètres des champs  ----------*/
 
 	$metabox_card_fields = array(
-		'desc'          => apply_filters( 'pc_filter_metabox_card_desc', $metabox_card_desc ),
+		'desc'          => apply_filters( 'pc_filter_metabox_card_desc', $metabox_card_desc, $metabox_card_for ),
 		'prefix'        => 'resum',
 		'fields'        => array(
 			array(
@@ -44,7 +44,7 @@ if ( class_exists('PC_Add_metabox') ) {
 		)
 	);
 
-	$metabox_card_fields = apply_filters( 'pc_filter_metabox_card_fields', $metabox_card_fields );
+	$metabox_card_fields = apply_filters( 'pc_filter_metabox_card_fields', $metabox_card_fields, $metabox_card_for );
 	
 
 	/*----------  Déclaration  ----------*/
