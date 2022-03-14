@@ -187,7 +187,8 @@ add_filter( 'map_meta_cap', 'pc_cgu_map_meta_cap', 10, 4 );
 
 			// modifier oui
 			if ( 'manage_privacy_options' === $cap ) {
-				$caps = array_diff( $caps, ['manage_options'] );
+				$manage_name = is_multisite() ? 'manage_network' : 'manage_options';
+     			$caps = array_diff( $caps, array( $manage_name ) );
 			}
 			// supprimer non
 			if ( 'delete_post' == $cap && $args[0] == get_option( 'wp_page_for_privacy_policy' ) ) {
