@@ -81,7 +81,7 @@ class PC_Home {
 		}
 		
 		global $texts_lengths;
-		return pc_words_limit( $description, $texts_lengths['seo-desc'] );
+		return pc_words_limit( wp_strip_all_tags( $description, true ), $texts_lengths['seo-desc'] );
 	
 	}
 
