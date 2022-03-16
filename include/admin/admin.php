@@ -183,13 +183,18 @@ add_filter( 'map_meta_cap', 'pc_cgu_map_meta_cap', 10, 4 );
 
 		global $current_user_role;
 
-		if ( 'editor' == $current_user_role || 'shop_manager' == $current_user_role ) {
+		if ( in_array( $current_user_role, array( 'editor', 'shop_manager', 'administrator' ) ) ) {
 
 			// modifier oui
 			if ( 'manage_privacy_options' === $cap ) {
 				$manage_name = is_multisite() ? 'manage_network' : 'manage_options';
      			$caps = array_diff( $caps, array( $manage_name ) );
 			}
+
+		}
+
+		if ( in_array( $current_user_role, array( 'editor', 'shop_manager' ) ) ) {
+		
 			// supprimer non
 			if ( 'delete_post' == $cap && $args[0] == get_option( 'wp_page_for_privacy_policy' ) ) {
 				$caps[] = 'do_not_allow';
@@ -198,6 +203,7 @@ add_filter( 'map_meta_cap', 'pc_cgu_map_meta_cap', 10, 4 );
 		}
 
 		return $caps;
+		
 	}
 
 // toujours publié
