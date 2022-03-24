@@ -57,7 +57,6 @@ include 'include/admin/admin.php';
 include 'include/templates/templates.php';
 
 
-
 /*----------  Init  ----------*/
 
 add_action( 'wp', 'pc_wpreform_init', 10 );
@@ -86,7 +85,6 @@ add_action( 'wp', 'pc_wpreform_init', 10 );
 		}
 
 	}
-
 
 
 /*----------  Setup thème  ----------*/

@@ -148,7 +148,7 @@ function pc_page_metabox_content_more( $post ) {
             'posts_per_page' => -1,
             'orderby' => 'title',
             'order' => 'ASC',
-            'post__not_in' => array($post->ID), // ne prend pas la page courante
+            'post__not_in' => array($post->ID, get_option( 'wp_page_for_privacy_policy' ) ), // ne prend pas la page courante et la page des CGU
             'meta_query' => array( // ne prend pas les pages parents
                 array(
                     'key'     => 'content-subpages',
