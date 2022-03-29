@@ -251,11 +251,11 @@ add_filter( 'pc_filter_add_metabox', 'pc_cgu_no_metaboxes', 10, 3 );
 	}
 
 // n'a pas la même métaboxe SEO & Social
-add_filter( 'pc_filter_metabox_content', 'pc_cgu_edit_metabox_content', 10, 2 );
+add_filter( 'pc_filter_metabox_content', 'pc_cgu_edit_metabox_content', 10, 3 );
 
-	function pc_cgu_edit_metabox_content( $content, $post ) {
+	function pc_cgu_edit_metabox_content( $content, $id, $post ) {
 
-		if ( get_option( 'wp_page_for_privacy_policy' ) == $post->ID ) {
+		if ( 'page-metabox-seo' == $id && get_option( 'wp_page_for_privacy_policy' ) == $post->ID ) {
 
 			$content['desc'] = '<p><strong>Optimisez le titre et la description pour les moteurs de recherche et les réseaux sociaux.</strong></p><p><em><strong>Remarques :</strong> si ce titre n\'est pas saisi, le titre de la page est utilisé. Si cette description n\'est pas saisie, les premiers mots du contenu sont utilisés, sinon la description par défaut (cf. Paramètres)</em></p>';
 
