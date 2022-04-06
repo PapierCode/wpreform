@@ -138,7 +138,7 @@ $settings_home_fields = array(
                     'media_buttons' => false,
                     'textarea_rows' => 10,
                     'tinymce'       => array (
-                        'toolbar1'  => 'fullscreen,undo,redo,removeformat,|,bullist,numlist,|,bold,italic,strikethrough,superscript,charmap,|,link,unlink'
+                        'toolbar1'  => 'undo,redo,removeformat,|,bold,italic,strikethrough,superscript,charmap,|,link,unlink'
                     )
                 ),
                 'required'  => true
