@@ -28,7 +28,8 @@ function pc_display_social_links( $css_class ) {
 
 			if ( !$ul ) { echo '<ul class="social-list reset-list no-print '.$css_class.'">'; $ul = true; };
 
-			echo '<li class="social-item"><a class="social-link social-link--'.$field['label_for'].'" href="'.$settings_project[$id].'" title="'.$field['label'].' (nouvelle fenêtre)" target="_blank" rel="noreferrer"><span class="visually-hidden">'.$field['label'].'</span><span class="ico">'.pc_svg($field['label_for']).'</span></a></li>';		
+			$txt = 'Suivez-nous sur '.$field['label'].' (nouvelle fenêtre)';
+			echo '<li class="social-item"><a class="social-link social-link--'.$field['label_for'].'" href="'.$settings_project[$id].'" title="'.$txt.'" target="_blank" rel="noreferrer"><span class="visually-hidden">'.$txt.'</span><span class="ico">'.pc_svg($field['label_for']).'</span></a></li>';		
 			
 		}
 
@@ -91,8 +92,9 @@ function pc_display_share_links() {
 		echo '<ul class="social-list social-list--share reset-list">';
 			foreach ( $share_links as $name => $href ) {
 				echo '<li class="social-item">';
-					echo '<a href="'.$href.'" target="_blank" class="social-link social-link--'.strtolower($name).'" rel="nofollow noreferrer" title="Partager sur '.$name.' (nouvelle fenêtre)">';
-						echo '<span class="visually-hidden">'.$name.'</span>';
+					$txt = 'Partager sur '.$name.' (nouvelle fenêtre)';
+					echo '<a href="'.$href.'" target="_blank" class="social-link social-link--'.strtolower($name).'" rel="nofollow noreferrer" title="'.$txt.'">';
+						echo '<span class="visually-hidden">'.$txt.'</span>';
 						echo '<span class="ico">'.pc_svg( strtolower($name) ).'</span>';
 					echo '</a>';
 				echo '</li>';
