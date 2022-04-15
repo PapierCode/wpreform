@@ -41,36 +41,24 @@ add_action( 'pc_header', 'pc_display_body_inner_start', 20 );
 
 function pc_display_skip_nav() {
 	
-	$skip_nav_list = array();
-
-	global $settings_pc;
-	if ( isset( $settings_pc['wpreform-search']) ) {
-		if ( is_search() ) {
-			$skip_nav_list['#form-search'] = 'Formulaire de recherche';
-			global $wp_query;
-			if ( '' != get_search_query() && $wp_query->found_posts > 0 ) {
-				$skip_nav_list['#search-results'] = 'Résultats de recherche';
-			}
-		} else {
-			$skip_nav_list[get_bloginfo('url').'/?s'] = 'Page de recherche';
-		}
-	}
-
-	if( !is_home() ) { $skip_nav_list[get_bloginfo('url')] = 'Page d\'accueil'; }
-	
-	$skip_nav_list = $skip_nav_list + array(
-		'#header-nav' => 'Navigation principale',
-		'#main' => 'Contenu de la page',
-		'#footer-nav' => 'Navigation du pied de page'
+	$skip_nav_list = array(
+		array( 'href' => '#main', 'label' => 'Contenu' )
 	);
 
 	$skip_nav_list = apply_filters( 'pc_filter_skip_nav', $skip_nav_list );
 
-	echo '<nav class="skip-nav no-print" role="navigation" aria-label="Liens d\'accès rapides"><ul class="skip-nav-list reset-list">';
-		foreach ( $skip_nav_list as $anchor => $text ) {
-			echo '<li><a href="'.$anchor.'">'.$text.'</a></li>';
-		}
-	echo '</ul></nav>';
+	$plurial = ( count( $skip_nav_list ) > 1 ) ? 's' : '';
+	echo '<nav class="skip-nav no-print" role="navigation" aria-label="Lien'.$plurial.' d\'accès rapide'.$plurial.'">';
+		if ( count( $skip_nav_list ) > 1 ) {
+			echo '<ul class="skip-nav-list reset-list">';
+				foreach ( $skip_nav_list as $args ) {
+					echo '<li><a href="'.$args['href'].'">'.$args['label'].'</a></li>';
+				}
+			echo '</ul>';
+		} else {
+			echo '<a href="'.$skip_nav_list[0]['href'].'">'.$skip_nav_list[0]['label'].'</a>';
+		}	
+	echo '</nav>';
 
 }
 
@@ -154,7 +142,7 @@ function pc_display_nav_button_open_close() {
 
 function pc_display_header_nav() {
 
-	echo '<nav id="header-nav" class="h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
+	echo '<nav class="h-nav" role="navigation" aria-label="Navigation principale"><div class="h-nav-inner">';
 		
 		do_action( 'pc_header_nav_list_before' );
 

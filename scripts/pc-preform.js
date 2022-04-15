@@ -233,7 +233,6 @@ document.addEventListener( 'DOMContentLoaded', function () {
 	const html = document.querySelector( 'html' );
 	const headerNav = {
 	
-		skipLink : document.querySelector( '.skip-nav-list a[href="#header-nav"]' ),
 		btnBox : document.querySelector( '.h-nav-btn-box' ),
 		menu : document.querySelector( '.h-nav' ),
 		isOpen : false,
@@ -245,14 +244,12 @@ document.addEventListener( 'DOMContentLoaded', function () {
 		update() {
 			if ( this.btnIsVisible ) {
 				this.btn.onclick = (event) => { this.toggle(event); };
-				this.skipLink.setAttribute('href','#header-nav-btn');
 				this.menu.setAttribute('aria-labelledby','#header-nav-btn');
 				this.menu.setAttribute('aria-hidden','true');
 				this.menu.style.visibility = 'hidden';
 				this.menu.onclick = (event) => { this.overlay(event); }; 
 			} else {
 				this.btn.onclick = null; 
-				this.skipLink.setAttribute('href','#header-nav');
 				this.menu.removeAttribute('aria-labelledby');
 				this.menu.removeAttribute('aria-hidden');
 				this.menu.removeAttribute('style');

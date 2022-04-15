@@ -116,7 +116,7 @@ function pc_display_footer_contact() {
 
 function pc_display_footer_nav() {
 
-	echo '<nav id="footer-nav" class="f-nav" role="navigation" aria-label="Navigation du pied de page">';
+	echo '<nav class="f-nav" role="navigation" aria-label="Navigation du pied de page">';
 	echo '<ul class="f-nav-list f-nav-list--l1 f-p-nav-list f-p-nav-list--l1 reset-list">';
 	
 		do_action( 'pc_footer_nav_items_before' );

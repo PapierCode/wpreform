@@ -35,7 +35,7 @@ function pc_display_body_inner_end() {
 
 function pc_display_main_start() {
 
-    echo apply_filters( 'pc_filter_main_start', '<main id="main" class="main" role="main"><div class="main-inner">' );
+    echo apply_filters( 'pc_filter_main_start', '<main id="main" class="main" role="main" tabindex="-1"><div class="main-inner">' );
 
 }
 
