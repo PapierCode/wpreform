@@ -13,8 +13,8 @@
 function pc_display_form_search() {
 
 		echo '<form id="form-search" class="form-search" method="get" role="search" aria-label="Formulaire de recherche" action="'.get_bloginfo('url').'">';
-			echo '<label class="form-search-label visually-hidden" for="form-search-input">Mots-clés</label>';
-			echo '<input type="text" class="form-search-input" name="s" id="form-search-input" value="'.esc_html( get_search_query() ).'" placeholder="Mots-clés" required>';
+			echo '<label class="form-search-label" for="form-search-input">Mots-clés</label>';
+			echo '<input type="text" class="form-search-input" name="s" id="form-search-input" value="'.esc_html( get_search_query() ).'" required>';
 			echo '<button type="submit" class="form-search-submit reset-btn button" title="Rechercher ces mots-clés"></span><span class="txt">Rechercher</span><span class="ico">'.pc_svg('zoom').'</button>';
 		echo '</form>';
 
