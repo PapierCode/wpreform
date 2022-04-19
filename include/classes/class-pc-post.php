@@ -312,7 +312,6 @@ class PC_Post {
 	public function get_seo_meta_title() {
 
 		$metas = $this->metas;
-		global $settings_project;
 
 		$title = ( isset( $metas['seo-title'] ) ) ? $metas['seo-title'] : $this->get_card_title();
 
@@ -320,6 +319,7 @@ class PC_Post {
 			$title .= ' - Page '.get_query_var( 'paged' );	
 		}
 
+		global $settings_project;
 		$title .= ' - '.$settings_project['coord-name'];
 		
 		return $title;

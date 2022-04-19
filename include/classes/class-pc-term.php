@@ -273,21 +273,13 @@ class PC_Term {
 	public function get_seo_meta_title() {
 
 		$metas = $this->metas;
+		
+		$title = ( isset( $metas['seo-title'] ) ) ? $metas['seo-title'] : $this->get_card_title();
+
 		global $settings_project;
-		$title = ( isset( $metas['seo-title'] ) ) ? $metas['seo-title'] : $this->get_card_title().' - '.$settings_project['coord-name'];
+		$title .= ' - '.$settings_project['coord-name'];
 		
-		if ( isset( $metas['seo-title'] ) ) {
-			
-			$title = $metas['seo-title'];
-			
-		} else if ( '' != $this->get_card_title() ) {
-
-			$title = $this->get_card_title();
-
-		}
-		
-		global $texts_lengths;
-		return pc_words_limit( $title, $texts_lengths['seo-title'] );
+		return $title;
 	
 	}
 
