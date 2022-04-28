@@ -80,7 +80,8 @@ if ( class_exists('PC_Add_metabox') ) {
 
 	/*----------  Déclaration  ----------*/
 	
-	$register_metabox_image = new PC_Add_Metabox( $metabox_image_for, 'Image associée', 'page-metabox-img', $metabox_image_fields, 'normal', 'high' );
+	$metabox_title = apply_filters( 'pc_filter_metabox_image_title', 'Image associée' );
+	$register_metabox_image = new PC_Add_Metabox( $metabox_image_for, $metabox_title, 'page-metabox-img', $metabox_image_fields, 'normal', 'high' );
 
 
 } // FIN if class_exist()
