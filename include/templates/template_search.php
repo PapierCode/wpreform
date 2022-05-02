@@ -75,7 +75,7 @@ function pc_display_search_results() {
 					echo '<h2 class="s-results-item-title"><a class="s-results-item-link" href="'.$pc_post->permalink.'" title="Lire la suite"><span>'.$pc_post->get_card_title().'</span> '.$tag.'</a></h2>';
 					echo '<p class="s-results-item-desc">'.$pc_post->get_card_description().'&nbsp;<span class="st-desc-ico">'.$ico.'</span></p>';			
 					if ( $pc_post->has_image ) {
-						echo '<figure class="s-results-item-img"><img src="'.wp_get_attachment_image_src( $metas['visual-id'], 'gl-th' )[0].'" alt="'.$pc_post->get_card_title().'" width="200" height="200" /><figure>';
+						echo '<figure class="s-results-item-img"><img src="'.wp_get_attachment_image_src( $metas['visual-id'], 'gl-th' )[0].'" alt="" width="200" height="200" /></figure>';
 					}
 				echo '</li>';
 
