@@ -180,7 +180,9 @@ $sprite = array(
 
 	'tag' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path d="M11.42,1.09A4.36,4.36,0,0,0,8.77,0H1.55A1.56,1.56,0,0,0,0,1.55V8.77a4.36,4.36,0,0,0,1.09,2.65l8.14,8.13a1.56,1.56,0,0,0,2.19,0l8.13-8.13a1.56,1.56,0,0,0,0-2.19ZM6.32,8.9A2.58,2.58,0,1,1,8.9,6.32,2.58,2.58,0,0,1,6.32,8.9Z"/></svg>',
 
-	'calendar' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect x="5" width="2" height="6" rx="1"/><rect x="13" width="2" height="6" rx="1"/><rect x="4" y="7.95" width="3" height="3"/><rect x="13" y="7.95" width="3" height="3"/><rect x="8.5" y="7.95" width="3" height="3"/><rect x="4" y="12.95" width="3" height="3"/><rect x="13" y="12.95" width="3" height="3"/><rect x="8.5" y="12.95" width="3" height="3"/><rect x="8" y="1.95" width="4" height="2"/><polygon points="16 1.95 16 3.95 18 3.95 18 17.95 2 17.95 2 3.95 4 3.95 4 1.95 0 1.95 0 19.95 20 19.95 20 1.95 16 1.95"/></svg>'
+	'calendar' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect x="5" width="2" height="6" rx="1"/><rect x="13" width="2" height="6" rx="1"/><rect x="4" y="7.95" width="3" height="3"/><rect x="13" y="7.95" width="3" height="3"/><rect x="8.5" y="7.95" width="3" height="3"/><rect x="4" y="12.95" width="3" height="3"/><rect x="13" y="12.95" width="3" height="3"/><rect x="8.5" y="12.95" width="3" height="3"/><rect x="8" y="1.95" width="4" height="2"/><polygon points="16 1.95 16 3.95 18 3.95 18 17.95 2 17.95 2 3.95 4 3.95 4 1.95 0 1.95 0 19.95 20 19.95 20 1.95 16 1.95"/></svg>',
+
+	'quote' => '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20"><path d="M12.07,2l-3.3,8.57h2.74L9.54,20H0l2-9.61L6.32,2Z"/><path d="M13.92,18l3.3-8.56H14.49l2-9.47H26L24,9.61,19.68,18Z"/></svg>'
 
 );
 
