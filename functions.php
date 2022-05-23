@@ -52,6 +52,13 @@ add_filter( 'admin_body_class', 'pc_edit_admin_body_class' );
 include 'include/admin/admin.php';
 
 
+/*----------  Block Editor  ----------*/
+
+if ( !isset( $settings_pc['blockeditor-disabled'] ) ) {
+	include 'include/block-editor/block-editor.php';
+}
+
+
 /*----------  Templates  ----------*/
 
 include 'include/templates/templates.php';
@@ -89,6 +96,7 @@ add_action( 'wp', 'pc_wpreform_init', 10 );
 
 /*----------  Setup thème  ----------*/
 
+// to do...
 $is_fresh_site = get_option('fresh_site');
 if ( $is_fresh_site ) {
 	include 'include/theme-setup/theme-setup_pages.php';
