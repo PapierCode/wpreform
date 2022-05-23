@@ -64,7 +64,7 @@ $('button').mouseup(function() {
 
 /*----------  gallery  ----------*/
 
-$('.wp-gallery').gallery({
+$('.gallery').gallery({
 	btnNextInner:sprite.arrow,
 	btnPrevInner:sprite.arrow,
 	btnCloseInner:sprite.cross,
