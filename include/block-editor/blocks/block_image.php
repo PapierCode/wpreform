@@ -13,6 +13,10 @@ if ( $img ) {
 	
 	$img_size = get_field('_bloc_img_size');
 
+	$src = $img['sizes']['thumbnail'];
+	$width = $img['sizes']['thumbnail-width'];
+	$height = $img['sizes']['thumbnail-height'];
+
 	if ( 'wide' == $block_size || ( 'default' == $block_size && in_array( $img_size, array('600','800') ) ) ) {
 
 		$srcset = array(
@@ -35,13 +39,19 @@ if ( $img ) {
 		);
 
 		if ( 'default' == $block_size && '600' == $img_size ) {
-			$sizes[] = '600px';
+			$sizes[] = '600px';			
+			$src = $img['sizes']['medium'];
+			$width = $img['sizes']['medium-width'];
+			$height = $img['sizes']['medium-height'];
 		}
 		if ( 'wide' == $block_size || ( 'default' == $block_size && '800' == $img_size ) ) {
 			$sizes[] = '(max-width:'.(600/16).'em) 600px';
 		}
 		if ( 'default' == $block_size && '800' == $img_size ) {
-			$sizes[] = '800px';
+			$sizes[] = '800px';		
+			$src = $img['sizes']['medium_large'];
+			$width = $img['sizes']['medium_large-width'];
+			$height = $img['sizes']['medium_large-height'];
 		}
 		if ( 'wide' == $block_size ) {
 			$sizes = array_merge(
@@ -50,7 +60,10 @@ if ( $img ) {
 					'(max-width:'.(800/16).'em) 800px',
 					'1200px'
 				)
-			);
+			);		
+			$src = $img['sizes']['large'];
+			$width = $img['sizes']['large-width'];
+			$height = $img['sizes']['large-height'];
 		}
 
 	}
@@ -58,9 +71,9 @@ if ( $img ) {
 	$attrs = array(
 		'alt' => trim($img['alt']),
 		'loading' => 'lazy',
-		'src' => $img['sizes']['large'],
-		'width' => $img['sizes']['large-width'],
-		'height' => $img['sizes']['large-height'],
+		'src' => $src,
+		'width' => $width,
+		'height' => $height,
 	);
 	if ( isset( $srcset ) ) { $attrs['srcset'] = implode( ', ', $srcset ); }
 	if ( isset( $sizes ) ) { $attrs['sizes'] = implode( ', ', $sizes ); }
