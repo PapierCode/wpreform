@@ -101,6 +101,24 @@ add_action( 'acf/init', 'pc_acf_init_block_types' );
 				) )
 			);
 
+			/*----------  Contenu embarqué  ----------*/
+
+			acf_register_block_type( 
+				apply_filters( 'pc_filter_acf_embed_block_args', array(
+					'name'              => 'pc-embed',
+					'title'             => 'Contenu embarqué',
+					'icon'              => 'format-video',
+					'category'          => 'media',
+					'keywords'          => array( 'vidéo', 'embed' ),
+					'mode'				=> 'auto',
+					'supports'			=> array(
+						'align' => false,
+						'anchor' => true
+					),
+					'render_template'   => 'include/block-editor/blocks/block_embed.php',
+				) )
+			);
+
 		}
 
 	}

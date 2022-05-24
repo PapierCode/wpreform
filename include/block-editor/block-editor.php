@@ -36,12 +36,13 @@ include 'acf-blocks.php';
 
 add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 
-	function pc_allowed_block_types_all( $block_editor_context ) {
+	function pc_allowed_block_types_all( $blocks ) {
 
-		$block_editor_context = array(
+		$blocks = array(
 			'core/paragraph',
 			'core/heading',
 			'core/list',
+			'acf/pc-embed',
 			'acf/pc-image',
 			'acf/pc-gallery',
 			'acf/pc-cta',
@@ -49,7 +50,7 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 			'acf/pc-quote'
 		);
 	
-		return $block_editor_context;
+		return $blocks;
 		
 	}
 
