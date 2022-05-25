@@ -1,6 +1,15 @@
 <?php
 $button_txt = trim(get_field('_bloc_cta_button_txt'));
-$button_link = get_field('_bloc_cta_button_link');
+$button_type = get_field('_bloc_cta_button_type');
+
+switch ( $button_type ) {
+	case 'page':
+		$button_link = get_field('_bloc_cta_button_link');
+		break;
+	case 'file':
+		$button_link = get_field('_bloc_cta_button_file');
+		break;
+}
 
 if ( $button_txt && is_array($button_link) ) {
 
@@ -15,15 +24,15 @@ if ( $button_txt && is_array($button_link) ) {
 	$link_css = array( 'cta-button' );
 	if ( !$is_preview ) { $link_css[] = 'button'; }
 	$link_attrs[] = 'class="'.implode(' ',$link_css).'"';
-	if ( $button_link['target'] ) { $link_attrs[] = 'target="'.$button_link['target'].'"'; }
+	if ( (isset($button_link['target']) && '_blank' == $button_link['target']) || 'file' == $button_type ) { $link_attrs[] = 'target="_blank"'; }
 
 	echo '<div class="'.implode( ' ', $block_css ).'">';
 		if ( $frame && $frame_title ) { echo '<h2 class="cta-title">'.$frame_title.'</h2>'; }
-		echo '<a '.implode( ' ', $link_attrs ).'>'.trim($button_txt).'</a>';
+		echo '<a '.implode( ' ', $link_attrs ).'>'.$button_txt.'</a>';
 	echo '</div>';
 
 } else if ( $is_preview ) {
 
-	echo '<p class="editor-error">Erreur bloc <em>Bouton (CTA)</em> : saisissez au moins le texte et le lien du bouton.</p>';
+	echo '<p class="editor-error">Erreur bloc <em>Bouton (CTA)</em> : saisissez au moins le texte et un lien.</p>';
 
 }
