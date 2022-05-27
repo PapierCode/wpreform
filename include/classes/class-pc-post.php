@@ -172,7 +172,7 @@ class PC_Post {
 		
 		} else {
 
-			$image_datas['urls'] = pc_get_default_card_image();
+			$image_datas['sizes'] = pc_get_default_card_image();
 			$image_datas['alt'] = $this->get_card_title();
 
 		}
