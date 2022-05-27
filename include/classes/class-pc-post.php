@@ -161,23 +161,23 @@ class PC_Post {
 
 		if ( $this->has_image ) {
 			
-			$thumbnail_datas['sizes'] = apply_filters( 'pc_filter_card_image_sizes', array(
+			$image_datas['sizes'] = apply_filters( 'pc_filter_card_image_sizes', array(
 				'400' => wp_get_attachment_image_src( $metas['visual-id'], 'st-400' ),
 				'500' => wp_get_attachment_image_src( $metas['visual-id'], 'st-500' ),
 				'700' => wp_get_attachment_image_src( $metas['visual-id'], 'st-700' )
 			), $metas['visual-id'], $this );
 			
 			$image_alt = get_post_meta( $metas['visual-id'], '_wp_attachment_image_alt', true );
-			$thumbnail_datas['alt'] = ( '' != $image_alt ) ? $image_alt : $this->get_card_title();
+			$image_datas['alt'] = ( '' != $image_alt ) ? $image_alt : $this->get_card_title();
 		
 		} else {
 
-			$thumbnail_datas['urls'] = pc_get_default_card_image();
-			$thumbnail_datas['alt'] = $this->get_card_title();
+			$image_datas['urls'] = pc_get_default_card_image();
+			$image_datas['alt'] = $this->get_card_title();
 
 		}
 		
-		return $thumbnail_datas;
+		return $image_datas;
 	
 	}
 	
