@@ -122,9 +122,9 @@ function pc_get_default_card_image() {
 	$directory = get_bloginfo('template_directory');
 
 	return apply_filters( 'pc_filter_default_card_image', array(
-		'400' => $directory.'/images/st-default-400.jpg',
-		'500' => $directory.'/images/st-default-500.jpg',
-		'700' => $directory.'/images/st-default-700.jpg'
+		'400' => array(	$directory.'/images/st-default-400.jpg', 400, 250 ),
+		'500' => array(	$directory.'/images/st-default-500.jpg', 500, 320 ),
+		'700' => array(	$directory.'/images/st-default-700.jpg', 700, 440 )
 	) );
 
 }
