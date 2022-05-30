@@ -10,7 +10,6 @@ if ( $quote ) {
 		if ( $cite = trim( get_field('_bloc_quote_src') ) ) {
 			echo '<cite class="txt-align--'.get_field('_bloc_quote_src_align').'">'.$cite.'</cite>';
 		}
-		echo '<span class="ico" aria-hidden="true">'.pc_svg('quote').'</span>';
 	echo '</blockquote>';
 
 } else if ( $is_preview ) {
