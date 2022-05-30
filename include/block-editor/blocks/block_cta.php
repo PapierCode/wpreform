@@ -22,7 +22,6 @@ if ( $button_txt && is_array($button_link) ) {
 
 	$link_attrs[] = 'href="'.trim($button_link['url']).'"';	
 	$link_css = array( 'cta-button' );
-	if ( !$is_preview ) { $link_css[] = 'button'; }
 	$link_attrs[] = 'class="'.implode(' ',$link_css).'"';
 	if ( (isset($button_link['target']) && '_blank' == $button_link['target']) || 'file' == $button_type ) { $link_attrs[] = 'target="_blank"'; }
 
