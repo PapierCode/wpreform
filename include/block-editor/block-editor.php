@@ -47,7 +47,8 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 			'acf/pc-gallery',
 			'acf/pc-cta',
 			//'acf/pc-columns',
-			'acf/pc-quote'
+			'acf/pc-quote',
+			'acf/pc-intro'
 		);
 	
 		return $blocks;

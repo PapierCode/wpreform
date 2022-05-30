@@ -119,6 +119,22 @@ add_action( 'acf/init', 'pc_acf_init_block_types' );
 				) )
 			);
 
+			/*----------  Contenu introduction  ----------*/
+
+			acf_register_block_type(array(
+				'name'              => 'pc-intro',
+				'title'             => 'Introduction',
+				'icon'              => 'info-outline',
+				'category'          => 'text',
+				'keywords'          => array( 'introduction', 'chapeau' ),
+				'mode'				=> 'auto',
+				'supports'			=> array(
+					'align' => false,
+					'anchor' => true
+				),
+				'render_template'   => 'include/block-editor/blocks/block_intro.php',
+			));
+
 		}
 
 	}
