@@ -36,7 +36,9 @@ include 'metaboxes/metabox_seo-social.php';
 
 /*----------  Accueil  ----------*/
 
-include 'settings/settings_home.php';
+if ( !apply_filters('pc_filter_settings_home_disabled', false) ) {
+	include 'settings/settings_home.php';
+}
 
 
 /*=====  FIN Include  =====*/
