@@ -109,7 +109,8 @@ function pc_display_page_specific_content( $pc_post ) {
 		if ( isset($metas['content-from']) ) {
 
 			global $settings_project;
-			include $settings_project['page-content-from'][$metas['content-from']][1];
+			$template = $settings_project['page-content-from'][$metas['content-from']][1];
+			if ( $template ) { include $template; }
 
 
 		/*----------  Sous-pages  ----------*/		
