@@ -34,6 +34,12 @@
 		wp.richText.unregisterFormatType( 'core/code' );
 		wp.richText.unregisterFormatType( 'core/keyboard' );
 		wp.richText.unregisterFormatType( 'core/text-color' );
+
+
+		/*----------  Pas de plein écran au chargement  ----------*/
+				
+		const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' );
+		if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); }
    
     });
 
