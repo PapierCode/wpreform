@@ -41,15 +41,16 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 		$blocks = array(
 			'core/paragraph',
 			'core/heading',
-			'core/list',
-			'acf/pc-embed',
-			'acf/pc-image',
-			'acf/pc-gallery',
-			'acf/pc-cta',
-			//'acf/pc-columns',
-			'acf/pc-quote',
-			'acf/pc-intro'
+			'core/list'
 		);
+		
+		if ( apply_filters( 'pc_filter_add_acf_image_block', true ) ) { $blocks[] = 'acf/pc-image'; }
+		if ( apply_filters( 'pc_filter_add_acf_gallery_block', true ) ) { $blocks[] = 'acf/pc-gallery'; }
+		if ( apply_filters( 'pc_filter_add_acf_cta_block', true ) ) { $blocks[] = 'acf/pc-cta'; }
+		// if ( apply_filters( 'pc_filter_add_acf_columns_block', true ) ) { $blocks[] = 'acf/pc-columns'; }
+		if ( apply_filters( 'pc_filter_add_acf_quote_block', true ) ) { $blocks[] = 'acf/pc-quote'; }
+		if ( apply_filters( 'pc_filter_add_acf_embed_block', true ) ) { $blocks[] = 'acf/pc-embed'; }
+		if ( apply_filters( 'pc_filter_add_acf_intro_block', true ) ) { $blocks[] = 'acf/pc-intro'; }
 	
 		return $blocks;
 		
@@ -58,6 +59,7 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 
 /*----------  ACF TinyMCE  ----------*/
 
+/* 
 add_filter( 'acf/fields/wysiwyg/toolbars' , 'pc_acf_tinymce_toolbars'  );
 
 	function pc_acf_tinymce_toolbars( $toolbars ) {
@@ -101,3 +103,5 @@ add_action('acf/input/admin_footer', 'fnas_acf_input_admin_footer');
 		</script>
 
 	<?php }
+
+*/
