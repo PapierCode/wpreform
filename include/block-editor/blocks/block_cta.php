@@ -16,7 +16,7 @@ if ( $button_txt && is_array($button_link) ) {
 	$frame = get_field('_bloc_cta_box');
 	$frame_title = get_field('_bloc_cta_title');
 	
-	$block_css = array( 'bloc-cta', 'cta', 'bloc-space--'.get_field('_bloc_space_v') );
+	$block_css = array( 'bloc-cta', 'bloc-space--'.get_field('_bloc_space_v'), 'cta', 'cta--'.get_field('_bloc_cta_style') );
 	if ( $frame ) { $block_css[] = 'cta--frame'; }
 	if ( 'wide' == get_field('_bloc_size') ) { $block_css[] = 'bloc-wide'; }
 
