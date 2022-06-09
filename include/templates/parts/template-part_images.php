@@ -90,6 +90,12 @@ add_action( 'init', 'pc_add_images_sizes' );
 
 		}
 
+		if ( !isset( $settings_pc['blockeditor-disabled'] ) ) {
+
+			$images_sizes['thumbnail_small'] = array( 'width'=>200, 'height'=>0, 'crop'=>false );
+
+		}
+
 		$images_sizes = apply_filters( 'pc_filter_images_sizes', $images_sizes );
 
 		foreach ( $images_sizes as $size => $datas ) {

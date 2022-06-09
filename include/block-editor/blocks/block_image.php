@@ -13,57 +13,67 @@ if ( $img ) {
 	
 	$img_size = get_field('_bloc_img_size');
 
-	$src = $img['sizes']['thumbnail'];
-	$width = $img['sizes']['thumbnail-width'];
-	$height = $img['sizes']['thumbnail-height'];
+	if ( '200' == $img_size ) {
 
-	if ( 'wide' == $block_size || ( 'default' == $block_size && in_array( $img_size, array('600','800') ) ) ) {
+		$src = $img['sizes']['thumbnail_small'];
+		$width = $img['sizes']['thumbnail_small-width'];
+		$height = $img['sizes']['thumbnail_small-height'];
 
-		$srcset = array(
-			$img['sizes']['thumbnail'].' 400w',
-			$img['sizes']['medium'].' 600w'
-		);
+	} else {
 
-		if ( 'wide' == $block_size || ( 'default' == $block_size && '800' == $img_size ) ) {
+		$src = $img['sizes']['thumbnail'];
+		$width = $img['sizes']['thumbnail-width'];
+		$height = $img['sizes']['thumbnail-height'];
 
-			$srcset[] = $img['sizes']['medium_large'].' 800w';
+		if ( 'wide' == $block_size || ( 'default' == $block_size && in_array( $img_size, array('600','800') ) ) ) {
 
-			if ( 'wide' == $block_size ) {
-				$srcset[] = $img['sizes']['large'].' 1200w';
+			$srcset = array(
+				$img['sizes']['thumbnail'].' 400w',
+				$img['sizes']['medium'].' 600w'
+			);
+
+			if ( 'wide' == $block_size || ( 'default' == $block_size && '800' == $img_size ) ) {
+
+				$srcset[] = $img['sizes']['medium_large'].' 800w';
+
+				if ( 'wide' == $block_size ) {
+					$srcset[] = $img['sizes']['large'].' 1200w';
+				}
+
 			}
 
-		}
+			$sizes = array(
+				'(max-width:'.(400/16).'em) 400px'
+			);
 
-		$sizes = array(
-			'(max-width:'.(400/16).'em) 400px'
-		);
+			if ( 'default' == $block_size && '600' == $img_size ) {
+				$sizes[] = '(min-width:'.(401/16).'em) 600px';			
+				$src = $img['sizes']['medium'];
+				$width = $img['sizes']['medium-width'];
+				$height = $img['sizes']['medium-height'];
+			}
+			if ( 'wide' == $block_size || ( 'default' == $block_size && '800' == $img_size ) ) {
+				$sizes[] = '(min-width:'.(401/16).'em) and (max-width:'.(600/16).'em) 600px';
+			}
+			if ( 'default' == $block_size && '800' == $img_size ) {
+				$sizes[] = '(min-width:'.(601/16).'em) 800px';		
+				$src = $img['sizes']['medium_large'];
+				$width = $img['sizes']['medium_large-width'];
+				$height = $img['sizes']['medium_large-height'];
+			}
+			if ( 'wide' == $block_size ) {
+				$sizes = array_merge(
+					$sizes,
+					array(
+						'(min-width:'.(601/16).'em) and (max-width:'.(800/16).'em) 800px',
+						'(min-width:'.(801/16).'em) 1200px'
+					)
+				);		
+				$src = $img['sizes']['large'];
+				$width = $img['sizes']['large-width'];
+				$height = $img['sizes']['large-height'];
+			}
 
-		if ( 'default' == $block_size && '600' == $img_size ) {
-			$sizes[] = '(min-width:'.(401/16).'em) 600px';			
-			$src = $img['sizes']['medium'];
-			$width = $img['sizes']['medium-width'];
-			$height = $img['sizes']['medium-height'];
-		}
-		if ( 'wide' == $block_size || ( 'default' == $block_size && '800' == $img_size ) ) {
-			$sizes[] = '(min-width:'.(401/16).'em) and (max-width:'.(600/16).'em) 600px';
-		}
-		if ( 'default' == $block_size && '800' == $img_size ) {
-			$sizes[] = '(min-width:'.(601/16).'em) 800px';		
-			$src = $img['sizes']['medium_large'];
-			$width = $img['sizes']['medium_large-width'];
-			$height = $img['sizes']['medium_large-height'];
-		}
-		if ( 'wide' == $block_size ) {
-			$sizes = array_merge(
-				$sizes,
-				array(
-					'(min-width:'.(601/16).'em) and (max-width:'.(800/16).'em) 800px',
-					'(min-width:'.(801/16).'em) 1200px'
-				)
-			);		
-			$src = $img['sizes']['large'];
-			$width = $img['sizes']['large-width'];
-			$height = $img['sizes']['large-height'];
 		}
 
 	}
