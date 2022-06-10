@@ -21,3 +21,21 @@ table.wp-list-table .column-thumb img {
 	font-weight: 700;
 }
 
+/*----------  Repeater  ----------*/
+
+.wpr-repeater-item { margin-bottom: 4px; }
+.wpr-repeater-item span, .wpr-repeater-btn-more {
+	padding: 4px;
+	border:1px solid #8c8f94;
+	background-color: #f6f7f7;
+	border-radius: 3px;
+}
+.wpr-repeater-btn-more {
+	padding-left:10px;
+	padding-right:10px;
+}
+.wpr-repeater-item span:hover, .wpr-repeater-btn-more:hover {
+	background-color: #ddd;
+}
+.wpr-repeater-btn-delete, .wpr-repeater-btn-more { cursor: pointer ;}
+.wpr-repeater-btn-move { cursor: move; } 

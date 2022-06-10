@@ -68,7 +68,7 @@ function pc_get_subpage_repeater_line( $css_class, $subpages, $current = '', $sa
 		$return .= '</select>';
 
 		// effacer la ligne
-		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-trash"></span>';
+		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="wpr-repeater-btn-delete dashicons dashicons-trash"></span>';
 		// déplacer la ligne
 		$return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
 	
@@ -164,20 +164,20 @@ function pc_page_metabox_content_more( $post ) {
 
         // affichage
         echo '<tr><th><label>Sous-pages</label></th><td>';
-            echo '<div class="pc-repeater" data-type="subpage">';
+            echo '<div class="wpr-repeater" data-type="subpage">';
 				foreach ( $subpages_saved_array as $id ) {
-					echo pc_get_subpage_repeater_line( 'pc-repeater-item', $subpages, $id, $subpages_saved_array );
+					echo pc_get_subpage_repeater_line( 'wpr-repeater-item', $subpages, $id, $subpages_saved_array );
 				}
             echo '</div>';
             // c'est ce input qui est sauvegardé !
-            echo '<input type="hidden" value="'.$subpages_saved.'" name="content-subpages" class="pc-repeater-input" />';
+            echo '<input type="hidden" value="'.$subpages_saved.'" name="content-subpages" class="wpr-repeater-input" />';
             // btn ajout ligne
-            echo '<p><button type="button" class="pc-repeater-btn-more button">Ajouter une sous-page</button></p>';
+            echo '<p><button type="button" class="wpr-repeater-btn-more button">Ajouter une sous-page</button></p>';
         echo '</td></tr>';
 
         // source pour le js
         echo '<tr style="display:none"><td colspan="2">';
-            echo pc_get_subpage_repeater_line( 'pc-repeater-item pc-repeater-src', $subpages );
+            echo pc_get_subpage_repeater_line( 'wpr-repeater-item wpr-repeater-src', $subpages );
         echo '</td></tr>';
 
     } // FIN if $post->post_parent < 1

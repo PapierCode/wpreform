@@ -40,7 +40,7 @@ function pc_get_home_shortcut_repeater_line( $css_class, $pages, $current = '', 
 		// titre
 		$return .= '<input type="text"value="'.$title.'" style="vertical-align:middle;width:260px" maxlength="40"/>';
 		// effacer la ligne
-		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="pc-repeater-btn-delete dashicons dashicons-trash"></span>';
+		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="wpr-repeater-btn-delete dashicons dashicons-trash"></span>';
 		// supprimer la ligne
 		$return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
 
@@ -92,19 +92,19 @@ $home_shortcuts_in_bdd = ( isset( $settings_home['content-pages'] ) && $settings
 $home_shortcuts_in_bdd_converted = pc_convert_home_shortcuts_bdd_to_array( $home_shortcuts_in_bdd );
 
 // html à afficher
-$home_shortcuts_field = '<div class="pc-repeater" data-type="homepages">';
+$home_shortcuts_field = '<div class="wpr-repeater" data-type="homepages">';
 	// une ligne par page à la une
 	foreach ($home_shortcuts_in_bdd_converted as $id => $title) {
-		$home_shortcuts_field .= pc_get_home_shortcut_repeater_line( 'pc-repeater-item', $all_pages, $id, $title );
+		$home_shortcuts_field .= pc_get_home_shortcut_repeater_line( 'wpr-repeater-item', $all_pages, $id, $title );
 	}
 $home_shortcuts_field .= '</div>';
 // c'est ce input qui est sauvegardé !
-$home_shortcuts_field .= '<input type="hidden" value="'.$home_shortcuts_in_bdd.'" name="home-settings-option[content-pages]" class="pc-repeater-input" />';
+$home_shortcuts_field .= '<input type="hidden" value="'.$home_shortcuts_in_bdd.'" name="home-settings-option[content-pages]" class="wpr-repeater-input" />';
 // btn ajout ligne
-$home_shortcuts_field .= '<p><button type="button" class="pc-repeater-btn-more button">Ajouter une page</button></p>';
+$home_shortcuts_field .= '<p><button type="button" class="wpr-repeater-btn-more button">Ajouter une page</button></p>';
 // source pour le js
 $home_shortcuts_field .= '<div style="display:none">';
-	$home_shortcuts_field .= pc_get_home_shortcut_repeater_line( 'pc-repeater-item pc-repeater-src', $all_pages );
+	$home_shortcuts_field .= pc_get_home_shortcut_repeater_line( 'wpr-repeater-item wpr-repeater-src', $all_pages );
 $home_shortcuts_field .= '</div>';
 
 
