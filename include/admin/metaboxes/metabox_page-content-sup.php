@@ -99,22 +99,32 @@ function pc_page_metabox_content_more( $post ) {
 
 		$subpages_field_name = 'content-subpages';
         $subpages_save = get_post_meta( $post->ID, 'content-subpages', true );
-		$subpages_args = apply_filters( 'pc_filter_page_metabox_subpages_args', array(
-            'post_type' => 'page',
-            'post_status' => 'publish',
-			'post_parent' => 0,
-            'posts_per_page' => -1,
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'post__not_in' => array( $post->ID, get_option( 'wp_page_for_privacy_policy' ) ), // ne prend pas la page courante et la page des CGU
-            'meta_query' => array( // ne prend pas les pages parents
-                array(
-                    'key'     => 'content-subpages',
-                    'compare' => 'NOT EXISTS',
-                )
-            ),
-		), $post );
-		$subpages_repeater = new PC_posts_Selector( $subpages_field_name, $subpages_save, $subpages_args );
+		$subpages_repeater = new PC_posts_Selector( 
+			$subpages_field_name,
+			$subpages_save,
+			apply_filters( 
+				'pc_filter_page_metabox_subpages_args', 
+				array(
+					'post_type' => 'page',
+					'post_status' => 'publish',
+					'posts_per_page' => -1,
+					'orderby' => 'title',
+					'order' => 'ASC',
+					'post__not_in' => array( $post->ID, get_option( 'wp_page_for_privacy_policy' ) ), // ne prend pas la page courante et la page des CGU
+					'meta_query' => array( // ne prend pas les pages parents
+						array(
+							'key'     => 'content-subpages',
+							'compare' => 'NOT EXISTS',
+						)
+					),
+				),
+				$post
+			),
+			array(
+				'add_button_txt' => 'Ajouter une page',
+				'subpages' => true
+			)
+		);
 
         // affichage
         echo '<tr><th><label>Sous-pages</label></th><td>';
