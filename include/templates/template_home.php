@@ -48,7 +48,7 @@ add_action( 'pc_action_home_main_end', 'pc_display_main_end', 10 ); // template-
 function pc_display_home_main_title( $pc_home ) {
 	
 	$metas = $pc_home->metas;
-	echo '<h1><span>'.$metas['content-title'].'</span></h1>';
+	echo '<h1 class="home-title"><span>'.$metas['content-title'].'</span></h1>';
 
 }
 
