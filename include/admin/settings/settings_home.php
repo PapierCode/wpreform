@@ -8,114 +8,34 @@
 */
 
 // si la class est disponible
-if ( class_exists('PC_Add_Admin_Page') ) {
-
-/*=================================
-=            Fonctions            =
-=================================*/
-
-/*----------  Pages à la une : ligne du repeater  ----------*/
-
-/**
- * 
- * @param string	$css_class		Classes css associées à la ligne
- * @param array		$pages			Posts sélectionnables (tableau d'objets)
- * @param int		$current		Id du post associé à ligne
- * @param string	$title			Titre de remplacement
- * 
- * @return string	HTML
- * 
- */
-
-function pc_get_home_shortcut_repeater_line( $css_class, $pages, $current = '', $title = '' ) {
-
-	$return = '<div class="'.$css_class.'">';
-	$return .= '<select><option value=""></option>';
-		
-		// selecteur
-		foreach ($pages as $subpage ) {
-			$return .= '<option value="'.$subpage->ID.'" '.selected($current,$subpage->ID,false).'>'.$subpage->post_title.'</option>';
-		}
-		$return .= '</select>';
-		// titre
-		$return .= '<input type="text"value="'.$title.'" style="vertical-align:middle;width:260px" maxlength="40"/>';
-		// effacer la ligne
-		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="wpr-repeater-btn-delete dashicons dashicons-trash"></span>';
-		// supprimer la ligne
-		$return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
-
-	$return .= '</div>';
-
-	return $return;
-
-}
-
-/*----------  Pages à la une : conversion valeur sauvegardée  ----------*/
-
-/**
- * 
- * @param string	$datas		Valeur du champ en bdd
- * 
- * @return array	id => titre
- * 
- */
-
-function pc_convert_home_shortcuts_bdd_to_array( $datas ) {
-
-	$return = array();
-	if ( $datas != '' ) {
-		$set = explode( '|', $datas );
-		foreach ( $set as $value ) {
-			$temp = explode( '§', $value );
-			$return[$temp[0]] = $temp[1];
-		}
-	}
-	return $return;
-
-}
-
-
-/*=====  FIN Fonctions  =====*/
-
-/*=========================================================
-=            Pages à la une : contenu repeater            =
-=========================================================*/
-
-/*----------  Valeur en bdd  ----------*/
-
-// métas accueil
-$settings_home = get_option( 'home-settings-option' );
-
-// pages à la une sauvegardées
-$home_shortcuts_in_bdd = ( isset( $settings_home['content-pages'] ) && $settings_home['content-pages'] !='' ) ? $settings_home['content-pages'] : '';
-// conversion
-$home_shortcuts_in_bdd_converted = pc_convert_home_shortcuts_bdd_to_array( $home_shortcuts_in_bdd );
-
-// html à afficher
-$home_shortcuts_field = '<div class="wpr-repeater" data-type="homepages">';
-	// une ligne par page à la une
-	foreach ($home_shortcuts_in_bdd_converted as $id => $title) {
-		$home_shortcuts_field .= pc_get_home_shortcut_repeater_line( 'wpr-repeater-item', $all_pages, $id, $title );
-	}
-$home_shortcuts_field .= '</div>';
-// c'est ce input qui est sauvegardé !
-$home_shortcuts_field .= '<input type="hidden" value="'.$home_shortcuts_in_bdd.'" name="home-settings-option[content-pages]" class="wpr-repeater-input" />';
-// btn ajout ligne
-$home_shortcuts_field .= '<p><button type="button" class="wpr-repeater-btn-more button">Ajouter une page</button></p>';
-// source pour le js
-$home_shortcuts_field .= '<div style="display:none">';
-	$home_shortcuts_field .= pc_get_home_shortcut_repeater_line( 'wpr-repeater-item wpr-repeater-src', $all_pages );
-$home_shortcuts_field .= '</div>';
-
-
-/*=====  FIN Pages à la une : contenu repeater  =====*/
-
+if ( is_admin() && class_exists('PC_Add_Admin_Page') ) {
 
 /*==============================
 =            Champs            =
 ==============================*/
 
 /*----------  Textes  ----------*/
+
+$home_pages_field_name = 'home-settings-option[content-pages]';
+$settings_home = get_option( 'home-settings-option' );
+$home_pages_field_save = ( isset($settings_home['content-pages']) ) ? $settings_home['content-pages'] : '';
+
+$home_pages_repeater = new PC_posts_Selector(
+	$home_pages_field_name,
+	$home_pages_field_save,
+	array(
+		'post_type' => 'page',
+		'post_status' => 'publish',
+		'posts_per_page' => -1,
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'post__not_in' => array( get_option( 'wp_page_for_privacy_policy' ) ), // page CGU
+	),
+	array(
+		'add_button_txt' => 'Ajouter une page'
+	)
+);
+
 
 $settings_home_fields = array(
     array(
@@ -147,7 +67,7 @@ $settings_home_fields = array(
                 'type'      => 'custom',
                 'label_for' => 'pages',
                 'label'     => 'Pages à la une',
-                'display'   => $home_shortcuts_field
+                'display'   => $home_pages_repeater->display()
             )
         )
 	)    

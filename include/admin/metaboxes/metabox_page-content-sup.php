@@ -37,50 +37,6 @@ add_action( 'add_meta_boxes', 'pc_page_add_metabox_content_more', 10, 2 );
 
 /*=====  FIN Déclaration métaboxe  =====*/
 
-/*=================================
-=            Fonctions            =
-=================================*/
-
-/*----------  Ligne du repeater sous-pages  ----------*/
-
-/**
- * 
- * @param string	$css_class	Classes css associées à la ligne
- * @param array		$subpages	Posts sélectionnables (tableau d'objets) 
- * @param int		$current	Id du post associé à ligne
- * @param array		$saved		Toutes les sous-pages sauvegardées (tableau d'id)
- * 
- * @return string	HTML
- * 	
- */
-
-function pc_get_subpage_repeater_line( $css_class, $subpages, $current = '', $saved = array() ) {
-
-	$return = '<div class="'.$css_class.'">';
-	
-		// sélecteur de page
-		$return .= '<select><option value=""></option>';
-		foreach ( $subpages as $subpage ) {
-			if ( $subpage->post_parent < 1 || in_array( $subpage->ID,$saved ) ) { // si ce n'est pas déjà une sous-page
-				$return .= '<option value="'.$subpage->ID.'" '.selected( $current,$subpage->ID,false ).'>'.$subpage->post_title.'</option>';
-			}
-		}
-		$return .= '</select>';
-
-		// effacer la ligne
-		$return .= ' <span title="Effacer" style="vertical-align:middle; cursor:pointer;" class="wpr-repeater-btn-delete dashicons dashicons-trash"></span>';
-		// déplacer la ligne
-		$return .= ' <span title="Déplacer" style="vertical-align:middle; cursor:move;" class="dashicons dashicons-move"></span>';
-	
-	$return .= '</div>';
-
-	return $return;
-
-}
-
-
-/*=====  FIN Fonctions  =====*/
-
 /*==============================================
 =            Contenu de la metaboxe            =
 ==============================================*/
@@ -141,43 +97,28 @@ function pc_page_metabox_content_more( $post ) {
  
     if ( apply_filters( 'pc_filter_page_metabox_subpages_enabled', true ) && $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
 
-		// les pages qui sont ou peuvent être sous-page
-		$subpages_args = array(
+		$subpages_field_name = 'content-subpages';
+        $subpages_save = get_post_meta( $post->ID, 'content-subpages', true );
+		$subpages_args = apply_filters( 'pc_filter_page_metabox_subpages_args', array(
             'post_type' => 'page',
             'post_status' => 'publish',
+			'post_parent' => 0,
             'posts_per_page' => -1,
             'orderby' => 'title',
             'order' => 'ASC',
-            'post__not_in' => array($post->ID, get_option( 'wp_page_for_privacy_policy' ) ), // ne prend pas la page courante et la page des CGU
+            'post__not_in' => array( $post->ID, get_option( 'wp_page_for_privacy_policy' ) ), // ne prend pas la page courante et la page des CGU
             'meta_query' => array( // ne prend pas les pages parents
                 array(
                     'key'     => 'content-subpages',
                     'compare' => 'NOT EXISTS',
                 )
             ),
-		);
-		$subpages_args = apply_filters( 'pc_filter_page_metabox_subpages_args', $subpages_args, $post );
-        $subpages = get_posts( $subpages_args );
-        // liste des sous-pages sauvegardées
-        $subpages_saved = get_post_meta( $post->ID, 'content-subpages', true );
-        $subpages_saved_array = explode( ',', $subpages_saved );
+		), $post );
+		$subpages_repeater = new PC_posts_Selector( $subpages_field_name, $subpages_save, $subpages_args );
 
         // affichage
         echo '<tr><th><label>Sous-pages</label></th><td>';
-            echo '<div class="wpr-repeater" data-type="subpage">';
-				foreach ( $subpages_saved_array as $id ) {
-					echo pc_get_subpage_repeater_line( 'wpr-repeater-item', $subpages, $id, $subpages_saved_array );
-				}
-            echo '</div>';
-            // c'est ce input qui est sauvegardé !
-            echo '<input type="hidden" value="'.$subpages_saved.'" name="content-subpages" class="wpr-repeater-input" />';
-            // btn ajout ligne
-            echo '<p><button type="button" class="wpr-repeater-btn-more button">Ajouter une sous-page</button></p>';
-        echo '</td></tr>';
-
-        // source pour le js
-        echo '<tr style="display:none"><td colspan="2">';
-            echo pc_get_subpage_repeater_line( 'wpr-repeater-item wpr-repeater-src', $subpages );
+			echo $subpages_repeater->display();
         echo '</td></tr>';
 
     } // FIN if $post->post_parent < 1

@@ -52,7 +52,6 @@ add_action( 'admin_enqueue_scripts', 'pc_admin_enqueue_scripts', 999 );
     function pc_admin_enqueue_scripts() {
 
         wp_enqueue_style( 'pc-css-admin', get_bloginfo( 'template_directory').'/include/admin/admin.css' );
-        wp_enqueue_script( 'pc-js-admin', get_bloginfo( 'template_directory').'/include/admin/admin.js' );
         
     };
 

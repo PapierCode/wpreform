@@ -81,24 +81,24 @@ function pc_display_home_shortcuts( $pc_home ) {
 	if ( isset($metas['content-pages']) && $metas['content-pages'] != '' ) {
 
 		// id des pages mises en avant
-		$home_shortcuts = pc_convert_home_shortcuts_bdd_to_array($metas['content-pages']);
+		$home_shortcuts = explode( ',', $metas['content-pages']);
 
 		// pour les CSS, pair ou impair ?
 		$shortcuts_nb = ( count($home_shortcuts)%2 == 1 ) ? 'home-shortcuts--odd' : 'home-shortcuts--even';
 
 		echo '<div class="home-shortcuts">';
 		echo '<ul class="home-shortcuts-list '.$shortcuts_nb.' reset-list">';
-			foreach ($home_shortcuts as $post_id => $post_title_alt) {
+			foreach ( $home_shortcuts as $post_id ) {
 
 				$post = new PC_post( get_post( $post_id ) );
-				$post_title = ( '' != $post_title_alt ) ? $post_title_alt : $post->title;
+				$post_title = $post->get_card_title();
 
 				// affichage
 				echo '<li class="home-shortcut-item"><a title="'.$post_title.'" href="'.$post->permalink.'" class="home-shortcut-link">';
 					echo '<span class="home-shortcut-img">';
 						$post->display_card_image();
 					echo '</span>';
-					echo '<span class="home-shortcut-txt">'.pc_words_limit(htmlspecialchars_decode($post_title),40).'</span>';
+					echo '<span class="home-shortcut-txt">'.$post_title.'</span>';
 					echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';
 				echo '</a></li>';
 
@@ -136,14 +136,14 @@ function pc_display_home_schema_collection_page( $pc_home ) {
 		'isPartOf' => pc_get_schema_website()
 	);
 
-	if ( isset($metas['content-pages']) && $metas['content-pages'] != '' ) {
+	if ( isset( $metas['content-pages'] ) && $metas['content-pages'] != '' ) {
 
 		// id des pages mises en avant
-		$home_shortcuts = pc_convert_home_shortcuts_bdd_to_array($metas['content-pages']);
+		$home_shortcuts = explode( ',', $metas['content-pages']);
 		// compteur position itemListElement
 		$list_item_key = 1;
 
-		foreach ($home_shortcuts as $post_id => $post_title_alt) {
+		foreach ( $home_shortcuts as $post_id ) {
 
 			$pc_post = new PC_post( get_post( $post_id ) );
 			
