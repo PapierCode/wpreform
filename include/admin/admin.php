@@ -257,31 +257,26 @@ add_filter( 'pc_filter_metabox_content', 'pc_cgu_edit_metabox_content', 10, 3 );
 =            TinyMCE custom            =
 ======================================*/
 
-add_action( 'admin_init', 'pc_tinymce_css' );
+if ( isset( $settings_pc['blockeditor-disabled'] ) ) {
 
-	function pc_tinymce_css() {
+	add_filter( 'tiny_mce_before_init', 'pc_tinymce_edit_formats' ); 
 
-		add_editor_style( get_bloginfo( 'template_directory').'/include/admin/admin.css' );
-
-	}
-
-
-add_filter( 'tiny_mce_before_init', 'pc_tinymce_edit_formats' ); 
-
-    function pc_tinymce_edit_formats( $init_array ) {  
-        
-        $style_formats = array(  
-            array(  
-                'title' => 'Introduction',
-                'block' => 'p',
-                'classes' => 'wysi-intro'
-            )
-		);      
+		function pc_tinymce_edit_formats( $init_array ) {  
+			
+			$style_formats = array(  
+				array(  
+					'title' => 'Introduction',
+					'block' => 'p',
+					'classes' => 'wysi-intro'
+				)
+			);      
+			
+			$init_array['style_formats'] = json_encode( $style_formats );  
+			return $init_array;  
 		
-        $init_array['style_formats'] = json_encode( $style_formats );  
-        return $init_array;  
-      
-	}
+		}
+
+}
 
 
 /*=====  FIN TinyMCE custom  =====*/
