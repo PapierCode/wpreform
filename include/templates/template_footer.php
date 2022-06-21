@@ -58,7 +58,7 @@ function pc_display_footer_contact() {
 		'url' => get_bloginfo('template_directory').'/images/logo-footer.svg',
 		'width' => 100,
 		'height' => 25,
-		'alt' => 'Logo '.$settings_project['coord-name']
+		'alt' => $settings_project['coord-name']
 	);
 	// filtre
 	$logo_datas = apply_filters( 'pc_filter_footer_logo_datas', $logo_datas, $settings_project );
