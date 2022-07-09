@@ -36,7 +36,6 @@ $home_pages_repeater = new PC_posts_Selector(
 	)
 );
 
-
 $settings_home_fields = array(
     array(
         'title'     => 'Contenu',

@@ -188,7 +188,9 @@ $sprite = array(
 
 	'calendar' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect x="5" width="2" height="6" rx="1"/><rect x="13" width="2" height="6" rx="1"/><rect x="4" y="7.95" width="3" height="3"/><rect x="13" y="7.95" width="3" height="3"/><rect x="8.5" y="7.95" width="3" height="3"/><rect x="4" y="12.95" width="3" height="3"/><rect x="13" y="12.95" width="3" height="3"/><rect x="8.5" y="12.95" width="3" height="3"/><rect x="8" y="1.95" width="4" height="2"/><polygon points="16 1.95 16 3.95 18 3.95 18 17.95 2 17.95 2 3.95 4 3.95 4 1.95 0 1.95 0 19.95 20 19.95 20 1.95 16 1.95"/></svg>',
 
-	'quote' => '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20"><path d="M12.07,2l-3.3,8.57h2.74L9.54,20H0l2-9.61L6.32,2Z"/><path d="M13.92,18l3.3-8.56H14.49l2-9.47H26L24,9.61,19.68,18Z"/></svg>'
+	'quote' => '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="20" viewBox="0 0 26 20"><path d="M12.07,2l-3.3,8.57h2.74L9.54,20H0l2-9.61L6.32,2Z"/><path d="M13.92,18l3.3-8.56H14.49l2-9.47H26L24,9.61,19.68,18Z"/></svg>',
+
+	'download' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="20 20 0 20 0 12.5 3 12.5 3 17 17 17 17 12.5 20 12.5 20 20"/><polygon points="13.88 6.59 11.5 8.97 11.5 0 8.5 0 8.5 8.97 6.12 6.59 4 8.71 10 14.71 16 8.71 13.88 6.59"/></svg>'
 
 );
 
