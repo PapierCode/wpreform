@@ -179,7 +179,7 @@ function pc_display_js_footer() {
 	
 	if ( !empty( $js_files ) ) { 
 		foreach ( $js_files as $id => $url ) {
-			echo '<script src="'.$url.'"></script>';
+			echo '<script async defer src="'.$url.'"></script>';
 		}
 	}
 
