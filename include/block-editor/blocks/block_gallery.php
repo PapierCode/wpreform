@@ -5,11 +5,16 @@ $gallery = get_field('_bloc_gallery_ids');
 if ( $gallery ) {
 
 	$block_css = array( 'gallery', 'bloc-gallery', 'bloc-space--'.get_field('_bloc_space_v') );
+
+	if ( isset( $block['className'] ) && '' != trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 	
 	$block_size = get_field('_bloc_size');
 	if ( 'wide' == $block_size ) { $block_css[] = 'bloc-wide'; }
+	
+	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
+	if ( isset( $block['anchor'] ) && '' != trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 
-	echo '<div class="'.implode(' ',$block_css).'"><ul class="gallery-list reset-list">';
+	echo '<div '.implode(' ',$block_attrs).'><ul class="gallery-list reset-list">';
 
 	foreach ( $gallery as $image ) {
 

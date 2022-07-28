@@ -8,6 +8,8 @@ if ( $img ) {
 
 	$block_css = array( 'bloc-image', 'bloc-space--'.get_field('_bloc_space_v') );
 	
+	if ( isset( $block['className'] ) && '' != trim( $block['className'] ) ) { $block_css[] = $block['className']; }
+	
 	$block_size = get_field('_bloc_size');
 	if ( 'wide' == $block_size ) { $block_css[] = 'bloc-wide'; }
 	
@@ -88,7 +90,10 @@ if ( $img ) {
 	if ( isset( $srcset ) ) { $attrs['srcset'] = implode( ', ', $srcset ); }
 	if ( isset( $sizes ) ) { $attrs['sizes'] = implode( ', ', $sizes ); }
 
-	echo '<div class="'.implode(' ',$block_css).'"><'.$tag.'>';
+	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
+	if ( isset( $block['anchor'] ) && '' != trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+
+	echo '<div '.implode(' ',$block_attrs).'><'.$tag.'>';
 
 		echo '<img';
 			foreach ( $attrs as $key => $value ) {

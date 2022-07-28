@@ -57,10 +57,14 @@ if ( have_rows ('_bloc_columns') ) { while ( have_rows('_bloc_columns') ) { the_
 if ( !empty($columns) && count($columns) > 1 ) {
 
 	$block_css = array( 'bloc-columns', 'bloc-columns--'.count($columns), 'bloc-space--'.get_field('_bloc_space_v') );	
+	if ( isset( $block['className'] ) && '' != trim( $block['className'] ) ) { $block_css[] = $block['className']; }
 	$block_size = get_field('_bloc_size');
 	if ( 'wide' == $block_size ) { $block_css[] = 'bloc-wide'; }
+	
+	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
+	if ( isset( $block['anchor'] ) && '' != trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 
-	echo '<div class="'.implode(' ',$block_css).'">';
+	echo '<div '.implode(' ',$block_attrs).'>';
 
 		foreach ( $columns as $column ) {
 				

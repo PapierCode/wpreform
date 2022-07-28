@@ -3,7 +3,13 @@ $intro = trim(get_field('_bloc_intro_txt'));
 
 if ( $intro ) {
 
-	echo '<p class="bloc-intro">'.$intro.'</p>';
+	$block_css = array( 'bloc-intro' );
+	if ( isset( $block['className'] ) && '' != trim( $block['className'] ) ) { $block_css[] = $block['className']; }
+	
+	$block_attrs = array( 'class="'.implode( ' ', $block_css ).'"' );
+	if ( isset( $block['anchor'] ) && '' != trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
+
+	echo '<p '.implode(' ',$block_attrs).'>'.$intro.'</p>';
 
 } else if ( $is_preview ) {
 
