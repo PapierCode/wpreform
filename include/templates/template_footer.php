@@ -173,8 +173,9 @@ function pc_display_js_footer() {
 
 	/*----------  Fichiers JS  ----------*/
 
+	$js_preform_path = '/scripts/pc-preform-jquery.min.js';
 	$js_files = apply_filters( 'pc_filter_js_files', array(
-		'wpreform' => get_bloginfo('template_directory').'/scripts/pc-preform-jquery.min.js'
+		'wpreform' => get_template_directory_uri().$js_preform_path.'?ver='.filemtime(get_template_directory().$js_preform_path)
 	) );
 	
 	if ( !empty( $js_files ) ) { 
