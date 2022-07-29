@@ -131,7 +131,16 @@ function pc_display_breadcrumb() {
 
 		/*----------  Filtre  ----------*/
 	
-		$links = apply_filters( 'pc_filter_breadcrumb_before_display', $links );	
+		$links = apply_filters( 'pc_filter_breadcrumb_before_display', $links );
+		
+
+		/*----------  Données structurées  ----------*/
+		
+		$structured_datas = array(
+			'@context' => 'https://schema.org',
+      		'@type' => 'BreadcrumbList',
+      		'itemListElement' => array()
+		);
 
 
 		/*----------  Affichage  ----------*/
@@ -142,8 +151,17 @@ function pc_display_breadcrumb() {
 
 				$current = ( $key == ( count($links) - 1 ) ) ? ' aria-current="page"' : '';
 				echo '<li class="breadcrumb-item">'.$separator.'<a href="'.$link['permalink'].'"'.$current.'>'.$link['name'].'</a></li>';
+
+				$structured_datas['itemListElement'][] = array(
+					'@type' => 'ListItem',
+					'position' => $key + 1,
+					'name' => $link['name'],
+					'item' => $link['permalink']
+				);
 				
 			}
+
+			echo '<script type="application/ld+json">'.json_encode($structured_datas,JSON_UNESCAPED_SLASHES).'</script>';
 
 		echo '</ol></nav>';
 
