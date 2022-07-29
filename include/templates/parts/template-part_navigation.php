@@ -9,6 +9,27 @@
 **/
 
 
+/*=============================
+=            Menus            =
+=============================*/
+
+add_action( 'after_setup_theme', 'pc_preform_register_nav_menus' );
+
+	function pc_preform_register_nav_menus() {
+
+		$nav_locations = apply_filters( 'pc_filter_nav_locations', array( 
+			'nav-header' => 'Entête',
+			'nav-footer' => 'Pied de page'
+		) );
+
+		register_nav_menus( $nav_locations );	
+
+	}
+
+
+/*=====  FIN Menus  =====*/
+
+
 /*==========================================
 =            Customisation menu            =
 ==========================================*/
