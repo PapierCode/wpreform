@@ -161,9 +161,9 @@ function pc_display_breadcrumb() {
 				
 			}
 
-			echo '<script type="application/ld+json">'.json_encode($structured_datas,JSON_UNESCAPED_SLASHES).'</script>';
-
-		echo '</ol></nav>';
+		echo '</ol>';
+		echo '<script type="application/ld+json">'.json_encode($structured_datas,JSON_UNESCAPED_SLASHES).'</script>';
+		echo '</nav>';
 
 	}
 
