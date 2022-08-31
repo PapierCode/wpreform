@@ -136,23 +136,23 @@ class PC_Term {
 
 		if ( $this->has_image ) {
 			
-			$thumbnail_datas['urls'] = array(
-				wp_get_attachment_image_src( $metas['visual-id'], 'st-400' )[0],
-				wp_get_attachment_image_src( $metas['visual-id'], 'st-500' )[0],
-				wp_get_attachment_image_src( $metas['visual-id'], 'st-700' )[0]
-			);
+			$image_datas['sizes'] = apply_filters( 'pc_filter_card_image_sizes', array(
+				'400' => wp_get_attachment_image_src( $metas['visual-id'], 'st-400' ),
+				'500' => wp_get_attachment_image_src( $metas['visual-id'], 'st-500' ),
+				'700' => wp_get_attachment_image_src( $metas['visual-id'], 'st-700' )
+			), $metas['visual-id'], $this );
 			
 			$image_alt = get_post_meta( $metas['visual-id'], '_wp_attachment_image_alt', true );
-			$thumbnail_datas['alt'] = ( '' != $image_alt ) ? $image_alt : $this->get_card_title();
+			$image_datas['alt'] = ( '' != $image_alt ) ? $image_alt : $this->get_card_title();
 		
 		} else {
 
-			$thumbnail_datas['urls'] = pc_get_default_card_image();
-			$thumbnail_datas['alt'] = $this->get_card_title();
+			$image_datas['sizes'] = pc_get_default_card_image();
+			$image_datas['alt'] = $this->get_card_title();
 
 		}
 		
-		return $thumbnail_datas;
+		return $image_datas;
 	
 	}
 	
@@ -165,13 +165,32 @@ class PC_Term {
 	 */
 	public function display_card_image() {
 
-		global $images_sizes;
-		$thumbnail_datas = $this->get_card_image_datas();
+		$image_datas = $this->get_card_image_datas();
+		$sizes_count = count( $image_datas['sizes'] );
+		$last_size_key = array_key_last($image_datas['sizes']);
+
+		$image_attrs = array(
+			'src="'.$image_datas['sizes'][$last_size_key][0].'"',
+			'alt="'.$image_datas['alt'].'"',
+			'width="'.$image_datas['sizes'][$last_size_key][1].'"',
+			'height="'.$image_datas['sizes'][$last_size_key][2].'"',
+			'loading="lazy"'
+		);
 	
-		$attr_srcset = $thumbnail_datas['urls'][0].' 400w, '.$thumbnail_datas['urls'][1].' 500w, '.$thumbnail_datas['urls'][2].' 700w';
-		$attr_sizes = '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, 500px';
-	
-		$tag = '<img src="'.$thumbnail_datas['urls'][2].'" alt="'.$thumbnail_datas['alt'].'" srcset="'.$attr_srcset.'" sizes="'.$attr_sizes.'" loading="lazy" width="'.$images_sizes['st-700']['width'].'" height="'.$images_sizes['st-700']['height'].'" />';
+		if ( $sizes_count > 1 ) {
+			
+			$attr_srcset = array();
+			foreach ( $image_datas['sizes'] as $size => $attachment ) {
+				$attr_srcset[] = $attachment[0].' '.$size.'w';
+			}
+			$image_attrs[] = 'srcset="'.implode(', ',$attr_srcset).'"';
+
+			$attr_sizes = apply_filters( 'pc_filter_card_image_sizes_attribut', '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, (min-width:701px) 500px', $image_datas, $this );
+			$image_attrs[] = 'sizes="'.$attr_sizes.'"';
+
+		}
+		
+		$tag = apply_filters( 'pc_filter_card_image', '<img '.implode( ' ', $image_attrs ).' />', $image_datas, $this );
 		
 		echo $tag;
 	
