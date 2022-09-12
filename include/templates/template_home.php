@@ -94,9 +94,9 @@ function pc_display_home_shortcuts( $pc_home ) {
 				$post_title = $post->get_card_title();
 
 				// affichage
-				echo '<li class="home-shortcut-item"><a title="'.$post_title.'" href="'.$post->permalink.'" class="home-shortcut-link">';
+				echo '<li class="home-shortcut-item"><a href="'.$post->permalink.'" class="home-shortcut-link">';
 					echo '<span class="home-shortcut-img">';
-						$post->display_card_image();
+						$post->display_card_image( false);
 					echo '</span>';
 					echo '<span class="home-shortcut-txt">'.$post_title.'</span>';
 					echo '<span class="home-shortcut-ico">'.pc_svg('link').'</span>';

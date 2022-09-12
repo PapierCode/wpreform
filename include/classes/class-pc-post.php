@@ -188,18 +188,18 @@ class PC_Post {
 	 * @return string HTML
 	 * 
 	 */
-	public function display_card_image() {
+	public function display_card_image( $alt = true ) {
 
 		$image_datas = $this->get_card_image_datas();
 		$sizes_count = count( $image_datas['sizes'] );
 		$last_size_key = array_key_last($image_datas['sizes']);
 
 		$image_attrs = array(
-			'src="'.$image_datas['sizes'][$last_size_key][0].'"',
-			'alt="'.$image_datas['alt'].'"',
-			'width="'.$image_datas['sizes'][$last_size_key][1].'"',
-			'height="'.$image_datas['sizes'][$last_size_key][2].'"',
-			'loading="lazy"'
+			'src' => $image_datas['sizes'][$last_size_key][0],
+			'width' => $image_datas['sizes'][$last_size_key][1],
+			'height' => $image_datas['sizes'][$last_size_key][2],
+			'alt' => ( $alt ) ? $image_datas['alt'] : '',
+			'loading' => 'lazy'
 		);
 	
 		if ( $sizes_count > 1 ) {
@@ -208,14 +208,17 @@ class PC_Post {
 			foreach ( $image_datas['sizes'] as $size => $attachment ) {
 				$attr_srcset[] = $attachment[0].' '.$size.'w';
 			}
-			$image_attrs[] = 'srcset="'.implode(', ',$attr_srcset).'"';
-
-			$attr_sizes = apply_filters( 'pc_filter_card_image_sizes_attribut', '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, (min-width:701px) 500px', $image_datas, $this );
-			$image_attrs[] = 'sizes="'.$attr_sizes.'"';
+			$image_attrs['srcset'] = implode(', ',$attr_srcset);
+			$image_attrs['sizes'] = apply_filters( 'pc_filter_card_image_sizes_attribut', '(max-width:400px) 400px, (min-width:401px) and (max-width:700px) 700px, (min-width:701px) 500px', $image_datas, $this );
 
 		}
 		
-		$tag = apply_filters( 'pc_filter_card_image', '<img '.implode( ' ', $image_attrs ).' />', $image_datas, $this );
+		$tag = '<img';
+		foreach ( $image_attrs as $attr => $attr_value ) {
+			$tag .= ' '.$attr.'="'.$attr_value.'"';
+		}
+		$tag .= ' />';
+		$tag = apply_filters( 'pc_filter_card_image', $tag, $image_datas, $this );
 		
 		echo $tag;
 	
