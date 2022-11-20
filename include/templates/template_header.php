@@ -203,7 +203,7 @@ function pc_display_header_tools() {
 		$search_ico = apply_filters( 'pc_filter_header_tools_search_icon', pc_svg( 'zoom' ) );
 		$items['search'] = array(
 			'attrs' => '',
-			'html' => '<a href="'.get_bloginfo('url').'/?s" title="Page de recherche" class="h-tools-link"><span class="txt">Recherche</span><span class="ico">'.$search_ico.'</span></a>'
+			'html' => '<a href="'.get_bloginfo('url').'/?s" class="h-tools-link"><span class="txt">Recherche</span><span class="ico">'.$search_ico.'</span></a>'
 		);
 	}
 
