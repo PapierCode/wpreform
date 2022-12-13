@@ -81,7 +81,7 @@ function pc_display_footer_contact() {
 	/*----------  Téléphone  ----------*/
 	
 	$phone = '<a href="tel:'.pc_phone($settings_project['coord-phone-1']).'">'.pc_phone($settings_project['coord-phone-1'],false).'</a>';
-	if ( $settings_project['coord-phone-2'] != '' ) {
+	if ( isset( $settings_project['coord-phone-2'] ) && $settings_project['coord-phone-2'] ) {
 		$phone .= '<br/><span class="coord-sep"> / </span><a href="tel:'.pc_phone($settings_project['coord-phone-2']).'">'.pc_phone($settings_project['coord-phone-2'],false).'</a>';
 	}
 	$dd['list']['phone'] = array(
