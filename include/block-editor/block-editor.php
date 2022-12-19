@@ -41,7 +41,8 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 		$blocks = array(
 			'core/paragraph',
 			'core/heading',
-			'core/list'
+			'core/list',
+			'core/list-item'
 		);
 		
 		if ( apply_filters( 'pc_filter_add_acf_image_block', true ) ) { $blocks[] = 'acf/pc-image'; }
