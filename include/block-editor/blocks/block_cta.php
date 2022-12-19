@@ -31,7 +31,7 @@ if ( $button_txt && is_array($button_link) ) {
 
 	echo '<div '.implode(' ',$block_attrs).'>';
 		if ( $frame && $frame_title ) { echo '<h2 class="cta-title">'.$frame_title.'</h2>'; }
-		echo '<a '.implode( ' ', $link_attrs ).'>'.$button_txt.'</a>';
+		echo '<a '.implode( ' ', $link_attrs ).'><span class="txt">'.$button_txt.'</span></a>';
 	echo '</div>';
 
 } else if ( $is_preview ) {
