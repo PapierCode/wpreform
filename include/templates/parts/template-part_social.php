@@ -29,7 +29,7 @@ function pc_display_social_links( $css_class ) {
 			if ( !$ul ) { echo '<ul class="social-list reset-list no-print '.$css_class.'">'; $ul = true; };
 
 			$txt = 'Suivez-nous sur '.$field['label'].' (nouvelle fenêtre)';
-			echo '<li class="social-item"><a class="social-link social-link--'.$field['label_for'].'" href="'.$settings_project[$id].'" title="'.$txt.'" target="_blank" rel="noreferrer"><span class="visually-hidden">'.$txt.'</span><span class="ico">'.pc_svg($field['label_for']).'</span></a></li>';		
+			echo '<li class="social-item"><a class="social-link social-link--'.$field['label_for'].'" href="'.$settings_project[$id].'" target="_blank" rel="noreferrer"><span class="visually-hidden">'.$txt.'</span><span class="ico">'.pc_svg($field['label_for']).'</span></a></li>';		
 			
 		}
 

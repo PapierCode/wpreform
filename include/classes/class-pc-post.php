@@ -66,6 +66,7 @@ class PC_Post {
 	 * @return string string url
 	 * 
 	 */
+
 	public function get_canonical() {
 
 		$canonical = $this->permalink;
@@ -97,6 +98,7 @@ class PC_Post {
 	 * @return	string 	Date traduite
 	 * 
 	 */
+
 	public function get_date( $format = 'j F Y', $modified = false ) {
 
 		$date = ( !$modified ) ? $this->wp_post->post_date : $this->wp_post->post_modified;
@@ -118,6 +120,7 @@ class PC_Post {
 	 * @return string Méta resum-title | titre du post | '(sans titre)'
 	 * 
 	 */
+
 	public function get_card_title() {
 
 		$metas = $this->metas;
@@ -136,6 +139,7 @@ class PC_Post {
 	 * @return string Méta resum-desc | wp_excerpt | empty
 	 * 
 	 */
+
 	public function get_card_description() {
 
 		$metas = $this->metas;
@@ -155,6 +159,7 @@ class PC_Post {
 	 * 					string	attribut alt				Méta _wp_attachment_image_alt | get_card_title()
 	 * 
 	 */
+
 	public function get_card_image_datas() {
 
 		$metas = $this->metas;
@@ -188,6 +193,7 @@ class PC_Post {
 	 * @return string HTML
 	 * 
 	 */
+
 	public function display_card_image( $alt = true ) {
 
 		$image_datas = $this->get_card_image_datas();
@@ -330,6 +336,7 @@ class PC_Post {
 	 * @return string Méta seo-title | get_card_title()
 	 * 
 	 */
+
 	public function get_seo_meta_title() {
 
 		$metas = $this->metas;
@@ -354,6 +361,7 @@ class PC_Post {
 	 * @return string Méta seo-desc | get_card_description()
 	 * 
 	 */
+
 	public function get_seo_meta_description() {
 
 		$metas = $this->metas;
@@ -386,6 +394,7 @@ class PC_Post {
 	 * 					Url/width/height 
 	 * 
 	 */
+
 	public function get_seo_meta_image_datas() {
 
 		$metas = $this->metas;
@@ -406,6 +415,7 @@ class PC_Post {
 	 * 					get_seo_meta_image_datas()
 	 * 
 	 */
+
 	public function get_seo_metas( ) {
 
 		// titre
@@ -437,6 +447,7 @@ class PC_Post {
 	 * @return	array	Pour conversion JSON
 	 * 
 	 */
+
 	public function get_schema_author() {
 
 		global $settings_project;
@@ -472,6 +483,7 @@ class PC_Post {
 	 * @return	array	Pour conversion JSON
 	 * 
 	 */
+
 	public function get_schema_article( $is_part_of = false ) {
 
 		global $settings_project;
@@ -516,6 +528,7 @@ class PC_Post {
 	 * @return	array	Pour conversion JSON
 	 * 
 	 */
+
 	public function get_schema_list_item( $position ) {
 
 		$image_to_share = $this->get_seo_meta_image_datas();	
@@ -550,6 +563,7 @@ class PC_Post {
 	 * [WOO] Image produit
 	 * 
 	 */
+	
 	private function use_woo_product_image() {
 
 		if ( in_array( $this->type, array('product','product_variation') ) ) {
