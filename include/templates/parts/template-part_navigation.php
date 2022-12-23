@@ -47,7 +47,7 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 			$class_names .= ' '.$prefix.'-list '.$prefix.'-list--l'.$display_depth;
 		}
 		// 
-		$output = '<ul class="' . $class_names . ' reset-list">';
+		$output .= '<ul class="' . $class_names . ' reset-list">';
 
 	} // end start_lvl()
 
