@@ -37,7 +37,7 @@ switch ( $btn_type ) {
 
 if ( !empty( $errors ) ) {
 	
-	echo '<p class="editor-error">Erreur bloc <em>Bouton (CTA)</em> : '.implode(', ',$errors).'.</p>';
+	if ( $is_preview ) { echo '<p class="editor-error">Erreur bloc <em>Bouton (CTA)</em> : '.implode(', ',$errors).'.</p>'; }
 
 } else {
 
