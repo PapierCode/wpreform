@@ -107,6 +107,7 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 			// création du lien
 			$output .= '<a '.$attributes.'>';
+			$output .= apply_filters( 'pc_filter_nav_menu_item_icon', $icon = '', $item, $args );
 			$output .= '<span class="'.$span_class_name.'">'.$item->title.'</span>';
 			$output .= '</a>';
 
