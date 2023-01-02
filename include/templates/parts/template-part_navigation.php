@@ -90,9 +90,7 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		// si c'est un item parent
 		if ( in_array( 'is-parent', $clean_classes ) ) {
 			// pas de lien mais un bouton
-			$output .= '<button type="button" class="'.$link_class_name.'reset-btn">';
-			$output .= '<span class="'.$span_class_name.'">'.$item->title.'</span>';
-			$output .= '</button>';
+			$output .= apply_filters( 'pc_filter_nav_parent_button_tag', '<button type="button" class="'.$link_class_name.'reset-btn"><span class="'.$span_class_name.'">'.$item->title.'</span></button>', $item, $args, $clean_classes );
 
 		// si ce n'est pas un parent
 		} else {
