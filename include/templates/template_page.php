@@ -106,7 +106,7 @@ function pc_display_page_specific_content( $pc_post ) {
 
 		/*----------  Contenu spécifique  ----------*/
 			
-		if ( isset($metas['content-from']) ) {
+		if ( isset($metas['content-from']) && apply_filters( 'pc_filter_page_display_content_from', true, $pc_post ) ) {
 
 			global $settings_project;
 			$template = $settings_project['page-content-from'][$metas['content-from']][1];
@@ -115,7 +115,7 @@ function pc_display_page_specific_content( $pc_post ) {
 
 		/*----------  Sous-pages  ----------*/		
 
-		} else if ( isset($metas['content-subpages']) ) {
+		} else if ( isset($metas['content-subpages']) && apply_filters( 'pc_filter_page_display_content_subpages', true, $pc_post )  ) {
 
 			// liste des sous-pages
 			$sub_pages_ids = explode( ',', $metas['content-subpages'] );
