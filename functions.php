@@ -12,6 +12,7 @@
 
 /*----------  Classes  ----------*/
 
+include 'include/classes/class-pc-walker-nav.php';
 include 'include/classes/class-pc-post.php';
 include 'include/classes/class-pc-term.php';
 include 'include/classes/class-pc-home.php';

@@ -33,7 +33,8 @@ js_src = [
 ];
 
 js_src_all = [
-	'scripts/include/jquery-3.6.0.min.js'
+	'scripts/include/jquery-3.6.0.min.js',
+	'scripts/include/nav.js'
 ].concat(js_src);
 
 
@@ -42,9 +43,7 @@ js_src_all = [
 function js_hint() {
 
 	return src( js_src )
-        .pipe(jshint({
-			esversion: 6
-		}))
+		.pipe(jshint( { esnext:true, browser:true } ))
         .pipe(jshint.reporter( 'default' ));
 
 }
@@ -75,7 +74,8 @@ function js() {
 ==================================*/
 
 exports.watch = function() {
-	watch( [ 'scripts/**/*.js', '!scripts/pc-preform.min.js', '!scripts/pc-preform-jquery.min.js' ], series(js_hint,js_jquery,js)  )
+
+	watch( [ 'scripts/**/*.js', '!scripts/pc-preform.min.js', '!scripts/pc-preform-jquery.min.js' ], series( js_hint, js_jquery,js )  )
 };
 
 

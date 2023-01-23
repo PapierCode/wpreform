@@ -165,10 +165,28 @@ function pc_display_footer_end() {
 
 function pc_display_js_footer() {
 
-	/*----------  Sprite to JS  ----------*/
+	/*----------  PHP to JS  ----------*/
 	
-	$sprite_to_js_array = apply_filters( 'pc_filter_sprite_to_js', array('arrow','cross','more','less') );
-	if ( !empty( $sprite_to_js_array ) ) { pc_sprite_to_js( $sprite_to_js_array ); }
+	$sprite_selection = apply_filters( 'pc_filter_sprite_to_js', array('arrow','cross','more','less') );
+	if ( !empty( $sprite_selection ) ) {
+		global $sprite;
+		$sprite_to_json = array();
+		foreach ( $sprite_selection as $id ) {
+			$sprite_to_json[$id] = str_replace( '<svg', '<svg aria-hidden="true" focusable="false"', $sprite[$id] );
+		}
+	}
+
+	$h_nav_js_args = apply_filters( 'pc_filter_header_nav_js_args', array(
+		'heightAnimation' => array(
+			'small' => false,
+			'full' => false
+		)
+	) );
+
+	echo '<script>';
+		echo 'var navArgs='.json_encode( $h_nav_js_args, JSON_PRETTY_PRINT ).';';
+		echo 'var sprite='.json_encode( $sprite_to_json, JSON_PRETTY_PRINT ).';';
+	echo '</script>';
 	
 
 	/*----------  Fichiers JS  ----------*/

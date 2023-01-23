@@ -5,6 +5,29 @@
  * 
  */
 
+/*
+bloc publié dans une seule page
+
+$posts_with = get_posts(array(
+	'post_type' => 'page',
+	's' => 'acf/visio-custom-posts',
+	'post__not_in' => array($post_id)
+));
+if ( !empty( $posts_with ) ) {
+	foreach ( $posts_with as $post ) {
+		$blocs = parse_blocks($post->post_content);
+		$bloc = array_filter($blocs, 'pc_find_block');
+		$bloc = reset( $bloc );
+		if ( $type['value'] == $bloc['attrs']['data']['_bloc_posts_type'] ) {
+			$display = false;
+			$message = 'le contenu "'.$type['label'].'" est déjà publié dans une autre page';
+			break;
+		}
+	}
+}
+
+*/
+
 add_action( 'acf/init', 'pc_acf_init_block_types' );
 
 	function pc_acf_init_block_types() {
