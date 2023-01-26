@@ -45,15 +45,12 @@
 
 	function removeAlignOptions( settings, name ) {
 
-		if ( name == 'core/heading' ) {
-			return lodash.assign( {}, settings, {
-				supports: lodash.assign( {}, settings.supports, {
-					align: [], // pas de wide
-				} )
-			} );
-		}
-
-		return settings;
+		return lodash.assign( {}, settings, {
+			supports: lodash.assign( {}, settings.supports, {
+				align: [], // pas de wide
+				html: false // pas d'édition en html
+			} )
+		} );
 
 	}
 	 
