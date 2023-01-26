@@ -57,7 +57,7 @@ $('.js-toggle').click( function() {
 
 /*----------  gallery  ----------*/
 
-$('.gallery').gallery({
+$('.gallery:not(.gallery--nojs)').gallery({
 	btnNextInner:sprite.arrow,
 	btnPrevInner:sprite.arrow,
 	btnCloseInner:sprite.cross,
