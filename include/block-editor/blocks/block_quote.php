@@ -10,9 +10,9 @@ if ( $quote ) {
 	if ( isset( $block['anchor'] ) && '' != trim( $block['anchor'] ) ) { $block_attrs[] = 'id="'.$block['anchor'].'"'; }
 	
 	echo '<blockquote '.implode(' ',$block_attrs).'>';
-		echo '<p class="txt-align--'.get_field('_bloc_quote_txt_align').'">'.$quote.'</p>';
+		echo '<p class="has-text-align-'.get_field('_bloc_quote_txt_align').'">'.$quote.'</p>';
 		if ( $cite = trim( get_field('_bloc_quote_src') ) ) {
-			echo '<cite class="txt-align--'.get_field('_bloc_quote_src_align').'">'.$cite.'</cite>';
+			echo '<cite class="has-text-align-'.get_field('_bloc_quote_src_align').'">'.$cite.'</cite>';
 		}
 	echo '</blockquote>';
 

@@ -43,7 +43,7 @@
    
     });
 
-	function removeAlignOptions( settings, name ) {
+	function pcRemoveOptions( settings, name ) {
 
 		return lodash.assign( {}, settings, {
 			supports: lodash.assign( {}, settings.supports, {
@@ -56,8 +56,8 @@
 	 
 	wp.hooks.addFilter(
 		'blocks.registerBlockType',
-		'pc/removealignoptions',
-		removeAlignOptions
+		'pc/pcRemoveOptions',
+		pcRemoveOptions
 	);
 
 } )()

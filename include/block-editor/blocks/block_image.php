@@ -101,7 +101,7 @@ if ( $img ) {
 			}
 		echo '/>';
 
-		if ( $caption ) { echo '<figcaption class="txt-align--'.get_field('_bloc_img_caption_align').'">'.$caption.'</figcaption>'; }
+		if ( $caption ) { echo '<figcaption class="has-text-align-'.get_field('_bloc_img_caption_align').'">'.$caption.'</figcaption>'; }
 
 	echo '</'.$tag.'></div>';
 

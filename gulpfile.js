@@ -29,12 +29,12 @@ const terser		= require( 'gulp-terser' ); // minification js
 
 js_src = [
 	'scripts/include/jquery-gallery.js',
+	'scripts/include/nav.js',
 	'scripts/pc-preform.js'
 ];
 
 js_src_all = [
-	'scripts/include/jquery-3.6.0.min.js',
-	'scripts/include/nav.js'
+	'scripts/include/jquery-3.6.0.min.js'
 ].concat(js_src);
 
 
