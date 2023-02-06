@@ -75,7 +75,7 @@ function js() {
 
 exports.watch = function() {
 
-	watch( [ 'scripts/**/*.js', '!scripts/pc-preform.min.js', '!scripts/pc-preform-jquery.min.js' ], series( js_hint, js_jquery,js )  )
+	watch( [ 'scripts/**/*.js', '!scripts/pc-preform.min.js', '!scripts/pc-preform-jquery.min.js' ], series( js_hint, js_jquery, js )  )
 };
 
 
