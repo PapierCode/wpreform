@@ -178,8 +178,8 @@ function pc_display_js_footer() {
 
 	$h_nav_js_args = apply_filters( 'pc_filter_header_nav_js_args', array(
 		'heightAnimation' => array(
-			'small' => false,
-			'full' => false
+			'small' => true,
+			'full' => true
 		)
 	) );
 
