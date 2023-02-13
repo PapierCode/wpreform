@@ -7,14 +7,20 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		// parceque...
 		$display_depth = ($depth + 2);
-		// css
-		$class_names = array();
+		
+		$box_css = array(); 
 		foreach ( $args->nav_prefix as $prefix ) {
-			$class_names[] = $prefix.'-list';
-			$class_names[] = $prefix.'-list--l'.$display_depth;
+			$box_css[] = $prefix.'-box';
+			$box_css[] = $prefix.'-box--l'.$display_depth;
+		};
+		$output .= '<div class="' .implode( ' ', $box_css ) . '">';
+			
+		$list_css = array();
+		foreach ( $args->nav_prefix as $prefix ) {
+			$list_css[] = $prefix.'-list';
+			$list_css[] = $prefix.'-list--l'.$display_depth;
 		}
-		// retour
-		$output .= '<ul class="' .implode( ' ', $class_names ) . ' reset-list">';
+		$output .= '<ul class="' .implode( ' ', $list_css ) . ' reset-list">';
 
 	} // end start_lvl()
 
@@ -54,16 +60,16 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		// construction du li
 		$output .= '<li class="'.$li_class_name.'">';
 
-		// si c'est un item parent
-		if ( in_array( 'is-parent', $clean_classes ) ) {
-			if ( $display_depth == 1 ) {
-				$parent_first_child_tag = '<button type="button" class="'.$link_class_name.'reset-btn"><span class="'.$span_class_name.'">'.$item->title.'</span></button>';
-			} else {
-				$title_class_name = str_replace( 'link', 'title', $link_class_name );
-				$title_span_class_name = str_replace( 'link', 'title', $span_class_name );
-				$parent_first_child_tag = '<p class="'.$title_class_name.'reset-btn"><span class="'.$title_span_class_name.'">'.$item->title.'</span></p>';
-			}
-			$output .= apply_filters( 'pc_filter_nav_parent_button_tag', $parent_first_child_tag, $item, $args, $clean_classes );
+		// si niveau 1 & item parent
+		if ( $display_depth == 1 && in_array( 'is-parent', $clean_classes ) ) {
+
+			$output .= '<button type="button" class="'.$link_class_name.'reset-btn"><span class="'.$span_class_name.'">'.$item->title.'</span></button>';
+
+		} else if ( $display_depth > 1 && in_array( 'is-parent', $clean_classes ) && apply_filters( 'pc_filter_nav_menu_disable_submenu_parent_link', false ) ) {
+
+			$title_class_name = str_replace( 'link', 'title', $link_class_name );
+			$title_span_class_name = str_replace( 'link', 'title', $span_class_name );
+			$output .= '<p class="'.$title_class_name.'reset-btn"><span class="'.$title_span_class_name.'">'.$item->title.'</span></p>';
 
 		// si ce n'est pas un parent
 		} else {
@@ -87,5 +93,12 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$output = apply_filters( 'pc_filter_menu_walker_item_output', $output, $item, $args );
 
 	} // end start_el()
+	
+	// création des ul level 2 et sup
+	function end_lvl( &$output, $depth = 0, $args = array() ) {
+
+		$output .= '</ul></div>';
+
+	} // end start_lvl()
 
 } // end Primary_Walker()
