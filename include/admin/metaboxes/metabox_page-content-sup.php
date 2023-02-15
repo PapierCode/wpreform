@@ -99,25 +99,36 @@ function pc_page_metabox_content_more( $post ) {
 
 		$subpages_field_name = 'content-subpages';
         $subpages_save = get_post_meta( $post->ID, 'content-subpages', true );
+		$subpages_repeater_query_args = array(
+			'post_type' => 'page',
+			'post_status' => 'publish',
+			'nopaging' => true,
+			'orderby' => 'title',
+			'order' => 'ASC',
+			'post__not_in' => array( $post->ID, get_option( 'wp_page_for_privacy_policy' ) ), // ne prend pas la page courante et la page des CGU
+		);
+
+		// recherche parent, grand-parent,...
+		$parent_id = $post->post_parent;
+		$parents = ( $parent_id ) ? array( $parent_id ) : array() ;
+		while ( $parent_id ) {
+			$post_parent = get_post( $parent_id );
+			$parent_id = $post_parent->post_parent;
+			if ( $parent_id ) {	$parents[] = $parent_id; }
+		}
+		if ( !empty( $parents ) ) {
+			$subpages_repeater_query_args['post__not_in'] = array_merge(
+				$subpages_repeater_query_args['post__not_in'],
+				$parents
+			);
+		}
+
 		$subpages_repeater = new PC_posts_Selector( 
 			$subpages_field_name,
 			$subpages_save,
 			apply_filters( 
 				'pc_filter_page_metabox_subpages_args', 
-				array(
-					'post_type' => 'page',
-					'post_status' => 'publish',
-					'nopaging' => true,
-					'orderby' => 'title',
-					'order' => 'ASC',
-					'post__not_in' => array( $post->ID, get_option( 'wp_page_for_privacy_policy' ) ), // ne prend pas la page courante et la page des CGU
-					// 'meta_query' => array( // ne prend pas les pages parents
-					// 	array(
-					// 		'key'     => 'content-subpages',
-					// 		'compare' => 'NOT EXISTS',
-					// 	)
-					// )
-				),
+				$subpages_repeater_query_args,
 				$post
 			),
 			array(
