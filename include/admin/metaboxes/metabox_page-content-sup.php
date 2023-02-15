@@ -49,13 +49,13 @@ function pc_page_metabox_content_more( $post ) {
 	wp_nonce_field( basename( __FILE__ ), 'nonce-page-content-from' );
 
 	// labels, description,... contextualisés
-	if ( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
-		if ( !empty( $settings_project['page-content-from'] ) ) {
+	// if ( $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
+	// 	if ( !empty( $settings_project['page-content-from'] ) ) {
 			$metabox_desc = '<p><strong>Affichez, à la fin de la page, un contenu spécifique <strong style="font-weight:700">OU</strong> des sous-pages.</strong></p>';
-		}		
-	} else { // si la page courante est une sous-page
-		$metabox_desc = '<p><strong>Affichez, à la fin de la page, un contenu spécifique.</strong></p>';
-	}
+	// 	}		
+	// } else { // si la page courante est une sous-page
+	// 	$metabox_desc = '<p><strong>Affichez, à la fin de la page, un contenu spécifique.</strong></p>';
+	// }
 
 	// début mise en page
 	echo '<div class="pc-metabox-help">';
@@ -95,7 +95,7 @@ function pc_page_metabox_content_more( $post ) {
     =            Sélection de pages enfants (repeater)            =
     =============================================================*/
  
-    if ( apply_filters( 'pc_filter_page_metabox_subpages_enabled', true ) && $post->post_parent < 1 ) { // si la page en cours n'est pas déjà une sous-page
+    if ( apply_filters( 'pc_filter_page_metabox_subpages_enabled', true ) ) { // si la page en cours n'est pas déjà une sous-page
 
 		$subpages_field_name = 'content-subpages';
         $subpages_save = get_post_meta( $post->ID, 'content-subpages', true );
@@ -107,16 +107,16 @@ function pc_page_metabox_content_more( $post ) {
 				array(
 					'post_type' => 'page',
 					'post_status' => 'publish',
-					'posts_per_page' => -1,
+					'nopaging' => true,
 					'orderby' => 'title',
 					'order' => 'ASC',
 					'post__not_in' => array( $post->ID, get_option( 'wp_page_for_privacy_policy' ) ), // ne prend pas la page courante et la page des CGU
-					'meta_query' => array( // ne prend pas les pages parents
-						array(
-							'key'     => 'content-subpages',
-							'compare' => 'NOT EXISTS',
-						)
-					),
+					// 'meta_query' => array( // ne prend pas les pages parents
+					// 	array(
+					// 		'key'     => 'content-subpages',
+					// 		'compare' => 'NOT EXISTS',
+					// 	)
+					// )
 				),
 				$post
 			),

@@ -32,14 +32,20 @@ function pc_display_breadcrumb() {
 
 			global $pc_post;
 
-			if ( $pc_post->parent > 0 ) {
+			$parent_id = $pc_post->parent;
+			$parent_links = array();
 
-				$pc_post_parent = new PC_Post( get_post( $pc_post->parent ) );
-				$links[] = array(
+			while ( $parent_id ) {
+				$pc_post_parent = new PC_Post( get_post( $parent_id ) );
+				$parent_links[] = array(
 					'name' => $pc_post_parent->get_card_title(),
 					'permalink' => $pc_post_parent->permalink
 				);
+				$parent_id = $pc_post_parent->parent;
+			}
 
+			if ( !empty( $parent_links ) ) {
+				$links = array_merge( $links, array_reverse( $parent_links ) );
 			}
 
 			$links[] = array(
