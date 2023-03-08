@@ -53,7 +53,8 @@ add_filter( 'upload_mimes', 'pc_edit_upload_mimes' );
 
         return $mimes = apply_filters( 'pc_filter_upload_mimes', array (
             'jpg|jpeg' => 'image/jpeg',
-            'pdf' => 'application/pdf'
+            'pdf' => 'application/pdf',
+            'webp' => 'image/webp'
         ));
 
 		return $mimes;
