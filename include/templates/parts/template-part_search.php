@@ -10,12 +10,26 @@
 =            Formulaire            =
 ==================================*/
 
-function pc_display_form_search() {
+function pc_display_form_search( $txts = array(), $css = array(), $icon = 'zoom' ) {
 
-		echo '<form id="form-search" class="form-search" method="get" role="search" aria-label="Formulaire de recherche" action="'.get_bloginfo('url').'">';
-			echo '<label class="form-search-label" for="form-search-input">Mots-clés</label>';
+		$txts = array_merge(
+			array(
+				'label' => 'Mots-clés',
+				'btn_title' => 'Rechercher ces mots-clés',
+				'btn_txt' => 'Rechercher'
+			),
+			$txts
+		);
+
+		$css = array_merge(
+			array( 'form-search' ),
+			$css
+		);
+
+		echo '<form id="form-search" class="'.implode( ' ', $css ).'" method="get" role="search" aria-label="Formulaire de recherche" action="'.get_bloginfo('url').'">';
+			echo '<label class="form-search-label" for="form-search-input">'.$txts['label'].'</label>';
 			echo '<input type="text" class="form-search-input" name="s" id="form-search-input" value="'.esc_html( get_search_query() ).'" required>';
-			echo '<button type="submit" class="form-search-submit reset-btn button" title="Rechercher ces mots-clés"></span><span class="txt">Rechercher</span><span class="ico">'.pc_svg('zoom').'</button>';
+			echo '<button type="submit" class="form-search-submit reset-btn button" title="'.$txts['btn_title'].'"></span><span class="txt">'.$txts['btn_txt'].'</span><span class="ico">'.pc_svg($icon).'</button>';
 		echo '</form>';
 
 }
