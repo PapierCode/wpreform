@@ -35,35 +35,64 @@ add_action( 'after_setup_theme', 'pc_preform_register_nav_menus' );
 
 add_filter( 'wp_nav_menu_objects', 'pc_nav_page_parent_active', NULL, 2 );
 
-	function pc_nav_page_parent_active( $menu_items, $args ) {
+	function pc_nav_page_parent_active( $items, $args ) {
 
-		// si menu d'entête
 		if ( $args->theme_location == 'nav-header' ) {
 
-			// si page.php
 			if ( is_page() ) {
-				
+
 				global $post;
-				// si la page a un parent
-				if ( $post->post_parent > 0 ) { $id_to_search = $post->post_parent; }
 
-			}
-			
-			// recherche de l'item
-			if ( isset($id_to_search) ) {
+				if ( $post->post_parent ) {					
 
-				foreach ( $menu_items as $object ) {
-					if ( $object->object_id == $id_to_search ) {
-						// ajout classe WP (remplacée dans le Walker du menu)
-						$object->classes[] = 'current-menu-item';
+					$page_parent_ids = array();
+					$parent_id = wp_get_post_parent_id( $post );
+
+					if ( $parent_id ) {
+
+						$pc_items = array();
+						foreach ( $items as $item ) { $pc_items[$item->ID] = $item; }
+						
+						// toutes les pages parentes (custom post hierarchical) de la page courante
+						$page_parent_ids[] = $parent_id;
+						while ( $parent_id ) {
+							$sup_parent_id = wp_get_post_parent_id( $parent_id );
+							if ( $sup_parent_id ) { $page_parent_ids[] = $sup_parent_id; }
+							$parent_id = $sup_parent_id;
+						}
+						
+						// recherche des pages parentes dans le menu
+						// et recherche des ancêtres des items associés à ces pages parentes
+						$all_items_ancestor = array();
+						foreach ( $pc_items as $id => $item ) {
+							if ( in_array( $item->object_id, $page_parent_ids ) && !in_array( $item->menu_item_parent, $all_items_ancestor ) ) {
+								$ancestor_id = $item->menu_item_parent;
+								$all_items_ancestor[] = $ancestor_id;
+								while ( $ancestor_id ) {
+									$ancestor_id = $pc_items[$ancestor_id]->menu_item_parent;
+									if ( $ancestor_id && !in_array( $ancestor_id, $all_items_ancestor ) ) {
+										$all_items_ancestor[] = $ancestor_id;
+									}
+								}
+							}
+						}
+
+						// active les ancêtres d'items si nécessaire
+						foreach ( $items as $key => $item ) {
+							if ( in_array( $item->ID, $all_items_ancestor ) && !in_array( 'current-menu-ancestor', $item->classes ) ) {
+								$items[$key]->classes[] = 'current-menu-ancestor';
+							}
+						}
+
 					}
+
 				}
 
 			}
 
 		}
 
-		return $menu_items;
+		return $items;
 
 	};
 

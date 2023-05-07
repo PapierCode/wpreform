@@ -26,7 +26,6 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 	// création des li tous level
 	function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-
 		// parceque...
 		$display_depth = ( $depth + 1);
 		// classes communes et en fonction de la profondeur
@@ -40,12 +39,14 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		}
 		
 		// supprime tous les classes sauf celles précisées dans le tableau
-		$clean_classes = is_array( $item->classes ) ? array_intersect( $item->classes, array( 'current-menu-item','menu-item-has-children','current-menu-parent' ) ) : '';
+		$clean_classes = is_array( $item->classes ) ? array_intersect( $item->classes, array( 'current-menu-item','menu-item-has-children','current-menu-parent', 'current-menu-ancestor', 'current-'.$item->object.'-ancestor' ) ) : '';
 		// remplace les classes restantes
 		$new_classes = array(
-			'current-menu-item' => 'is-active',
 			'menu-item-has-children' => 'is-parent',
-			'current-menu-parent' => 'is-active'
+			'current-menu-item' => 'is-active',
+			'current-menu-parent' => 'is-active',
+			'current-menu-ancestor' => 'is-active',
+			'current-'.$item->object.'-ancestor' => 'is-active'
 		);
 		$clean_classes = str_replace( array_keys( $new_classes ), $new_classes, $clean_classes );
 		
