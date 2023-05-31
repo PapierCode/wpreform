@@ -4,7 +4,7 @@
 * Communs templates : navigation
 *
 ** Menus
-** Item parent actif si page enfatn affichée
+** Item parent actif si page enfant affichée
 *
 **/
 
