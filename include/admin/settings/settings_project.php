@@ -182,6 +182,15 @@ $settings_project_fields = array(
 				'options'	=> array(
 					'btnselection' => false
 				)
+                ),
+            array(
+                'type'      => 'url',
+                'label_for' => 'youtube',
+                'label'     => 'Youtube',
+                'css'       => 'width:100%',
+				'options'	=> array(
+					'btnselection' => false
+				)
             )
         )
     )
