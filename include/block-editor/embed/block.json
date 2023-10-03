@@ -1,0 +1,16 @@
+{
+    "name": "acf/pc-embed",
+    "title": "Vidéo embarqué",
+    "description": "Affiche une vidéo",
+    "category": "media",
+    "keywords": [ "vidéo" ],
+    "icon": "format-video",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "auto",
+        "renderTemplate": "block-embed.php"
+    },
+    "supports": {
+        "anchor": true
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "name": "acf/pc-cta",
+    "title": "Bouton (CTA)",
+    "description": "Affiche un bouton ou un Call To Action",
+    "category": "design",
+    "keywords": [ "bouton", "cta" ],
+    "icon": "button",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "auto",
+        "renderTemplate": "block-cta.php"
+    },
+    "supports": {
+        "anchor": true
+    }
+}

@@ -29,10 +29,17 @@ remove_theme_support( 'core-block-patterns' );
 
 /*----------  Blocs ACF  ----------*/
 
-include 'acf-blocks.php';
+$blocks_acf = array(
+	'quote',
+	'cta',
+	'image',
+	'embed',
+	'gallery',
+);
 
-
-/*----------  Blocs disponibles  ----------*/
+foreach ( $blocks_acf as $block_id ) {
+	if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { register_block_type( __DIR__.'/'.$block_id ); }
+}
 
 add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 
@@ -45,13 +52,10 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 			'core/list-item'
 		);
 		
-		if ( apply_filters( 'pc_filter_add_acf_image_block', true ) ) { $blocks[] = 'acf/pc-image'; }
-		if ( apply_filters( 'pc_filter_add_acf_gallery_block', true ) ) { $blocks[] = 'acf/pc-gallery'; }
-		if ( apply_filters( 'pc_filter_add_acf_cta_block', true ) ) { $blocks[] = 'acf/pc-cta'; }
-		// if ( apply_filters( 'pc_filter_add_acf_columns_block', true ) ) { $blocks[] = 'acf/pc-columns'; }
-		if ( apply_filters( 'pc_filter_add_acf_quote_block', true ) ) { $blocks[] = 'acf/pc-quote'; }
-		if ( apply_filters( 'pc_filter_add_acf_embed_block', true ) ) { $blocks[] = 'acf/pc-embed'; }
-		if ( apply_filters( 'pc_filter_add_acf_intro_block', true ) ) { $blocks[] = 'acf/pc-intro'; }
+		global $blocks_acf;
+		foreach ( $blocks_acf as $block_id ) {
+			if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { $blocks[] = 'acf/sol-'.$block_id; }
+		}
 	
 		return $blocks;
 		
@@ -60,12 +64,11 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 
 /*----------  ACF TinyMCE  ----------*/
 
-/* 
 add_filter( 'acf/fields/wysiwyg/toolbars' , 'pc_acf_tinymce_toolbars'  );
 
 	function pc_acf_tinymce_toolbars( $toolbars ) {
 
-		$toolbars['Light'] = array( 
+		$toolbars['Colonne'] = array( 
 			1 => array(
 				'undo',
 				'redo',
@@ -74,7 +77,6 @@ add_filter( 'acf/fields/wysiwyg/toolbars' , 'pc_acf_tinymce_toolbars'  );
 				'bold',
 				'italic',
 				'strikethrough',
-				'charmap',
 				'|',
 				'bullist',
 				'numlist',
@@ -83,7 +85,8 @@ add_filter( 'acf/fields/wysiwyg/toolbars' , 'pc_acf_tinymce_toolbars'  );
 				'aligncenter',
 				'alignright',
 				'|',
-				'link'
+				'link',
+				'unlink'
 			)
 		);
 
@@ -104,5 +107,3 @@ add_action('acf/input/admin_footer', 'fnas_acf_input_admin_footer');
 		</script>
 
 	<?php }
-
-*/

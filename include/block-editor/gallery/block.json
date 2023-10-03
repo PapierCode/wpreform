@@ -1,0 +1,16 @@
+{
+    "name": "acf/pc-gallery",
+    "title": "Galerie d'images",
+    "description": "Affiche une série d'images avec ou sans diaporama",
+    "category": "media",
+    "keywords": [ "image", "galerie" ],
+    "icon": "format-gallery",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "auto",
+        "renderTemplate": "block-gallery.php"
+    },
+    "supports": {
+        "anchor": true
+    }
+}

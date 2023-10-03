@@ -1,0 +1,16 @@
+{
+    "name": "acf/pc-quote",
+    "title": "Citation",
+    "description": "Affiche une citation",
+    "category": "design",
+    "keywords": [ "citation" ],
+    "icon": "format-quote",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "auto",
+        "renderTemplate": "block-quote.php"
+    },
+    "supports": {
+        "anchor": true
+    }
+}
