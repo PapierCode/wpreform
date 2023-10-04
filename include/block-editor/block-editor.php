@@ -54,7 +54,7 @@ add_filter( 'allowed_block_types_all', 'pc_allowed_block_types_all' );
 		
 		global $blocks_acf;
 		foreach ( $blocks_acf as $block_id ) {
-			if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { $blocks[] = 'acf/sol-'.$block_id; }
+			if ( apply_filters( 'pc_filter_add_acf_'.$block_id.'_block', true ) ) { $blocks[] = 'acf/pc-'.$block_id; }
 		}
 	
 		return $blocks;
