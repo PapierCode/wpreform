@@ -38,8 +38,12 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 			$span_class_name .= $prefix.'-link-inner '.$prefix.'-link-inner--l'.$display_depth.' ';
 		}
 		
-		// supprime tous les classes sauf celles précisées dans le tableau
-		$clean_classes = is_array( $item->classes ) ? array_intersect( $item->classes, array( 'current-menu-item','menu-item-has-children','current-menu-parent', 'current-menu-ancestor', 'current-'.$item->object.'-ancestor' ) ) : '';
+		// supprime tous les classes sauf celles précisées dans le tableau	
+		$classes = array( 'current-menu-item' );
+		if ( $args->depth > 1 ) {
+			$classes = array_merge( $classes, array( 'menu-item-has-children','current-menu-parent', 'current-menu-ancestor', 'current-'.$item->object.'-ancestor' ) );
+		};
+		$clean_classes = is_array( $item->classes ) ? array_intersect( $item->classes, $classes ) : '';
 		// remplace les classes restantes
 		$new_classes = array(
 			'menu-item-has-children' => 'is-parent',
