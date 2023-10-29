@@ -94,9 +94,9 @@ add_filter( 'acf/fields/wysiwyg/toolbars' , 'pc_acf_tinymce_toolbars'  );
 
 	}
 		
-add_action('acf/input/admin_footer', 'fnas_acf_input_admin_footer');
+add_action('acf/input/admin_footer', 'pc_acf_input_admin_footer');
 
-	function fnas_acf_input_admin_footer() { ?>
+	function pc_acf_input_admin_footer() { ?>
 
 		<script type="text/javascript">
 		acf.add_filter( 'wysiwyg_tinymce_settings', function( mceInit, id ) {
