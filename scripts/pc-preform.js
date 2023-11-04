@@ -68,9 +68,9 @@ $('.gallery:not(.gallery--nojs)').gallery({
 
 /*----------  iframe  ----------*/
 
-$('.editor iframe').each(function() {
-	$(this).wrap('<div class="iframe iframe_16-10"></div>');
-});
+// $('.editor iframe').each(function() {
+// 	$(this).wrap('<div class="iframe iframe_16-10"></div>');
+// });
 
 
 /*=====  End of divers  ======*/
@@ -215,3 +215,20 @@ if ( $js_button_map.length > 0 ) {
 /*=====  FIN Carte  =====*/
 
 }); // end $(document).ready()
+
+document.addEventListener( 'DOMContentLoaded', () => {
+
+	const blocEmbeds = document.querySelectorAll('.bloc-embed');
+
+	blocEmbeds.forEach( (bloc) => {
+		const iframe = bloc.querySelector('iframe');
+		const src = iframe.dataset.src;
+		const rgpd = bloc.querySelector('.iframe-accept');
+		const btn = bloc.querySelector('button');
+		btn.addEventListener( 'click', () => {
+			iframe.setAttribute( 'src', src );
+			rgpd.remove();
+		});
+	});
+
+});
