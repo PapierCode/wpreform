@@ -56,7 +56,8 @@ include 'include/admin/admin.php';
 /*----------  Block Editor  ----------*/
 
 if ( !isset( $settings_pc['blockeditor-disabled'] ) ) {
-	include 'include/block-editor/block-editor.php';
+	include 'include/admin/editors/block-editor/block-editor.php';
+	include 'include/admin/editors/acf-tinymce/acf-tinymce.php';
 }
 
 
