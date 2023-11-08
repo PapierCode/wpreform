@@ -8,11 +8,11 @@
 
 /*----------  Dépendances JS & CSS  ----------*/
 
-add_action( 'admin_enqueue_scripts', 'pc_block_editor_admin_enqueue_scripts' );
+add_action( 'enqueue_block_editor_assets', 'pc_block_editor_admin_enqueue_scripts' );
 
 function pc_block_editor_admin_enqueue_scripts() {
 
-	wp_enqueue_script( 'pc-block-editor-js-admin', get_bloginfo( 'template_directory').'/include/block-editor/block-editor.js', ['wp-blocks', 'wp-block-library', 'wp-element', 'wp-editor', 'wp-hooks', 'wp-dom-ready', 'wp-edit-post'] );
+	wp_enqueue_script( 'pc-block-editor-js-admin', get_bloginfo( 'template_directory').'/include/admin/editors/block-editor/block-editor.js', ['wp-blocks', 'wp-dom', 'wp-hooks', 'wp-dom-ready', 'lodash'] );
 	
 }
 
