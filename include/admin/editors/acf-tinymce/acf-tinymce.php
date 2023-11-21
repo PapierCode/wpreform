@@ -2,9 +2,9 @@
 
 /*----------  Barre d'outils custom  ----------*/
 
-add_filter( 'acf/fields/wysiwyg/toolbars' , 'sol_admin_acf_tinymce_toolbars'  );
+add_filter( 'acf/fields/wysiwyg/toolbars' , 'pc_admin_acf_tinymce_toolbars' );
 
-   function sol_admin_acf_tinymce_toolbars( $toolbars ) {
+   function pc_admin_acf_tinymce_toolbars( $toolbars ) {
 
     unset( $toolbars['Full' ] );
     unset( $toolbars['Basic' ] );
@@ -20,9 +20,9 @@ add_filter( 'acf/fields/wysiwyg/toolbars' , 'sol_admin_acf_tinymce_toolbars'  );
 
 /*----------  Config & plugins  ----------*/
 
-add_filter( 'mce_external_plugins', 'sol_admin_acf_tinymce_plugins' );
+add_filter( 'mce_external_plugins', 'pc_admin_acf_tinymce_plugins' );
 
-	function sol_admin_acf_tinymce_plugins( $plugins ) {
+	function pc_admin_acf_tinymce_plugins( $plugins ) {
 
 		$path = get_template_directory_uri();
 
@@ -32,9 +32,9 @@ add_filter( 'mce_external_plugins', 'sol_admin_acf_tinymce_plugins' );
 
 	}
 
-add_action('acf/input/admin_footer', 'sol_admin_acf_tinymce_settings');
+add_action( 'acf/input/admin_footer', 'pc_admin_acf_tinymce_settings' );
 
-	function sol_admin_acf_tinymce_settings() { ?>
+	function pc_admin_acf_tinymce_settings() { ?>
 
 		<style>.acf-editor-wrap iframe { min-height: 0; } </style>
 
