@@ -65,16 +65,25 @@ class Pc_Walker_Nav_Menu extends Walker_Nav_Menu {
 		// construction du li
 		$output .= '<li class="'.$li_class_name.'">';
 
-		// si niveau 1 & item parent
-		if ( $display_depth == 1 && in_array( 'is-parent', $clean_classes ) ) {
+		// item parent
+		if ( in_array( 'is-parent', $clean_classes ) ) {
 
-			$output .= '<button type="button" class="'.$link_class_name.'reset-btn"><span class="'.$span_class_name.'">'.$item->title.'</span></button>';
+			if ( $display_depth == 1 ) {
+				$tag = apply_filters( 'pc_filter_nav_menu_l1_tag', 'btn', $item, $display_depth, $args );
+			} else {
+				$tag = apply_filters( 'pc_filter_nav_menu_l2_and_more_tag', 'p', $item, $display_depth, $args );				
+			}
 
-		} else if ( $display_depth > 1 && in_array( 'is-parent', $clean_classes ) && apply_filters( 'pc_filter_nav_menu_disable_submenu_parent_link', false ) ) {
-
-			$title_class_name = str_replace( 'link', 'title', $link_class_name );
-			$title_span_class_name = str_replace( 'link', 'title', $span_class_name );
-			$output .= '<p class="'.$title_class_name.'reset-btn"><span class="'.$title_span_class_name.'">'.$item->title.'</span></p>';
+			switch ( $tag ) {
+				case 'btn':
+					$output .= '<button type="button" class="'.$link_class_name.'reset-btn"><span class="'.$span_class_name.'">'.$item->title.'</span></button>';
+					break;
+				default:
+					$title_class_name = str_replace( 'link', 'title', $link_class_name );
+					$title_span_class_name = str_replace( 'link', 'title', $span_class_name );
+					$output .= '<'.$tag.' class="'.$title_class_name.'reset-btn"><span class="'.$title_span_class_name.'">'.$item->title.'</span></'.$tag.'>';
+					break;
+			}
 
 		// si ce n'est pas un parent
 		} else {
