@@ -11,6 +11,7 @@
         "renderTemplate": "block-embed.php"
     },
     "supports": {
-        "anchor": true
+        "anchor": true,
+        "align": false
     }
 }

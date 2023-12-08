@@ -11,6 +11,7 @@
         "renderTemplate": "block-image.php"
     },
     "supports": {
-        "anchor": true
+        "anchor": true,
+        "align": false
     }
 }

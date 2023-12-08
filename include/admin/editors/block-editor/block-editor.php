@@ -20,9 +20,9 @@ function pc_block_editor_admin_enqueue_scripts() {
 /*----------  Suppressions divers  ----------*/
 
 // révisions
-add_action( 'init', function() { remove_post_type_support( 'page', 'revisions' ); });
+add_action( 'init', function() { remove_post_type_support( 'page', 'page-attributes' ); });
 // modèle de page 
-remove_theme_support( 'block-templates' );
+// remove_theme_support( 'block-templates' );
 // ensembles de bloc prédéfinis
 remove_theme_support( 'core-block-patterns' );
 

@@ -8,8 +8,8 @@
       
 		/*----------  Page sidebar  ----------*/
 		
-        // wp.data.dispatch( 'core/edit-post' ).removeEditorPanel( 'page-attributes' );
-        // wp.data.dispatch( 'core/edit-post').removeEditorPanel( 'page-templates' );
+        wp.data.dispatch( 'core/edit-post' ).removeEditorPanel( 'page-attributes' );
+        // wp.data.dispatch( 'core/edit-post').removeEditorPanel( 'template' );
 
 
 		/*----------  Options de texte  ----------*/
