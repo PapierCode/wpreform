@@ -19,12 +19,44 @@ function pc_block_editor_admin_enqueue_scripts() {
 
 /*----------  Suppressions divers  ----------*/
 
-// révisions
-add_action( 'init', function() { remove_post_type_support( 'page', 'page-attributes' ); });
-// modèle de page 
-// remove_theme_support( 'block-templates' );
-// ensembles de bloc prédéfinis
-remove_theme_support( 'core-block-patterns' );
+// Autres suppressions, voir les fichiers CSS & JS
+
+add_action( 'init', 'pc_block_editir_init' );
+
+	function pc_block_editir_init() { 
+
+		remove_post_type_support( 'page', 'page-attributes' ); 
+		
+	}
+
+add_action( 'after_setup_theme', 'pc_block_editor_after_setup_theme' );
+
+	function pc_block_editor_after_setup_theme() {
+
+		// modèle de page 
+		remove_theme_support( 'block-templates' );
+		// ensembles de bloc prédéfinis
+		remove_theme_support( 'core-block-patterns' );
+
+	}
+
+
+add_filter( 'block_editor_settings_all', 'pc_block_editor_settings_all', 10, 2 );
+
+	function pc_block_editor_settings_all( $settings, $context ) {
+
+		$is_administrator = current_user_can( 'activate_plugins' );
+
+		if ( !$is_administrator ) {
+			// verrouillage des block 
+			$settings[ 'canLockBlocks' ] = false;
+			// Éditeur de code 
+			$settings[ 'codeEditingEnabled' ] = false;
+		}
+
+		return $settings;
+
+	}
 
 
 /*----------  Blocs ACF  ----------*/
