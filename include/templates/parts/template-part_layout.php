@@ -35,13 +35,19 @@ function pc_display_body_inner_end() {
 
 function pc_display_main_start() {
 
-    echo apply_filters( 'pc_filter_main_start', '<main id="main" class="main" role="main" tabindex="-1"><div class="main-inner">' );
+	$tag = '<main id="main" class="main" role="main" tabindex="-1">';
+	if ( apply_filters( 'pc_display_main_inner', false ) ) { $tag .= '<div class="main-inner">'; }
+
+    echo apply_filters( 'pc_filter_main_start', $tag );
 
 }
 
 function pc_display_main_end() {
 
-    echo apply_filters( 'pc_filter_main_end', '</div></main>');
+	$tag = '</main>';
+	if ( apply_filters( 'pc_display_main_inner', false ) ) { $tag = '</div>'.$tag; }
+
+    echo apply_filters( 'pc_filter_main_end', $tag );
 
 }
 
@@ -50,7 +56,10 @@ function pc_display_main_end() {
 
 function pc_display_main_header_start() {
 
-	echo apply_filters( 'pc_filter_main_header_start', '<header class="main-header" aria-label="Entête du contenu principal"><div class="main-header-inner">' );
+	$tag = '<header class="main-header" aria-label="Entête du contenu principal">';
+	if ( apply_filters( 'pc_display_main_header_inner', false ) ) { $tag .= '<div class="main-header-inner">'; }
+
+	echo apply_filters( 'pc_filter_main_header_start', $tag );
 
 }
 
@@ -61,8 +70,11 @@ function pc_display_main_title() {
 }
 
 function pc_display_main_header_end() {
+
+	$tag = '</header>';
+	if ( apply_filters( 'pc_display_main_header_inner', false ) ) { $tag .= '</div>'.$tag; }
 	
-	echo apply_filters( 'pc_filter_main_header_end', '</div></header>' );
+	echo apply_filters( 'pc_filter_main_header_end', $tag );
 
 }
 
@@ -71,13 +83,21 @@ function pc_display_main_header_end() {
 
 function pc_display_main_content_start() {
 
-	echo apply_filters( 'pc_filter_main_content_start', '<div class="main-content"><div class="main-content-inner">' );
+	$tag = '';
+	if ( apply_filters( 'pc_display_main_content', false ) ) { $tag .= '<div class="main-content">'; }
+	if ( apply_filters( 'pc_display_main_content_inner', false ) ) { $tag .= '<div class="main-content-inner">'; }
+
+	if ( $tag ) { echo apply_filters( 'pc_filter_main_content_start', $tag ); }
 
 }
 
 function pc_display_main_content_end() {
 
-	echo apply_filters( 'pc_filter_main_content_end', '</div></div>');
+	$tag = '';
+	if ( apply_filters( 'pc_display_main_content', false ) ) { $tag .= '</div>'; }
+	if ( apply_filters( 'pc_display_main_content_inner', false ) ) { $tag .= '</div>'; }
+
+	if ( $tag ) { echo apply_filters( 'pc_filter_main_content_end', $tag ); }
 
 }
 
@@ -86,13 +106,19 @@ function pc_display_main_content_end() {
 
 function pc_display_main_footer_start() {
 
-    echo apply_filters( 'pc_filter_main_footer_start', '<footer class="main-footer" aria-label="Pied de page du contenu principal"><div class="main-footer-inner">' );
+	$tag = '<footer class="main-footer" aria-label="Pied de page du contenu principal">';
+	if ( apply_filters( 'pc_display_main_footer_inner', false ) ) { $tag .= '<div class="main-footer-inner">'; }
+
+    echo apply_filters( 'pc_filter_main_footer_start', $tag );
 
 }
 
 function pc_display_main_footer_end() {
 
-    echo apply_filters( 'pc_filter_main_footer_end', '</div></footer>' );
+	$tag = '</footer>';
+	if ( apply_filters( 'pc_display_main_footer_inner', false ) ) { $tag .= '</div>'.$tag; }
+
+    echo apply_filters( 'pc_filter_main_footer_end', $tag );
 
 }
 

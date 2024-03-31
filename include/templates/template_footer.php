@@ -35,7 +35,10 @@ add_action( 'pc_wp_footer', 'pc_display_js_footer', 10 );
 
 function pc_display_footer_start() {
 
-	echo apply_filters( 'pc_filter_footer_start', '<footer class="footer" role="contentinfo"><div class="footer-inner">' );
+	$tag = '<footer class="footer" role="contentinfo">';
+	if ( apply_filters( 'pc_display_footer_inner', false ) ) { $tag .= '<div class="footer-inner">'; }
+
+	echo apply_filters( 'pc_filter_footer_start', $tag );
 
 }
 
@@ -150,7 +153,10 @@ function pc_display_footer_nav() {
 
 function pc_display_footer_end() {
 
-	echo apply_filters( 'pc_filter_footer_end', '</div></footer>' );
+	$tag = '</footer>';
+	if ( apply_filters( 'pc_display_footer_inner', false ) ) { $tag = '</div>'.$tag; }
+
+	echo apply_filters( 'pc_filter_footer_end', $tag );
 
 }
 

@@ -73,13 +73,19 @@ function pc_display_skip_nav() {
 
 function pc_display_header_start() {
 
-	echo apply_filters( 'pc_filter_header_start', '<header class="header" role="banner"><div class="header-inner">' );
+	$tag = '<header class="header" role="banner">';
+	if ( apply_filters( 'pc_display_header_inner', false ) ) { $tag .= '<div class="header-inner">'; }
+
+	echo apply_filters( 'pc_filter_header_start', $tag );
 
 }
 
 function pc_display_header_end() {
 
-	echo apply_filters( 'pc_filter_header_end', '</div></header>' );
+	$tag = '</header>';
+	if ( apply_filters( 'pc_display_main_inner', false ) ) { $tag = '</div>'.$tag; }
+
+	echo apply_filters( 'pc_filter_header_end', $tag );
 
 }
 
