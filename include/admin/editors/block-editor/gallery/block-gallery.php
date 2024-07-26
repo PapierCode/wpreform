@@ -19,11 +19,13 @@ if ( $gallery ) {
 
 	echo '<div '.implode(' ',$block_attrs).'><ul class="gallery-list reset-list">';
 
+	$thumb_size = get_field('_bloc_gallery_nocrop') ? 'thumbnail' : 'gl-th';
+
 	foreach ( $gallery as $image ) {
 
 		echo '<li class="gallery-item">';
 			if ( !$gallery_no_js ) { echo '<a class="gallery-link" href="'.$image['sizes']['gl-l'].'" data-gl-caption="'.$image['caption'].'" data-gl-responsive="'.$image['sizes']['gl-m'].'" title="Afficher l\'image">'; }
-				echo '<img class="gallery-img" src="'.$image['sizes']['gl-th'].'" width="'.$image['sizes']['gl-th-width'].'" height="'.$image['sizes']['gl-th-height'].'" alt="'.$image['alt'].'" loading="lazy"/>';
+				echo '<img class="gallery-img" src="'.$image['sizes'][$thumb_size].'" width="'.$image['sizes'][$thumb_size.'-width'].'" height="'.$image['sizes'][$thumb_size.'-height'].'" alt="'.$image['alt'].'" loading="lazy"/>';
 				echo '<span class="gallery-ico">'.pc_svg('zoom').'</span>';
 			if ( !$gallery_no_js ) { echo '</a>'; }
 		echo '</li>';
