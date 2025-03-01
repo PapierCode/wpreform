@@ -169,8 +169,8 @@ if ( $js_button_map.length > 0 ) {
 					tap : false
 				}).setView([mapLat, mapLong], mapZoomDefault);
 
-				L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGFwaWVyY29kZSIsImEiOiJja203a3E5N3kweXplMnhuNjBuOTV2bmQ1In0.UtKowadsitAGdxDUpMv5aA', {
-					id: 'mapbox/streets-v11',
+				L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoicGFwaWVyY29kZSIsImEiOiJjbTZhbTMwZTkwaXNvMm1zaWU4ZnR2NmFnIn0.KKkR3402RzV80Du2Hu1gLg', {
+					id: 'papiercode/cm69i1x8x001t01r5568bhc7w',
 					tileSize: 512,
 					zoomOffset: -1
 				}).addTo(map);

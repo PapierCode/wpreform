@@ -3,7 +3,7 @@ $errors = array();
 $btn_attrs = array( 'class="cta-button"' );
 
 $btn_txt = trim( get_field( '_bloc_cta_button_txt' ) );
-if ( !$btn_txt ) { $errors[] = 'saississez le texte du boutton'; }
+if ( !$btn_txt ) { $errors[] = 'saississez le texte du bouton'; }
 
 $btn_type = get_field( '_bloc_cta_button_type' );
 switch ( $btn_type ) {

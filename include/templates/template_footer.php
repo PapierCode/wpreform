@@ -63,7 +63,7 @@ function pc_display_footer_contact() {
 	// filtre
 	$logo_datas = apply_filters( 'pc_filter_footer_logo_datas', $logo_datas, $settings_project );
 	// html
-	$logo_tag = '<img src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy" />';
+	$logo_tag = '<img src="'.$logo_datas['url'].'" alt="'.$logo_datas['alt'].'" width="'.$logo_datas['width'].'" height="'.$logo_datas['height'].'" loading="lazy">';
 
 
 	/*----------  Adresse  ----------*/
@@ -82,7 +82,7 @@ function pc_display_footer_contact() {
 	
 	$phone = '<a href="tel:'.pc_phone($settings_project['coord-phone-1']).'">'.pc_phone($settings_project['coord-phone-1'],false).'</a>';
 	if ( isset( $settings_project['coord-phone-2'] ) && $settings_project['coord-phone-2'] ) {
-		$phone .= '<br/><span class="coord-sep"> / </span><a href="tel:'.pc_phone($settings_project['coord-phone-2']).'">'.pc_phone($settings_project['coord-phone-2'],false).'</a>';
+		$phone .= '<br><span class="coord-sep"> / </span><a href="tel:'.pc_phone($settings_project['coord-phone-2']).'">'.pc_phone($settings_project['coord-phone-2'],false).'</a>';
 	}
 	$dd['list']['phone'] = array(
 		'ico' => 'phone',
